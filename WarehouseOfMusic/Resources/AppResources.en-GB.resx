@@ -125,14 +125,14 @@
     <value>en-GB</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
+  <data name="OpenProjectButtonContent" xml:space="preserve">
+    <value>OPEN PROJECT</value>
+  </data>
   <data name="CreateProjectButtonContent" xml:space="preserve">
     <value>CREATE PROJECT</value>
   </data>
   <data name="ExitButtonContent" xml:space="preserve">
     <value>EXIT</value>
-  </data>
-  <data name="OpenProjectButtonContent" xml:space="preserve">
-    <value>OPEN PROJECT</value>
   </data>
   <data name="OptionsButtonContent" xml:space="preserve">
     <value>OPTIONS</value>

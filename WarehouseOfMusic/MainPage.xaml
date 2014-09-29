@@ -39,17 +39,37 @@
             CurrentUICulture приложения во время выполнения.
          -->
 
-        <!--TitlePanel содержит имя приложения и заголовок страницы-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="МОЕ ПРИЛОЖЕНИЕ" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="имя страницы" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <!--TitlePanel содержит имя приложения-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
+            <TextBlock Text="WAREHOUSE OF MUSIC" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
+                       HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeLarge}"/>
         </StackPanel>
 
-        <!--ContentPanel — поместите здесь дополнительное содержимое-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <!--ProjectControlPanel — управление проектом-->
+        <Grid x:Name="ProjectControlPanel" Grid.Row="1" Margin="12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="OpenProjectButton" Content="{Binding Path=LocalizedResources.OpenProjectButtonContent, 
+                    Source={StaticResource LocalizedStrings}}" Grid.Row="1" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="340"/>
+            <Button x:Name="CreateProjectButton" Content="{Binding Path=LocalizedResources.CreateProjectButtonContent, 
+                    Source={StaticResource LocalizedStrings}}" Grid.Row="2" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="340"/>
+            <Button x:Name="OptionsButton" Content="{Binding Path=LocalizedResources.OptionsButtonContent, 
+                    Source={StaticResource LocalizedStrings}}" Grid.Row="3" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="340"/>
+            <Button x:Name="ExitButton" Content="{Binding Path=LocalizedResources.ExitButtonContent, 
+                    Source={StaticResource LocalizedStrings}}" Grid.Row="4" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="340"/>
 
         </Grid>
-
+        
         <!--Раскомментируйте, чтобы увидеть сетку выравнивания и выровнять
             элементы управления по общим границам.  Верхнее поле изображения равно -32 пикселя, чтобы
             осталось место для области уведомлений. Установите его равным 0 (или вообще удалите поле),

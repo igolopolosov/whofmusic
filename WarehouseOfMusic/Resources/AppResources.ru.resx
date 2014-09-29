@@ -122,19 +122,19 @@
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
-    <value>en-GB</value>
+    <value>ru</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="CreateProjectButtonContent" xml:space="preserve">
-    <value>CREATE PROJECT</value>
+    <value>СОЗДАТЬ ПРОЕКТ</value>
   </data>
   <data name="ExitButtonContent" xml:space="preserve">
-    <value>EXIT</value>
+    <value>ВЫХОД</value>
   </data>
   <data name="OpenProjectButtonContent" xml:space="preserve">
-    <value>OPEN PROJECT</value>
+    <value>ОТКРЫТЬ ПРОЕКТ</value>
   </data>
   <data name="OptionsButtonContent" xml:space="preserve">
-    <value>OPTIONS</value>
+    <value>НАСТРОЙКИ</value>
   </data>
 </root>
