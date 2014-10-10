@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using System.Resources;
 using System.Windows.Controls;
 using Microsoft.Phone.Controls;
-using WarehouseOfMusic.Resources;
 
 namespace WarehouseOfMusic
 {
@@ -47,6 +45,12 @@ namespace WarehouseOfMusic
             var newCulture = new CultureInfo(culture);
             CultureInfo.DefaultThreadCurrentCulture = newCulture;
             CultureInfo.DefaultThreadCurrentUICulture = newCulture;
+            ApplySettingsButton.IsEnabled = true;
+        }
+
+        private void ApplySettingsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
     }
 }

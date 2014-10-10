@@ -61,6 +61,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ПРИМЕНИТЬ.
+        /// </summary>
+        public static string ApplySettingsButtonContent {
+            get {
+                return ResourceManager.GetString("ApplySettingsButtonContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на СОЗДАТЬ ПРОЕКТ.
         /// </summary>
         public static string CreateProject {

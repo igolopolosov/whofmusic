@@ -30,13 +30,13 @@
         <!--ApplicationSettingsGrid — управление настройками проекта-->
         <Grid x:Name="ApplicationSettingsGrid" Grid.Row="1" Margin="12,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="20*"/>
             </Grid.RowDefinitions>
             
             <!--Изменение громкости звука в приложении-->
@@ -72,8 +72,13 @@
                 <ListBoxItem Content="{Binding Path=LocalizedResources.CustomThemeListBoxItem, 
                     Source={StaticResource LocalizedStrings}}" IsSelected="False" HorizontalAlignment="Center"/>
             </ListBox>
-
-
+            
+            <!--Кнопка применить изменения-->
+            <Button x:Name="ApplySettingsButton" IsEnabled="False" HorizontalAlignment="Center" 
+                    Grid.Row="6" BorderThickness="0" VerticalAlignment="Top" FontWeight="Bold" 
+                    FontSize="{StaticResource PhoneFontSizeExtraLarge}" Click="ApplySettingsButton_Click"
+                    Content="{Binding Path=LocalizedResources.ApplySettingsButtonContent, 
+                    Source={StaticResource LocalizedStrings}}"/>
         </Grid>
     </Grid>
 
