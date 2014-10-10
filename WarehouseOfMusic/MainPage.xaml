@@ -20,56 +20,32 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- ПРИМЕЧАНИЕ О ЛОКАЛИЗАЦИИ:
-            Чтобы локализовать отображаемые строки, скопируйте их значения в соответствующим образом названные
-            ключи в файле ресурсов нейтрального языка приложения (AppResources.resx), а затем
-            замените жестко заданное текстовое значение между кавычками атрибутов
-            на выражение привязки, указывающее на имя соответствующей строки.
-
-            Пример:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            Данная привязка указывает на строковый ресурс шаблона с именем "ApplicationTitle".
-
-            Добавление поддерживаемых языков на вкладку "Свойства проекта" создает
-            новый RESX-файл для каждого языка, в котором могут храниться переведенные значения
-            строк пользовательского интерфейса. Привязка в этих примерах вызывает отрисовку
-            значений атрибутов из RESX-файла, соответствующего
-            CurrentUICulture приложения во время выполнения.
-         -->
-
         <!--TitlePanel содержит имя приложения-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
             <TextBlock Text="WAREHOUSE OF MUSIC" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
-                       HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                       HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
         </StackPanel>
 
         <!--ProjectControlPanel — управление проектом-->
-        <Grid x:Name="ProjectControlPanel" Grid.Row="1" Margin="12,0">
+        <Grid x:Name="ProjectControlPanel" Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <Button x:Name="OpenProjectButton" Content="{Binding Path=LocalizedResources.OpenProjectButtonContent, 
-                    Source={StaticResource LocalizedStrings}}" Grid.Row="1" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="340"/>
+                    Source={StaticResource LocalizedStrings}}" Grid.Row="0" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin"/>
             <Button x:Name="CreateProjectButton" Content="{Binding Path=LocalizedResources.CreateProjectButtonContent, 
-                    Source={StaticResource LocalizedStrings}}" Grid.Row="2" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="340"/>
-            <Button x:Name="OptionsButton" Content="{Binding Path=LocalizedResources.OptionsButtonContent, 
-                    Source={StaticResource LocalizedStrings}}" Grid.Row="3" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="340"/>
-            <Button x:Name="ExitButton" Content="{Binding Path=LocalizedResources.ExitButtonContent, 
-                    Source={StaticResource LocalizedStrings}}" Grid.Row="4" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="340"/>
+                    Source={StaticResource LocalizedStrings}}" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin"/>
+            <Button x:Name="SettingsButton" Content="{Binding Path=LocalizedResources.SettingsButtonContent, 
+                    Source={StaticResource LocalizedStrings}}" Grid.Row="2" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" Click="SettingsButton_Click" FontWeight="Thin"/>
 
         </Grid>
-        
+
         <!--Раскомментируйте, чтобы увидеть сетку выравнивания и выровнять
             элементы управления по общим границам.  Верхнее поле изображения равно -32 пикселя, чтобы
             осталось место для области уведомлений. Установите его равным 0 (или вообще удалите поле),

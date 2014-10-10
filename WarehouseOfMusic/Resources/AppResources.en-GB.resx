@@ -134,7 +134,25 @@
   <data name="ExitButtonContent" xml:space="preserve">
     <value>EXIT</value>
   </data>
-  <data name="OptionsButtonContent" xml:space="preserve">
-    <value>OPTIONS</value>
+  <data name="SettingsButtonContent" xml:space="preserve">
+    <value>SETTINGS</value>
+  </data>
+  <data name="CustomThemeListBoxItem" xml:space="preserve">
+    <value>Smart</value>
+  </data>
+  <data name="DarkThemeListBoxItem" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="LanguageTextBlockText" xml:space="preserve">
+    <value>language</value>
+  </data>
+  <data name="LightThemeListBoxItem" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="ThemeTextBlockText" xml:space="preserve">
+    <value>theme</value>
+  </data>
+  <data name="VolumeTextBlockText" xml:space="preserve">
+    <value>volume</value>
   </data>
 </root>

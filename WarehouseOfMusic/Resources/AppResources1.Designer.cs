@@ -61,7 +61,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на CREATE PROJECT.
+        ///   Ищет локализованную строку, похожую на СОЗДАТЬ ПРОЕКТ.
         /// </summary>
         public static string CreateProjectButtonContent {
             get {
@@ -70,7 +70,25 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на EXIT.
+        ///   Ищет локализованную строку, похожую на Удобная.
+        /// </summary>
+        public static string CustomThemeListBoxItem {
+            get {
+                return ResourceManager.GetString("CustomThemeListBoxItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Темная.
+        /// </summary>
+        public static string DarkThemeListBoxItem {
+            get {
+                return ResourceManager.GetString("DarkThemeListBoxItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ВЫХОД.
         /// </summary>
         public static string ExitButtonContent {
             get {
@@ -79,20 +97,29 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на OPEN PROJECT.
+        ///   Ищет локализованную строку, похожую на язык.
         /// </summary>
-        public static string OpenProjectButtonContent {
+        public static string LanguageTextBlockText {
             get {
-                return ResourceManager.GetString("OpenProjectButtonContent", resourceCulture);
+                return ResourceManager.GetString("LanguageTextBlockText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на OPTIONS.
+        ///   Ищет локализованную строку, похожую на Светлая.
         /// </summary>
-        public static string OptionsButtonContent {
+        public static string LightThemeListBoxItem {
             get {
-                return ResourceManager.GetString("OptionsButtonContent", resourceCulture);
+                return ResourceManager.GetString("LightThemeListBoxItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ОТКРЫТЬ ПРОЕКТ.
+        /// </summary>
+        public static string OpenProjectButtonContent {
+            get {
+                return ResourceManager.GetString("OpenProjectButtonContent", resourceCulture);
             }
         }
         
@@ -106,11 +133,38 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на en-GB.
+        ///   Ищет локализованную строку, похожую на ru-RU.
         /// </summary>
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на НАСТРОЙКИ.
+        /// </summary>
+        public static string SettingsButtonContent {
+            get {
+                return ResourceManager.GetString("SettingsButtonContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на тема.
+        /// </summary>
+        public static string ThemeTextBlockText {
+            get {
+                return ResourceManager.GetString("ThemeTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на громкость.
+        /// </summary>
+        public static string VolumeTextBlockText {
+            get {
+                return ResourceManager.GetString("VolumeTextBlockText", resourceCulture);
             }
         }
     }

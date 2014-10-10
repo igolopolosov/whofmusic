@@ -97,8 +97,16 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationSettings.xaml.cs">
+      <DependentUpon>ApplicationSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\AppResources.Designer.cs">
+    <Compile Include="Resources\AppResources.en-GB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.en-GB.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AppResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
@@ -110,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,10 +166,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\AppResources.en-GB.resx" />
+    <EmbeddedResource Include="Resources\AppResources.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.en-GB.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>AppResources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.ru.resx" />
   </ItemGroup>

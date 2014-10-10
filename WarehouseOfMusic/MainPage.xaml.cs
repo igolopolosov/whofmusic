@@ -22,6 +22,11 @@ namespace WarehouseOfMusic
             //BuildLocalizedApplicationBar();
         }
 
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/ApplicationSettings.xaml", UriKind.Relative));
+        }
+
         // Пример кода для сборки локализованной панели ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{
