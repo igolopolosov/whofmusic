@@ -22,8 +22,8 @@
 
         <!--TitlePanel содержит название страницы-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
-            <TextBlock Text="{Binding Path=LocalizedResources.SettingsButtonContent, 
-                    Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
+            <TextBlock Text="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}" 
+                       Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
         </StackPanel>
 
@@ -53,11 +53,12 @@
                     Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"
                        Grid.Row="2" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontWeight="SemiBold"/>
             <ListBox x:Name="LanguageListBox" HorizontalAlignment="Center" Grid.Row="3" FontWeight="Light"
-                     FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Top">
-                <ListBoxItem Content="English" IsSelected="False" HorizontalAlignment="Center"/>
-                <ListBoxItem Content="Русский" IsSelected="True" HorizontalAlignment="Center"/>
+                     FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Top" SelectionChanged="LanguageListBox_OnSelectionChanged">
+                <ListBoxItem Content="English" HorizontalAlignment="Center"/>
+                <ListBoxItem Content="Русский" HorizontalAlignment="Center"/>
             </ListBox>
-
+            
+            <!--Изменение темы в приложении-->
             <TextBlock x:Name="ThemeTextBlock" HorizontalAlignment="Center" TextWrapping="Wrap" 
                        Text="{Binding Path=LocalizedResources.ThemeTextBlockText, 
                     Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"

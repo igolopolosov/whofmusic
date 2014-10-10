@@ -63,9 +63,9 @@ namespace WarehouseOfMusic.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на СОЗДАТЬ ПРОЕКТ.
         /// </summary>
-        public static string CreateProjectButtonContent {
+        public static string CreateProject {
             get {
-                return ResourceManager.GetString("CreateProjectButtonContent", resourceCulture);
+                return ResourceManager.GetString("CreateProject", resourceCulture);
             }
         }
         
@@ -84,15 +84,6 @@ namespace WarehouseOfMusic.Resources {
         public static string DarkThemeListBoxItem {
             get {
                 return ResourceManager.GetString("DarkThemeListBoxItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на ВЫХОД.
-        /// </summary>
-        public static string ExitButtonContent {
-            get {
-                return ResourceManager.GetString("ExitButtonContent", resourceCulture);
             }
         }
         
@@ -117,9 +108,9 @@ namespace WarehouseOfMusic.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на ОТКРЫТЬ ПРОЕКТ.
         /// </summary>
-        public static string OpenProjectButtonContent {
+        public static string OpenProject {
             get {
-                return ResourceManager.GetString("OpenProjectButtonContent", resourceCulture);
+                return ResourceManager.GetString("OpenProject", resourceCulture);
             }
         }
         
@@ -144,9 +135,9 @@ namespace WarehouseOfMusic.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на НАСТРОЙКИ.
         /// </summary>
-        public static string SettingsButtonContent {
+        public static string Settings {
             get {
-                return ResourceManager.GetString("SettingsButtonContent", resourceCulture);
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         

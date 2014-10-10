@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
+using System.Globalization;
+using System.Resources;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+using WarehouseOfMusic.Resources;
 
 namespace WarehouseOfMusic
 {
@@ -15,6 +12,41 @@ namespace WarehouseOfMusic
         public ApplicationSettingsPage()
         {
             InitializeComponent();
+            SetLanguageListboxSelectedIndex();
+        }
+
+        private void SetLanguageListboxSelectedIndex()
+        {
+            switch (CultureInfo.CurrentCulture.Name)
+            {
+                case "en-GB":
+                    LanguageListBox.SelectedIndex = 0;
+                    break;
+                case "ru-RU":
+                    LanguageListBox.SelectedIndex = 1;
+                    break;
+            }
+        }
+
+        public void LanguageListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string culture = "";
+            switch (LanguageListBox.SelectedIndex)
+            {
+                case 0:
+                    culture = "en-GB";
+                    break;
+                case 1:
+                    culture = "ru-RU";
+                    break;
+            }
+
+            // set app current culture to the culture associated with the selected locale
+            if (culture == CultureInfo.CurrentCulture.Name) return;
+
+            var newCulture = new CultureInfo(culture);
+            CultureInfo.DefaultThreadCurrentCulture = newCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = newCulture;
         }
     }
 }

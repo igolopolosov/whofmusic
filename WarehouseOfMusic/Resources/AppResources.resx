@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreateProjectButtonContent" xml:space="preserve">
+  <data name="CreateProject" xml:space="preserve">
     <value>СОЗДАТЬ ПРОЕКТ</value>
   </data>
   <data name="CustomThemeListBoxItem" xml:space="preserve">
@@ -126,27 +126,22 @@
   <data name="DarkThemeListBoxItem" xml:space="preserve">
     <value>Темная</value>
   </data>
-  <data name="ExitButtonContent" xml:space="preserve">
-    <value>ВЫХОД</value>
-  </data>
   <data name="LanguageTextBlockText" xml:space="preserve">
     <value>язык</value>
   </data>
   <data name="LightThemeListBoxItem" xml:space="preserve">
     <value>Светлая</value>
   </data>
-  <data name="OpenProjectButtonContent" xml:space="preserve">
+  <data name="OpenProject" xml:space="preserve">
     <value>ОТКРЫТЬ ПРОЕКТ</value>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
-    <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>ru-RU</value>
-    <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
-  <data name="SettingsButtonContent" xml:space="preserve">
+  <data name="Settings" xml:space="preserve">
     <value>НАСТРОЙКИ</value>
   </data>
   <data name="ThemeTextBlockText" xml:space="preserve">

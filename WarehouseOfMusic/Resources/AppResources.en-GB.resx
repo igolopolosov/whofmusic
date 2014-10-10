@@ -119,23 +119,9 @@
   </resheader>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
-    <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>en-GB</value>
-    <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
-  </data>
-  <data name="OpenProjectButtonContent" xml:space="preserve">
-    <value>OPEN PROJECT</value>
-  </data>
-  <data name="CreateProjectButtonContent" xml:space="preserve">
-    <value>CREATE PROJECT</value>
-  </data>
-  <data name="ExitButtonContent" xml:space="preserve">
-    <value>EXIT</value>
-  </data>
-  <data name="SettingsButtonContent" xml:space="preserve">
-    <value>SETTINGS</value>
   </data>
   <data name="CustomThemeListBoxItem" xml:space="preserve">
     <value>Smart</value>
@@ -154,5 +140,14 @@
   </data>
   <data name="VolumeTextBlockText" xml:space="preserve">
     <value>volume</value>
+  </data>
+  <data name="CreateProject" xml:space="preserve">
+    <value>CREATE PROJECT</value>
+  </data>
+  <data name="OpenProject" xml:space="preserve">
+    <value>OPEN PROJECT</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>SETTINGS</value>
   </data>
 </root>
