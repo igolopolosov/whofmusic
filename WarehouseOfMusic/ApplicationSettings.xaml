@@ -64,13 +64,13 @@
                     Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"
                        Grid.Row="4" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontWeight="SemiBold"/>
             <ListBox x:Name="ThemeListBox" HorizontalAlignment="Center" Grid.Row="5" FontWeight="Light"
-                     FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Top">
+                     FontSize="{StaticResource PhoneFontSizeLarge}" VerticalAlignment="Top" SelectionChanged="ThemeListBox_SelectionChanged">
                 <ListBoxItem Content="{Binding Path=LocalizedResources.DarkThemeListBoxItem, 
-                    Source={StaticResource LocalizedStrings}}" IsSelected="True" HorizontalAlignment="Center"/>
+                    Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center"/>
                 <ListBoxItem Content="{Binding Path=LocalizedResources.LightThemeListBoxItem, 
-                    Source={StaticResource LocalizedStrings}}" IsSelected="False" HorizontalAlignment="Center"/>
+                    Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center"/>
                 <ListBoxItem Content="{Binding Path=LocalizedResources.CustomThemeListBoxItem, 
-                    Source={StaticResource LocalizedStrings}}" IsSelected="False" HorizontalAlignment="Center"/>
+                    Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center"/>
             </ListBox>
             
             <!--Кнопка применить изменения-->

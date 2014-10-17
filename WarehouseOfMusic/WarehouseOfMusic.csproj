@@ -116,6 +116,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.ru-RU.resx</DependentUpon>
     </Compile>
+    <Compile Include="ThemeManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -137,6 +138,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
