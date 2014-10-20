@@ -39,7 +39,7 @@
                     HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin"/>
             <Button x:Name="CreateProjectButton" Content="{Binding Path=LocalizedResources.CreateProject, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin"/>
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin" Click="CreateProjectButton_Click"/>
             <Button x:Name="SettingsButton" Content="{Binding Path=LocalizedResources.Settings, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="2" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                     HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" Click="SettingsButton_Click" FontWeight="Thin"/>
