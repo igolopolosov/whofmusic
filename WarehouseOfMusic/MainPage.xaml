@@ -36,7 +36,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="OpenProjectButton" Content="{Binding Path=LocalizedResources.OpenProject, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="0" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin"/>
+                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin" Click="OpenProjectButton_Click"/>
             <Button x:Name="CreateProjectButton" Content="{Binding Path=LocalizedResources.CreateProject, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                     HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin" Click="CreateProjectButton_Click"/>

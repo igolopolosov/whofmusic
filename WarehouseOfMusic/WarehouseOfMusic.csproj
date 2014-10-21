@@ -100,6 +100,7 @@
     <Compile Include="ApplicationSettingsPage.xaml.cs">
       <DependentUpon>ApplicationSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\ToDoDataContext.cs" />
     <Compile Include="ProjectEditorPage.xaml.cs">
       <DependentUpon>ProjectEditorPage.xaml</DependentUpon>
     </Compile>
@@ -120,6 +121,7 @@
       <DependentUpon>AppResources.ru-RU.resx</DependentUpon>
     </Compile>
     <Compile Include="ThemeManager.cs" />
+    <Compile Include="ViewModel\ToDoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

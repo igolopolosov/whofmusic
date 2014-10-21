@@ -6,12 +6,21 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using WarehouseOfMusic.Model;
 using WarehouseOfMusic.Resources;
+using WarehouseOfMusic.ViewModel;
 
 namespace WarehouseOfMusic
 {
+    
     public partial class App : Application
     {
+        private static ToDoViewModel viewModel;
+        public static ToDoViewModel ViewModel
+        {
+            get { return viewModel; }
+        }
+
         /// <summary>
         /// Обеспечивает быстрый доступ к корневому кадру приложения телефона.
         /// </summary>
@@ -55,6 +64,30 @@ namespace WarehouseOfMusic
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            // Specify the local database connection string.
+            string DBConnectionString = "Data Source=isostore:/ToDo.sdf";
+
+            // Create the database if it does not exist.
+            using (ToDoDataContext db = new ToDoDataContext(DBConnectionString))
+            {
+                if (db.DatabaseExists() == false)
+                {
+                    // Create the local database.
+                    db.CreateDatabase();
+
+                    // Prepopulate the categories.
+                    db.Projects.InsertOnSubmit(new ToDoProject { Name = "Default" });
+
+                    // Save categories to the database.
+                    db.SubmitChanges();
+                }
+            }
+
+            // Create the ViewModel object.
+            viewModel = new ToDoViewModel(DBConnectionString);
+
+            // Query the local database and load observable collections.
+            viewModel.LoadCollectionsFromDatabase();
         }
 
         // Код, который выполняется, если при активации контракта, такого как открытие файла или выбор файлов в окне сохранения, возвращается 
