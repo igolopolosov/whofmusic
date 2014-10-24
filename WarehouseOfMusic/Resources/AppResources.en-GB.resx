@@ -145,12 +145,15 @@
     <value>CREATE PROJECT</value>
   </data>
   <data name="OpenProject" xml:space="preserve">
-    <value>OPEN PROJECT</value>
+    <value>ALL PROJECTS</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>SETTINGS</value>
   </data>
   <data name="ApplySettingsButtonContent" xml:space="preserve">
     <value>APPLY</value>
+  </data>
+  <data name="CreateProjectTextBoxPlaceholder" xml:space="preserve">
+    <value>ENTER PROJECT NAME</value>
   </data>
 </root>

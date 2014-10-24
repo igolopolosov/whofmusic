@@ -123,6 +123,9 @@
   <data name="CreateProject" xml:space="preserve">
     <value>СОЗДАТЬ ПРОЕКТ</value>
   </data>
+  <data name="CreateProjectTextBoxPlaceholder" xml:space="preserve">
+    <value>ВВЕДИТЕ ИМЯ ПРОЕКТА</value>
+  </data>
   <data name="CustomThemeListBoxItem" xml:space="preserve">
     <value>Удобная</value>
   </data>
@@ -136,7 +139,7 @@
     <value>Светлая</value>
   </data>
   <data name="OpenProject" xml:space="preserve">
-    <value>ОТКРЫТЬ ПРОЕКТ</value>
+    <value>ВСЕ ПРОЕКТЫ</value>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>

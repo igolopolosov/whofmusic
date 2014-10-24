@@ -79,6 +79,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ВВЕДИТЕ ИМЯ ПРОЕКТА.
+        /// </summary>
+        public static string CreateProjectTextBoxPlaceholder {
+            get {
+                return ResourceManager.GetString("CreateProjectTextBoxPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Удобная.
         /// </summary>
         public static string CustomThemeListBoxItem {
@@ -115,7 +124,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на ОТКРЫТЬ ПРОЕКТ.
+        ///   Ищет локализованную строку, похожую на ВСЕ ПРОЕКТЫ.
         /// </summary>
         public static string OpenProject {
             get {

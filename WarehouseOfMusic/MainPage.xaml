@@ -34,25 +34,35 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="OpenProjectButton" Content="{Binding Path=LocalizedResources.OpenProject, 
-                    Source={StaticResource LocalizedStrings}}" Grid.Row="0" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin" Click="OpenProjectButton_Click"/>
-            <Button x:Name="CreateProjectButton" Content="{Binding Path=LocalizedResources.CreateProject, 
+            
+            <!--Создание нового проекта-->
+            <Grid x:Name="CreateProjectGrid" Grid.Row="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="CreateProjectTextBox" Grid.Row="0" FontSize="{StaticResource PhoneFontSizeExtraLarge}" 
+                     TextWrapping="Wrap" BorderBrush="{StaticResource PhoneBorderBrush}"
+                     Text="{Binding Path=LocalizedResources.CreateProjectTextBoxPlaceholder, 
+                     Source={StaticResource LocalizedStrings}}" Visibility="Collapsed" 
+                     LostFocus="CreateProjectTextBox_LostFocus" GotFocus="CreateProjectTextBox_GotFocus"/>
+                <Button x:Name="CreateProjectButton" Content="{Binding Path=LocalizedResources.CreateProject, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" FontWeight="Thin" Click="CreateProjectButton_Click"/>
+                    VerticalAlignment="Center" MinWidth="400" FontWeight="Thin" Click="CreateProjectButton_Click"/>
+            </Grid>
+
+            <!--Открытие страницы со списком проектов-->
+            <Button x:Name="OpenProjectButton" Content="{Binding Path=LocalizedResources.OpenProject, 
+                    Source={StaticResource LocalizedStrings}}" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                    VerticalAlignment="Center" MinWidth="400" FontWeight="Thin" Click="OpenProjectButton_Click"/>
+            
+
+            <!--Открытие страницы настроек-->
             <Button x:Name="SettingsButton" Content="{Binding Path=LocalizedResources.Settings, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="2" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="460" Click="SettingsButton_Click" FontWeight="Thin"/>
-
+                    VerticalAlignment="Center" MinWidth="400" Click="SettingsButton_Click" FontWeight="Thin"/>
+            
         </Grid>
-
-        <!--Раскомментируйте, чтобы увидеть сетку выравнивания и выровнять
-            элементы управления по общим границам.  Верхнее поле изображения равно -32 пикселя, чтобы
-            осталось место для области уведомлений. Установите его равным 0 (или вообще удалите поле),
-            если область уведомлений скрыта.
-
-            Перед сдачей приложения удалите этот код XAML и само изображение.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>
 
 </phone:PhoneApplicationPage>

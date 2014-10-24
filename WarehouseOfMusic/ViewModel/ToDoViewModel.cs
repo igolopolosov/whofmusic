@@ -18,15 +18,15 @@ namespace WarehouseOfMusic.ViewModel
             toDoDB = new ToDoDataContext(toDoDBConnectionString);
         }
 
-        // A list of all projects, used by the add task page.
-        private string _projectName;
-        public string ProjectName
+        // Name of currently editing project
+        private ToDoProject _currentProject;
+        public ToDoProject CurrentProject
         {
-            get { return _projectName; }
+            get { return _currentProject; }
             set
             {
-                _projectName = value;
-                NotifyPropertyChanged("ProjectName");
+                _currentProject = value;
+                NotifyPropertyChanged("CurrentProject");
             }
         }
         
@@ -57,14 +57,10 @@ namespace WarehouseOfMusic.ViewModel
         // Add a project to the database and collections.
         public void AddProject(ToDoProject newProject)
         {
-            // Add a to-do item to the data context.
             toDoDB.Projects.InsertOnSubmit(newProject);
-
-            // Save changes to the database.
             toDoDB.SubmitChanges();
-
-            // Add a to-do item to the "all" observable collection.
             ProjectsList.Add(newProject);
+            CurrentProject = newProject;
         }
 
         // Remove a project from the database and collections.
