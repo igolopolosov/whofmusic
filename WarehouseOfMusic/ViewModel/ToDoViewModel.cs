@@ -1,112 +1,144 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using WarehouseOfMusic.Model;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="ToDoViewModel.cs" company="github.com/usehotkey">
+//     Free code of the application. No copyrights.
+// </copyright>
+// <author>Igor Golopolosov</author>
+//-----------------------------------------------------------------------
 
 namespace WarehouseOfMusic.ViewModel
 {
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using Model;
+
+    /// <summary>
+    /// Class to realize access to database and represent information to application pages.\
+    /// </summary>
     public class ToDoViewModel : INotifyPropertyChanged
     {
-        // LINQ to SQL data context for the local database.
-        private ToDoDataContext toDoDB;
+        /// <summary>
+        /// LINQ to SQL data context for the local database.
+        /// </summary>
+        private readonly ToDoDataContext _toDoDb;
 
-        // Class constructor, create the data context object.
-        public ToDoViewModel(string toDoDBConnectionString)
-        {
-            toDoDB = new ToDoDataContext(toDoDBConnectionString);
-        }
-
-        // Name of currently editing project
+        /// <summary>
+        /// Name of currently editing project
+        /// </summary>
         private ToDoProject _currentProject;
-        public ToDoProject CurrentProject
+
+        /// <summary>
+        /// A list of all projects
+        /// </summary>
+        private List<ToDoProject> _projectsList;
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToDoViewModel" /> class.
+        /// Class constructor, create the data context object.
+        /// </summary>
+        /// <param name="toDoDbConnectionString">Path to connect to database</param>
+        public ToDoViewModel(string toDoDbConnectionString)
         {
-            get { return _currentProject; }
-            set
-            {
-                _currentProject = value;
-                NotifyPropertyChanged("CurrentProject");
-            }
+            this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
         }
         
-        // To-do tracks.
-        private ObservableCollection<ToDoTrack> _toDoTracks;
-        public ObservableCollection<ToDoTrack> ToDoTracks
+        /// <summary>
+        /// Gets or sets current project
+        /// </summary>
+        public ToDoProject CurrentProject
         {
-            get { return _toDoTracks; }
+            get
+            {
+                return this._currentProject;
+            }
+
             set
             {
-                _toDoTracks = value;
-                NotifyPropertyChanged("ToDoTracks");
+                this._currentProject = value;
+                this.NotifyPropertyChanged("CurrentProject");
             }
         }
 
-        // A list of all projects, used by the add task page.
-        private List<ToDoProject> _projectsList;
+        /// <summary>
+        /// Gets or sets a list of all projects
+        /// </summary>
         public List<ToDoProject> ProjectsList
         {
-            get { return _projectsList; }
+            get
+            {
+                return this._projectsList;
+            }
+
             set
             {
-                _projectsList = value;
-                NotifyPropertyChanged("ProjectsList");
+                this._projectsList = value;
+                this.NotifyPropertyChanged("ProjectsList");
             }
         }
 
-        // Add a project to the database and collections.
+        /// <summary>
+        /// Add a project to the database and collections.
+        /// </summary>
+        /// <param name="newProject">Project on adding</param>
         public void AddProject(ToDoProject newProject)
         {
-            toDoDB.Projects.InsertOnSubmit(newProject);
-            toDoDB.SubmitChanges();
-            ProjectsList.Add(newProject);
-            CurrentProject = newProject;
+            this._toDoDb.Projects.InsertOnSubmit(newProject);
+            this._toDoDb.SubmitChanges();
+            this.ProjectsList.Add(newProject);
+            this.CurrentProject = newProject;
         }
 
-        // Remove a project from the database and collections.
+        /// <summary>
+        /// Remove a project from the database and collections.
+        /// </summary>
+        /// <param name="toDoForDelete">Project on removing</param>
         public void DeleteProject(ToDoProject toDoForDelete)
         {
-            // Remove the to-do item from the "all" observable collection.
-            ProjectsList.Remove(toDoForDelete);
-
-            // Remove the to-do item from the data context.
-            toDoDB.Projects.DeleteOnSubmit(toDoForDelete);
-            // Save changes to the database.
-            toDoDB.SubmitChanges();
+            //// Remove the to-do item from the "all" observable collection.
+            this.ProjectsList.Remove(toDoForDelete);
+            //// Remove the to-do item from the data context.
+            this._toDoDb.Projects.DeleteOnSubmit(toDoForDelete);
+            //// Save changes to the database.
+            this._toDoDb.SubmitChanges();
         }
 
-
-        // Query database and load the collections and list used by the pivot pages.
+        /// <summary>
+        /// Query database and load the collections and list /
+        /// </summary>
         public void LoadCollectionsFromDatabase()
         {
-
-            // Specify the query for all to-do items in the database.
-            var toDoTracksInDB = from ToDoTrack todo in toDoDB.Tracks
+            //// Specify the query for all to-do items in the database.
+            var toDoTracksInDb = from ToDoTrack todo in this._toDoDb.Tracks
                                 select todo;
 
-            // Query the database and load all to-do items.
-            ToDoTracks = new ObservableCollection<ToDoTrack>(toDoTracksInDB);
-
-            // Load a list of all categories.
-            ProjectsList = toDoDB.Projects.ToList();
+            //// Load a list of all categories.
+            this.ProjectsList = this._toDoDb.Projects.ToList();
         }
 
-        // Write changes in the data context to the database.
-        public void SaveChangesToDB()
+        /// <summary>
+        /// Write changes in the data context to the database.
+        /// </summary>
+        public void SaveChangesToDb()
         {
-            toDoDB.SubmitChanges();
+            this._toDoDb.SubmitChanges();
         }
 
         #region INotifyPropertyChanged Members
 
+        /// <summary>
+        /// Event of property changed
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // Used to notify the app that a property has changed.
+        /// <summary>
+        /// Used to notify the app that a property has changed.
+        /// </summary>
+        /// <param name="propertyName">Property on changed</param>
         private void NotifyPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
+            if (this.PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
         #endregion
