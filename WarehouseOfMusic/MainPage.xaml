@@ -54,9 +54,8 @@
             <!--Открытие страницы со списком проектов-->
             <Button x:Name="ExistingProjectsButton" Content="{Binding Path=LocalizedResources.ExistingProjects, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    VerticalAlignment="Center" MinWidth="400" FontWeight="Thin" Click="ExistingProjectsButton_Click" GotFocus="ExistingProjectsButton_GotFocus"/>
+                    VerticalAlignment="Center" MinWidth="400" FontWeight="Thin" Click="ExistingProjectsButton_Click"/>
             
-
             <!--Открытие страницы настроек-->
             <Button x:Name="SettingsButton" Content="{Binding Path=LocalizedResources.Settings, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="2" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
