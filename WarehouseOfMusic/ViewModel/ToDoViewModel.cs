@@ -11,6 +11,7 @@ namespace WarehouseOfMusic.ViewModel
     using System.ComponentModel;
     using System.Linq;
     using Model;
+    using Resources;
 
     /// <summary>
     /// Class to realize access to database and represent information to application pages.\
@@ -82,6 +83,15 @@ namespace WarehouseOfMusic.ViewModel
         /// <param name="newProject">Project on adding</param>
         public void AddProject(ToDoProject newProject)
         {
+            if (newProject.Name == null)
+            {
+                var projectNumber = 1;
+                if (this.ProjectsList.Any())
+                {
+                    projectNumber = this.ProjectsList.OrderBy(project => project.Id).Last().Id;
+                }
+                newProject.Name = AppResources.ProjectString + " " + projectNumber;
+            }
             this._toDoDb.Projects.InsertOnSubmit(newProject);
             this._toDoDb.SubmitChanges();
             this.ProjectsList.Add(newProject);
@@ -107,10 +117,6 @@ namespace WarehouseOfMusic.ViewModel
         /// </summary>
         public void LoadCollectionsFromDatabase()
         {
-            //// Specify the query for all to-do items in the database.
-            var toDoTracksInDb = from ToDoTrack todo in this._toDoDb.Tracks
-                                select todo;
-
             //// Load a list of all categories.
             this.ProjectsList = this._toDoDb.Projects.ToList();
         }

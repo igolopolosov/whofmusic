@@ -106,6 +106,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ВСЕ ПРОЕКТЫ.
+        /// </summary>
+        public static string ExistingProjects {
+            get {
+                return ResourceManager.GetString("ExistingProjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на язык.
         /// </summary>
         public static string LanguageTextBlockText {
@@ -124,11 +133,11 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на ВСЕ ПРОЕКТЫ.
+        ///   Ищет локализованную строку, похожую на Проект.
         /// </summary>
-        public static string OpenProject {
+        public static string ProjectString {
             get {
-                return ResourceManager.GetString("OpenProject", resourceCulture);
+                return ResourceManager.GetString("ProjectString", resourceCulture);
             }
         }
         

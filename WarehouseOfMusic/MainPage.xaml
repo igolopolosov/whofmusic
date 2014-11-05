@@ -52,9 +52,9 @@
             </Grid>
 
             <!--Открытие страницы со списком проектов-->
-            <Button x:Name="OpenProjectButton" Content="{Binding Path=LocalizedResources.OpenProject, 
+            <Button x:Name="ExistingProjectsButton" Content="{Binding Path=LocalizedResources.ExistingProjects, 
                     Source={StaticResource LocalizedStrings}}" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    VerticalAlignment="Center" MinWidth="400" FontWeight="Thin" Click="OpenProjectButton_Click"/>
+                    VerticalAlignment="Center" MinWidth="400" FontWeight="Thin" Click="ExistingProjectsButton_Click" GotFocus="ExistingProjectsButton_GotFocus"/>
             
 
             <!--Открытие страницы настроек-->

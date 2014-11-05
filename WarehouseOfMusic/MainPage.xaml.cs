@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using Microsoft.Phone.Controls;
-using WarehouseOfMusic.Model;
-using WarehouseOfMusic.Resources;
-
-namespace WarehouseOfMusic
+﻿namespace WarehouseOfMusic
 {
+    using System;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
+    using Microsoft.Phone.Controls;
+    using Model;
+    using Resources;
+
     public partial class MainPage : PhoneApplicationPage
     {
         // Конструктор
@@ -28,11 +28,9 @@ namespace WarehouseOfMusic
             }
             else
             {
-                if (CreateProjectTextBox.Text == AppResources.CreateProjectTextBoxPlaceholder)
-                {
-                    App.ViewModel.AddProject(new ToDoProject {Name = "Default"});
-                }
-                else App.ViewModel.AddProject(new ToDoProject {Name = CreateProjectTextBox.Text});
+                App.ViewModel.AddProject(CreateProjectTextBox.Text == AppResources.CreateProjectTextBoxPlaceholder
+                    ? new ToDoProject()
+                    : new ToDoProject {Name = CreateProjectTextBox.Text});
                 NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
             }
         }
@@ -52,9 +50,9 @@ namespace WarehouseOfMusic
         }
         #endregion
 
-        private void OpenProjectButton_Click(object sender, RoutedEventArgs e)
+        private void ExistingProjectsButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/AllExistingProjectsPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/ExistingProjectsPage.xaml", UriKind.Relative));
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)

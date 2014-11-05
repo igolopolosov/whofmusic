@@ -144,7 +144,7 @@
   <data name="CreateProject" xml:space="preserve">
     <value>CREATE PROJECT</value>
   </data>
-  <data name="OpenProject" xml:space="preserve">
+  <data name="ExistingProjects" xml:space="preserve">
     <value>ALL PROJECTS</value>
   </data>
   <data name="Settings" xml:space="preserve">
@@ -155,5 +155,8 @@
   </data>
   <data name="CreateProjectTextBoxPlaceholder" xml:space="preserve">
     <value>ENTER PROJECT NAME</value>
+  </data>
+  <data name="ProjectString" xml:space="preserve">
+    <value>Project</value>
   </data>
 </root>

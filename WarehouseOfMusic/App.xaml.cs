@@ -65,7 +65,7 @@ namespace WarehouseOfMusic
             }
 
             // Specify the local database connection string.
-            string DBConnectionString = "Data Source=isostore:/ToDo.sdf";
+            string DBConnectionString = "Data Source=isostore:/WarehouseOfMusic.sdf";
 
             // Create the database if it does not exist.
             using (ToDoDataContext db = new ToDoDataContext(DBConnectionString))
@@ -74,12 +74,6 @@ namespace WarehouseOfMusic
                 {
                     // Create the local database.
                     db.CreateDatabase();
-
-                    // Prepopulate the categories.
-                    db.Projects.InsertOnSubmit(new ToDoProject { Name = "Default" });
-
-                    // Save categories to the database.
-                    db.SubmitChanges();
                 }
             }
 
