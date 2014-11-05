@@ -1,8 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ToDoViewModel.cs" company="github.com/usehotkey">
-//     Free code of the application. No copyrights.
+// <copyright file="ToDoViewModel.cs" company="Igor Golopolosov">
+//     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
-// <author>Igor Golopolosov</author>
 //-----------------------------------------------------------------------
 
 namespace WarehouseOfMusic.ViewModel
@@ -88,7 +87,7 @@ namespace WarehouseOfMusic.ViewModel
                 var projectNumber = 1;
                 if (this.ProjectsList.Any())
                 {
-                    projectNumber = this.ProjectsList.OrderBy(project => project.Id).Last().Id;
+                    projectNumber = this.ProjectsList.OrderBy(project => project.Id).Last().Id + 1;
                 }
                 newProject.Name = AppResources.ProjectString + " " + projectNumber;
             }
@@ -117,8 +116,8 @@ namespace WarehouseOfMusic.ViewModel
         /// </summary>
         public void LoadCollectionsFromDatabase()
         {
-            //// Load a list of all categories.
-            this.ProjectsList = this._toDoDb.Projects.ToList();
+            //// Load a list of all categories. 
+            this.ProjectsList = this._toDoDb.Projects.Any() ? this._toDoDb.Projects.ToList() : new List<ToDoProject>();
         }
 
         /// <summary>

@@ -1,8 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ToDoProject.cs" company="github.com/usehotkey">
-//     Free code of the application. No copyrights.
+// <copyright file="ToDoProject.cs" company="Igor Golopolosov">
+//     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
-// <author>Igor Golopolosov</author>
 //-----------------------------------------------------------------------
 
 namespace WarehouseOfMusic.Model
@@ -20,14 +19,29 @@ namespace WarehouseOfMusic.Model
     {
         #region Fields of project
         /// <summary>
+        /// Time of creation of the project
+        /// </summary>
+        private readonly DateTime _creationTime;
+
+        /// <summary>
         /// ID of the project
         /// </summary>
         private int _id;
 
         /// <summary>
+        /// Time of last modification of the project
+        /// </summary>
+        private readonly DateTime _lastModificationTime;
+
+        /// <summary>
         /// Name of the project
         /// </summary>
         private string _name;
+
+        /// <summary>
+        /// Tempo of the project
+        /// </summary>
+        private int _tempo;
 
         /// <summary>
         /// Entity set for the collection side of the relationship.
@@ -50,6 +64,8 @@ namespace WarehouseOfMusic.Model
             this._tracks = new EntitySet<ToDoTrack>(
                 new Action<ToDoTrack>(this.AttachToDoTrack),
                 new Action<ToDoTrack>(this.DetachToDoTrack));
+            this._creationTime = this._lastModificationTime = DateTime.Now;
+            this._tempo = 100;
         }
 
         /// <summary>
@@ -61,6 +77,18 @@ namespace WarehouseOfMusic.Model
         /// Event of property changing
         /// </summary>
         public event PropertyChangingEventHandler PropertyChanging;
+
+        /// <summary>
+        /// Gets or sets Time of creation of the project
+        /// </summary>
+        [Column]
+        public DateTime CreationTime
+        {
+            get
+            {
+                return this._creationTime;
+            }
+        }
 
         /// <summary>
         /// Gets or sets ID of the project
@@ -82,6 +110,18 @@ namespace WarehouseOfMusic.Model
         }
 
         /// <summary>
+        /// Gets or sets Time of last modification of the project
+        /// </summary>
+        [Column]
+        public DateTime LastModificationTime
+        {
+            get
+            {
+                return this._lastModificationTime;
+            }
+        }
+        
+        /// <summary>
         /// Gets or sets Name of the project
         /// </summary>
         [Column]
@@ -97,6 +137,25 @@ namespace WarehouseOfMusic.Model
                 this.NotifyPropertyChanging("Name");
                 this._name = value;
                 this.NotifyPropertyChanged("Name");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets Name of the project
+        /// </summary>
+        [Column]
+        public int Tempo
+        {
+            get
+            {
+                return this._tempo;
+            }
+
+            set
+            {
+                this.NotifyPropertyChanging("Tempo");
+                this._tempo = value;
+                this.NotifyPropertyChanged("Tempo");
             }
         }
 

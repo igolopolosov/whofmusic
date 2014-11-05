@@ -16,12 +16,15 @@
         <DataTemplate x:Key="ToDoListBoxProjectsTemplate">
 
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0"
-                    Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                <TextBlock Grid.Row="0" Text="{Binding Name}" 
+                           FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                <TextBlock Grid.Row="1" Text="{Binding CreationTime}" 
+                           FontSize="{StaticResource PhoneFontSizeMedium}"/>
 
             </Grid>
         </DataTemplate>
@@ -32,8 +35,7 @@
         </StackPanel>
         <ListBox 
                         x:Name="ExistingProjextsListBox" 
-                        ItemsSource="{Binding ProjectsList}" 
-                        Margin="12, 0, 12, 0" Width="440" 
+                        ItemsSource="{Binding ProjectsList}" Margin="12"
                         ItemTemplate="{StaticResource ToDoListBoxProjectsTemplate}" />
         </Grid>
 

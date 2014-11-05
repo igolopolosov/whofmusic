@@ -1,8 +1,7 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ToDoDataContext.cs" company="github.com/usehotkey">
-//     Free code of the application. No copyrights.
+// <copyright file="ToDoDataContext.cs" company="Igor Golopolosov">
+//     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
-// <author>Igor Golopolosov</author>
 //-----------------------------------------------------------------------
 
 namespace WarehouseOfMusic.Model
