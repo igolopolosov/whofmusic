@@ -44,6 +44,16 @@ namespace WarehouseOfMusic.Model
         private Binary _version;
 
         /// <summary>
+        /// Event of property changed
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Event of property changing
+        /// </summary>
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        /// <summary>
         /// Gets or sets ID of track
         /// </summary>
         [Column(IsPrimaryKey = true, IsDbGenerated = true, DbType = "INT NOT NULL Identity", CanBeNull = false, AutoSync = AutoSync.OnInsert)]
@@ -112,13 +122,8 @@ namespace WarehouseOfMusic.Model
             }
         }
 
-        #region INotifyPropertyChanged Members
+        #region INotifyProperty Members
         
-        /// <summary>
-        /// Event of property changed
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
         /// Used to notify that a property changed
         /// </summary>
@@ -130,15 +135,6 @@ namespace WarehouseOfMusic.Model
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        #endregion
-
-        #region INotifyPropertyChanging Members
-
-        /// <summary>
-        /// Event of property changing
-        /// </summary>
-        public event PropertyChangingEventHandler PropertyChanging;
 
         /// <summary>
         /// Used to notify that a property is about to change

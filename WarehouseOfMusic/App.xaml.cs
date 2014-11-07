@@ -1,61 +1,66 @@
-﻿using System;
-using System.Diagnostics;
-using System.Resources;
-using System.Windows;
-using System.Windows.Markup;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using WarehouseOfMusic.Model;
-using WarehouseOfMusic.Resources;
-using WarehouseOfMusic.ViewModel;
+﻿//-----------------------------------------------------------------------
+// <copyright file="App.xaml.cs" company="Igor Golopolosov">
+//     Copyright (c) Igor Golopolosov. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace WarehouseOfMusic
 {
-    
+    using System;
+    using System.Diagnostics;
+    using System.Windows;
+    using System.Windows.Markup;
+    using System.Windows.Navigation;
+    using Microsoft.Phone.Controls;
+    using Microsoft.Phone.Shell;
+    using Model;
+    using Resources;
+    using ViewModel;
+
+    /// <summary>
+    /// Class of an application
+    /// </summary>
     public partial class App : Application
     {
-        private static ToDoViewModel viewModel;
-        public static ToDoViewModel ViewModel
-        {
-            get { return viewModel; }
-        }
-
         /// <summary>
-        /// Обеспечивает быстрый доступ к корневому кадру приложения телефона.
+        /// ViewModel layer
         /// </summary>
-        /// <returns>Корневой кадр приложения телефона.</returns>
-        public static PhoneApplicationFrame RootFrame { get; private set; }
+        private static ToDoViewModel _viewModel;
 
         /// <summary>
-        /// Конструктор объекта приложения.
+        /// Avoid double initialization
+        /// </summary>
+        private bool _phoneApplicationInitialized;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App" /> class.
+        /// Constructor of an object of application.
         /// </summary>
         public App()
         {
             // Глобальный обработчик неперехваченных исключений.
-            UnhandledException += Application_UnhandledException;
+            this.UnhandledException += this.Application_UnhandledException;
 
             // Стандартная инициализация XAML
-            InitializeComponent();
+            this.InitializeComponent();
 
             // Инициализация телефона
-            InitializePhoneApplication();
+            this.InitializePhoneApplication();
 
             // Инициализация отображения языка
-            InitializeLanguage();
+            this.InitializeLanguage();
 
             // Отображение сведений о профиле графики во время отладки.
             if (Debugger.IsAttached)
             {
                 // Отображение текущих счетчиков частоты смены кадров.
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Отображение областей приложения, перерисовываемых в каждом кадре.
-                //Application.Current.Host.Settings.EnableRedrawRegions = true;
-
+                // Application.Current.Host.Settings.EnableRedrawRegions = true;
                 // Включение режима визуализации анализа нерабочего кода,
                 // для отображения областей страницы, переданных в GPU, с цветным наложением.
-                //Application.Current.Host.Settings.EnableCacheVisualization = true;
+                // Application.Current.Host.Settings.EnableCacheVisualization = true;
 
                 // Предотвратить выключение экрана в режиме отладчика путем отключения
                 // определения состояния простоя приложения.
@@ -65,10 +70,10 @@ namespace WarehouseOfMusic
             }
 
             // Specify the local database connection string.
-            string DBConnectionString = "Data Source=isostore:/WarehouseOfMusic.sdf";
+            const string DB_CONNECTION_STRING = "Data Source=isostore:/WarehouseOfMusic.sdf";
 
             // Create the database if it does not exist.
-            using (ToDoDataContext db = new ToDoDataContext(DBConnectionString))
+            using (var db = new ToDoDataContext(DB_CONNECTION_STRING))
             {
                 if (db.DatabaseExists() == false)
                 {
@@ -78,43 +83,81 @@ namespace WarehouseOfMusic
             }
 
             // Create the ViewModel object.
-            viewModel = new ToDoViewModel(DBConnectionString);
+            _viewModel = new ToDoViewModel(DB_CONNECTION_STRING);
 
             // Query the local database and load observable collections.
-            viewModel.LoadCollectionsFromDatabase();
+            _viewModel.LoadCollectionsFromDatabase();
         }
 
-        // Код, который выполняется, если при активации контракта, такого как открытие файла или выбор файлов в окне сохранения, возвращается 
-        // выбранный файл или другие возвращаемые значения
+        /// <summary>
+        /// Gets View Model layer
+        /// </summary>
+        public static ToDoViewModel ViewModel
+        {
+            get { return _viewModel; }
+        }
+
+        /// <summary>
+        /// Gets easy access to root frame of application.
+        /// </summary>
+        /// <returns>Root frame of application.</returns>
+        public static PhoneApplicationFrame RootFrame { get; private set; }
+
+        /// <summary>
+        /// The code that is executed if the contract is activated, such as opening a file or a selection of files in the save window, 
+        /// returns the selected file or other return values
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Contract is activated</param>
         private void Application_ContractActivated(object sender, Windows.ApplicationModel.Activation.IActivatedEventArgs e)
         {
         }
 
-        // Код для выполнения при запуске приложения (например, из меню "Пуск")
-        // Этот код не будет выполняться при повторной активации приложения
+        /// <summary>
+        /// The code to execute when the application starts (for example, from "Start" menu) 
+        /// This code will not execute when the application re-activation
+        /// /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Launch of an application</param>
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
         }
 
-        // Код для выполнения при активации приложения (переводится в основной режим)
-        // Этот код не будет выполняться при первом запуске приложения
+        /// <summary>
+        /// The code to execute when the application is activated (translated in Native Mode)
+        /// This code will not run when you first start the application
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Application is activated</param>
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
         }
 
-        // Код для выполнения при деактивации приложения (отправляется в фоновый режим)
-        // Этот код не будет выполняться при закрытии приложения
+        /// <summary>
+        /// The code to execute when the deactivation application (sent to background)
+        /// This code will not execute when the application is closed
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Deactivation of an application</param>
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
         }
 
-        // Код для выполнения при закрытии приложения (например, при нажатии пользователем кнопки "Назад")
-        // Этот код не будет выполняться при деактивации приложения
+        /// <summary>
+        /// The code to execute when the application is closed (for example, when the user clicks the "Back")
+        /// This code will not execute when the application deactivation
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Application is closed</param>
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
         }
 
-        // Код для выполнения в случае ошибки навигации
+        /// <summary>
+        /// The code to execute if an error navigation
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Error of navigation</param>
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             if (Debugger.IsAttached)
@@ -124,7 +167,11 @@ namespace WarehouseOfMusic
             }
         }
 
-        // Код для выполнения на необработанных исключениях
+        /// <summary>
+        /// Code for execution on unhandled exception
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Unhandled exception</param>
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             if (Debugger.IsAttached)
@@ -136,65 +183,85 @@ namespace WarehouseOfMusic
 
         #region Инициализация приложения телефона
 
-        // Избегайте двойной инициализации
-        private bool phoneApplicationInitialized = false;
-
-        // Не добавляйте в этот метод дополнительный код
+        /// <summary>
+        /// Do not add additional code, this method
+        /// </summary>
         private void InitializePhoneApplication()
         {
-            if (phoneApplicationInitialized)
+            if (this._phoneApplicationInitialized)
+            {
                 return;
+            }
 
             // Создайте кадр, но не задавайте для него значение RootVisual; это позволит
             // экрану-заставке оставаться активным, пока приложение не будет готово для визуализации.
             RootFrame = new PhoneApplicationFrame();
-            RootFrame.Navigated += CompleteInitializePhoneApplication;
+            RootFrame.Navigated += this.CompleteInitializePhoneApplication;
 
             // Обработка сбоев навигации
-            RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+            RootFrame.NavigationFailed += this.RootFrame_NavigationFailed;
 
             // Обработка запросов на сброс для очистки стека переходов назад
-            RootFrame.Navigated += CheckForResetNavigation;
+            RootFrame.Navigated += this.CheckForResetNavigation;
 
             // Обработка активации контракта, такого как открытие файла или выбор файлов в окне сохранения
-            PhoneApplicationService.Current.ContractActivated += Application_ContractActivated;
+            PhoneApplicationService.Current.ContractActivated += this.Application_ContractActivated;
 
             // Убедитесь, что инициализация не выполняется повторно
-            phoneApplicationInitialized = true;
+            this._phoneApplicationInitialized = true;
         }
 
-        // Не добавляйте в этот метод дополнительный код
+        /// <summary>
+        /// Do not add additional code, this method
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Complete initialize phone application</param>
         private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
         {
             // Задайте корневой визуальный элемент для визуализации приложения
             if (RootVisual != RootFrame)
-                RootVisual = RootFrame;
+            {
+                this.RootVisual = RootFrame;
+            }
 
             // Удалите этот обработчик, т.к. он больше не нужен
-            RootFrame.Navigated -= CompleteInitializePhoneApplication;
+            RootFrame.Navigated -= this.CompleteInitializePhoneApplication;
         }
 
+        /// <summary>
+        /// If the application has a navigation "reset", should be checked
+        /// The next navigation to check whether you need to reset the stack
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Next Navigation</param>
         private void CheckForResetNavigation(object sender, NavigationEventArgs e)
         {
-            // Если приложение получило навигацию "reset", необходимо проверить
-            // при следующей навигации, чтобы проверить, нужно ли выполнять сброс стека
             if (e.NavigationMode == NavigationMode.Reset)
-                RootFrame.Navigated += ClearBackStackAfterReset;
+            {
+                RootFrame.Navigated += this.ClearBackStackAfterReset;
+            }
         }
 
+        /// <summary>
+        /// Clear of back stack
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Next Navigation</param>
         private void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
         {
             // Отменить регистрацию события, чтобы оно больше не вызывалось
-            RootFrame.Navigated -= ClearBackStackAfterReset;
+            RootFrame.Navigated -= this.ClearBackStackAfterReset;
 
             // Очистка стека только для "новых" навигаций (вперед) и навигаций "обновления"
             if (e.NavigationMode != NavigationMode.New && e.NavigationMode != NavigationMode.Refresh)
+            {
                 return;
+            }
 
             // Очистка всего стека страницы для согласованности пользовательского интерфейса
             while (RootFrame.RemoveBackEntry() != null)
             {
-                ; // ничего не делать
+                // ничего не делать
             }
         }
 
@@ -215,8 +282,11 @@ namespace WarehouseOfMusic
         //     Значение ResourceLanguage должно равняться "ar-SA"
         //     Значение ResourceFlowDirection должно равняться "RightToLeft"
         //
-        // Дополнительные сведения о локализации приложений Windows Phone см. на странице http://go.microsoft.com/fwlink/?LinkId=262072.
-        //
+        //// Дополнительные сведения о локализации приложений Windows Phone см. на странице http://go.microsoft.com/fwlink/?LinkId=262072.
+
+        /// <summary>
+        /// Initialize the application's font and text direction as defined in the localized resource strings.
+        /// </summary>
         private void InitializeLanguage()
         {
             try
@@ -237,7 +307,7 @@ namespace WarehouseOfMusic
                 //
                 // Если возникла ошибка компилятора, ResourceFlowDirection отсутствует в
                 // файл ресурсов.
-                FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
+                var flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
                 RootFrame.FlowDirection = flow;
             }
             catch
@@ -245,7 +315,7 @@ namespace WarehouseOfMusic
                 // Если здесь перехвачено исключение, вероятнее всего это означает, что
                 // для ResourceLangauge неправильно задан код поддерживаемого языка
                 // или для ResourceFlowDirection задано значение, отличное от LeftToRight
-                // или RightToLeft.
+                //// или RightToLeft.
 
                 if (Debugger.IsAttached)
                 {

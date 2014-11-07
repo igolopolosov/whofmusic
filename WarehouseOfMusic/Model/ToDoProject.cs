@@ -24,14 +24,14 @@ namespace WarehouseOfMusic.Model
         private readonly DateTime _creationTime;
 
         /// <summary>
-        /// ID of the project
-        /// </summary>
-        private int _id;
-
-        /// <summary>
         /// Time of last modification of the project
         /// </summary>
         private readonly DateTime _lastModificationTime;
+
+        /// <summary>
+        /// ID of the project
+        /// </summary>
+        private int _id;
 
         /// <summary>
         /// Name of the project
@@ -52,7 +52,7 @@ namespace WarehouseOfMusic.Model
         /// Version column aids update performance.
         /// </summary>
         [Column(IsVersion = true)]
-        private Binary _version; 
+        private Binary _version;
         #endregion
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace WarehouseOfMusic.Model
         public event PropertyChangingEventHandler PropertyChanging;
 
         /// <summary>
-        /// Gets or sets Time of creation of the project
+        /// Gets Time of creation of the project
         /// </summary>
         [Column]
         public DateTime CreationTime
@@ -110,7 +110,7 @@ namespace WarehouseOfMusic.Model
         }
 
         /// <summary>
-        /// Gets or sets Time of last modification of the project
+        /// Gets Time of last modification of the project
         /// </summary>
         [Column]
         public DateTime LastModificationTime

@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -102,6 +103,7 @@
     </Compile>
     <Compile Include="ApplicationSettingsPage.xaml.cs">
       <DependentUpon>ApplicationSettingsPage.xaml</DependentUpon>
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Model\ToDoDataContext.cs" />
     <Compile Include="Model\ToDoProject.cs" />
@@ -109,7 +111,9 @@
     <Compile Include="ProjectEditorPage.xaml.cs">
       <DependentUpon>ProjectEditorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -125,7 +129,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.ru-RU.resx</DependentUpon>
     </Compile>
-    <Compile Include="ThemeManager.cs" />
+    <Compile Include="ThemeManager.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="ViewModel\ToDoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -157,9 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\AppManifest.xml">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </None>
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </None>
   </ItemGroup>
   <ItemGroup>

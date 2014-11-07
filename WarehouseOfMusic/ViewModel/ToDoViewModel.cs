@@ -31,7 +31,7 @@ namespace WarehouseOfMusic.ViewModel
         /// A list of all projects
         /// </summary>
         private List<ToDoProject> _projectsList;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ToDoViewModel" /> class.
         /// Class constructor, create the data context object.
@@ -41,6 +41,11 @@ namespace WarehouseOfMusic.ViewModel
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
         }
+
+        /// <summary>
+        /// Event of property changed
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
         
         /// <summary>
         /// Gets or sets current project
@@ -89,8 +94,10 @@ namespace WarehouseOfMusic.ViewModel
                 {
                     projectNumber = this.ProjectsList.OrderBy(project => project.Id).Last().Id + 1;
                 }
+
                 newProject.Name = AppResources.ProjectString + " " + projectNumber;
             }
+
             this._toDoDb.Projects.InsertOnSubmit(newProject);
             this._toDoDb.SubmitChanges();
             this.ProjectsList.Add(newProject);
@@ -129,11 +136,6 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         #region INotifyPropertyChanged Members
-
-        /// <summary>
-        /// Event of property changed
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Used to notify the app that a property has changed.
