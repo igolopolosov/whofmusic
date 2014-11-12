@@ -14,8 +14,7 @@
     shell:SystemTray.IsVisible="False">
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="ToDoListBoxProjectsTemplate">
-
-            <Grid>
+            <Grid x:Name="ProjectItemGrid" Tap="ProjectItemGrid_OnTap">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
@@ -25,10 +24,10 @@
                            FontSize="{StaticResource PhoneFontSizeLarge}"/>
                 <TextBlock Grid.Row="1" Text="{Binding CreationTime}" 
                            FontSize="{StaticResource PhoneFontSizeMedium}"/>
-
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
+    
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
     <Grid x:Name="LayoutRoot">
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
