@@ -159,4 +159,7 @@
   <data name="ProjectString" xml:space="preserve">
     <value>Project</value>
   </data>
+  <data name="TrackString" xml:space="preserve">
+    <value>Track</value>
+  </data>
 </root>

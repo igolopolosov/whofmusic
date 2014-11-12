@@ -156,6 +156,9 @@
   <data name="ThemeTextBlockText" xml:space="preserve">
     <value>тема</value>
   </data>
+  <data name="TrackString" xml:space="preserve">
+    <value>Дорожка</value>
+  </data>
   <data name="VolumeTextBlockText" xml:space="preserve">
     <value>громкость</value>
   </data>

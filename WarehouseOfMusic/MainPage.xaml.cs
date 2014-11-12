@@ -44,7 +44,7 @@ namespace WarehouseOfMusic
             }
             else
             {
-                App.ViewModel.AddProject(CreateProjectTextBox.Text == AppResources.CreateProjectTextBoxPlaceholder
+                App.ViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProjectTextBoxPlaceholder
                     ? new ToDoProject()
                     : new ToDoProject { Name = CreateProjectTextBox.Text });
                 NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));

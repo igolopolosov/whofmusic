@@ -7,6 +7,8 @@
 namespace WarehouseOfMusic.ViewModel
 {
     using System.Collections.Generic;
+    using System.Data.Linq;
+    using System.Data.Linq.Mapping;
     using System.ComponentModel;
     using System.Linq;
     using Model;
@@ -23,7 +25,7 @@ namespace WarehouseOfMusic.ViewModel
         private readonly ToDoDataContext _toDoDb;
 
         /// <summary>
-        /// Name of currently editing project
+        /// Currently editing project
         /// </summary>
         private ToDoProject _currentProject;
 
@@ -40,6 +42,7 @@ namespace WarehouseOfMusic.ViewModel
         public ToDoViewModel(string toDoDbConnectionString)
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
+            this._currentProject = new ToDoProject();
         }
 
         /// <summary>
@@ -82,17 +85,40 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         /// <summary>
+        /// Add new track to the database and collections.
+        /// </summary>
+        public void AddTrackToCurrentProject()
+        {
+            var trackNumber = 1;
+            if (_currentProject.Tracks.Any())
+            {
+                trackNumber = _currentProject.Tracks.Count + 1;
+            }
+            var trackName = AppResources.TrackString + " " + trackNumber;
+
+            var newTrack = new ToDoTrack
+            {
+                Name = trackName,
+                Project = _currentProject
+            };
+
+            this._toDoDb.Tracks.InsertOnSubmit(newTrack);
+            this._toDoDb.SubmitChanges();
+            this._currentProject.Tracks.Add(newTrack);
+        }
+
+        /// <summary>
         /// Add a project to the database and collections.
         /// </summary>
         /// <param name="newProject">Project on adding</param>
-        public void AddProject(ToDoProject newProject)
+        public void CreateProject(ToDoProject newProject)
         {
             if (newProject.Name == null)
             {
                 var projectNumber = 1;
-                if (this.ProjectsList.Any())
+                if (this._projectsList.Any())
                 {
-                    projectNumber = this.ProjectsList.OrderBy(project => project.Id).Last().Id + 1;
+                    projectNumber = this._projectsList.OrderBy(project => project.Id).Last().Id + 1;
                 }
 
                 newProject.Name = AppResources.ProjectString + " " + projectNumber;
@@ -100,31 +126,31 @@ namespace WarehouseOfMusic.ViewModel
 
             this._toDoDb.Projects.InsertOnSubmit(newProject);
             this._toDoDb.SubmitChanges();
-            this.ProjectsList.Add(newProject);
-            this.CurrentProject = newProject;
+            this._projectsList.Add(newProject);
+            this._currentProject = newProject;
         }
 
         /// <summary>
-        /// Remove a project from the database and collections.
+        /// Remove a track from the database and collections.
         /// </summary>
-        /// <param name="toDoForDelete">Project on removing</param>
-        public void DeleteProject(ToDoProject toDoForDelete)
+        /// <param name="toDoForDelete">Track on removing</param>
+        public void DeleteTrack(ToDoTrack toDoForDelete)
         {
-            //// Remove the to-do item from the "all" observable collection.
-            this.ProjectsList.Remove(toDoForDelete);
-            //// Remove the to-do item from the data context.
-            this._toDoDb.Projects.DeleteOnSubmit(toDoForDelete);
+            //// Remove the track from the current project.
+            this.CurrentProject.Tracks.Remove(toDoForDelete);
+            //// Remove the track from the data context.
+            this._toDoDb.Tracks.DeleteOnSubmit(toDoForDelete);
             //// Save changes to the database.
             this._toDoDb.SubmitChanges();
         }
 
         /// <summary>
-        /// Query database and load the collections and list /
+        /// Query database and load the collections and list
         /// </summary>
         public void LoadCollectionsFromDatabase()
         {
-            //// Load a list of all categories. 
-            this.ProjectsList = this._toDoDb.Projects.Any() ? this._toDoDb.Projects.ToList() : new List<ToDoProject>();
+            //// Load a list of all projects. 
+            this._projectsList = this._toDoDb.Projects.Any() ? this._toDoDb.Projects.ToList() : new List<ToDoProject>();
         }
 
         /// <summary>

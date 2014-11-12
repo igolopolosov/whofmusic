@@ -32,16 +32,15 @@ namespace WarehouseOfMusic.Model
         private EntityRef<ToDoProject> _project;
 
         /// <summary>
+        /// Version column aids update performance.
+        /// </summary>
+        [Column(IsVersion = true)] private Binary _version;
+
+        /// <summary>
         /// Internal column for the associated ToDoProject ID value
         /// </summary>
         [Column]
-        private int _projectId;
-
-        /// <summary>
-        /// Version column aids update performance.
-        /// </summary>
-        [Column(IsVersion = true)]
-        private Binary _version;
+        internal int ProjectId;
 
         /// <summary>
         /// Event of property changed
@@ -100,7 +99,7 @@ namespace WarehouseOfMusic.Model
         /// <summary>
         /// Gets or sets association, to describe the relationship between this key and that "storage" table
         /// </summary>
-        [Association(Storage = "_project", ThisKey = "_projectId", OtherKey = "Id", IsForeignKey = true)]
+        [Association(Storage = "_project", ThisKey = "ProjectId", OtherKey = "Id", IsForeignKey = true)]
         public ToDoProject Project
         {
             get
@@ -115,7 +114,7 @@ namespace WarehouseOfMusic.Model
 
                 if (value != null)
                 {
-                    this._projectId = value.Id;
+                    this.ProjectId = value.Id;
                 }
 
                 this.NotifyPropertyChanging("Project");

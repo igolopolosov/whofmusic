@@ -21,12 +21,12 @@ namespace WarehouseOfMusic.Model
         /// <summary>
         /// Time of creation of the project
         /// </summary>
-        private readonly DateTime _creationTime;
+        private DateTime _creationTime;
 
         /// <summary>
         /// Time of last modification of the project
         /// </summary>
-        private readonly DateTime _lastModificationTime;
+        private DateTime _lastModificationTime;
 
         /// <summary>
         /// ID of the project
@@ -79,7 +79,7 @@ namespace WarehouseOfMusic.Model
         public event PropertyChangingEventHandler PropertyChanging;
 
         /// <summary>
-        /// Gets Time of creation of the project
+        /// Getsor or sets Time of creation of the project
         /// </summary>
         [Column]
         public DateTime CreationTime
@@ -88,6 +88,13 @@ namespace WarehouseOfMusic.Model
             {
                 return this._creationTime;
             }
+
+            set
+            {
+                this.NotifyPropertyChanging("CreationTime");
+                _creationTime = value;
+                this.NotifyPropertyChanged("CreationTime");
+            } 
         }
 
         /// <summary>
@@ -119,6 +126,13 @@ namespace WarehouseOfMusic.Model
             {
                 return this._lastModificationTime;
             }
+
+            set
+            {
+                this.NotifyPropertyChanging("LastModificationTime");
+                _lastModificationTime = value;
+                this.NotifyPropertyChanged("LastModificationTime");
+            } 
         }
         
         /// <summary>
@@ -162,8 +176,8 @@ namespace WarehouseOfMusic.Model
         /// <summary>
         /// Gets or sets entity set for the collection side of the relationship.
         /// </summary>
-        [Association(Storage = "_tracks", OtherKey = "_projectId", ThisKey = "Id")]
-        public EntitySet<ToDoTrack> ToDoTrack
+        [Association(Storage = "_tracks", OtherKey = "ProjectId", ThisKey = "Id")]
+        public EntitySet<ToDoTrack> Tracks
         {
             get { return this._tracks; }
             set { this._tracks.Assign(value); }

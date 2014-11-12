@@ -178,6 +178,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Дорожка.
+        /// </summary>
+        public static string TrackString {
+            get {
+                return ResourceManager.GetString("TrackString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на громкость.
         /// </summary>
         public static string VolumeTextBlockText {

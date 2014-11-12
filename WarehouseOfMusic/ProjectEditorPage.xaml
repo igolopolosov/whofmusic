@@ -13,11 +13,44 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
     
+    <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="ToDoListBoxTracksTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{Binding Name}"
+                           FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                <Button x:Name="DeleteTrackButton" Grid.Column="1" Content="X" Click="DeleteTrackButton_OnClick"/>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+    
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
     <Grid x:Name="LayoutRoot">
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
             <TextBlock Text="{Binding CurrentProject.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+            <Grid x:Name="ProjectControlPanel" Margin="12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ListBox x:Name="TracksListBox" Grid.Row="0"
+                        ItemsSource="{Binding CurrentProject.Tracks}"
+                        ItemTemplate="{StaticResource ToDoListBoxTracksTemplate}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                <Button x:Name="AddTrackButton" Content="ADD TRACK" Grid.Row="1" Click="AddTrackButton_Click"/>
+            </Grid>
+                
         </StackPanel>
     </Grid>
 
