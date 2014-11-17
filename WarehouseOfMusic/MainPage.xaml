@@ -43,18 +43,18 @@
         <!--ProjectControlPanel — управление проектом-->
         <Grid x:Name="ProjectControlPanel" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
             <ListBox 
                         x:Name="ExistingProjextsListBox" Background="{StaticResource PhoneChromeBrush}"
-                        ItemsSource="{Binding ProjectsList}" Margin="12"
+                        ItemsSource="{Binding ProjectsList}" Margin="12" Grid.Row="1"
                         ItemTemplate="{StaticResource ToDoListBoxProjectsTemplate}" />
             
             <!--Создание нового проекта-->
-            <Grid x:Name="CreateProjectGrid" Grid.Row="1">
+            <Grid x:Name="CreateProjectGrid" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*"/>
                     <ColumnDefinition Width="2*"/>
