@@ -123,23 +123,20 @@
   <data name="CreateProject" xml:space="preserve">
     <value>СОЗДАТЬ ПРОЕКТ</value>
   </data>
-  <data name="CreateProjectTextBoxPlaceholder" xml:space="preserve">
-    <value>ВВЕДИТЕ ИМЯ ПРОЕКТА</value>
-  </data>
   <data name="CustomThemeListBoxItem" xml:space="preserve">
     <value>Удобная</value>
   </data>
   <data name="DarkThemeListBoxItem" xml:space="preserve">
     <value>Темная</value>
   </data>
-  <data name="ExistingProjects" xml:space="preserve">
-    <value>ВСЕ ПРОЕКТЫ</value>
-  </data>
   <data name="LanguageTextBlockText" xml:space="preserve">
     <value>язык</value>
   </data>
   <data name="LightThemeListBoxItem" xml:space="preserve">
     <value>Светлая</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="ProjectString" xml:space="preserve">
     <value>Проект</value>

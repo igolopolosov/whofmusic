@@ -79,15 +79,6 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на ВВЕДИТЕ ИМЯ ПРОЕКТА.
-        /// </summary>
-        public static string CreateProjectTextBoxPlaceholder {
-            get {
-                return ResourceManager.GetString("CreateProjectTextBoxPlaceholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Удобная.
         /// </summary>
         public static string CustomThemeListBoxItem {
@@ -106,15 +97,6 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на ВСЕ ПРОЕКТЫ.
-        /// </summary>
-        public static string ExistingProjects {
-            get {
-                return ResourceManager.GetString("ExistingProjects", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на язык.
         /// </summary>
         public static string LanguageTextBlockText {
@@ -129,6 +111,15 @@ namespace WarehouseOfMusic.Resources {
         public static string LightThemeListBoxItem {
             get {
                 return ResourceManager.GetString("LightThemeListBoxItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на OK.
+        /// </summary>
+        public static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         

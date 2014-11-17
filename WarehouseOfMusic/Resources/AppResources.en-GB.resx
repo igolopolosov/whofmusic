@@ -144,22 +144,19 @@
   <data name="CreateProject" xml:space="preserve">
     <value>CREATE PROJECT</value>
   </data>
-  <data name="ExistingProjects" xml:space="preserve">
-    <value>ALL PROJECTS</value>
-  </data>
   <data name="Settings" xml:space="preserve">
     <value>SETTINGS</value>
   </data>
   <data name="ApplySettingsButtonContent" xml:space="preserve">
     <value>APPLY</value>
   </data>
-  <data name="CreateProjectTextBoxPlaceholder" xml:space="preserve">
-    <value>ENTER PROJECT NAME</value>
-  </data>
   <data name="ProjectString" xml:space="preserve">
     <value>Project</value>
   </data>
   <data name="TrackString" xml:space="preserve">
     <value>Track</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
   </data>
 </root>

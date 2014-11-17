@@ -10,6 +10,7 @@ namespace WarehouseOfMusic
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using Microsoft.Phone.Controls;
     using Model;
     using Resources;
@@ -34,21 +35,12 @@ namespace WarehouseOfMusic
         /// </summary>
         /// <param name="sender">Some object</param>
         /// <param name="e">Click on button</param>
-        private void CreateProjectButton_Click(object sender, RoutedEventArgs e)
+        private void OkButton_OnTap(object sender, GestureEventArgs e)
         {
-            if (object.Equals(CreateProjectTextBox.Visibility, Visibility.Collapsed))
-            {
-                CreateProjectTextBox.Visibility = Visibility.Visible;
-                var firstRow = CreateProjectGrid.RowDefinitions.First();
-                firstRow.Height = new GridLength(1, GridUnitType.Star);
-            }
-            else
-            {
-                App.ViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProjectTextBoxPlaceholder
+            App.ViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProject
                     ? new ToDoProject()
                     : new ToDoProject { Name = CreateProjectTextBox.Text });
-                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
-            }
+            NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
         }
 
         /// <summary>
@@ -61,7 +53,7 @@ namespace WarehouseOfMusic
             var _this = (TextBox)sender;
             if (_this.Text == string.Empty)
             {
-                _this.Text = AppResources.CreateProjectTextBoxPlaceholder;
+                _this.Text = AppResources.CreateProject;
             }
         }
 
@@ -73,22 +65,12 @@ namespace WarehouseOfMusic
         private void CreateProjectTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             var _this = (TextBox)sender;
-            if (_this.Text == AppResources.CreateProjectTextBoxPlaceholder)
+            if (_this.Text == AppResources.CreateProject)
             {
                 _this.Text = string.Empty;
             }
         }
         #endregion
-
-        /// <summary>
-        /// Click on ExistingProjectsButton
-        /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">Click on button</param>
-        private void ExistingProjectsButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/ExistingProjectsPage.xaml", UriKind.Relative));
-        }
 
         /// <summary>
         /// Click on SettingsButton
@@ -98,6 +80,24 @@ namespace WarehouseOfMusic
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/ApplicationSettingsPage.xaml", UriKind.Relative));
+        }
+
+        /// <summary>
+        /// Chose project for editing.
+        /// </summary>
+        /// <param name="sender">Project item displayed like a list box item</param>
+        /// <param name="e">One tap</param>
+        private void ProjectItemGrid_OnTap(object sender, GestureEventArgs e)
+        {
+            var grid = sender as Grid;
+
+            if (grid != null)
+            {
+                var chosenProject = grid.DataContext as ToDoProject;
+                App.ViewModel.CurrentProject = chosenProject;
+            }
+
+            NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
         }
     }
 }
