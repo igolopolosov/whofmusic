@@ -73,6 +73,40 @@ namespace WarehouseOfMusic
         #endregion
 
         /// <summary>
+        /// Chose project for editing.
+        /// </summary>
+        /// <param name="sender">Project item displayed like a list box item</param>
+        /// <param name="e">One tap</param>
+       private void EditProjectButton_OnTap(object sender, GestureEventArgs e)
+        {
+            var button = sender as Button;
+
+            if (button != null)
+            {
+                var chosenProject = button.DataContext as ToDoProject;
+                App.ViewModel.CurrentProject = chosenProject;
+            }
+
+            NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
+        }
+
+       /// <summary>
+       /// Chose project for deleting.
+       /// </summary>
+       /// <param name="sender">Project item displayed like a list box item</param>
+       /// <param name="e">One tap</param>
+        private void DeleteProjectButton_OnTap(object sender, GestureEventArgs e)
+        {
+            var button = sender as Button;
+
+            if (button != null)
+            {
+                var chosenProject = button.DataContext as ToDoProject;
+                App.ViewModel.DeleteProject(chosenProject);
+            }
+        }
+
+        /// <summary>
         /// Click on SettingsButton
         /// </summary>
         /// <param name="sender">Some object</param>
@@ -80,24 +114,6 @@ namespace WarehouseOfMusic
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/ApplicationSettingsPage.xaml", UriKind.Relative));
-        }
-
-        /// <summary>
-        /// Chose project for editing.
-        /// </summary>
-        /// <param name="sender">Project item displayed like a list box item</param>
-        /// <param name="e">One tap</param>
-        private void ProjectItemGrid_OnTap(object sender, GestureEventArgs e)
-        {
-            var grid = sender as Grid;
-
-            if (grid != null)
-            {
-                var chosenProject = grid.DataContext as ToDoProject;
-                App.ViewModel.CurrentProject = chosenProject;
-            }
-
-            NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
         }
     }
 }

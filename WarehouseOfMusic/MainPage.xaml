@@ -12,18 +12,37 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+    
     <phone:PhoneApplicationPage.Resources>
+        <!--Вид отдельного элемента списка проектов-->
         <DataTemplate x:Key="ToDoListBoxProjectsTemplate">
-            <Grid x:Name="ProjectItemGrid" Tap="ProjectItemGrid_OnTap">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Text="{Binding Name}" 
+            <Grid x:Name="ProjectItemGrid" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Name}" 
                            FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                <TextBlock Grid.Row="1" Text="{Binding CreationTime}" 
+                    <TextBlock Grid.Row="1" Text="{Binding CreationTime}" FontWeight="Thin" 
                            FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="EditProjectButton" Grid.Column="0" Content="E"
+                            FontSize="{StaticResource PhoneFontSizeLarge}" Tap="EditProjectButton_OnTap"
+                            VerticalAlignment="Center" FontWeight="Thin"/>
+                    <Button x:Name="DeleteProjectButton" Grid.Column="1" Content="X"
+                            FontSize="{StaticResource PhoneFontSizeLarge}" Tap="DeleteProjectButton_OnTap"
+                    VerticalAlignment="Center" FontWeight="Thin"/>
+                </Grid>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -48,11 +67,6 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <ListBox 
-                        x:Name="ExistingProjextsListBox" Background="{StaticResource PhoneChromeBrush}"
-                        ItemsSource="{Binding ProjectsList}" Margin="12" Grid.Row="1"
-                        ItemTemplate="{StaticResource ToDoListBoxProjectsTemplate}" />
-            
             <!--Создание нового проекта-->
             <Grid x:Name="CreateProjectGrid" Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -66,9 +80,20 @@
                 <Button x:Name="OkButton" Content="{Binding Path=LocalizedResources.OK, 
                     Source={StaticResource LocalizedStrings}}" Grid.Column="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                     VerticalAlignment="Center" FontWeight="Thin" Tap="OkButton_OnTap"/>
-
-
             </Grid>
+
+            <!--Список проектов-->
+            <ListBox 
+                        x:Name="ExistingProjextsListBox" Background="{StaticResource PhoneChromeBrush}"
+                        ItemsSource="{Binding ProjectsList}" Margin="12" Grid.Row="1"
+                        ItemTemplate="{StaticResource ToDoListBoxProjectsTemplate}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            
 
             <!--Открытие страницы настроек-->
             <Button x:Name="SettingsButton" Content="{Binding Path=LocalizedResources.Settings, 

@@ -6,9 +6,7 @@
 
 namespace WarehouseOfMusic.ViewModel
 {
-    using System.Collections.Generic;
-    using System.Data.Linq;
-    using System.Data.Linq.Mapping;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using Model;
@@ -32,7 +30,7 @@ namespace WarehouseOfMusic.ViewModel
         /// <summary>
         /// A list of all projects
         /// </summary>
-        private List<ToDoProject> _projectsList;
+        private ObservableCollection<ToDoProject> _projectsList;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToDoViewModel" /> class.
@@ -70,7 +68,7 @@ namespace WarehouseOfMusic.ViewModel
         /// <summary>
         /// Gets or sets a list of all projects
         /// </summary>
-        public List<ToDoProject> ProjectsList
+        public ObservableCollection<ToDoProject> ProjectsList
         {
             get
             {
@@ -90,16 +88,17 @@ namespace WarehouseOfMusic.ViewModel
         public void AddTrackToCurrentProject()
         {
             var trackNumber = 1;
-            if (_currentProject.Tracks.Any())
+            if (this._currentProject.Tracks.Any())
             {
-                trackNumber = _currentProject.Tracks.Count + 1;
+                trackNumber = this._currentProject.Tracks.Count + 1;
             }
+
             var trackName = AppResources.TrackString + " " + trackNumber;
 
             var newTrack = new ToDoTrack
             {
                 Name = trackName,
-                Project = _currentProject
+                Project = this._currentProject
             };
 
             this._toDoDb.Tracks.InsertOnSubmit(newTrack);
@@ -133,14 +132,32 @@ namespace WarehouseOfMusic.ViewModel
         /// <summary>
         /// Remove a track from the database and collections.
         /// </summary>
-        /// <param name="toDoForDelete">Track on removing</param>
-        public void DeleteTrack(ToDoTrack toDoForDelete)
+        /// <param name="trackForDelete">Track on removing</param>
+        public void DeleteTrack(ToDoTrack trackForDelete)
         {
-            //// Remove the track from the current project.
-            this.CurrentProject.Tracks.Remove(toDoForDelete);
-            //// Remove the track from the data context.
-            this._toDoDb.Tracks.DeleteOnSubmit(toDoForDelete);
-            //// Save changes to the database.
+            this.CurrentProject.Tracks.Remove(trackForDelete);
+            this._toDoDb.Tracks.DeleteOnSubmit(trackForDelete);
+            this._toDoDb.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Remove project and data linked with him from collections and database.
+        /// </summary>
+        /// <param name="projectForDelete">Project on removing</param>
+        public void DeleteProject(ToDoProject projectForDelete)
+        {
+            if (Equals(projectForDelete, this._currentProject))
+            {
+                this._currentProject = new ToDoProject();
+            }
+
+            foreach (var track in projectForDelete.Tracks)
+            {
+                this._toDoDb.Tracks.DeleteOnSubmit(track);
+            }
+
+            this.ProjectsList.Remove(projectForDelete);
+            this._toDoDb.Projects.DeleteOnSubmit(projectForDelete);
             this._toDoDb.SubmitChanges();
         }
 
@@ -150,7 +167,9 @@ namespace WarehouseOfMusic.ViewModel
         public void LoadCollectionsFromDatabase()
         {
             //// Load a list of all projects. 
-            this._projectsList = this._toDoDb.Projects.Any() ? this._toDoDb.Projects.ToList() : new List<ToDoProject>();
+            this._projectsList = this._toDoDb.Projects.Any()
+                ? new ObservableCollection<ToDoProject>(this._toDoDb.Projects)
+                : new ObservableCollection<ToDoProject>();
         }
 
         /// <summary>

@@ -79,7 +79,7 @@ namespace WarehouseOfMusic.Model
         public event PropertyChangingEventHandler PropertyChanging;
 
         /// <summary>
-        /// Getsor or sets Time of creation of the project
+        /// Gets or sets Time of creation of the project
         /// </summary>
         [Column]
         public DateTime CreationTime
@@ -92,7 +92,7 @@ namespace WarehouseOfMusic.Model
             set
             {
                 this.NotifyPropertyChanging("CreationTime");
-                _creationTime = value;
+                this._creationTime = value;
                 this.NotifyPropertyChanged("CreationTime");
             } 
         }
@@ -117,7 +117,7 @@ namespace WarehouseOfMusic.Model
         }
 
         /// <summary>
-        /// Gets Time of last modification of the project
+        /// Gets or sets Time of last modification of the project
         /// </summary>
         [Column]
         public DateTime LastModificationTime
@@ -130,7 +130,7 @@ namespace WarehouseOfMusic.Model
             set
             {
                 this.NotifyPropertyChanging("LastModificationTime");
-                _lastModificationTime = value;
+                this._lastModificationTime = value;
                 this.NotifyPropertyChanged("LastModificationTime");
             } 
         }

@@ -4,12 +4,11 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-
 namespace WarehouseOfMusic
 {
-    using Microsoft.Phone.Controls;
     using System.Windows;
     using System.Windows.Controls;
+    using Microsoft.Phone.Controls;
     using Model;
 
     /// <summary>
@@ -26,25 +25,31 @@ namespace WarehouseOfMusic
             this.DataContext = App.ViewModel;
         }
 
-        private void AddTrackButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        /// <summary>
+        /// Adding new track
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">On click</param>
+        private void AddTrackButton_Click(object sender, RoutedEventArgs e)
         {
             App.ViewModel.AddTrackToCurrentProject();
         }
 
+        /// <summary>
+        /// Deleting of chosen track
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">On click</param>
         private void DeleteTrackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            // Cast the parameter as a button.
             var button = sender as Button;
 
             if (button != null)
             {
-                // Get a handle for the track bound to the button.
-                var toDoForDelete = button.DataContext as ToDoTrack;
-
-                App.ViewModel.DeleteTrack(toDoForDelete);
+                var trackForDelete = button.DataContext as ToDoTrack;
+                App.ViewModel.DeleteTrack(trackForDelete);
             }
 
-            // Put the focus back to the main page.
             this.Focus();
         }
     }
