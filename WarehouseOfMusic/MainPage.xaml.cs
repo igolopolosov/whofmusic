@@ -9,7 +9,6 @@ namespace WarehouseOfMusic
     using System;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Input;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
     using Model;
@@ -79,9 +78,9 @@ namespace WarehouseOfMusic
         /// </summary>
         /// <param name="sender">Project item displayed like a list box item</param>
         /// <param name="e">One tap</param>
-        private void EditProjectButton_OnTap(object sender, GestureEventArgs e)
+        private void ProjectItemGrid_OnTap(object sender, GestureEventArgs e)
         {
-            var button = sender as Button;
+            var button = sender as Grid;
 
             if (button != null)
             {
@@ -97,9 +96,9 @@ namespace WarehouseOfMusic
         /// </summary>
         /// <param name="sender">Project item displayed like a list box item</param>
         /// <param name="e">One tap</param>
-        private void DeleteProjectButton_OnTap(object sender, GestureEventArgs e)
+        private void ProjectItemGrid_Hold(object sender, GestureEventArgs e)
         {
-            var button = sender as Button;
+            var button = sender as Grid;
 
             if (button != null)
             {

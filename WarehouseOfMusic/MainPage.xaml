@@ -16,13 +16,9 @@
     <phone:PhoneApplicationPage.Resources>
         <!--Вид отдельного элемента списка проектов-->
         <DataTemplate x:Key="ToDoListBoxProjectsTemplate">
-            <Grid x:Name="ProjectItemGrid" VerticalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
+            <Grid x:Name="ProjectItemGrid" VerticalAlignment="Stretch" Hold="ProjectItemGrid_Hold"
+                  Tap="ProjectItemGrid_OnTap">
+                <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
@@ -30,19 +26,6 @@
                            FontSize="{StaticResource PhoneFontSizeLarge}"/>
                     <TextBlock Grid.Row="1" Text="{Binding CreationTime}" FontWeight="Thin" 
                            FontSize="{StaticResource PhoneFontSizeMedium}"/>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="EditProjectButton" Grid.Column="0" Content="E"
-                            FontSize="{StaticResource PhoneFontSizeLarge}" Tap="EditProjectButton_OnTap"
-                            VerticalAlignment="Center" FontWeight="Thin"/>
-                    <Button x:Name="DeleteProjectButton" Grid.Column="1" Content="X"
-                            FontSize="{StaticResource PhoneFontSizeLarge}" Tap="DeleteProjectButton_OnTap"
-                    VerticalAlignment="Center" FontWeight="Thin"/>
-                </Grid>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -94,4 +77,8 @@
             </ListBox>
         </Grid>
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
