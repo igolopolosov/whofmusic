@@ -7,11 +7,11 @@
 namespace WarehouseOfMusic
 {
     using System;
-    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using Microsoft.Phone.Controls;
+    using Microsoft.Phone.Shell;
     using Model;
     using Resources;
 
@@ -27,6 +27,7 @@ namespace WarehouseOfMusic
         {
             this.InitializeComponent();
             this.DataContext = App.ViewModel;
+            this.BuildLocalizedAppBar();
         }
 
         #region CreateProjectButton events
@@ -72,12 +73,13 @@ namespace WarehouseOfMusic
         }
         #endregion
 
+        #region Manipulation with projects from list
         /// <summary>
         /// Chose project for editing.
         /// </summary>
         /// <param name="sender">Project item displayed like a list box item</param>
         /// <param name="e">One tap</param>
-       private void EditProjectButton_OnTap(object sender, GestureEventArgs e)
+        private void EditProjectButton_OnTap(object sender, GestureEventArgs e)
         {
             var button = sender as Button;
 
@@ -90,11 +92,11 @@ namespace WarehouseOfMusic
             NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
         }
 
-       /// <summary>
-       /// Chose project for deleting.
-       /// </summary>
-       /// <param name="sender">Project item displayed like a list box item</param>
-       /// <param name="e">One tap</param>
+        /// <summary>
+        /// Chose project for deleting.
+        /// </summary>
+        /// <param name="sender">Project item displayed like a list box item</param>
+        /// <param name="e">One tap</param>
         private void DeleteProjectButton_OnTap(object sender, GestureEventArgs e)
         {
             var button = sender as Button;
@@ -104,16 +106,43 @@ namespace WarehouseOfMusic
                 var chosenProject = button.DataContext as ToDoProject;
                 App.ViewModel.DeleteProject(chosenProject);
             }
-        }
+        } 
+        #endregion
 
+        #region For application bar
         /// <summary>
         /// Click on SettingsButton
         /// </summary>
         /// <param name="sender">Some object</param>
         /// <param name="e">Click on button</param>
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        private void SettingsButton_OnClick(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/ApplicationSettingsPage.xaml", UriKind.Relative));
         }
+
+        /// <summary>
+        /// Bulid Localized application bar
+        /// </summary>
+        private void BuildLocalizedAppBar()
+        {
+            this.ApplicationBar = new ApplicationBar();
+
+            //// Add button linked with help page
+            var helpButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.question.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarHelp
+            };
+            this.ApplicationBar.Buttons.Add(helpButton);
+
+            //// Add button linked with settings page
+            var settingsButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.settings.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarSettings,
+            };
+            settingsButton.Click += this.SettingsButton_OnClick;
+            this.ApplicationBar.Buttons.Add(settingsButton);
+        }
+
+        #endregion
     }
 }

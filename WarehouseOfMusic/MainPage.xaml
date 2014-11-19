@@ -64,7 +64,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
             <!--Создание нового проекта-->
@@ -93,14 +92,6 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
             </ListBox>
-            
-
-            <!--Открытие страницы настроек-->
-            <Button x:Name="SettingsButton" Content="{Binding Path=LocalizedResources.Settings, 
-                    Source={StaticResource LocalizedStrings}}" Grid.Row="2" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    VerticalAlignment="Center" MinWidth="400" Click="SettingsButton_Click" FontWeight="Thin"/>
-            
         </Grid>
     </Grid>
-
 </phone:PhoneApplicationPage>

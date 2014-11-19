@@ -61,6 +61,24 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на справка.
+        /// </summary>
+        public static string AppBarHelp {
+            get {
+                return ResourceManager.GetString("AppBarHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на настройки.
+        /// </summary>
+        public static string AppBarSettings {
+            get {
+                return ResourceManager.GetString("AppBarSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ПРИМЕНИТЬ.
         /// </summary>
         public static string ApplySettingsButtonContent {
