@@ -115,6 +115,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на удалить.
+        /// </summary>
+        public static string DeleteContextMenu {
+            get {
+                return ResourceManager.GetString("DeleteContextMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на язык.
         /// </summary>
         public static string LanguageTextBlockText {
@@ -147,6 +156,15 @@ namespace WarehouseOfMusic.Resources {
         public static string ProjectString {
             get {
                 return ResourceManager.GetString("ProjectString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на переименовать.
+        /// </summary>
+        public static string RenameContextMenu {
+            get {
+                return ResourceManager.GetString("RenameContextMenu", resourceCulture);
             }
         }
         

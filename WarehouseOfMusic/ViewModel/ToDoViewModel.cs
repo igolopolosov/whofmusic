@@ -28,6 +28,11 @@ namespace WarehouseOfMusic.ViewModel
         private ToDoProject _currentProject;
 
         /// <summary>
+        /// Project that must be renamed
+        /// </summary>
+        private int _onRenameProjectId = -1;
+
+        /// <summary>
         /// A list of all projects
         /// </summary>
         private ObservableCollection<ToDoProject> _projectsList;
@@ -62,6 +67,23 @@ namespace WarehouseOfMusic.ViewModel
             {
                 this._currentProject = value;
                 this.NotifyPropertyChanged("CurrentProject");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets id of project on rename
+        /// </summary>
+        public int OnRenameProjectId
+        {
+            get
+            {
+                return this._onRenameProjectId;
+            }
+
+            set
+            {
+                this._onRenameProjectId = value;
+                this.NotifyPropertyChanged("OnRenameProjectId");
             }
         }
 
@@ -135,7 +157,7 @@ namespace WarehouseOfMusic.ViewModel
         /// <param name="trackForDelete">Track on removing</param>
         public void DeleteTrack(ToDoTrack trackForDelete)
         {
-            this.CurrentProject.Tracks.Remove(trackForDelete);
+            this._currentProject.Tracks.Remove(trackForDelete);
             this._toDoDb.Tracks.DeleteOnSubmit(trackForDelete);
             this._toDoDb.SubmitChanges();
         }
@@ -156,8 +178,22 @@ namespace WarehouseOfMusic.ViewModel
                 this._toDoDb.Tracks.DeleteOnSubmit(track);
             }
 
-            this.ProjectsList.Remove(projectForDelete);
+            this._projectsList.Remove(projectForDelete);
             this._toDoDb.Projects.DeleteOnSubmit(projectForDelete);
+            this._toDoDb.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Give the project new name
+        /// </summary>
+        /// <param name="newName">New name of the project</param>
+        internal void RenameProjectTo(string newName)
+        {
+            var onRenameProject = (from prj in this._projectsList
+                where prj.Id == this._onRenameProjectId
+                select prj).First();
+
+            onRenameProject.Name = newName;
             this._toDoDb.SubmitChanges();
         }
 

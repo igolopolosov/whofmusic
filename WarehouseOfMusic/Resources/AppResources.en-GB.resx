@@ -165,4 +165,10 @@
   <data name="AppBarSettings" xml:space="preserve">
     <value>settings</value>
   </data>
+  <data name="DeleteContextMenu" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="RenameContextMenu" xml:space="preserve">
+    <value>rename</value>
+  </data>
 </root>

@@ -4,11 +4,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using Windows.Media.Devices;
+
 namespace WarehouseOfMusic
 {
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
     using Model;
@@ -30,17 +33,28 @@ namespace WarehouseOfMusic
         }
 
         #region CreateProjectButton events
+
         /// <summary>
         /// Click on CreateProjectButton
         /// </summary>
         /// <param name="sender">Some object</param>
         /// <param name="e">Click on button</param>
-        private void OkButton_OnTap(object sender, GestureEventArgs e)
+        private void OkButton_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            App.ViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProject
+            if (App.ViewModel.OnRenameProjectId != -1)
+            {
+                App.ViewModel.RenameProjectTo(CreateProjectTextBox.Text);
+                App.ViewModel.OnRenameProjectId = -1;
+            }
+            else
+            {
+                App.ViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProject
                     ? new ToDoProject()
-                    : new ToDoProject { Name = CreateProjectTextBox.Text });
-            NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
+                    : new ToDoProject {Name = CreateProjectTextBox.Text});
+                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
+            }
+
+            CreateProjectTextBox.Text = AppResources.CreateProject;
         }
 
         /// <summary>
@@ -65,6 +79,7 @@ namespace WarehouseOfMusic
         private void CreateProjectTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             var _this = (TextBox)sender;
+
             if (_this.Text == AppResources.CreateProject)
             {
                 _this.Text = string.Empty;
@@ -78,13 +93,13 @@ namespace WarehouseOfMusic
         /// </summary>
         /// <param name="sender">Project item displayed like a list box item</param>
         /// <param name="e">One tap</param>
-        private void ProjectItemGrid_OnTap(object sender, GestureEventArgs e)
+        private void ProjectItemGrid_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var button = sender as Grid;
+            var grid = sender as Grid;
 
-            if (button != null)
+            if (grid != null)
             {
-                var chosenProject = button.DataContext as ToDoProject;
+                var chosenProject = grid.DataContext as ToDoProject;
                 App.ViewModel.CurrentProject = chosenProject;
             }
 
@@ -92,20 +107,56 @@ namespace WarehouseOfMusic
         }
 
         /// <summary>
-        /// Chose project for deleting.
+        /// Rename project
         /// </summary>
         /// <param name="sender">Project item displayed like a list box item</param>
-        /// <param name="e">One tap</param>
-        private void ProjectItemGrid_Hold(object sender, GestureEventArgs e)
+        /// <param name="e">On tap</param>
+        private void RenameProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var button = sender as Grid;
+            var contextMenuItem = sender as MenuItem;
 
-            if (button != null)
+            if (contextMenuItem != null && ReferenceEquals(contextMenuItem.Header, AppResources.RenameContextMenu))
             {
-                var chosenProject = button.DataContext as ToDoProject;
+                var chosenProject = contextMenuItem.DataContext as ToDoProject;
+                if (chosenProject != null) App.ViewModel.OnRenameProjectId = chosenProject.Id;
+            }
+        }
+
+        /// <summary>
+        /// Delete project
+        /// </summary>
+        /// <param name="sender">Project item displayed like a list box item</param>
+        /// <param name="e">On tap</param>
+        private void DeleteProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var contextMenuItem = sender as MenuItem;
+
+            if (contextMenuItem != null)
+            {
+                var chosenProject = contextMenuItem.DataContext as ToDoProject;
                 App.ViewModel.DeleteProject(chosenProject);
             }
-        } 
+        }
+
+        /// <summary>
+        /// Rightly set focus after tap on rename
+        /// </summary>
+        /// <param name="sender">Rename item</param>
+        /// <param name="e">On lost focus</param>
+        private void RenameProject_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            CreateProjectTextBox.Focus();
+        }
+
+        /// <summary>
+        /// Rightly set focus after tap on delete
+        /// </summary>
+        /// <param name="sender">Delete item</param>
+        /// <param name="e">On lost focus</param>
+        private void DeleteProject_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            this.Focus();
+        }
         #endregion
 
         #region For application bar

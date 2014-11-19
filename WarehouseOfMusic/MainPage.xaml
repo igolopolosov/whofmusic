@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -16,8 +17,7 @@
     <phone:PhoneApplicationPage.Resources>
         <!--Вид отдельного элемента списка проектов-->
         <DataTemplate x:Key="ToDoListBoxProjectsTemplate">
-            <Grid x:Name="ProjectItemGrid" VerticalAlignment="Stretch" Hold="ProjectItemGrid_Hold"
-                  Tap="ProjectItemGrid_OnTap">
+            <Grid x:Name="ProjectItemGrid" VerticalAlignment="Stretch" Tap="ProjectItemGrid_OnTap">
                 <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
@@ -26,9 +26,19 @@
                            FontSize="{StaticResource PhoneFontSizeLarge}"/>
                     <TextBlock Grid.Row="1" Text="{Binding CreationTime}" FontWeight="Thin" 
                            FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu">
+                        <toolkit:MenuItem Header="{Binding Path=LocalizedResources.RenameContextMenu, 
+                     Source={StaticResource LocalizedStrings}}" Tap="RenameProject_OnTap" LostFocus="RenameProject_OnLostFocus" />
+                        <toolkit:MenuItem Header="{Binding Path=LocalizedResources.DeleteContextMenu, 
+                     Source={StaticResource LocalizedStrings}}" Tap="DeleteProject_OnTap" LostFocus="DeleteProject_OnLostFocus"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
+    
     <!--LayoutRoot представляет корневую сетку, где размещается все содержимое страницы-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
