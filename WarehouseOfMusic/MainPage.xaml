@@ -56,24 +56,14 @@
         <Grid x:Name="ProjectControlPanel" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
 
             <!--Создание нового проекта-->
-            <Grid x:Name="CreateProjectGrid" Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <TextBox x:Name="CreateProjectTextBox" Grid.Column="0" FontSize="{StaticResource PhoneFontSizeLarge}" 
+            <TextBox x:Name="CreateProjectTextBox" Grid.Row="0" FontSize="{StaticResource PhoneFontSizeLarge}" 
                      BorderBrush="{StaticResource PhoneBorderBrush}" Text="{Binding Path=LocalizedResources.CreateProject, 
-                     Source={StaticResource LocalizedStrings}}"
+                     Source={StaticResource LocalizedStrings}}" TextAlignment="Center" KeyUp="CreateProjectTextBox_OnKeyUp"
                      LostFocus="CreateProjectTextBox_LostFocus" GotFocus="CreateProjectTextBox_GotFocus"/>
-                <Button x:Name="OkButton" Content="{Binding Path=LocalizedResources.OK, 
-                    Source={StaticResource LocalizedStrings}}" Grid.Column="1" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
-                    VerticalAlignment="Center" FontWeight="Thin" Tap="OkButton_OnTap"/>
-            </Grid>
-
             <!--Список проектов-->
             <ListBox 
                         x:Name="ExistingProjextsListBox" Background="{StaticResource PhoneChromeBrush}"

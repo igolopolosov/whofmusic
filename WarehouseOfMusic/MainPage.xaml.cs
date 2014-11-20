@@ -35,39 +35,27 @@ namespace WarehouseOfMusic
         #region CreateProjectButton events
 
         /// <summary>
-        /// Click on CreateProjectButton
+        /// By press enter key creates new project or renames chosen by user project
         /// </summary>
         /// <param name="sender">Some object</param>
         /// <param name="e">Click on button</param>
-        private void OkButton_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void CreateProjectTextBox_OnKeyUp(object sender, KeyEventArgs e)
         {
-            if (App.ViewModel.OnRenameProjectId != -1)
+            if (e.Key == Key.Enter)
             {
-                App.ViewModel.RenameProjectTo(CreateProjectTextBox.Text);
-                App.ViewModel.OnRenameProjectId = -1;
-            }
-            else
-            {
-                App.ViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProject
-                    ? new ToDoProject()
-                    : new ToDoProject {Name = CreateProjectTextBox.Text});
-                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
-            }
-
-            CreateProjectTextBox.Text = AppResources.CreateProject;
-        }
-
-        /// <summary>
-        /// CreateProjectTextBox lost focus
-        /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">Lost focus of button</param>
-        private void CreateProjectTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            var _this = (TextBox)sender;
-            if (_this.Text == string.Empty)
-            {
-                _this.Text = AppResources.CreateProject;
+                if (App.ViewModel.OnRenameProjectId == -1)
+                {
+                    App.ViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProject
+                        ? new ToDoProject()
+                        : new ToDoProject { Name = CreateProjectTextBox.Text });
+                    NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    App.ViewModel.RenameProjectTo(CreateProjectTextBox.Text);
+                    App.ViewModel.OnRenameProjectId = -1;
+                    this.Focus();
+                }
             }
         }
 
@@ -78,12 +66,23 @@ namespace WarehouseOfMusic
         /// <param name="e">Got focus of button</param>
         private void CreateProjectTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            var _this = (TextBox)sender;
+            var thisTextBox = (TextBox)sender;
 
-            if (_this.Text == AppResources.CreateProject)
+            if (thisTextBox.Text == AppResources.CreateProject)
             {
-                _this.Text = string.Empty;
+                thisTextBox.Text = string.Empty;
             }
+        }
+
+        /// <summary>
+        /// CreateProjectTextBox lost focus
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Lost focus of button</param>
+        private void CreateProjectTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var thisTextBox = (TextBox)sender;
+            thisTextBox.Text = AppResources.CreateProject;
         }
         #endregion
 
