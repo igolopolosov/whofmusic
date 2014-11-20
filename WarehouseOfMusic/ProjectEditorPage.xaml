@@ -50,8 +50,12 @@
                 </ListBox>
                 <Button x:Name="AddTrackButton" Content="ADD TRACK" Grid.Row="1" Click="AddTrackButton_Click"/>
             </Grid>
-                
         </StackPanel>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
