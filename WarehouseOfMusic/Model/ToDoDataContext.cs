@@ -14,14 +14,19 @@ namespace WarehouseOfMusic.Model
     public class ToDoDataContext : DataContext
     {
         /// <summary>
-        /// Specify a table for the to-do tracks.
+        /// Specify a table for the notes
         /// </summary>
-        public Table<ToDoTrack> Tracks;
+        public Table<ToDoNote> Notes;
 
         /// <summary>
         /// Specify a table for the projects.
         /// </summary>
         public Table<ToDoProject> Projects;
+
+        /// <summary>
+        /// Specify a table for the tracks
+        /// </summary>
+        public Table<ToDoTrack> Tracks;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToDoDataContext" /> class.

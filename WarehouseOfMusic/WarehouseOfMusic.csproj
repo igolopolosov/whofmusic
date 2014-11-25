@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Model\ToDoDataContext.cs" />
     <Compile Include="Model\ToDoProject.cs" />
+    <Compile Include="Model\ToDoNote.cs" />
     <Compile Include="Model\ToDoTrack.cs" />
     <Compile Include="ProjectEditorPage.xaml.cs">
       <DependentUpon>ProjectEditorPage.xaml</DependentUpon>
