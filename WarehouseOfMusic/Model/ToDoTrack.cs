@@ -6,6 +6,7 @@
 
 namespace WarehouseOfMusic.Model
 {
+    using System;
     using System.ComponentModel;
     using System.Data.Linq;
     using System.Data.Linq.Mapping;
@@ -27,6 +28,11 @@ namespace WarehouseOfMusic.Model
         private string _name;
 
         /// <summary>
+        /// Entity set for the collection side of the relationship.
+        /// </summary>
+        private EntitySet<ToDoNote> _notes;
+
+        /// <summary>
         /// Entity reference, to identify the ToDoProject "storage" table
         /// </summary>
         private EntityRef<ToDoProject> _project;
@@ -35,6 +41,17 @@ namespace WarehouseOfMusic.Model
         /// Version column aids update performance.
         /// </summary>
         [Column(IsVersion = true)] private Binary _version;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ToDoTrack" /> class.
+        /// Assign handlers for the add and remove operations, respectively.
+        /// </summary>
+        public ToDoTrack()
+        {
+            this._notes = new EntitySet<ToDoNote>(
+                new Action<ToDoNote>(this.AttachToDoNote),
+                new Action<ToDoNote>(this.DetachToDoNote));
+        }
 
         /// <summary>
         /// Event of property changed
@@ -116,10 +133,40 @@ namespace WarehouseOfMusic.Model
         }
 
         /// <summary>
+        /// Gets or sets entity set for the collection side of the relationship.
+        /// </summary>
+        [Association(Storage = "_notes", OtherKey = "TrackId", ThisKey = "Id")]
+        public EntitySet<ToDoNote> Notes
+        {
+            get { return this._notes; }
+            set { this._notes.Assign(value); }
+        }
+
+        /// <summary>
         /// Gets or sets internal column for the associated ToDoProject ID value
         /// </summary>
         [Column]
         internal int ProjectId { get; set; }
+
+        /// <summary>
+        /// Called during an add operation
+        /// </summary>
+        /// <param name="toDo">Note on adding</param>
+        private void AttachToDoNote(ToDoNote toDo)
+        {
+            this.NotifyPropertyChanging("ToDoNote");
+            toDo.TrackRef = this;
+        }
+
+        /// <summary>
+        ///  Called during a remove operation
+        /// </summary>
+        /// <param name="toDo">Note on removing</param>
+        private void DetachToDoNote(ToDoNote toDo)
+        {
+            this.NotifyPropertyChanging("ToDoNote");
+            toDo.TrackRef = null;
+        }
 
         #region INotifyProperty Members
         

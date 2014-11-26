@@ -152,7 +152,7 @@ namespace WarehouseOfMusic.Model
         /// <summary>
         /// Gets or sets Name of note
         /// </summary>
-        [Column]
+        [Column(CanBeNull = true)]
         public string Title
         {
             get
