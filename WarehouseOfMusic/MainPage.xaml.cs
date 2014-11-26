@@ -97,7 +97,7 @@ namespace WarehouseOfMusic
             if (grid != null)
             {
                 var chosenProject = grid.DataContext as ToDoProject;
-                App.ViewModel.CurrentProject.Set(chosenProject);
+                App.ViewModel.ProjectEditorViewModel.CurrentProject = chosenProject;
             }
 
             NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
@@ -115,7 +115,10 @@ namespace WarehouseOfMusic
             if (contextMenuItem != null && ReferenceEquals(contextMenuItem.Header, AppResources.RenameContextMenu))
             {
                 var chosenProject = contextMenuItem.DataContext as ToDoProject;
-                if (chosenProject != null) App.ViewModel.OnRenameProjectId = chosenProject.Id;
+                if (chosenProject != null)
+                {
+                    App.ViewModel.OnRenameProjectId = chosenProject.Id;
+                }
             }
         }
 
@@ -168,7 +171,7 @@ namespace WarehouseOfMusic
         }
 
         /// <summary>
-        /// Bulid Localized application bar
+        /// Build Localized application bar
         /// </summary>
         private void BuildLocalizedAppBar()
         {

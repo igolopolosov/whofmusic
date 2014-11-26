@@ -52,12 +52,6 @@ namespace WarehouseOfMusic.Model
         [Column(IsVersion = true)] private Binary _version;
 
         /// <summary>
-        /// Internal column for the associated ToDoTrack ID value
-        /// </summary>
-        [Column]
-        internal int TrackId;
-
-        /// <summary>
         /// Event of property changed
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
@@ -201,6 +195,12 @@ namespace WarehouseOfMusic.Model
                 this.NotifyPropertyChanging("TrackRef");
             }
         }
+
+        /// <summary>
+        /// Gets or sets internal column for the associated ToDoTrack ID value
+        /// </summary>
+        [Column]
+        internal int TrackId { get; set; }
 
         #region INotifyProperty Members
         

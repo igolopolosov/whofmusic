@@ -7,19 +7,20 @@
 namespace WarehouseOfMusic
 {
     using Model;
+
     /// <summary>
     /// Track and type of changes for this track
     /// </summary>
     public sealed class TrackArgs
     {
         /// <summary>
-        /// Changed track
+        /// Gets or sets changed track
         /// </summary>
-        public ToDoTrack Track { set; get; }
+        public ToDoTrack Track { get; set; }
 
         /// <summary>
-        /// Type of change
+        /// Gets or sets type of change
         /// </summary>
-        public string TypeOfEvent { set; get; }
+        public string TypeOfEvent { get; set; }
     }
 }

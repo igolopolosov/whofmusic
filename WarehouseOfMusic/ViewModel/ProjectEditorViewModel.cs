@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TrackViewModel.cs" company="Igor Golopolosov">
+// <copyright file="ProjecteditorViewModel.cs" company="Igor Golopolosov">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -12,6 +12,9 @@ namespace WarehouseOfMusic.ViewModel
     using Model;
     using Resources;
 
+    /// <summary>
+    /// ViewModel for project editor page
+    /// </summary>
     public class ProjectEditorViewModel : INotifyPropertyChanged
     {
         /// <summary>
@@ -20,7 +23,17 @@ namespace WarehouseOfMusic.ViewModel
         private ToDoProject _currentProject;
 
         /// <summary>
-        /// Gets or sets current project
+        /// Called when necessary to delete or insert the track
+        /// </summary>
+        public event EventHandler<TrackArgs> TrackChanged;
+
+        /// <summary>
+        /// Event of property changed
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        /// <summary>
+        /// Gets or sets the current project
         /// </summary>
         public ToDoProject CurrentProject
         {
@@ -35,8 +48,6 @@ namespace WarehouseOfMusic.ViewModel
                 this.NotifyPropertyChanged("CurrentProject");
             }
         }
-
-        public event EventHandler<TrackArgs> TrackChanged;
 
         /// <summary>
         /// Add new track to the database and collections.
@@ -63,7 +74,10 @@ namespace WarehouseOfMusic.ViewModel
                 TypeOfEvent = "Insert"
             };
 
-            if (TrackChanged != null) TrackChanged(this, trackArgs);
+            if (this.TrackChanged != null)
+            {
+                this.TrackChanged(this, trackArgs);
+            }
 
             this._currentProject.Tracks.Add(newTrack);
         }
@@ -82,18 +96,11 @@ namespace WarehouseOfMusic.ViewModel
                 TypeOfEvent = "Delete"
             };
 
-            if (TrackChanged != null) TrackChanged(this, trackArgs);
+            if (this.TrackChanged != null)
+            {
+                this.TrackChanged(this, trackArgs);
+            }
         }
-
-        internal void Set(ToDoProject chosenProject)
-        {
-            _currentProject = chosenProject;
-        }
-
-        /// <summary>
-        /// Event of property changed
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #region INotifyPropertyChanged Members
 

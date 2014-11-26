@@ -23,9 +23,9 @@ namespace WarehouseOfMusic.ViewModel
         private readonly ToDoDataContext _toDoDb;
 
         /// <summary>
-        /// ViemModel for currently editing project
+        /// ViewModel for currently editing project
         /// </summary>
-        private ProjectEditorViewModel _currentProjectViewModel;
+        private ProjectEditorViewModel _projectEditorViewModel;
 
         /// <summary>
         /// Project that must be renamed
@@ -45,8 +45,8 @@ namespace WarehouseOfMusic.ViewModel
         public ToDoViewModel(string toDoDbConnectionString)
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
-            this._currentProjectViewModel = new ProjectEditorViewModel();
-            this._currentProjectViewModel.TrackChanged += this.TrackChanged;
+            this._projectEditorViewModel = new ProjectEditorViewModel();
+            this._projectEditorViewModel.TrackChanged += this.TrackChanged;
         }
 
         /// <summary>
@@ -55,18 +55,18 @@ namespace WarehouseOfMusic.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// ViemModel for currently editing project
+        /// Gets or sets ViewModel for editing project page
         /// </summary>
-        public ProjectEditorViewModel CurrentProject
+        public ProjectEditorViewModel ProjectEditorViewModel
         {
             get
             {
-                return this._currentProjectViewModel;
+                return this._projectEditorViewModel;
             }
 
             set
             {
-                this._currentProjectViewModel = value;
+                this._projectEditorViewModel = value;
                 this.NotifyPropertyChanged("CurrentProjectViewModel");
             }
         }
@@ -106,64 +106,6 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         /// <summary>
-        /// Add a project to the database and collections.
-        /// </summary>
-        /// <param name="newProject">Project on adding</param>
-        public void CreateProject(ToDoProject newProject)
-        {
-            if (newProject.Name == null)
-            {
-                var projectNumber = 1;
-                if (this._projectsList.Any())
-                {
-                    projectNumber = this._projectsList.OrderBy(project => project.Id).Last().Id + 1;
-                }
-
-                newProject.Name = AppResources.ProjectString + " " + projectNumber;
-            }
-
-            this._toDoDb.Projects.InsertOnSubmit(newProject);
-            this._toDoDb.SubmitChanges();
-            this._projectsList.Add(newProject);
-            this._currentProjectViewModel.CurrentProject = newProject;
-        }
-
-        /// <summary>
-        /// Remove project and data linked with him from collections and database.
-        /// </summary>
-        /// <param name="projectForDelete">Project on removing</param>
-        public void DeleteProject(ToDoProject projectForDelete)
-        {
-            if (Equals(projectForDelete, this._currentProjectViewModel.CurrentProject))
-            {
-                this._currentProjectViewModel.CurrentProject = new ToDoProject();
-            }
-
-            foreach (var track in projectForDelete.Tracks)
-            {
-                this._toDoDb.Tracks.DeleteOnSubmit(track);
-            }
-
-            this._projectsList.Remove(projectForDelete);
-            this._toDoDb.Projects.DeleteOnSubmit(projectForDelete);
-            this._toDoDb.SubmitChanges();
-        }
-
-        /// <summary>
-        /// Give the project new name
-        /// </summary>
-        /// <param name="newName">New name of the project</param>
-        internal void RenameProjectTo(string newName)
-        {
-            var onRenameProject = (from prj in this._projectsList
-                where prj.Id == this._onRenameProjectId
-                select prj).First();
-
-            onRenameProject.Name = newName;
-            this._toDoDb.SubmitChanges();
-        }
-
-        /// <summary>
         /// Query database and load the collections and list
         /// </summary>
         public void LoadCollectionsFromDatabase()
@@ -183,11 +125,69 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         /// <summary>
+        /// Add a project to the database and collections.
+        /// </summary>
+        /// <param name="newProject">Project on adding</param>
+        internal void CreateProject(ToDoProject newProject)
+        {
+            if (newProject.Name == null)
+            {
+                var projectNumber = 1;
+                if (this._projectsList.Any())
+                {
+                    projectNumber = this._projectsList.OrderBy(project => project.Id).Last().Id + 1;
+                }
+
+                newProject.Name = AppResources.ProjectString + " " + projectNumber;
+            }
+
+            this._toDoDb.Projects.InsertOnSubmit(newProject);
+            this._toDoDb.SubmitChanges();
+            this._projectsList.Add(newProject);
+            this._projectEditorViewModel.CurrentProject = newProject;
+        }
+
+        /// <summary>
+        /// Remove project and data linked with him from collections and database.
+        /// </summary>
+        /// <param name="projectForDelete">Project on removing</param>
+        internal void DeleteProject(ToDoProject projectForDelete)
+        {
+            if (Equals(projectForDelete, this._projectEditorViewModel.CurrentProject))
+            {
+                this._projectEditorViewModel.CurrentProject = new ToDoProject();
+            }
+
+            foreach (var track in projectForDelete.Tracks)
+            {
+                this._toDoDb.Tracks.DeleteOnSubmit(track);
+            }
+
+            this._projectsList.Remove(projectForDelete);
+            this._toDoDb.Projects.DeleteOnSubmit(projectForDelete);
+            this._toDoDb.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Give the project new name
+        /// </summary>
+        /// <param name="newName">New name of the project</param>
+        internal void RenameProjectTo(string newName)
+        {
+            var onRenameProject = (from prj in this._projectsList
+                                   where prj.Id == this._onRenameProjectId
+                                   select prj).First();
+
+            onRenameProject.Name = newName;
+            this._toDoDb.SubmitChanges();
+        }
+
+        /// <summary>
         /// Called on delete or add track
         /// </summary>
         /// <param name="sender">Current project</param>
-        /// <param name="trackArgs">Represet Track on change</param>
-        void TrackChanged(object sender, TrackArgs trackArgs)
+        /// <param name="trackArgs">Represent information about track on change</param>
+        internal void TrackChanged(object sender, TrackArgs trackArgs)
         {
             switch (trackArgs.TypeOfEvent)
             {
@@ -195,15 +195,17 @@ namespace WarehouseOfMusic.ViewModel
                 {
                     this._toDoDb.Tracks.InsertOnSubmit(trackArgs.Track);
                 }
+
                     break;
 
                 case "Delete":
-                    {
-                        this._toDoDb.Tracks.DeleteOnSubmit(trackArgs.Track);
-                    }
-                    break;
+                {
+                    this._toDoDb.Tracks.DeleteOnSubmit(trackArgs.Track);
+                }
 
+                    break;
             }
+
             this._toDoDb.SubmitChanges();
         }
 

@@ -37,7 +37,7 @@ namespace WarehouseOfMusic
         /// <param name="e">On click</param>
         private void AddTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            App.ViewModel.CurrentProject.AddTrack();
+            App.ViewModel.ProjectEditorViewModel.AddTrack();
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace WarehouseOfMusic
             if (button != null)
             {
                 var trackForDelete = button.DataContext as ToDoTrack;
-                App.ViewModel.CurrentProject.DeleteTrack(trackForDelete);
+                App.ViewModel.ProjectEditorViewModel.DeleteTrack(trackForDelete);
             }
 
             this.Focus();
@@ -71,7 +71,7 @@ namespace WarehouseOfMusic
         }
 
         /// <summary>
-        /// Bulid Localized application bar
+        /// Build Localized application bar
         /// </summary>
         private void BuildLocalizedAppBar()
         {

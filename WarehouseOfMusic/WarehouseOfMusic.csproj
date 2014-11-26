@@ -134,7 +134,7 @@
     </Compile>
     <Compile Include="TrackArgs.cs" />
     <Compile Include="ViewModel\ToDoViewModel.cs" />
-    <Compile Include="ViewModel\ProjectViewModel.cs" />
+    <Compile Include="ViewModel\ProjectEditorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
