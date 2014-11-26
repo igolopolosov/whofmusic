@@ -132,7 +132,9 @@
     <Compile Include="ThemeManager.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="TrackArgs.cs" />
     <Compile Include="ViewModel\ToDoViewModel.cs" />
+    <Compile Include="ViewModel\ProjectViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

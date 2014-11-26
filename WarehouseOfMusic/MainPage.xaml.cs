@@ -4,8 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using Windows.Media.Devices;
-
 namespace WarehouseOfMusic
 {
     using System;
@@ -99,7 +97,7 @@ namespace WarehouseOfMusic
             if (grid != null)
             {
                 var chosenProject = grid.DataContext as ToDoProject;
-                App.ViewModel.CurrentProject = chosenProject;
+                App.ViewModel.CurrentProject.Set(chosenProject);
             }
 
             NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));

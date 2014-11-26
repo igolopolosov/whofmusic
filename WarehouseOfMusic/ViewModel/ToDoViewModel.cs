@@ -13,7 +13,7 @@ namespace WarehouseOfMusic.ViewModel
     using Resources;
 
     /// <summary>
-    /// Class to realize access to database and represent information to application pages.\
+    /// Class to realize access to database and represent information to application pages.
     /// </summary>
     public class ToDoViewModel : INotifyPropertyChanged
     {
@@ -23,9 +23,9 @@ namespace WarehouseOfMusic.ViewModel
         private readonly ToDoDataContext _toDoDb;
 
         /// <summary>
-        /// Currently editing project
+        /// ViemModel for currently editing project
         /// </summary>
-        private ToDoProject _currentProject;
+        private ProjectEditorViewModel _currentProjectViewModel;
 
         /// <summary>
         /// Project that must be renamed
@@ -45,28 +45,29 @@ namespace WarehouseOfMusic.ViewModel
         public ToDoViewModel(string toDoDbConnectionString)
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
-            this._currentProject = new ToDoProject();
+            this._currentProjectViewModel = new ProjectEditorViewModel();
+            this._currentProjectViewModel.TrackChanged += this.TrackChanged;
         }
 
         /// <summary>
         /// Event of property changed
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         /// <summary>
-        /// Gets or sets current project
+        /// ViemModel for currently editing project
         /// </summary>
-        public ToDoProject CurrentProject
+        public ProjectEditorViewModel CurrentProject
         {
             get
             {
-                return this._currentProject;
+                return this._currentProjectViewModel;
             }
 
             set
             {
-                this._currentProject = value;
-                this.NotifyPropertyChanged("CurrentProject");
+                this._currentProjectViewModel = value;
+                this.NotifyPropertyChanged("CurrentProjectViewModel");
             }
         }
 
@@ -105,30 +106,6 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         /// <summary>
-        /// Add new track to the database and collections.
-        /// </summary>
-        public void AddTrackToCurrentProject()
-        {
-            var trackNumber = 1;
-            if (this._currentProject.Tracks.Any())
-            {
-                trackNumber = this._currentProject.Tracks.Count + 1;
-            }
-
-            var trackName = AppResources.TrackString + " " + trackNumber;
-
-            var newTrack = new ToDoTrack
-            {
-                Name = trackName,
-                Project = this._currentProject
-            };
-
-            this._toDoDb.Tracks.InsertOnSubmit(newTrack);
-            this._toDoDb.SubmitChanges();
-            this._currentProject.Tracks.Add(newTrack);
-        }
-
-        /// <summary>
         /// Add a project to the database and collections.
         /// </summary>
         /// <param name="newProject">Project on adding</param>
@@ -148,18 +125,7 @@ namespace WarehouseOfMusic.ViewModel
             this._toDoDb.Projects.InsertOnSubmit(newProject);
             this._toDoDb.SubmitChanges();
             this._projectsList.Add(newProject);
-            this._currentProject = newProject;
-        }
-
-        /// <summary>
-        /// Remove a track from the database and collections.
-        /// </summary>
-        /// <param name="trackForDelete">Track on removing</param>
-        public void DeleteTrack(ToDoTrack trackForDelete)
-        {
-            this._currentProject.Tracks.Remove(trackForDelete);
-            this._toDoDb.Tracks.DeleteOnSubmit(trackForDelete);
-            this._toDoDb.SubmitChanges();
+            this._currentProjectViewModel.CurrentProject = newProject;
         }
 
         /// <summary>
@@ -168,9 +134,9 @@ namespace WarehouseOfMusic.ViewModel
         /// <param name="projectForDelete">Project on removing</param>
         public void DeleteProject(ToDoProject projectForDelete)
         {
-            if (Equals(projectForDelete, this._currentProject))
+            if (Equals(projectForDelete, this._currentProjectViewModel.CurrentProject))
             {
-                this._currentProject = new ToDoProject();
+                this._currentProjectViewModel.CurrentProject = new ToDoProject();
             }
 
             foreach (var track in projectForDelete.Tracks)
@@ -213,6 +179,31 @@ namespace WarehouseOfMusic.ViewModel
         /// </summary>
         public void SaveChangesToDb()
         {
+            this._toDoDb.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Called on delete or add track
+        /// </summary>
+        /// <param name="sender">Current project</param>
+        /// <param name="trackArgs">Represet Track on change</param>
+        void TrackChanged(object sender, TrackArgs trackArgs)
+        {
+            switch (trackArgs.TypeOfEvent)
+            {
+                case "Insert":
+                {
+                    this._toDoDb.Tracks.InsertOnSubmit(trackArgs.Track);
+                }
+                    break;
+
+                case "Delete":
+                    {
+                        this._toDoDb.Tracks.DeleteOnSubmit(trackArgs.Track);
+                    }
+                    break;
+
+            }
             this._toDoDb.SubmitChanges();
         }
 

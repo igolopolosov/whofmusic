@@ -37,7 +37,7 @@ namespace WarehouseOfMusic
         /// <param name="e">On click</param>
         private void AddTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            App.ViewModel.AddTrackToCurrentProject();
+            App.ViewModel.CurrentProject.AddTrack();
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace WarehouseOfMusic
             if (button != null)
             {
                 var trackForDelete = button.DataContext as ToDoTrack;
-                App.ViewModel.DeleteTrack(trackForDelete);
+                App.ViewModel.CurrentProject.DeleteTrack(trackForDelete);
             }
 
             this.Focus();
