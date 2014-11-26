@@ -4,6 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Windows.Navigation;
+using WarehouseOfMusic.ViewModel;
+
 namespace WarehouseOfMusic
 {
     using System;
@@ -20,15 +23,39 @@ namespace WarehouseOfMusic
     /// </summary>
     public partial class MainPage : PhoneApplicationPage
     {
+
+        private MainViewModel _mainViewModel;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPage" /> class.
         /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
-            this.DataContext = App.ViewModel;
+            this.InitialiazeDataContext();
             this.BuildLocalizedAppBar();
         }
+
+        #region Navigation control
+        /// <summary>
+        /// Loads new state of ViewModel
+        /// </summary>
+        private void InitialiazeDataContext()
+        {
+            this._mainViewModel = new MainViewModel(App.DbConnectionString);
+            this._mainViewModel.LoadCollectionsFromDatabase();
+            this.DataContext = this._mainViewModel;
+        }
+
+        /// <summary>
+        /// Called when the page is active
+        /// </summary>
+        /// <param name="e">Navigation event</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.InitialiazeDataContext();
+        } 
+        #endregion
 
         #region CreateProjectButton events
 
@@ -41,17 +68,17 @@ namespace WarehouseOfMusic
         {
             if (e.Key == Key.Enter)
             {
-                if (App.ViewModel.OnRenameProjectId == -1)
+                if (this._mainViewModel.OnRenameProjectId == -1)
                 {
-                    App.ViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProject
+                    var newProject = this._mainViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProject
                         ? new ToDoProject()
                         : new ToDoProject { Name = CreateProjectTextBox.Text });
-                    NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative), newProject);
                 }
                 else
                 {
-                    App.ViewModel.RenameProjectTo(CreateProjectTextBox.Text);
-                    App.ViewModel.OnRenameProjectId = -1;
+                    this._mainViewModel.RenameProjectTo(CreateProjectTextBox.Text);
+                    this._mainViewModel.OnRenameProjectId = -1;
                     this.Focus();
                 }
             }
@@ -97,10 +124,8 @@ namespace WarehouseOfMusic
             if (grid != null)
             {
                 var chosenProject = grid.DataContext as ToDoProject;
-                App.ViewModel.ProjectEditorViewModel.CurrentProject = chosenProject;
+                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative), chosenProject);
             }
-
-            NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative));
         }
 
         /// <summary>
@@ -117,7 +142,7 @@ namespace WarehouseOfMusic
                 var chosenProject = contextMenuItem.DataContext as ToDoProject;
                 if (chosenProject != null)
                 {
-                    App.ViewModel.OnRenameProjectId = chosenProject.Id;
+                    _mainViewModel.OnRenameProjectId = chosenProject.Id;
                 }
             }
         }
@@ -134,7 +159,7 @@ namespace WarehouseOfMusic
             if (contextMenuItem != null)
             {
                 var chosenProject = contextMenuItem.DataContext as ToDoProject;
-                App.ViewModel.DeleteProject(chosenProject);
+                _mainViewModel.DeleteProject(chosenProject);
             }
         }
 

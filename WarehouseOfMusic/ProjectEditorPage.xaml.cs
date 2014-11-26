@@ -9,25 +9,53 @@ namespace WarehouseOfMusic
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
     using Model;
     using Resources;
+    using ViewModel;
 
     /// <summary>
     /// Page of editing projects
     /// </summary>
     public partial class ProjectEditorPage : PhoneApplicationPage
     {
+        private ProjectEditorViewModel _projectEditorViewModel;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorPage" /> class.
         /// </summary>
         public ProjectEditorPage()
         {
             this.InitializeComponent();
-            this.DataContext = App.ViewModel;
             this.BuildLocalizedAppBar();
         }
+
+        #region Navigation control
+        /// <summary>
+        /// Loads new state of ViewModel
+        /// </summary>
+        private void InitialiazeDataContext()
+        {
+            _projectEditorViewModel = new ProjectEditorViewModel(App.DbConnectionString);
+            if (NavigationService.GetNavigationData() != null)
+            {
+                _projectEditorViewModel.LoadCollectionsFromDatabase((ToDoProject)NavigationService.GetNavigationData());
+            }
+                
+            this.DataContext = _projectEditorViewModel;
+        }
+
+        /// <summary>
+        /// Called when the page is active
+        /// </summary>
+        /// <param name="e">Navigation event</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.InitialiazeDataContext();
+        }
+        #endregion
 
         #region Track editing(add, delete)
         /// <summary>
@@ -37,7 +65,7 @@ namespace WarehouseOfMusic
         /// <param name="e">On click</param>
         private void AddTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            App.ViewModel.ProjectEditorViewModel.AddTrack();
+            _projectEditorViewModel.AddTrack();
         }
 
         /// <summary>
@@ -52,7 +80,7 @@ namespace WarehouseOfMusic
             if (button != null)
             {
                 var trackForDelete = button.DataContext as ToDoTrack;
-                App.ViewModel.ProjectEditorViewModel.DeleteTrack(trackForDelete);
+                _projectEditorViewModel.DeleteTrack(trackForDelete);
             }
 
             this.Focus();

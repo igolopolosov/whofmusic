@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Extentions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -132,8 +133,7 @@
     <Compile Include="ThemeManager.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="TrackArgs.cs" />
-    <Compile Include="ViewModel\ToDoViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ProjectEditorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -31,7 +31,7 @@
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
     <Grid x:Name="LayoutRoot">
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
-            <TextBlock Text="{Binding ProjectEditorViewModel.CurrentProject.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
+            <TextBlock Text="{Binding CurrentProject.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
             <Grid x:Name="ProjectControlPanel" Margin="12">
                 <Grid.RowDefinitions>
@@ -40,7 +40,7 @@
                 </Grid.RowDefinitions>
 
                 <ListBox x:Name="TracksListBox" Grid.Row="0"
-                        ItemsSource="{Binding ProjectEditorViewModel.CurrentProject.Tracks}"
+                        ItemsSource="{Binding CurrentProject.Tracks}"
                         ItemTemplate="{StaticResource ToDoListBoxTracksTemplate}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">

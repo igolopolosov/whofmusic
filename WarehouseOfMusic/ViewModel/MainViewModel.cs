@@ -15,17 +15,12 @@ namespace WarehouseOfMusic.ViewModel
     /// <summary>
     /// Class to realize access to database and represent information to application pages.
     /// </summary>
-    public class ToDoViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
         /// <summary>
         /// LINQ to SQL data context for the local database.
         /// </summary>
         private readonly ToDoDataContext _toDoDb;
-
-        /// <summary>
-        /// ViewModel for currently editing project
-        /// </summary>
-        private ProjectEditorViewModel _projectEditorViewModel;
 
         /// <summary>
         /// Project that must be renamed
@@ -38,38 +33,19 @@ namespace WarehouseOfMusic.ViewModel
         private ObservableCollection<ToDoProject> _projectsList;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ToDoViewModel" /> class.
+        /// Initializes a new instance of the <see cref="MainViewModel" /> class.
         /// Class constructor, create the data context object.
         /// </summary>
         /// <param name="toDoDbConnectionString">Path to connect to database</param>
-        public ToDoViewModel(string toDoDbConnectionString)
+        public MainViewModel(string toDoDbConnectionString)
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
-            this._projectEditorViewModel = new ProjectEditorViewModel();
-            this._projectEditorViewModel.TrackChanged += this.TrackChanged;
         }
 
         /// <summary>
         /// Event of property changed
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Gets or sets ViewModel for editing project page
-        /// </summary>
-        public ProjectEditorViewModel ProjectEditorViewModel
-        {
-            get
-            {
-                return this._projectEditorViewModel;
-            }
-
-            set
-            {
-                this._projectEditorViewModel = value;
-                this.NotifyPropertyChanged("CurrentProjectViewModel");
-            }
-        }
 
         /// <summary>
         /// Gets or sets id of project on rename
@@ -128,7 +104,7 @@ namespace WarehouseOfMusic.ViewModel
         /// Add a project to the database and collections.
         /// </summary>
         /// <param name="newProject">Project on adding</param>
-        internal void CreateProject(ToDoProject newProject)
+        internal ToDoProject CreateProject(ToDoProject newProject)
         {
             if (newProject.Name == null)
             {
@@ -144,7 +120,7 @@ namespace WarehouseOfMusic.ViewModel
             this._toDoDb.Projects.InsertOnSubmit(newProject);
             this._toDoDb.SubmitChanges();
             this._projectsList.Add(newProject);
-            this._projectEditorViewModel.CurrentProject = newProject;
+            return newProject;
         }
 
         /// <summary>
@@ -153,11 +129,6 @@ namespace WarehouseOfMusic.ViewModel
         /// <param name="projectForDelete">Project on removing</param>
         internal void DeleteProject(ToDoProject projectForDelete)
         {
-            if (Equals(projectForDelete, this._projectEditorViewModel.CurrentProject))
-            {
-                this._projectEditorViewModel.CurrentProject = new ToDoProject();
-            }
-
             foreach (var track in projectForDelete.Tracks)
             {
                 this._toDoDb.Tracks.DeleteOnSubmit(track);
@@ -179,33 +150,6 @@ namespace WarehouseOfMusic.ViewModel
                                    select prj).First();
 
             onRenameProject.Name = newName;
-            this._toDoDb.SubmitChanges();
-        }
-
-        /// <summary>
-        /// Called on delete or add track
-        /// </summary>
-        /// <param name="sender">Current project</param>
-        /// <param name="trackArgs">Represent information about track on change</param>
-        internal void TrackChanged(object sender, TrackArgs trackArgs)
-        {
-            switch (trackArgs.TypeOfEvent)
-            {
-                case "Insert":
-                {
-                    this._toDoDb.Tracks.InsertOnSubmit(trackArgs.Track);
-                }
-
-                    break;
-
-                case "Delete":
-                {
-                    this._toDoDb.Tracks.DeleteOnSubmit(trackArgs.Track);
-                }
-
-                    break;
-            }
-
             this._toDoDb.SubmitChanges();
         }
 

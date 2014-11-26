@@ -15,7 +15,6 @@ namespace WarehouseOfMusic
     using Microsoft.Phone.Shell;
     using Model;
     using Resources;
-    using ViewModel;
 
     /// <summary>
     /// Class of an application
@@ -23,15 +22,13 @@ namespace WarehouseOfMusic
     public partial class App : Application
     {
         /// <summary>
-        /// ViewModel layer
-        /// </summary>
-        private static ToDoViewModel _viewModel;
-
-        /// <summary>
         /// Avoid double initialization
         /// </summary>
         private bool _phoneApplicationInitialized;
 
+        // Specify the local database connection string.
+        public const string DbConnectionString = "Data Source=isostore:/WarehouseOfMusic.sdf";
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="App" /> class.
         /// Constructor of an object of application.
@@ -69,11 +66,8 @@ namespace WarehouseOfMusic
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            // Specify the local database connection string.
-            const string DB_CONNECTION_STRING = "Data Source=isostore:/WarehouseOfMusic.sdf";
-
             // Create the database if it does not exist.
-            using (var db = new ToDoDataContext(DB_CONNECTION_STRING))
+            using (var db = new ToDoDataContext(DbConnectionString))
             {
                 if (db.DatabaseExists() == false)
                 {
@@ -81,20 +75,6 @@ namespace WarehouseOfMusic
                     db.CreateDatabase();
                 }
             }
-
-            // Create the ViewModel object.
-            _viewModel = new ToDoViewModel(DB_CONNECTION_STRING);
-
-            // Query the local database and load observable collections.
-            _viewModel.LoadCollectionsFromDatabase();
-        }
-
-        /// <summary>
-        /// Gets View Model layer
-        /// </summary>
-        public static ToDoViewModel ViewModel
-        {
-            get { return _viewModel; }
         }
 
         /// <summary>

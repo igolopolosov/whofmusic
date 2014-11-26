@@ -4,9 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Collections.ObjectModel;
+
 namespace WarehouseOfMusic.ViewModel
 {
-    using System;
     using System.ComponentModel;
     using System.Linq;
     using Model;
@@ -18,14 +19,14 @@ namespace WarehouseOfMusic.ViewModel
     public class ProjectEditorViewModel : INotifyPropertyChanged
     {
         /// <summary>
+        /// LINQ to SQL data context for the local database.
+        /// </summary>
+        private readonly ToDoDataContext _toDoDb;
+        
+        /// <summary>
         /// Currently editing project
         /// </summary>
         private ToDoProject _currentProject;
-
-        /// <summary>
-        /// Called when necessary to delete or insert the track
-        /// </summary>
-        public event EventHandler<TrackArgs> TrackChanged;
 
         /// <summary>
         /// Event of property changed
@@ -50,6 +51,16 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectEditorViewModel" /> class.
+        /// Class constructor, create the data context object.
+        /// </summary>
+        /// <param name="toDoDbConnectionString">Path to connect to database</param>
+        public ProjectEditorViewModel(string toDoDbConnectionString)
+        {
+            this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
+        }
+
+        /// <summary>
         /// Add new track to the database and collections.
         /// </summary>
         public void AddTrack()
@@ -67,18 +78,9 @@ namespace WarehouseOfMusic.ViewModel
                 Name = trackName,
                 Project = this._currentProject
             };
-            
-            var trackArgs = new TrackArgs
-            {
-                Track = newTrack,
-                TypeOfEvent = "Insert"
-            };
 
-            if (this.TrackChanged != null)
-            {
-                this.TrackChanged(this, trackArgs);
-            }
-
+            this._toDoDb.Tracks.InsertOnSubmit(newTrack);
+            this._toDoDb.SubmitChanges();
             this._currentProject.Tracks.Add(newTrack);
         }
 
@@ -89,17 +91,24 @@ namespace WarehouseOfMusic.ViewModel
         public void DeleteTrack(ToDoTrack trackForDelete)
         {
             this._currentProject.Tracks.Remove(trackForDelete);
+            this._toDoDb.Tracks.DeleteOnSubmit(trackForDelete);
+            this._toDoDb.SubmitChanges();
+        }
 
-            var trackArgs = new TrackArgs
-            {
-                Track = trackForDelete,
-                TypeOfEvent = "Delete"
-            };
+        /// <summary>
+        /// Query database and load the collections and list
+        /// </summary>
+        public void LoadCollectionsFromDatabase(ToDoProject currentProject)
+        {
+            this._currentProject = this._toDoDb.Projects.First(x => Equals(x, currentProject));
+        }
 
-            if (this.TrackChanged != null)
-            {
-                this.TrackChanged(this, trackArgs);
-            }
+        /// <summary>
+        /// Write changes in the data context to the database.
+        /// </summary>
+        public void SaveChangesToDb()
+        {
+            this._toDoDb.SubmitChanges();
         }
 
         #region INotifyPropertyChanged Members
