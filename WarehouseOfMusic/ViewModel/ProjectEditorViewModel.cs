@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 
 using System.Collections.ObjectModel;
+using System.Data.Linq;
 
 namespace WarehouseOfMusic.ViewModel
 {
@@ -65,6 +66,14 @@ namespace WarehouseOfMusic.ViewModel
         /// </summary>
         public void AddTrack()
         {
+            if (_currentProject.Tracks.Any())
+            {
+                var hook = _currentProject.Tracks.ToList();
+                if (hook.First().Notes.Any())
+                {
+                    var hookNotes = hook.First().Notes.ToList();
+                }
+            }
             var trackNumber = 1;
             if (this._currentProject.Tracks.Any())
             {
@@ -82,6 +91,91 @@ namespace WarehouseOfMusic.ViewModel
             this._toDoDb.Tracks.InsertOnSubmit(newTrack);
             this._toDoDb.SubmitChanges();
             this._currentProject.Tracks.Add(newTrack);
+            this.AddSample(newTrack);
+        }
+
+        /// <summary>
+        /// Add collection of notes to track
+        /// </summary>
+        /// <param name="newTrack">Track where will add notes</param>
+        private void AddSample(ToDoTrack newTrack)
+        {
+            if (newTrack.Id % 2 == 0)
+            {
+                var note = new ToDoNote()
+                {
+                    Duration = "1/4",
+                    Tact = 1,
+                    TactPosition = "1/4",
+                    Title = "C1",
+                    TrackRef = newTrack
+                };
+                this._toDoDb.Notes.InsertOnSubmit(note);
+                this._toDoDb.SubmitChanges();
+                this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
+
+                note = new ToDoNote()
+                {
+                    Duration = "1/4",
+                    Tact = 1,
+                    TactPosition = "2/4",
+                    Title = "D1",
+                    TrackRef = newTrack
+                };
+                this._toDoDb.Notes.InsertOnSubmit(note);
+                this._toDoDb.SubmitChanges();
+                this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
+
+                note = new ToDoNote()
+                {
+                    Duration = "1/4",
+                    Tact = 1,
+                    TactPosition = "3/4",
+                    Title = "D1",
+                    TrackRef = newTrack
+                };
+                this._toDoDb.Notes.InsertOnSubmit(note);
+                this._toDoDb.SubmitChanges();
+                this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
+
+                note = new ToDoNote()
+                {
+                    Duration = "1/4",
+                    Tact = 1,
+                    TactPosition = "4/4",
+                    Title = "E1",
+                    TrackRef = newTrack
+                };
+                this._toDoDb.Notes.InsertOnSubmit(note);
+                this._toDoDb.SubmitChanges();
+                this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
+            }
+            else
+            {
+                var note = new ToDoNote()
+                {
+                    Duration = "2/4",
+                    Tact = 1,
+                    TactPosition = "1/4",
+                    Title = "F0",
+                    TrackRef = newTrack
+                };
+                this._toDoDb.Notes.InsertOnSubmit(note);
+                this._toDoDb.SubmitChanges();
+                this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
+
+                note = new ToDoNote()
+                {
+                    Duration = "2/4",
+                    Tact = 1,
+                    TactPosition = "3/4",
+                    Title = "G0",
+                    TrackRef = newTrack
+                };
+                this._toDoDb.Notes.InsertOnSubmit(note);
+                this._toDoDb.SubmitChanges();
+                this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
+            }
         }
 
         /// <summary>
