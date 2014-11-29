@@ -111,7 +111,6 @@ namespace WarehouseOfMusic.ViewModel
                     TrackRef = newTrack
                 };
                 this._toDoDb.Notes.InsertOnSubmit(note);
-                this._toDoDb.SubmitChanges();
                 this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
 
                 note = new ToDoNote()
@@ -123,7 +122,6 @@ namespace WarehouseOfMusic.ViewModel
                     TrackRef = newTrack
                 };
                 this._toDoDb.Notes.InsertOnSubmit(note);
-                this._toDoDb.SubmitChanges();
                 this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
 
                 note = new ToDoNote()
@@ -135,7 +133,6 @@ namespace WarehouseOfMusic.ViewModel
                     TrackRef = newTrack
                 };
                 this._toDoDb.Notes.InsertOnSubmit(note);
-                this._toDoDb.SubmitChanges();
                 this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
 
                 note = new ToDoNote()
@@ -147,7 +144,6 @@ namespace WarehouseOfMusic.ViewModel
                     TrackRef = newTrack
                 };
                 this._toDoDb.Notes.InsertOnSubmit(note);
-                this._toDoDb.SubmitChanges();
                 this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
             }
             else
@@ -161,7 +157,6 @@ namespace WarehouseOfMusic.ViewModel
                     TrackRef = newTrack
                 };
                 this._toDoDb.Notes.InsertOnSubmit(note);
-                this._toDoDb.SubmitChanges();
                 this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Notes.Add(note);
 
                 note = new ToDoNote()
@@ -184,6 +179,10 @@ namespace WarehouseOfMusic.ViewModel
         /// <param name="trackForDelete">Track on removing</param>
         public void DeleteTrack(ToDoTrack trackForDelete)
         {
+            foreach (var note in this._currentProject.Tracks.First(x=>x.Id == trackForDelete.Id).Notes)
+            {
+                this._toDoDb.Notes.DeleteOnSubmit(note);
+            }
             this._currentProject.Tracks.Remove(trackForDelete);
             this._toDoDb.Tracks.DeleteOnSubmit(trackForDelete);
             this._toDoDb.SubmitChanges();

@@ -135,7 +135,7 @@ namespace WarehouseOfMusic.Model
         /// <summary>
         /// Gets or sets entity set for the collection side of the relationship.
         /// </summary>
-        [Association(Storage = "_notes", OtherKey = "TrackId", ThisKey = "Id")]
+        [Association(Storage = "_notes", OtherKey = "TrackId", ThisKey = "Id", DeleteRule = "Cascade")]
         public EntitySet<ToDoNote> Notes
         {
             get { return this._notes; }
