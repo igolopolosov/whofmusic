@@ -120,6 +120,9 @@
   <data name="AppBarHelp" xml:space="preserve">
     <value>справка</value>
   </data>
+  <data name="AppBarPlay" xml:space="preserve">
+    <value>играть</value>
+  </data>
   <data name="AppBarSettings" xml:space="preserve">
     <value>настройки</value>
   </data>

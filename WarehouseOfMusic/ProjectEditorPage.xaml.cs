@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Linq;
+
 namespace WarehouseOfMusic
 {
     using System;
@@ -119,6 +121,25 @@ namespace WarehouseOfMusic
             };
             settingsButton.Click += this.SettingsButton_OnClick;
             this.ApplicationBar.Buttons.Add(settingsButton);
+
+            //// Add play button for player
+            var playButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarPlay,
+            };
+            playButton.Click += this.PlayButton_OnClick;
+            this.ApplicationBar.Buttons.Add(playButton);
+        }
+
+        #endregion
+
+        
+
+        #region Player buttons
+        private void PlayButton_OnClick(object sender, EventArgs e)
+        {
+            var playermanager = new PlayerManager(_projectEditorViewModel.CurrentProject.Tracks.ToList());
+            playermanager.Play();
         }
         #endregion
     }

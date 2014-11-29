@@ -70,6 +70,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на играть.
+        /// </summary>
+        public static string AppBarPlay {
+            get {
+                return ResourceManager.GetString("AppBarPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на настройки.
         /// </summary>
         public static string AppBarSettings {

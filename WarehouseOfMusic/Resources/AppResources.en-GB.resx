@@ -171,4 +171,7 @@
   <data name="RenameContextMenu" xml:space="preserve">
     <value>rename</value>
   </data>
+  <data name="AppBarPlay" xml:space="preserve">
+    <value>play</value>
+  </data>
 </root>
