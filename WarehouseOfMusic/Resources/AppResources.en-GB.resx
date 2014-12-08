@@ -174,4 +174,7 @@
   <data name="AppBarPlay" xml:space="preserve">
     <value>play</value>
   </data>
+  <data name="AppBarStop" xml:space="preserve">
+    <value>stop</value>
+  </data>
 </root>

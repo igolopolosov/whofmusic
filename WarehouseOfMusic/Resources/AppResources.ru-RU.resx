@@ -126,6 +126,9 @@
   <data name="AppBarSettings" xml:space="preserve">
     <value>настройки</value>
   </data>
+  <data name="AppBarStop" xml:space="preserve">
+    <value>стоп</value>
+  </data>
   <data name="ApplySettingsButtonContent" xml:space="preserve">
     <value>ПРИМЕНИТЬ</value>
   </data>

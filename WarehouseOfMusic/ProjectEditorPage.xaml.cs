@@ -4,8 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Linq;
-
 namespace WarehouseOfMusic
 {
     using System;
@@ -23,7 +21,15 @@ namespace WarehouseOfMusic
     /// </summary>
     public partial class ProjectEditorPage : PhoneApplicationPage
     {
+        /// <summary>
+        /// ViewModel for this page
+        /// </summary>
         private ProjectEditorViewModel _projectEditorViewModel;
+
+        /// <summary>
+        /// Manager of track 
+        /// </summary>
+        private PlayerManager _playerManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorPage" /> class.
@@ -36,26 +42,26 @@ namespace WarehouseOfMusic
 
         #region Navigation control
         /// <summary>
-        /// Loads new state of ViewModel
-        /// </summary>
-        private void InitialiazeDataContext()
-        {
-            _projectEditorViewModel = new ProjectEditorViewModel(App.DbConnectionString);
-            if (NavigationService.GetNavigationData() != null)
-            {
-                _projectEditorViewModel.LoadCollectionsFromDatabase((ToDoProject)NavigationService.GetNavigationData());
-            }
-                
-            this.DataContext = _projectEditorViewModel;
-        }
-
-        /// <summary>
-        /// Called when the page is active
+        /// Called when the page is activated
         /// </summary>
         /// <param name="e">Navigation event</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.InitialiazeDataContext();
+        }
+
+        /// <summary>
+        /// Loads new state of ViewModel
+        /// </summary>
+        private void InitialiazeDataContext()
+        {
+            this._projectEditorViewModel = new ProjectEditorViewModel(App.DbConnectionString);
+            if (NavigationService.GetNavigationData() != null)
+            {
+                this._projectEditorViewModel.LoadCollectionsFromDatabase((ToDoProject)NavigationService.GetNavigationData());
+            }
+
+            this.DataContext = this._projectEditorViewModel;
         }
         #endregion
 
@@ -67,7 +73,7 @@ namespace WarehouseOfMusic
         /// <param name="e">On click</param>
         private void AddTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            _projectEditorViewModel.AddTrack();
+            this._projectEditorViewModel.AddTrack();
         }
 
         /// <summary>
@@ -82,7 +88,7 @@ namespace WarehouseOfMusic
             if (button != null)
             {
                 var trackForDelete = button.DataContext as ToDoTrack;
-                _projectEditorViewModel.DeleteTrack(trackForDelete);
+                this._projectEditorViewModel.DeleteTrack(trackForDelete);
             }
 
             this.Focus();
@@ -90,16 +96,6 @@ namespace WarehouseOfMusic
         #endregion
 
         #region For application bar
-        /// <summary>
-        /// Click on SettingsButton
-        /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">Click on button</param>
-        private void SettingsButton_OnClick(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/ApplicationSettingsPage.xaml", UriKind.Relative));
-        }
-
         /// <summary>
         /// Build Localized application bar
         /// </summary>
@@ -129,17 +125,50 @@ namespace WarehouseOfMusic
             };
             playButton.Click += this.PlayButton_OnClick;
             this.ApplicationBar.Buttons.Add(playButton);
+
+            //// Add stop button for player
+            var stopButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.stop.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarStop,
+            };
+            stopButton.Click += this.StopButton_OnClick;
+            this.ApplicationBar.Buttons.Add(stopButton);
         }
 
-        #endregion
+        /// <summary>
+        /// Click on SettingsButton
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">Click on button</param>
+        private void SettingsButton_OnClick(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/ApplicationSettingsPage.xaml", UriKind.Relative));
+        }
 
-        
-
-        #region Player buttons
+        /// <summary>
+        /// Play track
+        /// </summary>
+        /// <param name="sender">Page with projects</param>
+        /// <param name="e">Click event</param>
         private void PlayButton_OnClick(object sender, EventArgs e)
         {
-            var playermanager = new PlayerManager(_projectEditorViewModel.CurrentProject.Tracks.ToList());
-            playermanager.Play();
+            this._playerManager = new PlayerManager(this._projectEditorViewModel.CurrentProject);
+            this._playerManager.Play();
+        }
+
+        /// <summary>
+        /// Stop track
+        /// </summary>
+        /// <param name="sender">Page with projects</param>
+        /// <param name="e">Click event</param>
+        private void StopButton_OnClick(object sender, EventArgs e)
+        {
+            if (this._playerManager != null)
+            {
+                this._playerManager.Stop();
+            }
+
+            this._playerManager = null;
         }
         #endregion
     }

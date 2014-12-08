@@ -22,12 +22,14 @@ namespace WarehouseOfMusic
     public partial class App : Application
     {
         /// <summary>
+        /// Specify the local database connection string.
+        /// </summary>
+        public const string DbConnectionString = "Data Source=isostore:/WarehouseOfMusic.sdf";
+
+        /// <summary>
         /// Avoid double initialization
         /// </summary>
         private bool _phoneApplicationInitialized;
-
-        // Specify the local database connection string.
-        public const string DbConnectionString = "Data Source=isostore:/WarehouseOfMusic.sdf";
         
         /// <summary>
         /// Initializes a new instance of the <see cref="App" /> class.

@@ -88,6 +88,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на стоп.
+        /// </summary>
+        public static string AppBarStop {
+            get {
+                return ResourceManager.GetString("AppBarStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ПРИМЕНИТЬ.
         /// </summary>
         public static string ApplySettingsButtonContent {

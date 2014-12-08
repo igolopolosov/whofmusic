@@ -96,7 +96,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Extentions.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="NoteArgs.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
+    <Content Include="Assets\AppBar\appbar.control.stop.png" />
     <Content Include="Assets\AppBar\appbar.base.png" />
     <Content Include="Assets\AppBar\appbar.base.select.png" />
     <Content Include="Assets\AppBar\appbar.control.play.png" />
@@ -222,6 +224,12 @@
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WOMAudioComponent\WOMAudioComponent.vcxproj">
+      <Project>{61009b47-738c-48f3-ad4b-64c293ad8a23}</Project>
+      <Name>WOMAudioComponent</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

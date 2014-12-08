@@ -24,7 +24,12 @@ namespace WarehouseOfMusic.Model
         /// <summary>
         /// Duration of note
         /// </summary>
-        private string _duration;
+        private int _duration;
+
+        /// <summary>
+        /// Duration of note
+        /// </summary>
+        private int _midiNumber;
 
         /// <summary>
         /// Note contains in the tact
@@ -34,7 +39,7 @@ namespace WarehouseOfMusic.Model
         /// <summary>
         /// Position of note in a tact
         /// </summary>
-        private string _tactposition;
+        private int _tactposition;
 
         /// <summary>
         /// Name of note
@@ -109,7 +114,7 @@ namespace WarehouseOfMusic.Model
         /// Gets or sets position of in a tact
         /// </summary>
         [Column]
-        public string TactPosition
+        public int TactPosition
         {
             get
             {
@@ -131,7 +136,7 @@ namespace WarehouseOfMusic.Model
         /// Gets or sets duration of note
         /// </summary>
         [Column]
-        public string Duration
+        public int Duration
         {
             get
             {
@@ -145,6 +150,28 @@ namespace WarehouseOfMusic.Model
                     this.NotifyPropertyChanging("Duration");
                     this._duration = value;
                     this.NotifyPropertyChanged("Duration");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets duration of note
+        /// </summary>
+        [Column]
+        public int MidiNumber
+        {
+            get
+            {
+                return this._midiNumber;
+            }
+
+            set
+            {
+                if (this._midiNumber != value)
+                {
+                    this.NotifyPropertyChanging("MidiNumber");
+                    this._midiNumber = value;
+                    this.NotifyPropertyChanged("MidiNumber");
                 }
             }
         }

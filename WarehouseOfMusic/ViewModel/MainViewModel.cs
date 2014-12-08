@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ToDoViewModel.cs" company="Igor Golopolosov">
+// <copyright file="MainViewModel.cs" company="Igor Golopolosov">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -104,6 +104,7 @@ namespace WarehouseOfMusic.ViewModel
         /// Add a project to the database and collections.
         /// </summary>
         /// <param name="newProject">Project on adding</param>
+        /// <returns>New project</returns>
         internal ToDoProject CreateProject(ToDoProject newProject)
         {
             if (newProject.Name == null)

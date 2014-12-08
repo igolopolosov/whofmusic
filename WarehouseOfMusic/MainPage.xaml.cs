@@ -4,26 +4,27 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Windows.Navigation;
-using WarehouseOfMusic.ViewModel;
-
 namespace WarehouseOfMusic
 {
     using System;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
     using Model;
     using Resources;
+    using ViewModel;
 
     /// <summary>
     /// Main Page
     /// </summary>
     public partial class MainPage : PhoneApplicationPage
     {
-
+        /// <summary>
+        /// ViewModel for main page
+        /// </summary>
         private MainViewModel _mainViewModel;
 
         /// <summary>
@@ -38,6 +39,15 @@ namespace WarehouseOfMusic
 
         #region Navigation control
         /// <summary>
+        /// Called when the page is activated
+        /// </summary>
+        /// <param name="e">Navigation event</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.InitialiazeDataContext();
+        }
+
+        /// <summary>
         /// Loads new state of ViewModel
         /// </summary>
         private void InitialiazeDataContext()
@@ -46,15 +56,6 @@ namespace WarehouseOfMusic
             this._mainViewModel.LoadCollectionsFromDatabase();
             this.DataContext = this._mainViewModel;
         }
-
-        /// <summary>
-        /// Called when the page is active
-        /// </summary>
-        /// <param name="e">Navigation event</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            this.InitialiazeDataContext();
-        } 
         #endregion
 
         #region CreateProjectButton events
@@ -142,7 +143,7 @@ namespace WarehouseOfMusic
                 var chosenProject = contextMenuItem.DataContext as ToDoProject;
                 if (chosenProject != null)
                 {
-                    _mainViewModel.OnRenameProjectId = chosenProject.Id;
+                    this._mainViewModel.OnRenameProjectId = chosenProject.Id;
                 }
             }
         }
@@ -159,7 +160,7 @@ namespace WarehouseOfMusic
             if (contextMenuItem != null)
             {
                 var chosenProject = contextMenuItem.DataContext as ToDoProject;
-                _mainViewModel.DeleteProject(chosenProject);
+                this._mainViewModel.DeleteProject(chosenProject);
             }
         }
 
