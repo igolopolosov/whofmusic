@@ -4,9 +4,16 @@
 
 using namespace Platform;
 using namespace WomAudioComponent;
-using namespace Windows::Foundation;
 
 #define NUM_OSCILLATORS 10
+
+AudioController^ AudioController::Instance = nullptr;
+AudioController^ AudioController::Create()
+{
+	if (AudioController::Instance == nullptr)
+		AudioController::Instance = ref new AudioController();
+	return Instance;
+}
 
 AudioController::AudioController()
 {
@@ -220,8 +227,8 @@ void AudioController::CreatePatch()
 	patch = Patch::Create();
 
 	// Set event handlers for dynamic property subsets
-	patch->DynamicPropertyChanged += ref new EventHandler<int>(this, &AudioController::OnDynamicPropertyChanged);
-	patch->FilterEffectPropertyChanged += ref new EventHandler<int>(this, &AudioController::OnFilterEffectPropertyChanged);
+	//patch->DynamicPropertyChanged += ref new EventHandler<int>(this, &AudioController::OnDynamicPropertyChanged);
+	//patch->FilterEffectPropertyChanged += ref new EventHandler<int>(this, &AudioController::OnFilterEffectPropertyChanged);
 
 	// Get the saved patch & set to DataContext
 	patch->Load(nullptr);

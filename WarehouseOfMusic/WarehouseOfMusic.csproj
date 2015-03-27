@@ -226,9 +226,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WOMAudioComponent\WOMAudioComponent.vcxproj">
-      <Project>{61009b47-738c-48f3-ad4b-64c293ad8a23}</Project>
-      <Name>WOMAudioComponent</Name>
+    <ProjectReference Include="..\WomAudioComponent\WomAudioComponent.vcxproj">
+      <Project>{d0c05017-042d-47b9-935f-5cefa2639cae}</Project>
+      <Name>WomAudioComponent</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

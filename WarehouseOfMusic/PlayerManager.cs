@@ -4,16 +4,12 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-
 namespace WarehouseOfMusic
 {
-    using System;
+    using System.Collections.Generic;
     using System.Threading;
     using Model;
-    using WOMAudioComponent;
+    using WomAudioComponent;
 
     /// <summary>
     /// Supports to play tracks
@@ -24,7 +20,7 @@ namespace WarehouseOfMusic
         /// <summary>
         /// Audio API 
         /// </summary>
-        private AudioController _audioController;
+        private readonly AudioController _audioController;
 
         /// <summary>
         /// Controls step of timer
@@ -50,8 +46,8 @@ namespace WarehouseOfMusic
         public PlayerManager(ToDoProject onPlayProject)
         {
             _onPlayTracks = new List<ToDoTrack>(onPlayProject.Tracks);
-            _audioController = new AudioController(7);
-            this._audioController.Start();
+            _audioController =  new AudioController();
+            _audioController.CreatePatch();
         }
         #endregion
         
@@ -60,6 +56,7 @@ namespace WarehouseOfMusic
         /// </summary>
         public void Play()
         {
+            _audioController.Start();
             this._playerTimer = new Timer(Step, null, 100, 25);
         }
 
@@ -84,12 +81,22 @@ namespace WarehouseOfMusic
                 {
                     if (note.TactPosition == _stepControl)
                     {
-                        this._audioController.NoteOn(note.MidiNumber, note.MidiNumber%1000);
+                        var args = new KeyPressedArgs
+                        {
+                            IsPressed = true,
+                            KeyNumber = note.MidiNumber
+                        };
+                        this._audioController.KeyIsPressedChanged(this, args);
                     }
 
                     if (note.TactPosition + note.Duration == _stepControl)
                     {
-                        this._audioController.NoteOff(note.MidiNumber);
+                        var args = new KeyPressedArgs
+                        {
+                            IsPressed = false,
+                            KeyNumber = note.MidiNumber
+                        };
+                        this._audioController.KeyIsPressedChanged(this, args);
                     }
                 }
             }

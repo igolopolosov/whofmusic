@@ -16,6 +16,8 @@ namespace WomAudioComponent
 	public ref class AudioController sealed
 	{
 	private:
+		static AudioController^ Instance;
+		AudioController();
 		~AudioController();
 
 		Microsoft::WRL::ComPtr<IXAudio2> pXAudio2;
@@ -31,7 +33,7 @@ namespace WomAudioComponent
 		void OnFilterEffectPropertyChanged(Platform::Object^ sender, int args);
 
 	public:
-		AudioController();
+		static AudioController^ Create();
 		void CreatePatch();
 		Patch^ GetPatch();
 		bool IsOverloadPeaks();

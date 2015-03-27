@@ -2,18 +2,40 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Ресурсы">
-      <UniqueIdentifier>31dcd32e-8883-46cd-9393-7a917109660d</UniqueIdentifier>
+      <UniqueIdentifier>e2d88fea-b6c4-49b3-a34d-a3f39850eacb</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Class1.cpp" />
+    <ClCompile Include="AmplitudeEnvelopeEffect.cpp" />
     <ClCompile Include="AudioController.cpp" />
-    <ClCompile Include="SawtoothOscillator.cpp" />
+    <ClCompile Include="EnvelopeGenerator.cpp" />
+    <ClCompile Include="FilterEnvelopeEffect.cpp" />
+    <ClCompile Include="Oscillator.cpp" />
+    <ClCompile Include="Patch.cpp" />
+    <ClCompile Include="SynthVoice.cpp" />
+    <ClCompile Include="Waveform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Class1.h" />
+    <ClInclude Include="AmplitudeEnvelopeEffect.h" />
+    <ClInclude Include="AmplitudeEnvelopeParameters.h" />
     <ClInclude Include="AudioController.h" />
-    <ClInclude Include="SawtoothOscillator.h" />
+    <ClInclude Include="DynamicFilterParameters.h" />
+    <ClInclude Include="DynamicSynthVoiceParameters.h" />
+    <ClInclude Include="EnvelopeGenerator.h" />
+    <ClInclude Include="EnvelopeGeneratorParameters.h" />
+    <ClInclude Include="FilterEnvelopeEffect.h" />
+    <ClInclude Include="FilterEnvelopeParameters.h" />
+    <ClInclude Include="KeyPressedArgs.h" />
+    <ClInclude Include="Oscillator.h" />
+    <ClInclude Include="Patch.h" />
+    <ClInclude Include="SynthVoice.h" />
+    <ClInclude Include="TriggeredSynthVoiceParameters.h" />
+    <ClInclude Include="Waveform.h" />
+    <ClInclude Include="WaveformType.h" />
   </ItemGroup>
 </Project>
