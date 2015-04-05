@@ -121,12 +121,11 @@ namespace WarehouseOfMusic
         private void ProjectItemGrid_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var grid = sender as Grid;
+            if (grid == null) return;
 
-            if (grid != null)
-            {
-                var chosenProject = grid.DataContext as ToDoProject;
-                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative), chosenProject);
-            }
+            var chosenProject = grid.DataContext as ToDoProject;
+            if (chosenProject != null)
+                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative), chosenProject.Id);
         }
 
         /// <summary>

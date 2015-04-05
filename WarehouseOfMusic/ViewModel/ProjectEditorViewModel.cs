@@ -100,12 +100,12 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         /// <summary>
-        /// Query database and load the collections and list
+        /// Query database and load the information for project
         /// </summary>
-        /// <param name="currentProject">Current project</param>
-        public void LoadCollectionsFromDatabase(ToDoProject currentProject)
+        /// <param name="projectId">ID of loading project</param>
+        public void LoadProjectFromDatabase(int projectId)
         {
-            this._currentProject = this._toDoDb.Projects.First(x => Equals(x, currentProject));
+            this._currentProject = this._toDoDb.Projects.FirstOrDefault(x => x.Id == projectId);
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace WarehouseOfMusic
         /// <summary>
         /// ViewModel for this page
         /// </summary>
-        private ProjectEditorViewModel _projectEditorViewModel;
+        private ProjectEditorViewModel _viewModel;
 
         /// <summary>
         /// Manager of track 
@@ -55,13 +55,12 @@ namespace WarehouseOfMusic
         /// </summary>
         private void InitialiazeDataContext()
         {
-            this._projectEditorViewModel = new ProjectEditorViewModel(App.DbConnectionString);
+            this._viewModel = new ProjectEditorViewModel(App.DbConnectionString);
             if (NavigationService.GetNavigationData() != null)
             {
-                this._projectEditorViewModel.LoadCollectionsFromDatabase((ToDoProject)NavigationService.GetNavigationData());
+                this._viewModel.LoadProjectFromDatabase((int)NavigationService.GetNavigationData());
             }
-
-            this.DataContext = this._projectEditorViewModel;
+            this.DataContext = this._viewModel;
         }
         #endregion
 
@@ -73,7 +72,7 @@ namespace WarehouseOfMusic
         /// <param name="e">On click</param>
         private void AddTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            this._projectEditorViewModel.AddTrack();
+            this._viewModel.AddTrack();
         }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace WarehouseOfMusic
             if (button != null)
             {
                 var trackForDelete = button.DataContext as ToDoTrack;
-                this._projectEditorViewModel.DeleteTrack(trackForDelete);
+                this._viewModel.DeleteTrack(trackForDelete);
             }
 
             this.Focus();
@@ -152,7 +151,7 @@ namespace WarehouseOfMusic
         /// <param name="e">Click event</param>
         private void PlayButton_OnClick(object sender, EventArgs e)
         {
-            this._playerManager = new PlayerManager(this._projectEditorViewModel.CurrentProject);
+            this._playerManager = new PlayerManager(this._viewModel.CurrentProject);
             this._playerManager.Play();
         }
 
