@@ -72,15 +72,16 @@ namespace WarehouseOfMusic
             if (e.Key != Key.Enter) return;
             if (CreateProjectTextBox.Text == string.Empty)
             {
-                var message = new MessagePrompt()
+                var messagePrompt = new MessagePrompt()
                 {
                     Body = AppResources.ErrorEmptyName,
-                    VerticalAlignment = VerticalAlignment.Center
+                    VerticalAlignment = VerticalAlignment.Center,
                 };
-                message.Show();
+                messagePrompt.Completed += messagePrompt_Completed;
+                messagePrompt.Show();
                 return;
             }
-
+            
             if (this._mainViewModel.OnRenameProjectId == -1)
             {
                 var newProject = this._mainViewModel.CreateProject(CreateProjectTextBox.Text);
@@ -95,6 +96,14 @@ namespace WarehouseOfMusic
         }
 
         /// <summary>
+        /// Returns focus on CreateProjectTextBox
+        /// </summary>
+        private void messagePrompt_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            CreateProjectTextBox.Focus();
+        }
+
+        /// <summary>
         /// CreateProjectTextBox got focus
         /// </summary>s
         private void CreateProjectTextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -104,6 +113,7 @@ namespace WarehouseOfMusic
                 ? string.Empty
                 : this._mainViewModel.ProjectsList
                     .FirstOrDefault(x => x.Id == this._mainViewModel.OnRenameProjectId).Name;
+            thisTextBox.Select(thisTextBox.Text.Length, 0);
         }
 
         /// <summary>
