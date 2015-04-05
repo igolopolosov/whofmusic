@@ -142,6 +142,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на пожалуйста, задайте имя проекта.
+        /// </summary>
+        public static string ErrorEmptyName {
+            get {
+                return ResourceManager.GetString("ErrorEmptyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на язык.
         /// </summary>
         public static string LanguageTextBlockText {

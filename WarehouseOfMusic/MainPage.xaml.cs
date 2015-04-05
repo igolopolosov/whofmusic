@@ -4,6 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Linq;
+using System.Windows.Controls.Primitives;
+using Coding4Fun.Toolkit.Controls;
+
 namespace WarehouseOfMusic
 {
     using System;
@@ -53,7 +57,7 @@ namespace WarehouseOfMusic
         private void InitialiazeDataContext()
         {
             this._mainViewModel = new MainViewModel(App.DbConnectionString);
-            this._mainViewModel.LoadCollectionsFromDatabase();
+            this._mainViewModel.LoadProFromDatabase();
             this.DataContext = this._mainViewModel;
         }
         #endregion
@@ -63,41 +67,43 @@ namespace WarehouseOfMusic
         /// <summary>
         /// By press enter key creates new project or renames chosen by user project
         /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">Click on button</param>
         private void CreateProjectTextBox_OnKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key != Key.Enter) return;
+            if (CreateProjectTextBox.Text == string.Empty)
             {
-                if (this._mainViewModel.OnRenameProjectId == -1)
+                var message = new MessagePrompt()
                 {
-                    var newProject = this._mainViewModel.CreateProject(CreateProjectTextBox.Text == AppResources.CreateProject
-                        ? new ToDoProject()
-                        : new ToDoProject { Name = CreateProjectTextBox.Text });
-                    NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative), newProject);
-                }
-                else
-                {
-                    this._mainViewModel.RenameProjectTo(CreateProjectTextBox.Text);
-                    this._mainViewModel.OnRenameProjectId = -1;
-                    this.Focus();
-                }
+                    Body = AppResources.ErrorEmptyName,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                message.Show();
+                return;
+            }
+
+            if (this._mainViewModel.OnRenameProjectId == -1)
+            {
+                var newProject = this._mainViewModel.CreateProject(CreateProjectTextBox.Text);
+                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative), newProject.Id);
+            }
+            else
+            {
+                this._mainViewModel.RenameProjectTo(CreateProjectTextBox.Text);
+                this._mainViewModel.OnRenameProjectId = -1;
+                this.Focus();
             }
         }
 
         /// <summary>
         /// CreateProjectTextBox got focus
-        /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">Got focus of button</param>
+        /// </summary>s
         private void CreateProjectTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            var thisTextBox = (TextBox)sender;
-
-            if (thisTextBox.Text == AppResources.CreateProject)
-            {
-                thisTextBox.Text = string.Empty;
-            }
+            var thisTextBox = (TextBox) sender;
+            thisTextBox.Text = this._mainViewModel.OnRenameProjectId == -1
+                ? string.Empty
+                : this._mainViewModel.ProjectsList
+                    .FirstOrDefault(x => x.Id == this._mainViewModel.OnRenameProjectId).Name;
         }
 
         /// <summary>

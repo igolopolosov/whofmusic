@@ -177,4 +177,7 @@
   <data name="AppBarStop" xml:space="preserve">
     <value>stop</value>
   </data>
+  <data name="ErrorEmptyName" xml:space="preserve">
+    <value>please, give a name for the project</value>
+  </data>
 </root>

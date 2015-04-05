@@ -7,26 +7,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:tk="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-    
+
     <phone:PhoneApplicationPage.Resources>
         <!--Вид отдельного элемента списка проектов-->
         <DataTemplate x:Key="ToDoListBoxProjectsTemplate">
             <Grid x:Name="ProjectItemGrid" VerticalAlignment="Stretch" Tap="ProjectItemGrid_OnTap">
                 <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding Name}" 
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding Name}" 
                            FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                    <TextBlock Grid.Row="1" Text="{Binding CreationTime}" FontWeight="Thin" 
+                <TextBlock Grid.Row="1" Text="{Binding CreationTime}" FontWeight="Thin" 
                            FontSize="{StaticResource PhoneFontSizeMedium}"/>
-                
+
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu">
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.RenameContextMenu, 
@@ -38,7 +40,7 @@
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
-    
+
     <!--LayoutRoot представляет корневую сетку, где размещается все содержимое страницы-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -66,8 +68,8 @@
                      LostFocus="CreateProjectTextBox_LostFocus" GotFocus="CreateProjectTextBox_GotFocus"/>
             <!--Список проектов-->
             <ListBox 
-                        x:Name="ExistingProjextsListBox" Background="{StaticResource PhoneChromeBrush}"
-                        ItemsSource="{Binding ProjectsList}" Margin="12" Grid.Row="1"
+                        x:Name="ExistingProjextsListBox" ItemsSource="{Binding ProjectsList}" 
+                        Margin="24 12" Grid.Row="1"
                         ItemTemplate="{StaticResource ToDoListBoxProjectsTemplate}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">

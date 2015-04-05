@@ -144,6 +144,9 @@
   <data name="DeleteContextMenu" xml:space="preserve">
     <value>удалить</value>
   </data>
+  <data name="ErrorEmptyName" xml:space="preserve">
+    <value>пожалуйста, задайте имя проекта</value>
+  </data>
   <data name="LanguageTextBlockText" xml:space="preserve">
     <value>язык</value>
   </data>

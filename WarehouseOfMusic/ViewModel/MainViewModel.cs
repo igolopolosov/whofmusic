@@ -23,7 +23,7 @@ namespace WarehouseOfMusic.ViewModel
         private readonly ToDoDataContext _toDoDb;
 
         /// <summary>
-        /// Project that must be renamed
+        /// Project that must be renamed. If the value is -1, there is no project to rename.
         /// </summary>
         private int _onRenameProjectId = -1;
 
@@ -82,9 +82,9 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         /// <summary>
-        /// Query database and load the collections and list
+        /// Query database and load the list of projects
         /// </summary>
-        public void LoadCollectionsFromDatabase()
+        public void LoadProFromDatabase()
         {
             //// Load a list of all projects. 
             this._projectsList = this._toDoDb.Projects.Any()
@@ -101,22 +101,16 @@ namespace WarehouseOfMusic.ViewModel
         }
 
         /// <summary>
-        /// Add a project to the database and collections.
+        /// Add a project with specific name to the database and collections.
         /// </summary>
-        /// <param name="newProject">Project on adding</param>
+        /// <param name="projectName">Name of project</param>
         /// <returns>New project</returns>
-        internal ToDoProject CreateProject(ToDoProject newProject)
+        internal ToDoProject CreateProject(string projectName)
         {
-            if (newProject.Name == null)
+            var newProject = new ToDoProject()
             {
-                var projectNumber = 1;
-                if (this._projectsList.Any())
-                {
-                    projectNumber = this._projectsList.OrderBy(project => project.Id).Last().Id + 1;
-                }
-
-                newProject.Name = AppResources.ProjectString + " " + projectNumber;
-            }
+                Name = projectName
+            };
 
             this._toDoDb.Projects.InsertOnSubmit(newProject);
             this._toDoDb.SubmitChanges();
