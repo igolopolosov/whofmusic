@@ -1,52 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-
-  <Identity Name="12f97bca-12bc-4571-b24a-c9438a2683c7" Publisher="CN=Igor Golopolosov" Version="1.0.0.0"/>
-
-  <mp:PhoneIdentity PhoneProductId="8d0f7152-e53d-46d9-8b71-8d5478edac88" PhonePublisherId="c260c37d-66fd-44ea-8c30-516a142193c3"/>
-
+  <Identity Name="12f97bca-12bc-4571-b24a-c9438a2683c7" Publisher="CN=Igor Golopolosov" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="8d0f7152-e53d-46d9-8b71-8d5478edac88" PhonePublisherId="c260c37d-66fd-44ea-8c30-516a142193c3" />
   <Properties>
     <DisplayName>WarehouseOfMusic</DisplayName>
     <PublisherDisplayName>Igor Golopolosov</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Prerequisites>
     <OSMinVersion>6.3.1</OSMinVersion>
     <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
   </Prerequisites>
-
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="App" Executable="AGHost.exe" EntryPoint="MainPage.xaml">
+    <Application Id="App" Executable="AGHost.exe" EntryPoint="\Views\MainPage.xaml">
       <m3:VisualElements DisplayName="WarehouseOfMusic" Square150x150Logo="Assets\SquareTile150x150.png" Square44x44Logo="Assets\Logo.png" Description="WarehouseOfMusic" ForegroundText="light" BackgroundColor="#464646">
-        <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png"/>
-        <m3:SplashScreen Image="Assets\SplashScreen.png"/>
+        <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png">
+        </m3:DefaultTile>
+        <m3:SplashScreen Image="Assets\SplashScreen.png" />
       </m3:VisualElements>
-
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="AgHost.BackgroundTask">
           <BackgroundTasks>
-          <Task Type="systemEvent"/>
+            <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
       </Extensions>
-
     </Application>
   </Applications>
-  <Capabilities>
-  </Capabilities>
-
   <Extensions>
     <Extension Category="windows.activatableClass.inProcessServer">
       <InProcessServer>
         <Path>AgHostSvcs.dll</Path>
-        <ActivatableClass ActivatableClassId="AgHost.BackgroundTask" ThreadingModel="both"/>
+        <ActivatableClass ActivatableClassId="AgHost.BackgroundTask" ThreadingModel="both" />
       </InProcessServer>
     </Extension>
   </Extensions>
-
 </Package>

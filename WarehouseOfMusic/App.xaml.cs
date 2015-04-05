@@ -13,7 +13,7 @@ namespace WarehouseOfMusic
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
-    using Model;
+    using Models;
     using Resources;
 
     /// <summary>

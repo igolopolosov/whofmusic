@@ -4,13 +4,12 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WarehouseOfMusic.ViewModel
+namespace WarehouseOfMusic.ViewModels
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
-    using Model;
-    using Resources;
+    using Models;
 
     /// <summary>
     /// Class to realize access to database and represent information to application pages.

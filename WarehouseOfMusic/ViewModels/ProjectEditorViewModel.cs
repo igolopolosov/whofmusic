@@ -4,11 +4,11 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WarehouseOfMusic.ViewModel
+namespace WarehouseOfMusic.ViewModels
 {
     using System.ComponentModel;
     using System.Linq;
-    using Model;
+    using Models;
     using Resources;
 
     /// <summary>

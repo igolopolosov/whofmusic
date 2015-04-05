@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WarehouseOfMusic
+namespace WarehouseOfMusic.Views
 {
     using System;
     using System.Globalization;
@@ -122,7 +122,7 @@ namespace WarehouseOfMusic
         private void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
         {
             this.CheckValueThemeListBox();
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));
         }
     }
 }

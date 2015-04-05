@@ -4,23 +4,22 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Linq;
-using System.Windows.Controls.Primitives;
-using Coding4Fun.Toolkit.Controls;
 
-namespace WarehouseOfMusic
+namespace WarehouseOfMusic.Views
 {
     using System;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Navigation;
+    using Coding4Fun.Toolkit.Controls;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
-    using Model;
+    using Models;
     using Resources;
-    using ViewModel;
-
+    using ViewModels;
+    
     /// <summary>
     /// Main Page
     /// </summary>
@@ -85,7 +84,7 @@ namespace WarehouseOfMusic
             if (this._mainViewModel.OnRenameProjectId == -1)
             {
                 var newProject = this._mainViewModel.CreateProject(CreateProjectTextBox.Text);
-                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative), newProject.Id);
+                NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative), newProject.Id);
             }
             else
             {
@@ -141,7 +140,7 @@ namespace WarehouseOfMusic
 
             var chosenProject = grid.DataContext as ToDoProject;
             if (chosenProject != null)
-                NavigationService.Navigate(new Uri("/ProjectEditorPage.xaml", UriKind.Relative), chosenProject.Id);
+                NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative), chosenProject.Id);
         }
 
         /// <summary>
@@ -208,7 +207,7 @@ namespace WarehouseOfMusic
         /// <param name="e">Click on button</param>
         private void SettingsButton_OnClick(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/ApplicationSettingsPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/ApplicationSettingsPage.xaml", UriKind.Relative));
         }
 
         /// <summary>

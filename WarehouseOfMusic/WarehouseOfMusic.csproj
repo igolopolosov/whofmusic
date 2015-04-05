@@ -97,21 +97,20 @@
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Extensions.cs" />
-    <Compile Include="NoteArgs.cs" />
     <Compile Include="LocalizedStrings.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationSettingsPage.xaml.cs">
+    <Compile Include="Views\ApplicationSettingsPage.xaml.cs">
       <DependentUpon>ApplicationSettingsPage.xaml</DependentUpon>
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Model\ToDoDataContext.cs" />
-    <Compile Include="Model\ToDoProject.cs" />
-    <Compile Include="Model\ToDoNote.cs" />
-    <Compile Include="Model\ToDoTrack.cs" />
+    <Compile Include="Models\ToDoDataContext.cs" />
+    <Compile Include="Models\ToDoProject.cs" />
+    <Compile Include="Models\ToDoNote.cs" />
+    <Compile Include="Models\ToDoTrack.cs" />
     <Compile Include="PlayerManager.cs" />
-    <Compile Include="ProjectEditorPage.xaml.cs">
+    <Compile Include="Views\ProjectEditorPage.xaml.cs">
       <DependentUpon>ProjectEditorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -135,23 +134,23 @@
     <Compile Include="ThemeManager.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ProjectEditorViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ProjectEditorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ApplicationSettingsPage.xaml">
+    <Page Include="Views\ApplicationSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProjectEditorPage.xaml">
+    <Page Include="Views\ProjectEditorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,6 +238,7 @@
       <Name>WomAudioComponent</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

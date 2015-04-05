@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WarehouseOfMusic.Model
+namespace WarehouseOfMusic.Models
 {
     using System.Data.Linq;
 

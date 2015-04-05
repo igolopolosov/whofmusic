@@ -4,13 +4,12 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WarehouseOfMusic.Model
+namespace WarehouseOfMusic.Models
 {
     using System;
     using System.ComponentModel;
     using System.Data.Linq;
     using System.Data.Linq.Mapping;
-    
     /// <summary>
     /// Table of music projects
     /// </summary>

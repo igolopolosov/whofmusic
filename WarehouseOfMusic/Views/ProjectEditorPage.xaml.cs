@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WarehouseOfMusic
+namespace WarehouseOfMusic.Views
 {
     using System;
     using System.Windows;
@@ -12,10 +12,10 @@ namespace WarehouseOfMusic
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
-    using Model;
+    using Models;
     using Resources;
-    using ViewModel;
-
+    using ViewModels;
+    
     /// <summary>
     /// Page of editing projects
     /// </summary>
@@ -141,7 +141,7 @@ namespace WarehouseOfMusic
         /// <param name="e">Click on button</param>
         private void SettingsButton_OnClick(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/ApplicationSettingsPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/ApplicationSettingsPage.xaml", UriKind.Relative));
         }
 
         /// <summary>

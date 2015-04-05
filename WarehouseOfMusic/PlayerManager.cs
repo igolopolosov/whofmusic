@@ -8,9 +8,9 @@ namespace WarehouseOfMusic
 {
     using System.Collections.Generic;
     using System.Threading;
-    using Model;
+    using Models;
     using WomAudioComponent;
-
+    
     /// <summary>
     /// Supports to play tracks
     /// </summary>
