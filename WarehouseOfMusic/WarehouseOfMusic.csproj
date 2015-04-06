@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Managers\IsoSettingsManager.cs" />
     <Compile Include="ViewModels\TrackEditorContext.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
