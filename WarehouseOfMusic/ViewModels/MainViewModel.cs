@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MainViewModel.cs" company="Igor Golopolosov">
+// <copyright file="MainViewModel.cs">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

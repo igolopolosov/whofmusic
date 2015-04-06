@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="LocalizedStrings.cs" company="Igor Golopolosov">
+// <copyright file="LocalizedStrings.cs">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

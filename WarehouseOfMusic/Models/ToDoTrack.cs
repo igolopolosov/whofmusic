@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ToDoTrack.cs" company="Igor Golopolosov">
+// <copyright file="ToDoTrack.cs">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

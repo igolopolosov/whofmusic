@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ApplicationSettingsPage.xaml.cs" company="Igor Golopolosov">
+// <copyright file="ApplicationSettingsPage.xaml.cs">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

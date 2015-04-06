@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ProjecteditorViewModel.cs">
+// <copyright file="TrackEditorContext.cs">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -9,12 +9,11 @@ namespace WarehouseOfMusic.ViewModels
     using System.ComponentModel;
     using System.Linq;
     using Models;
-    using Resources;
 
     /// <summary>
     /// ViewModel for project editor page
     /// </summary>
-    public class ProjectEditorViewModel : INotifyPropertyChanged
+    public class TrackEditorContext : INotifyPropertyChanged
     {
         /// <summary>
         /// LINQ to SQL data context for the local database.
@@ -24,14 +23,14 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Currently editing project
         /// </summary>
-        private ToDoProject _currentProject;
+        private ToDoTrack _currentTrack;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectEditorViewModel" /> class.
+        /// Initializes a new instance of the <see cref="TrackEditorContext" /> class.
         /// Class constructor, create the data context object.
         /// </summary>
         /// <param name="toDoDbConnectionString">Path to connect to database</param>
-        public ProjectEditorViewModel(string toDoDbConnectionString)
+        public TrackEditorContext(string toDoDbConnectionString)
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
         }
@@ -44,67 +43,27 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Gets or sets the current project
         /// </summary>
-        public ToDoProject CurrentProject
+        public ToDoTrack CurrentTrack
         {
             get
             {
-                return this._currentProject;
+                return this._currentTrack;
             }
 
             set
             {
-                this._currentProject = value;
+                this._currentTrack = value;
                 this.NotifyPropertyChanged("CurrentProject");
             }
         }
 
         /// <summary>
-        /// Add new track to the database and collections.
-        /// </summary>
-        public void AddTrack()
-        {
-            var trackNumber = 1;
-            if (this._currentProject.Tracks.Any())
-            {
-                trackNumber = this._currentProject.Tracks.Count + 1;
-            }
-
-            var trackName = AppResources.TrackString + " " + trackNumber;
-
-            var newTrack = new ToDoTrack
-            {
-                Name = trackName,
-                Project = this._currentProject
-            };
-
-            this._toDoDb.Tracks.InsertOnSubmit(newTrack);
-            this._toDoDb.SubmitChanges();
-            this._currentProject.Tracks.Add(newTrack);
-        }
-
-        /// <summary>
-        /// Remove a track from the database and collections.
-        /// </summary>
-        /// <param name="trackForDelete">Track on removing</param>
-        public void DeleteTrack(ToDoTrack trackForDelete)
-        {
-            foreach (var note in this._currentProject.Tracks.First(x => x.Id == trackForDelete.Id).Notes)
-            {
-                this._toDoDb.Notes.DeleteOnSubmit(note);
-            }
-
-            this._currentProject.Tracks.Remove(trackForDelete);
-            this._toDoDb.Tracks.DeleteOnSubmit(trackForDelete);
-            this._toDoDb.SubmitChanges();
-        }
-
-        /// <summary>
         /// Query database and load the information for project
         /// </summary>
-        /// <param name="projectId">ID of loading project</param>
-        public void LoadProjectFromDatabase(int projectId)
+        /// <param name="trackId">ID of loading project</param>
+        public void LoadTrackFromDatabase(int trackId)
         {
-            this._currentProject = this._toDoDb.Projects.FirstOrDefault(x => x.Id == projectId);
+            this._currentTrack = this._toDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
         }
 
         /// <summary>

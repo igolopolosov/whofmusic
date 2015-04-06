@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="PlayerManager.cs" company="Igor Golopolosov">
+// <copyright file="PlayerManager.cs">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -47,6 +47,17 @@ namespace WarehouseOfMusic
         {
             _onPlayTracks = new List<ToDoTrack>(onPlayProject.Tracks);
             _audioController =  new AudioController();
+            _audioController.CreatePatch();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlayerManager" /> class.
+        /// </summary>
+        /// <param name="onPlayTrack">Track on play</param>
+        public PlayerManager(ToDoTrack onPlayTrack)
+        {
+            _onPlayTracks = new List<ToDoTrack> {onPlayTrack};
+            _audioController = new AudioController();
             _audioController.CreatePatch();
         }
         #endregion

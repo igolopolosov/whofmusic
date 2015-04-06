@@ -14,8 +14,8 @@
     shell:SystemTray.IsVisible="False">
     
     <phone:PhoneApplicationPage.Resources>
-        <DataTemplate x:Key="ToDoListBoxTracksTemplate">
-            <Grid>
+        <DataTemplate x:Key="TrackListBoxTemplate">
+            <Grid Tap="TrackListBoxItem_OnTap">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="Auto" />
@@ -39,9 +39,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <ListBox x:Name="TracksListBox" Grid.Row="0"
+                <ListBox x:Name="TrackListBox" Grid.Row="0"
                         ItemsSource="{Binding CurrentProject.Tracks}"
-                        ItemTemplate="{StaticResource ToDoListBoxTracksTemplate}">
+                        ItemTemplate="{StaticResource TrackListBoxTemplate}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
