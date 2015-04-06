@@ -1,9 +1,9 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="MainPage.xaml.cs" company="Igor Golopolosov">
-//     Copyright (c) Igor Golopolosov. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
+﻿
 
+
+using System.IO.IsolatedStorage;
+using Windows.ApplicationModel.Store;
+using WarehouseOfMusic.Managers;
 
 namespace WarehouseOfMusic.Views
 {
@@ -71,20 +71,15 @@ namespace WarehouseOfMusic.Views
             if (e.Key != Key.Enter) return;
             if (CreateProjectTextBox.Text == string.Empty)
             {
-                var messagePrompt = new MessagePrompt()
-                {
-                    Body = AppResources.ErrorEmptyName,
-                    VerticalAlignment = VerticalAlignment.Center,
-                };
-                messagePrompt.Completed += messagePrompt_Completed;
-                messagePrompt.Show();
+                ShowErrorMessage();
                 return;
             }
             
             if (this._mainViewModel.OnRenameProjectId == -1)
             {
                 var newProject = this._mainViewModel.CreateProject(CreateProjectTextBox.Text);
-                NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative), newProject.Id);
+                IsoSettingsManager.SetCurrentProject(newProject.Id);
+                NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative));
             }
             else
             {
@@ -92,6 +87,20 @@ namespace WarehouseOfMusic.Views
                 this._mainViewModel.OnRenameProjectId = -1;
                 this.Focus();
             }
+        }
+
+        /// <summary>
+        /// Informs the user about error
+        /// </summary>
+        private void ShowErrorMessage()
+        {
+            var messagePrompt = new MessagePrompt()
+            {
+                Body = AppResources.ErrorEmptyName,
+                VerticalAlignment = VerticalAlignment.Center,
+            };
+            messagePrompt.Completed += messagePrompt_Completed;
+            messagePrompt.Show();
         }
 
         /// <summary>
@@ -139,8 +148,9 @@ namespace WarehouseOfMusic.Views
             if (grid == null) return;
 
             var chosenProject = grid.DataContext as ToDoProject;
-            if (chosenProject != null)
-                NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative), chosenProject.Id);
+            if (chosenProject == null) return;
+            IsoSettingsManager.SetCurrentProject(chosenProject.Id);
+            NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative), chosenProject.Id);
         }
 
         /// <summary>
@@ -152,14 +162,9 @@ namespace WarehouseOfMusic.Views
         {
             var contextMenuItem = sender as MenuItem;
 
-            if (contextMenuItem != null && ReferenceEquals(contextMenuItem.Header, AppResources.RenameContextMenu))
-            {
-                var chosenProject = contextMenuItem.DataContext as ToDoProject;
-                if (chosenProject != null)
-                {
-                    this._mainViewModel.OnRenameProjectId = chosenProject.Id;
-                }
-            }
+            if (contextMenuItem == null) return;
+            var chosenProject = contextMenuItem.DataContext as ToDoProject;
+            this._mainViewModel.OnRenameProjectId = chosenProject.Id;
         }
 
         /// <summary>
@@ -171,11 +176,9 @@ namespace WarehouseOfMusic.Views
         {
             var contextMenuItem = sender as MenuItem;
 
-            if (contextMenuItem != null)
-            {
-                var chosenProject = contextMenuItem.DataContext as ToDoProject;
-                this._mainViewModel.DeleteProject(chosenProject);
-            }
+            if (contextMenuItem == null) return;
+            var chosenProject = contextMenuItem.DataContext as ToDoProject;
+            this._mainViewModel.DeleteProject(chosenProject);
         }
 
         /// <summary>

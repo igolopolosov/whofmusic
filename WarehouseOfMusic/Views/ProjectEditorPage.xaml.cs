@@ -12,6 +12,7 @@ namespace WarehouseOfMusic.Views
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
+    using Managers;
     using Models;
     using Resources;
     using ViewModels;
@@ -56,10 +57,7 @@ namespace WarehouseOfMusic.Views
         private void InitialiazeDataContext()
         {
             this._viewModel = new ProjectEditorViewModel(App.DbConnectionString);
-            if (NavigationService.GetNavigationData() != null)
-            {
-                this._viewModel.LoadProjectFromDatabase((int)NavigationService.GetNavigationData());
-            }
+            this._viewModel.LoadProjectFromDatabase((int)IsoSettingsManager.GetCurrentProjectId());
             this.DataContext = this._viewModel;
         }
         #endregion
@@ -182,8 +180,8 @@ namespace WarehouseOfMusic.Views
             if (grid == null) return;
 
             var chosenTrack = grid.DataContext as ToDoTrack;
-            if (chosenTrack != null)
-                NavigationService.Navigate(new Uri("/Views/TrackEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
+            IsoSettingsManager.SetCurrentTrack(chosenTrack.Id);
+            NavigationService.Navigate(new Uri("/Views/TrackEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
         }
     }
 }

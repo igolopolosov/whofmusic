@@ -10,6 +10,7 @@ namespace WarehouseOfMusic.Views
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
+    using Managers;
     using Resources;
     using ViewModels;
 
@@ -52,10 +53,7 @@ namespace WarehouseOfMusic.Views
         private void InitialiazeDataContext()
         {
             this._trackEditorContext = new TrackEditorContext(App.DbConnectionString);
-            if (NavigationService.GetNavigationData() != null)
-            {
-                this._trackEditorContext.LoadTrackFromDatabase((int) NavigationService.GetNavigationData());
-            }
+            this._trackEditorContext.LoadTrackFromDatabase((int) IsoSettingsManager.GetCurrentTrackId());
             this.DataContext = this._trackEditorContext;
         }
 
