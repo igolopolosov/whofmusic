@@ -70,11 +70,29 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на пауза.
+        /// </summary>
+        public static string AppBarPause {
+            get {
+                return ResourceManager.GetString("AppBarPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на играть.
         /// </summary>
         public static string AppBarPlay {
             get {
                 return ResourceManager.GetString("AppBarPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на продолжить.
+        /// </summary>
+        public static string AppBarResume {
+            get {
+                return ResourceManager.GetString("AppBarResume", resourceCulture);
             }
         }
         

@@ -180,4 +180,10 @@
   <data name="ErrorEmptyName" xml:space="preserve">
     <value>please, give a name for the project</value>
   </data>
+  <data name="AppBarPause" xml:space="preserve">
+    <value>pause</value>
+  </data>
+  <data name="AppBarResume" xml:space="preserve">
+    <value>resume</value>
+  </data>
 </root>

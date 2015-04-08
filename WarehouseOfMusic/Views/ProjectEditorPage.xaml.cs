@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using WomAudioComponent;
+
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -100,20 +102,14 @@ namespace WarehouseOfMusic.Views
         {
             this.ApplicationBar = new ApplicationBar();
 
-            //// Add button linked with help page
-            var helpButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.question.png", UriKind.Relative))
-            {
-                Text = AppResources.AppBarHelp
-            };
-            this.ApplicationBar.Buttons.Add(helpButton);
+            //// Add menu item linked with settings page
+            var settingsMenuItem = new ApplicationBarMenuItem(AppResources.AppBarSettings);
+            settingsMenuItem.Click += this.SettingsMenuItem_OnClick;
+            this.ApplicationBar.MenuItems.Add(settingsMenuItem);
 
-            //// Add button linked with settings page
-            var settingsButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.settings.png", UriKind.Relative))
-            {
-                Text = AppResources.AppBarSettings,
-            };
-            settingsButton.Click += this.SettingsButton_OnClick;
-            this.ApplicationBar.Buttons.Add(settingsButton);
+            //// Add menu item linked with help page
+            var helpMenuItem = new ApplicationBarMenuItem(AppResources.AppBarHelp);
+            this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
             var playButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
@@ -137,7 +133,7 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         /// <param name="sender">Some object</param>
         /// <param name="e">Click on button</param>
-        private void SettingsButton_OnClick(object sender, EventArgs e)
+        private void SettingsMenuItem_OnClick(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/ApplicationSettingsPage.xaml", UriKind.Relative));
         }
@@ -149,8 +145,18 @@ namespace WarehouseOfMusic.Views
         /// <param name="e">Click event</param>
         private void PlayButton_OnClick(object sender, EventArgs e)
         {
-            this._playerManager = new PlayerManager(this._viewModel.CurrentProject);
-            this._playerManager.Play();
+            var button = sender as ApplicationBarIconButton;
+
+            if (button.Text == AppResources.AppBarPlay || button.Text == AppResources.AppBarResume)
+            {
+                button.IconUri = new Uri("/Assets/AppBar/appbar.control.pause.png", UriKind.Relative);
+                button.Text = AppResources.AppBarPause;
+            }
+            else
+            {
+                button.IconUri = new Uri("/Assets/AppBar/appbar.control.resume.png", UriKind.Relative);
+                button.Text = AppResources.AppBarResume;
+            }
         }
 
         /// <summary>
@@ -160,12 +166,9 @@ namespace WarehouseOfMusic.Views
         /// <param name="e">Click event</param>
         private void StopButton_OnClick(object sender, EventArgs e)
         {
-            if (this._playerManager != null)
-            {
-                this._playerManager.Stop();
-            }
-
-            this._playerManager = null;
+            var playPauseButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
+            playPauseButton.Text = AppResources.AppBarPlay;
         }
         #endregion
 

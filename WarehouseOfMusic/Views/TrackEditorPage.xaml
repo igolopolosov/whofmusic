@@ -20,5 +20,10 @@
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
         </StackPanel>
     </Grid>
+    
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

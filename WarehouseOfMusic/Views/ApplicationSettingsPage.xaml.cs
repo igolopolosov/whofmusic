@@ -122,7 +122,7 @@ namespace WarehouseOfMusic.Views
         private void ApplySettingsButton_Click(object sender, RoutedEventArgs e)
         {
             this.CheckValueThemeListBox();
-            NavigationService.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));
+            if (NavigationService.CanGoBack) NavigationService.GoBack();
         }
     }
 }
