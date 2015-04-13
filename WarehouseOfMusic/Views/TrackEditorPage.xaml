@@ -15,12 +15,16 @@
 
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
     <Grid x:Name="LayoutRoot">
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
-            <TextBlock Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
-                       HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
+                       HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeSmall}"/>
+        <Grid x:Name="PianoRoll" Grid.Row="1">
+        </Grid>
     </Grid>
-    
+
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
         </shell:ApplicationBar>

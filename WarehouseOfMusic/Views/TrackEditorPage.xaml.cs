@@ -4,6 +4,11 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
+
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -34,6 +39,24 @@ namespace WarehouseOfMusic.Views
         {
             this.InitializeComponent();
             this.BuildLocalizedAppBar();
+            this.BuildPianoRoll();
+        }
+
+        private void BuildPianoRoll()
+        {
+            for (var i = 0; i < 12; i++)
+            {
+                PianoRoll.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star)});
+            }
+            for (var i = 0; i < 12; i++)
+            {
+                var key = new Rectangle
+                {
+                    Fill = (i%2 == 1) ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.White)
+                };
+                Grid.SetRow(key, i);
+                PianoRoll.Children.Add(key);
+            }
         }
 
         #region Navigation control
