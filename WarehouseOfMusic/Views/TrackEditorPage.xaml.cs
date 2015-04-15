@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Linq;
+
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -39,10 +41,6 @@ namespace WarehouseOfMusic.Views
         {
             this.InitializeComponent();
             this.BuildLocalizedAppBar();
-        }
-
-        private void LayoutGrid_OnLoaded(object sender, RoutedEventArgs e)
-        {
             this.BuildPianoRoll();
         }
 
@@ -151,8 +149,7 @@ namespace WarehouseOfMusic.Views
 
         private void BuildPianoRoll()
         {
-            PianoRoll.Height = (LayoutGrid.ActualHeight - TrackInfoGrid.ActualHeight)*2;
-            PianoRoll.DataContext = _pianoRollManager.Keys;
+           PianoRollKeys.DataContext = _pianoRollManager.Keys;
         }
         #endregion
 
