@@ -19,7 +19,6 @@ namespace WarehouseOfMusic.Views
     using Resources;
     using ViewModels;
 
-
     public partial class TrackEditorPage : PhoneApplicationPage
     {
         /// <summary>
@@ -40,23 +39,6 @@ namespace WarehouseOfMusic.Views
             this.InitializeComponent();
             this.BuildLocalizedAppBar();
             this.BuildPianoRoll();
-        }
-
-        private void BuildPianoRoll()
-        {
-            for (var i = 0; i < 12; i++)
-            {
-                PianoRoll.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star)});
-            }
-            for (var i = 0; i < 12; i++)
-            {
-                var key = new Rectangle
-                {
-                    Fill = (i%2 == 1) ? new SolidColorBrush(Colors.Black) : new SolidColorBrush(Colors.White)
-                };
-                Grid.SetRow(key, i);
-                PianoRoll.Children.Add(key);
-            }
         }
 
         #region Navigation control
@@ -156,6 +138,46 @@ namespace WarehouseOfMusic.Views
             var playPauseButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
             playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
             playPauseButton.Text = AppResources.AppBarPlay;
+        }
+
+        #endregion
+
+        #region For piano roll
+
+        private void BuildPianoRoll()
+        {
+            for (var i = 0; i < 12; i++)
+            {
+                PianoRoll.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                var key = new Rectangle
+                {
+                    Fill = GetKeyColor(i)
+                };
+                Grid.SetRow(key, i);
+                PianoRoll.Children.Add(key);
+            }
+        }
+
+        private Brush GetKeyColor(int relativeKeyNumber)
+        {
+            var keyNumber = relativeKeyNumber%12;
+            var brush = new SolidColorBrush();
+            switch (keyNumber)
+            {
+                case (int) Key.C0:
+                case (int) Key.D0:
+                case (int) Key.E0:
+                case (int) Key.F0:
+                case (int) Key.G0:
+                case (int) Key.A0:
+                case (int) Key.B0:
+                    brush.Color = Colors.White;
+                    break;
+                default:
+                    brush.Color = Colors.Black;
+                    break;
+            }
+            return brush;
         }
 
         #endregion

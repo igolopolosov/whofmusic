@@ -14,14 +14,16 @@
     shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
-    <Grid x:Name="LayoutRoot">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
+        <Grid x:Name="TrackInfoGrid" Grid.Row="0">
+        <TextBlock Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeSmall}"/>
-        <Grid x:Name="PianoRoll" Grid.Row="1">
+        </Grid>
+        <Grid x:Name="PianoRoll" Grid.Row="1" Height="Auto" >
         </Grid>
     </Grid>
 

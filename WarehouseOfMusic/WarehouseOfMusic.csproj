@@ -97,6 +97,7 @@
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Key.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Managers\IsoSettingsManager.cs" />
     <Compile Include="ViewModels\TrackEditorContext.cs" />
