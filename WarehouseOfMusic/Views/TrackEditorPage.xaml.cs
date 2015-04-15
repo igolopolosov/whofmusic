@@ -4,14 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
-
 namespace WarehouseOfMusic.Views
 {
     using System;
+    using System.Windows;
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
@@ -32,12 +28,21 @@ namespace WarehouseOfMusic.Views
         private PlayerManager _playerManager;
 
         /// <summary>
+        /// Manager of pianoroll
+        /// </summary>
+        private PianoRollManager _pianoRollManager = new PianoRollManager();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorPage" /> class.
         /// </summary>
         public TrackEditorPage()
         {
             this.InitializeComponent();
             this.BuildLocalizedAppBar();
+        }
+
+        private void LayoutGrid_OnLoaded(object sender, RoutedEventArgs e)
+        {
             this.BuildPianoRoll();
         }
 
@@ -146,40 +151,11 @@ namespace WarehouseOfMusic.Views
 
         private void BuildPianoRoll()
         {
-            for (var i = 0; i < 12; i++)
-            {
-                PianoRoll.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-                var key = new Rectangle
-                {
-                    Fill = GetKeyColor(i)
-                };
-                Grid.SetRow(key, i);
-                PianoRoll.Children.Add(key);
-            }
+            PianoRoll.Height = (LayoutGrid.ActualHeight - TrackInfoGrid.ActualHeight)*2;
+            PianoRoll.DataContext = _pianoRollManager.Keys;
         }
-
-        private Brush GetKeyColor(int relativeKeyNumber)
-        {
-            var keyNumber = relativeKeyNumber%12;
-            var brush = new SolidColorBrush();
-            switch (keyNumber)
-            {
-                case (int) Key.C0:
-                case (int) Key.D0:
-                case (int) Key.E0:
-                case (int) Key.F0:
-                case (int) Key.G0:
-                case (int) Key.A0:
-                case (int) Key.B0:
-                    brush.Color = Colors.White;
-                    break;
-                default:
-                    brush.Color = Colors.Black;
-                    break;
-            }
-            return brush;
-        }
-
         #endregion
+
+        
     }
 }

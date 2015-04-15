@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MainPage.xaml.cs" company="Igor Golopolosov">
+// <copyright file="IsoSettingsManager.cs" company="Igor Golopolosov">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

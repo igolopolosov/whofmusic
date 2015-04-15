@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:WarehouseOfMusic.Converters"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -13,17 +14,39 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
 
-    <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
-    <Grid>
+    <phone:PhoneApplicationPage.Resources>
+        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutGrid" Loaded="LayoutGrid_OnLoaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid x:Name="TrackInfoGrid" Grid.Row="0">
-        <TextBlock Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
+            <TextBlock Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeSmall}"/>
         </Grid>
-        <Grid x:Name="PianoRoll" Grid.Row="1" Height="Auto" >
+        <Grid Grid.Row="1">
+            <ItemsControl x:Name="PianoRoll" ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="75" Background ="{Binding Path=Color, Converter={StaticResource ColorToBrushConverter}}">
+                            <TextBlock Text="{Binding Name}" Foreground="{Binding Path=InversedColor, Converter={StaticResource ColorToBrushConverter}}" 
+                                      FontSize="{StaticResource PhoneFontSizeMedium}"
+                                       VerticalAlignment="Center"></TextBlock>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <ScrollViewer x:Name="scrollViewer"
+                          ManipulationMode="Control" VerticalScrollBarVisibility="Visible">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+            </ItemsControl>
         </Grid>
     </Grid>
 
