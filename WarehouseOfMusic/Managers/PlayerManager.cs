@@ -4,13 +4,12 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WarehouseOfMusic
+namespace WarehouseOfMusic.Managers
 {
     using System.Collections.Generic;
     using System.Threading;
     using Models;
     using WomAudioComponent;
-    
     /// <summary>
     /// Supports to play tracks
     /// </summary>

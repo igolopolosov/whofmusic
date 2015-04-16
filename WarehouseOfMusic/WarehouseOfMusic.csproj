@@ -115,7 +115,7 @@
     <Compile Include="Models\ToDoProject.cs" />
     <Compile Include="Models\ToDoNote.cs" />
     <Compile Include="Models\ToDoTrack.cs" />
-    <Compile Include="PlayerManager.cs" />
+    <Compile Include="Managers\PlayerManager.cs" />
     <Compile Include="Views\TrackEditorPage.xaml.cs">
       <DependentUpon>TrackEditorPage.xaml</DependentUpon>
     </Compile>

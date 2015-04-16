@@ -41,6 +41,10 @@ namespace WarehouseOfMusic.Views
         {
             this.InitializeComponent();
             this.BuildLocalizedAppBar();
+        }
+
+        private void LayoutGrid_OnLoaded(object sender, RoutedEventArgs e)
+        {
             this.BuildPianoRoll();
         }
 
@@ -149,8 +153,10 @@ namespace WarehouseOfMusic.Views
 
         private void BuildPianoRoll()
         {
-           PianoRollKeys.DataContext = _pianoRollManager.Keys;
+            PianoRollKeys.DataContext = _pianoRollManager.Keys;
+            PianoRollVerticalScroll.ScrollToVerticalOffset(PianoRollVerticalScroll.ExtentHeight/4);
         }
+
         #endregion
 
         
