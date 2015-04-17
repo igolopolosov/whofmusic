@@ -103,6 +103,7 @@
     <Compile Include="Managers\IsoSettingsManager.cs" />
     <Compile Include="Managers\PianoRollManager.cs" />
     <Compile Include="ViewModels\KeyContext.cs" />
+    <Compile Include="ViewModels\TactContext.cs" />
     <Compile Include="ViewModels\TrackEditorContext.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

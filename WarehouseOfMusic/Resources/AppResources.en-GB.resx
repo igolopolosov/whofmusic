@@ -186,4 +186,7 @@
   <data name="AppBarResume" xml:space="preserve">
     <value>resume</value>
   </data>
+  <data name="TactString" xml:space="preserve">
+    <value>TACT</value>
+  </data>
 </root>

@@ -4,12 +4,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using Coding4Fun.Toolkit.Controls;
 
 namespace WarehouseOfMusic.Views
 {
     using System;
-    using System.Windows;
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
@@ -29,11 +31,8 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private PlayerManager _playerManager;
 
-        /// <summary>
-        /// Manager of pianoroll
-        /// </summary>
         private PianoRollManager _pianoRollManager = new PianoRollManager();
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorPage" /> class.
         /// </summary>
@@ -41,11 +40,6 @@ namespace WarehouseOfMusic.Views
         {
             this.InitializeComponent();
             this.BuildLocalizedAppBar();
-        }
-
-        private void LayoutGrid_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            this.BuildPianoRoll();
         }
 
         #region Navigation control
@@ -67,6 +61,7 @@ namespace WarehouseOfMusic.Views
             this._trackEditorContext = new TrackEditorContext(App.DbConnectionString);
             this._trackEditorContext.LoadTrackFromDatabase((int) IsoSettingsManager.GetCurrentTrackId());
             this.DataContext = this._trackEditorContext;
+            PianoRoll.ItemsSource = this._trackEditorContext.Tacts;
         }
 
         #endregion
@@ -149,16 +144,22 @@ namespace WarehouseOfMusic.Views
 
         #endregion
 
-        #region For piano roll
-
-        private void BuildPianoRoll()
+        private void PianoRoll_OnLoadedPivotItem(object sender, PivotItemEventArgs e)
         {
-            PianoRollKeys.DataContext = _pianoRollManager.Keys;
-            PianoRollVerticalScroll.ScrollToVerticalOffset(PianoRollVerticalScroll.ExtentHeight/4);
+            if (_pianoRollManager.List != null)
+            {
+                _pianoRollManager.List.ScrollTo(_pianoRollManager.Keys[60]);
+            }
         }
 
-        #endregion
+        private void PianoRoll_OnUnloadingPivotItem(object sender, PivotItemEventArgs e)
+        {
+            e.Item.Content = null;
+        }
 
-        
+        private void PianoRoll_OnLoadingPivotItem(object sender, PivotItemEventArgs e)
+        {
+            e.Item.Content = _pianoRollManager;
+        }
     }
 }

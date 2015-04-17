@@ -177,6 +177,9 @@
   <data name="Settings" xml:space="preserve">
     <value>НАСТРОЙКИ</value>
   </data>
+  <data name="TactString" xml:space="preserve">
+    <value>ТАКТ</value>
+  </data>
   <data name="ThemeTextBlockText" xml:space="preserve">
     <value>тема</value>
   </data>

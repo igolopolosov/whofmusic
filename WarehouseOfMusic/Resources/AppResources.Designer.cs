@@ -241,6 +241,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ТАКТ.
+        /// </summary>
+        public static string TactString {
+            get {
+                return ResourceManager.GetString("TactString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на тема.
         /// </summary>
         public static string ThemeTextBlockText {

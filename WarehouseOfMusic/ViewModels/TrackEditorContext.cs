@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Collections.ObjectModel;
+
 namespace WarehouseOfMusic.ViewModels
 {
     using System.ComponentModel;
@@ -15,6 +17,16 @@ namespace WarehouseOfMusic.ViewModels
     /// </summary>
     public class TrackEditorContext : INotifyPropertyChanged
     {
+        public ObservableCollection<TactContext> Tacts = new ObservableCollection<TactContext>
+        {
+            new TactContext(1),
+            new TactContext(2),
+            new TactContext(3),
+            new TactContext(4)
+        }; 
+        
+        #region DataBaseLayer
+
         /// <summary>
         /// LINQ to SQL data context for the local database.
         /// </summary>
@@ -25,6 +37,7 @@ namespace WarehouseOfMusic.ViewModels
         /// </summary>
         private ToDoTrack _currentTrack;
 
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="TrackEditorContext" /> class.
         /// Class constructor, create the data context object.
@@ -73,6 +86,7 @@ namespace WarehouseOfMusic.ViewModels
         {
             this._toDoDb.SubmitChanges();
         }
+        #endregion
 
         #region INotifyPropertyChanged Members
 

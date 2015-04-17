@@ -16,43 +16,54 @@
 
     <phone:PhoneApplicationPage.Resources>
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
-        <DataTemplate x:Key="PianoRollTemplate">
-            <Border Height="40" Background ="{Binding Path=Color, Converter={StaticResource ColorToBrushConverter}}">
-                <TextBlock Text="{Binding Name}" Foreground="{Binding Path=InversedColor, Converter={StaticResource ColorToBrushConverter}}" 
-                                      FontSize="{StaticResource PhoneFontSizeMedium}"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            </Border>
+        <DataTemplate x:Key="KeyItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Height="40" Grid.Column="0" Background ="{Binding Path=Color, Converter={StaticResource ColorToBrushConverter}}">
+                    <TextBlock Text="{Binding Name}" Foreground="{Binding Path=InversedColor, Converter={StaticResource ColorToBrushConverter}}" 
+                                      FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                </Border>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="SmallPivotTitle">
+            <ContentPresenter Margin="0">
+                <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeSmall}"/>
+            </ContentPresenter>
+        </DataTemplate>
+        <DataTemplate x:Key="TactPivotItemTemplate">
+            <ContentPresenter Margin="0">
+                <phone:LongListSelector ItemsSource="{Binding Keys}" x:Name="PianoKeys"
+                                        ItemTemplate="{StaticResource KeyItemTemplate}">
+
+                </phone:LongListSelector>
+            </ContentPresenter>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
 
-    <Grid x:Name="LayoutGrid" Loaded="LayoutGrid_OnLoaded">
+    <Grid x:Name="LayoutGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid x:Name="TrackInfoGrid" Grid.Row="0">
             <TextBlock Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeSmall}"/>
         </Grid>
 
-        <ScrollViewer x:Name="PianoRollVerticalScroll" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
-            <Grid x:Name="PianoRoll">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <phone:LongListSelector Grid.Column="0" x:Name="PianoRollKeys" 
-                                        ItemsSource="{Binding}" 
-                                        ItemTemplate="{StaticResource PianoRollTemplate}">
-                    
-                </phone:LongListSelector>
-
-                <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
-                    <Rectangle Fill="CornflowerBlue" Width="800"></Rectangle>
-                </ScrollViewer>
-            </Grid>
-        </ScrollViewer>
+        <Grid Grid.Row="1">
+            <phone:Pivot x:Name="PianoRoll" ItemsSource="{Binding}" HeaderTemplate="{StaticResource SmallPivotTitle}" 
+                         ItemTemplate="{StaticResource TactPivotItemTemplate}" Margin="0" Padding="0" 
+                         LoadedPivotItem="PianoRoll_OnLoadedPivotItem" LoadingPivotItem="PianoRoll_OnLoadingPivotItem"
+                         UnloadingPivotItem="PianoRoll_OnUnloadingPivotItem">
+            </phone:Pivot>
+        </Grid>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>

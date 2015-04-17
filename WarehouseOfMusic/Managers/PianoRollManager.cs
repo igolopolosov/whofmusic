@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 
 using System.Linq;
+using Microsoft.Phone.Controls;
 using WarehouseOfMusic.ViewModels;
 
 namespace WarehouseOfMusic.Managers
@@ -31,5 +32,7 @@ namespace WarehouseOfMusic.Managers
         {
             get { return _keys; }
         }
+
+        public LongListSelector List { get; set; }
     }
 }
