@@ -1,4 +1,4 @@
-﻿namespace WarehouseOfMusic
+﻿namespace WarehouseOfMusic.ViewModels
 {
     /// <summary>
     /// Represent midi number of key,

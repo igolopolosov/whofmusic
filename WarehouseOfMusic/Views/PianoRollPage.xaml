@@ -14,24 +14,24 @@
         <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
     </UserControl.Resources>
 
-   <phone:LongListSelector Margin="0" ItemsSource="{Binding Keys}" x:Name="PianoKeys" Loaded="PianoKeys_OnLoaded"
+    <phone:LongListSelector Margin="0" Padding="0" ItemsSource="{Binding Keys}" x:Name="PianoKeys" Loaded="PianoKeys_OnLoaded"
                            ItemRealized="LLS_ItemRealized" ItemUnrealized="LLS_ItemUnrealized">
         <phone:LongListSelector.ItemTemplate>
             <DataTemplate>
-                <Grid>
+                <Grid Height="40">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Border Height="40" Grid.Column="0" Background ="{Binding Path=Color, Converter={StaticResource ColorToBrushConverter}}">
+                    <Border Grid.Column="0" Background ="{Binding Path=Color, Converter={StaticResource ColorToBrushConverter}}">
                         <TextBlock Text="{Binding Name}" Foreground="{Binding Path=InversedColor, Converter={StaticResource ColorToBrushConverter}}" 
                                       FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                     </Border>
+                    <Canvas Grid.Column="1" x:Name="KeyCanvas" Tap="KeyCanvas_OnTap" 
+                            Background="{StaticResource PhoneChromeBrush}"></Canvas>
                 </Grid>
             </DataTemplate>
         </phone:LongListSelector.ItemTemplate>
    </phone:LongListSelector>
+    
 </UserControl>

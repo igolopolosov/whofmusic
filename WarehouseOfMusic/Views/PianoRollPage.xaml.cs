@@ -1,4 +1,5 @@
-﻿using WarehouseOfMusic.ViewModels;
+﻿using System.Windows.Shapes;
+using WarehouseOfMusic.ViewModels;
 
 namespace WarehouseOfMusic.Views
 {
@@ -108,5 +109,34 @@ namespace WarehouseOfMusic.Views
             if (key != null) TactContext.PianoRollContext.TopKey = key.Value;
         } 
         #endregion
+
+        private void KeyCanvas_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var canvas = sender as Canvas;
+            if (canvas == null) return;
+            var tapPoint = e.GetPosition(canvas);
+            CreateNoteRectangle(canvas, tapPoint);
+        }
+
+        private void CreateNoteRectangle(Panel panel, Point tapPoint)
+        {
+            var blockWidth = panel.ActualWidth / 16;
+            var rectangle = new Rectangle
+            {
+                Width = blockWidth,
+                Height = panel.ActualHeight,
+                Fill = new SolidColorBrush((Application.Current.Resources["PhoneAccentBrush"] as SolidColorBrush).Color)
+            };
+            Canvas.SetTop(rectangle, 0);
+            Canvas.SetLeft(rectangle, tapPoint.X - (tapPoint.X % blockWidth));
+            panel.Children.Add(rectangle);
+
+            if (OnAddingNote != null) OnAddingNote(this, new NoteEventArgs
+            {
+            });
+        }
+
+        public delegate void NoteChangedHandler(object sender, NoteEventArgs e);
+        public event NoteChangedHandler OnAddingNote;
     }
 }

@@ -159,5 +159,10 @@ namespace WarehouseOfMusic.Views
                 list.SaveOffset();
             }
         }
+
+        private void PianoRollPage_OnOnAddingNote(object sender, NoteEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

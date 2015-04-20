@@ -24,12 +24,12 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Duration of note
         /// </summary>
-        private int _duration;
+        private byte _duration;
 
         /// <summary>
         /// Duration of note
         /// </summary>
-        private int _midiNumber;
+        private byte _midiNumber;
 
         /// <summary>
         /// Note contains in the tact
@@ -39,12 +39,7 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Position of note in a tact
         /// </summary>
-        private int _tactposition;
-
-        /// <summary>
-        /// Name of note
-        /// </summary>
-        private string _title;
+        private byte _tactposition;
 
         /// <summary>
         /// Entity reference, to identify the ToDoTrack "storage" table
@@ -89,6 +84,50 @@ namespace WarehouseOfMusic.Models
         }
 
         /// <summary>
+        /// Gets or sets duration of note
+        /// </summary>
+        [Column]
+        public byte Duration
+        {
+            get
+            {
+                return this._duration;
+            }
+
+            set
+            {
+                if (this._duration != value)
+                {
+                    this.NotifyPropertyChanging("Duration");
+                    this._duration = value;
+                    this.NotifyPropertyChanged("Duration");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets duration of note
+        /// </summary>
+        [Column]
+        public byte MidiNumber
+        {
+            get
+            {
+                return this._midiNumber;
+            }
+
+            set
+            {
+                if (this._midiNumber != value)
+                {
+                    this.NotifyPropertyChanging("MidiNumber");
+                    this._midiNumber = value;
+                    this.NotifyPropertyChanged("MidiNumber");
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets tact, which contains note
         /// </summary>
         [Column]
@@ -114,7 +153,7 @@ namespace WarehouseOfMusic.Models
         /// Gets or sets position of in a tact
         /// </summary>
         [Column]
-        public int TactPosition
+        public byte TactPosition
         {
             get
             {
@@ -128,72 +167,6 @@ namespace WarehouseOfMusic.Models
                     this.NotifyPropertyChanging("TactPosition");
                     this._tactposition = value;
                     this.NotifyPropertyChanged("TactPosition");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets duration of note
-        /// </summary>
-        [Column]
-        public int Duration
-        {
-            get
-            {
-                return this._duration;
-            }
-
-            set
-            {
-                if (this._duration != value)
-                {
-                    this.NotifyPropertyChanging("Duration");
-                    this._duration = value;
-                    this.NotifyPropertyChanged("Duration");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets duration of note
-        /// </summary>
-        [Column]
-        public int MidiNumber
-        {
-            get
-            {
-                return this._midiNumber;
-            }
-
-            set
-            {
-                if (this._midiNumber != value)
-                {
-                    this.NotifyPropertyChanging("MidiNumber");
-                    this._midiNumber = value;
-                    this.NotifyPropertyChanged("MidiNumber");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets Name of note
-        /// </summary>
-        [Column(CanBeNull = true)]
-        public string Title
-        {
-            get
-            {
-                return this._title; 
-            }
-
-            set
-            {
-                if (this._title != value)
-                {
-                    this.NotifyPropertyChanging("Name");
-                    this._title = value;
-                    this.NotifyPropertyChanged("Name");
                 }
             }
         }
