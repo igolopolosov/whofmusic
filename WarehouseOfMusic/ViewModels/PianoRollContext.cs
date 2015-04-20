@@ -4,35 +4,44 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Linq;
-using Microsoft.Phone.Controls;
-using WarehouseOfMusic.ViewModels;
-
-namespace WarehouseOfMusic.Managers
+namespace WarehouseOfMusic.ViewModels
 {
     using System.Collections.ObjectModel;
 
-    public class PianoRollManager
+    public class PianoRollContext
     {
+        /// <summary>
+        /// Collection of all availiable keys
+        /// </summary>
         private ObservableCollection<KeyContext> _keys;
 
-        public PianoRollManager()
+        /// <summary>
+        /// Create new instance of PianoRollContext
+        /// </summary>
+        public PianoRollContext()
         {
             _keys = new ObservableCollection<KeyContext>();
-            var key = Key.G10;
+            var key = Key.B7;
             _keys.Add(new KeyContext(key));
-            while (key != Key.C0)
+            while (key != Key.C2)
             {
                 key = (Key)((int)key - 1);
                 _keys.Add(new KeyContext(key));
-            } 
+            }
+            TopKey = Key.G5;
         }
 
+        /// <summary>
+        /// Collection of all availiable keys
+        /// </summary>
         public ObservableCollection<KeyContext> Keys
         {
             get { return _keys; }
         }
 
-        public LongListSelector List { get; set; }
+        /// <summary>
+        /// Current value of element located at the top of view
+        /// </summary>
+        public Key TopKey { get; set; }
     }
 }

@@ -101,7 +101,7 @@
     <Compile Include="Key.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Managers\IsoSettingsManager.cs" />
-    <Compile Include="Managers\PianoRollManager.cs" />
+    <Compile Include="ViewModels\PianoRollContext.cs" />
     <Compile Include="ViewModels\KeyContext.cs" />
     <Compile Include="ViewModels\TactContext.cs" />
     <Compile Include="ViewModels\TrackEditorContext.cs" />
@@ -117,6 +117,9 @@
     <Compile Include="Models\ToDoNote.cs" />
     <Compile Include="Models\ToDoTrack.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
+    <Compile Include="Views\PianoRollPage.xaml.cs">
+      <DependentUpon>PianoRollPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TrackEditorPage.xaml.cs">
       <DependentUpon>TrackEditorPage.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ApplicationSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PianoRollPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters="clr-namespace:WarehouseOfMusic.Converters"
+    xmlns:views="clr-namespace:WarehouseOfMusic.Views"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -15,38 +15,20 @@
     shell:SystemTray.IsVisible="False">
 
     <phone:PhoneApplicationPage.Resources>
-        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
-        <DataTemplate x:Key="KeyItemTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Border Height="40" Grid.Column="0" Background ="{Binding Path=Color, Converter={StaticResource ColorToBrushConverter}}">
-                    <TextBlock Text="{Binding Name}" Foreground="{Binding Path=InversedColor, Converter={StaticResource ColorToBrushConverter}}" 
-                                      FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                </Border>
-            </Grid>
-        </DataTemplate>
-        
         <DataTemplate x:Key="SmallPivotTitle">
             <ContentPresenter Margin="0">
                 <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeSmall}"/>
             </ContentPresenter>
         </DataTemplate>
-        <DataTemplate x:Key="TactPivotItemTemplate">
-            <ContentPresenter Margin="0">
-                <phone:LongListSelector ItemsSource="{Binding Keys}" x:Name="PianoKeys"
-                                        ItemTemplate="{StaticResource KeyItemTemplate}">
 
-                </phone:LongListSelector>
+        <DataTemplate x:Key="PivotItem">
+            <ContentPresenter Margin="0">
+                <views:PianoRollPage DataContext="{Binding PianoRollContext}">
+                </views:PianoRollPage>
             </ContentPresenter>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
-
+    
     <Grid x:Name="LayoutGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -59,9 +41,7 @@
 
         <Grid Grid.Row="1">
             <phone:Pivot x:Name="PianoRoll" ItemsSource="{Binding}" HeaderTemplate="{StaticResource SmallPivotTitle}" 
-                         ItemTemplate="{StaticResource TactPivotItemTemplate}" Margin="0" Padding="0" 
-                         LoadedPivotItem="PianoRoll_OnLoadedPivotItem" LoadingPivotItem="PianoRoll_OnLoadingPivotItem"
-                         UnloadingPivotItem="PianoRoll_OnUnloadingPivotItem">
+                         Margin="0" Padding="0" ItemTemplate="{StaticResource PivotItem}" UnloadedPivotItem="PianoRoll_OnUnloadedPivotItem" LoadedPivotItem="PianoRoll_OnLoadedPivotItem">
             </phone:Pivot>
         </Grid>
     </Grid>

@@ -4,9 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
+using System.Collections.Generic;
 using Coding4Fun.Toolkit.Controls;
 
 namespace WarehouseOfMusic.Views
@@ -31,8 +29,6 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private PlayerManager _playerManager;
 
-        private PianoRollManager _pianoRollManager = new PianoRollManager();
-        
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorPage" /> class.
         /// </summary>
@@ -61,7 +57,7 @@ namespace WarehouseOfMusic.Views
             this._trackEditorContext = new TrackEditorContext(App.DbConnectionString);
             this._trackEditorContext.LoadTrackFromDatabase((int) IsoSettingsManager.GetCurrentTrackId());
             this.DataContext = this._trackEditorContext;
-            PianoRoll.ItemsSource = this._trackEditorContext.Tacts;
+            this.PianoRoll.ItemsSource = this._trackEditorContext.Tacts;
         }
 
         #endregion
@@ -124,7 +120,9 @@ namespace WarehouseOfMusic.Views
             {
                 button.IconUri = new Uri("/Assets/AppBar/appbar.control.pause.png", UriKind.Relative);
                 button.Text = AppResources.AppBarPause;
-            } else {
+            }
+            else
+            {
                 button.IconUri = new Uri("/Assets/AppBar/appbar.control.resume.png", UriKind.Relative);
                 button.Text = AppResources.AppBarResume;
             }
@@ -146,20 +144,20 @@ namespace WarehouseOfMusic.Views
 
         private void PianoRoll_OnLoadedPivotItem(object sender, PivotItemEventArgs e)
         {
-            if (_pianoRollManager.List != null)
+            var list = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
+            if (list != null)
             {
-                _pianoRollManager.List.ScrollTo(_pianoRollManager.Keys[60]);
+                list.Scroll();
             }
         }
 
-        private void PianoRoll_OnUnloadingPivotItem(object sender, PivotItemEventArgs e)
+        private void PianoRoll_OnUnloadedPivotItem(object sender, PivotItemEventArgs e)
         {
-            e.Item.Content = null;
-        }
-
-        private void PianoRoll_OnLoadingPivotItem(object sender, PivotItemEventArgs e)
-        {
-            e.Item.Content = _pianoRollManager;
+            var list = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
+            if (list != null)
+            {
+                list.SaveOffset();
+            }
         }
     }
 }

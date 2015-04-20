@@ -11,17 +11,17 @@
         {
             get
             {
-                var keyNumber = (int)_key % 12;
+                var keyNumber = (int)_key % 12 + 24;
                 Color color;
                 switch (keyNumber)
                 {
-                    case (int)Key.C0:
-                    case (int)Key.D0:
-                    case (int)Key.E0:
-                    case (int)Key.F0:
-                    case (int)Key.G0:
-                    case (int)Key.A0:
-                    case (int)Key.B0:
+                    case (int)Key.C2:
+                    case (int)Key.D2:
+                    case (int)Key.E2:
+                    case (int)Key.F2:
+                    case (int)Key.G2:
+                    case (int)Key.A2:
+                    case (int)Key.B2:
                         color = Colors.White;
                         break;
                     default:

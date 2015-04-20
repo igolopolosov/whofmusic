@@ -1,28 +1,48 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using WarehouseOfMusic.Resources;
-
-namespace WarehouseOfMusic.ViewModels
+﻿namespace WarehouseOfMusic.ViewModels
 {
+    using System.ComponentModel;
+    using Resources;
+
     /// <summary>
     /// Describes template of tact
     /// </summary>
     public class TactContext : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Number of tact
+        /// </summary>
         private int _number;
 
+        private static PianoRollContext _pianoRollManager = new PianoRollContext();
+
+        /// <summary>
+        /// Name of tact
+        /// </summary>
         public string Name
         {
             get { return _number + " " + AppResources.TactString; }
         }
 
+        /// <summary>
+        /// Number of tact
+        /// </summary>
         public int Number
         {
             get { return _number; }
         }
 
-        public ObservableCollection<KeyContext> PianoKeys { get; set; }
+        /// <summary>
+        /// Grid of piano keys
+        /// </summary>
+        public static PianoRollContext PianoRollContext
+        {
+            get { return _pianoRollManager; }
+        }
 
+        /// <summary>
+        /// Create instanse of TactContext
+        /// </summary>
+        /// <param name="number">Number of tact</param>
         public TactContext(int number)
         {
             _number = number;
