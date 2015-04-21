@@ -23,7 +23,8 @@
 
         <DataTemplate x:Key="PivotItem">
             <ContentPresenter Margin="0">
-                <views:PianoRollPage Margin="0" Padding="0" DataContext="{Binding PianoRollContext}">
+                <views:PianoRollPage Margin="0" Padding="0" DataContext="{Binding PianoRollContext}" 
+                                     AddedNote="PianoRollPage_OnAddedNote" DeletedNote="PianoRollPage_OnDeletedNote">
                 </views:PianoRollPage>
             </ContentPresenter>
         </DataTemplate>

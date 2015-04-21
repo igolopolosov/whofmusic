@@ -160,9 +160,14 @@ namespace WarehouseOfMusic.Views
             }
         }
 
-        private void PianoRollPage_OnOnAddingNote(object sender, NoteEventArgs e)
+        private void PianoRollPage_OnAddedNote(object sender, NoteEventArgs e)
         {
-            throw new NotImplementedException();
+            var f = e;
+        }
+
+        private void PianoRollPage_OnDeletedNote(object sender, NoteEventArgs e)
+        {
+            var f = e;
         }
     }
 }

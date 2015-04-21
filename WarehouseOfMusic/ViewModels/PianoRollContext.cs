@@ -29,6 +29,7 @@ namespace WarehouseOfMusic.ViewModels
                 _keys.Add(new KeyContext(key));
             }
             TopKey = Key.G5;
+            NoteDuration = 2;
         }
 
         /// <summary>
@@ -43,5 +44,10 @@ namespace WarehouseOfMusic.ViewModels
         /// Current value of element located at the top of view
         /// </summary>
         public Key TopKey { get; set; }
+
+        /// <summary>
+        /// Current value of note duration
+        /// </summary>
+        public byte NoteDuration { get; set; }
     }
 }

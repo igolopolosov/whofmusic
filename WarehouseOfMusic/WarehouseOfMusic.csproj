@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="NoteEventArgs.cs" />
     <Compile Include="ViewModels\Key.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Managers\IsoSettingsManager.cs" />

@@ -68,7 +68,7 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void CreateProjectTextBox_OnKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key != Key.Enter) return;
+            if (e.Key != System.Windows.Input.Key.Enter) return;
             if (CreateProjectTextBox.Text == string.Empty)
             {
                 ShowErrorMessage();
