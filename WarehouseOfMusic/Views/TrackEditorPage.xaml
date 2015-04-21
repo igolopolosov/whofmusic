@@ -24,7 +24,9 @@
         <DataTemplate x:Key="PivotItem">
             <ContentPresenter Margin="0">
                 <views:PianoRollPage Margin="0" Padding="0" DataContext="{Binding PianoRollContext}" 
-                                     AddedNote="PianoRollPage_OnAddedNote" DeletedNote="PianoRollPage_OnDeletedNote">
+                                     AddedNote="PianoRollPage_OnAddedNote" 
+                                     DeletedNote="PianoRollPage_OnDeletedNote" 
+                                     Loaded="PianoRollPage_OnLoaded">
                 </views:PianoRollPage>
             </ContentPresenter>
         </DataTemplate>
@@ -42,7 +44,8 @@
 
         <Grid Grid.Row="1">
             <phone:Pivot x:Name="PianoRoll" ItemsSource="{Binding}" HeaderTemplate="{StaticResource SmallPivotTitle}" 
-                         Margin="0" Padding="0" ItemTemplate="{StaticResource PivotItem}" UnloadedPivotItem="PianoRoll_OnUnloadedPivotItem" LoadedPivotItem="PianoRoll_OnLoadedPivotItem">
+                         Margin="0" Padding="0" ItemTemplate="{StaticResource PivotItem}" UnloadedPivotItem="PianoRoll_OnUnloadedPivotItem" 
+                         LoadedPivotItem="PianoRoll_OnLoadedPivotItem">
             </phone:Pivot>
         </Grid>
     </Grid>

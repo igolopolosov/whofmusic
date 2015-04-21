@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Data.Linq;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using Coding4Fun.Toolkit.Controls;
+using WarehouseOfMusic.Models;
 using WarehouseOfMusic.UIElementContexts;
 using WarehouseOfMusic.ViewModels;
 
@@ -128,21 +131,9 @@ namespace WarehouseOfMusic.Views
         {
             var canvas = sender as Canvas;
             if (canvas == null) return;
-            var tapPoint = e.GetPosition(canvas);
+            var tapPoint = e.GetPosition(canvas); 
             var cellWidth = canvas.ActualWidth / 16;
-            var blockWidth = TactContext.PianoRollContext.NoteDuration * cellWidth;
-            var noteRectangle = new Rectangle
-            {
-                Width = blockWidth,
-                Height = canvas.ActualHeight,
-                Fill = new SolidColorBrush((Application.Current.Resources["PhoneAccentBrush"] as SolidColorBrush).Color)
-            };
-            noteRectangle.Tap += noteRectangle_Tap;
-            noteRectangle.DoubleTap += noteRectangle_DoubleTap;
-            Canvas.SetTop(noteRectangle, 0);
-            Canvas.SetLeft(noteRectangle, tapPoint.X - (tapPoint.X % cellWidth));
-            Canvas.SetZIndex(noteRectangle, 1);
-            canvas.Children.Add(noteRectangle);
+            var noteRectangle = PlaceNoteTo(canvas, tapPoint);
 
             var key = canvas.DataContext as KeyContext;
             var tactPostition = (tapPoint.X - (tapPoint.X % cellWidth)) / cellWidth + 1;
@@ -203,5 +194,51 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         public event NoteChangedHandler DeletedNote; 
         #endregion
+
+        private Rectangle PlaceNoteTo(Canvas canvas, Point tapPoint)
+        {
+            var cellWidth = canvas.ActualWidth / 16;
+            var blockWidth = TactContext.PianoRollContext.NoteDuration * cellWidth;
+            var noteRectangle = new Rectangle
+            {
+                Width = blockWidth,
+                Height = canvas.ActualHeight,
+                Fill = new SolidColorBrush((Application.Current.Resources["PhoneAccentBrush"] as SolidColorBrush).Color)
+            };
+            noteRectangle.Tap += noteRectangle_Tap;
+            noteRectangle.DoubleTap += noteRectangle_DoubleTap;
+            Canvas.SetTop(noteRectangle, 0);
+            Canvas.SetLeft(noteRectangle, tapPoint.X - (tapPoint.X % cellWidth));
+            Canvas.SetZIndex(noteRectangle, 1);
+            canvas.Children.Add(noteRectangle);
+            return noteRectangle;
+        }
+
+        /// <summary>
+        /// Place notes of this tact and track to piano Roll
+        /// </summary>
+        /// <param name="notes"></param>
+        public void PopulateNotes(IEnumerable<ToDoNote> notes)
+        {
+            foreach (var note in notes)
+            {
+                foreach (var noteRectangle in from keyCanvas in PianoKeys.GetLogicalChildrenByType<Canvas>(true)
+                    let key = keyCanvas.DataContext as KeyContext
+                    where key != null
+                    where note.MidiNumber == (byte) key.Value
+                    let cellWidth = keyCanvas.ActualWidth/16
+                    select PlaceNoteTo(keyCanvas, new Point(cellWidth*note.TactPosition, 0)))
+                {
+                    noteRectangle.DataContext = note.Id;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Remove note rectangle from this page
+        /// </summary>
+        public void RemoveNotes()
+        {
+        }
     }
 }

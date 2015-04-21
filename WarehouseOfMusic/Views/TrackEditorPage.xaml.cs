@@ -4,6 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Linq;
+using System.Windows;
+
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -142,24 +145,40 @@ namespace WarehouseOfMusic.Views
 
         #endregion
 
+        #region Pianoroll populating
+
+        private void PianoRollPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var pianoRollPage = sender as PianoRollPage;
+            if (pianoRollPage == null) return;
+            var tactContext = PianoRoll.SelectedItem as TactContext;
+            if (tactContext == null) return;
+            var populateCollection = _trackEditorContext.CurrentTrack.Notes.Where(x => x.Tact == tactContext.Number);
+            pianoRollPage.PopulateNotes(populateCollection);
+        }
+
         private void PianoRoll_OnLoadedPivotItem(object sender, PivotItemEventArgs e)
         {
-            var list = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
-            if (list != null)
-            {
-                list.Scroll();
-            }
+            var pianoRollPage = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
+            if (pianoRollPage == null) return;
+            //var tactContext = PianoRoll.SelectedItem as TactContext;
+            //if (tactContext == null) return;
+            //pianoRollPage.PopulateNotes(_trackEditorContext.CurrentTrack.Notes.Where(x => x.Tact == tactContext.Number));
+            pianoRollPage.Scroll();
         }
 
         private void PianoRoll_OnUnloadedPivotItem(object sender, PivotItemEventArgs e)
         {
-            var list = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
-            if (list != null)
+            var pianoRollPage = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
+            if (pianoRollPage != null)
             {
-                list.SaveOffset();
+                pianoRollPage.RemoveNotes();
+                pianoRollPage.SaveOffset();
             }
-        }
+        } 
+        #endregion
 
+        #region Modification note events
         private int PianoRollPage_OnAddedNote(object sender, NoteEventArgs e)
         {
             var tactContext = PianoRoll.SelectedItem as TactContext;
@@ -179,6 +198,9 @@ namespace WarehouseOfMusic.Views
         {
             _trackEditorContext.DeleteNote(e.Id);
             return 0;
-        }
+        } 
+        #endregion
+
+        
     }
 }

@@ -27,7 +27,9 @@
                         <TextBlock Text="{Binding Name}" Foreground="{Binding Path=InversedColor, Converter={StaticResource ColorToBrushConverter}}" 
                                       FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                     </Border>
-                    <Canvas Grid.Column="1" x:Name="KeyCanvas" Tap="KeyCanvas_OnTap" ZIndex="0" Background="{StaticResource PhoneChromeBrush}"></Canvas>
+                    <Canvas Grid.Column="1" x:Name="KeyCanvas" Tap="KeyCanvas_OnTap" ZIndex="0" Background="{StaticResource PhoneChromeBrush}">
+                        
+                    </Canvas>
                 </Grid>
             </DataTemplate>
         </phone:LongListSelector.ItemTemplate>
