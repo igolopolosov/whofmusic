@@ -4,18 +4,18 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Collections.Generic;
-using Coding4Fun.Toolkit.Controls;
-
 namespace WarehouseOfMusic.Views
 {
     using System;
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
+    using Coding4Fun.Toolkit.Controls;
     using Managers;
+    using Models;
     using Resources;
     using ViewModels;
+    using UIElementContexts;
 
     public partial class TrackEditorPage : PhoneApplicationPage
     {
@@ -160,14 +160,25 @@ namespace WarehouseOfMusic.Views
             }
         }
 
-        private void PianoRollPage_OnAddedNote(object sender, NoteEventArgs e)
+        private int PianoRollPage_OnAddedNote(object sender, NoteEventArgs e)
         {
-            var f = e;
+            var tactContext = PianoRoll.SelectedItem as TactContext;
+            if (tactContext == null) return 0;
+            var note = new ToDoNote
+            {
+                Duration = TactContext.PianoRollContext.NoteDuration,
+                MidiNumber = (byte)e.Key,
+                Tact = tactContext.Number,
+                TactPosition = e.TactPosition
+            };
+            _trackEditorContext.AddNote(note);
+            return note.Id;
         }
 
-        private void PianoRollPage_OnDeletedNote(object sender, NoteEventArgs e)
+        private int PianoRollPage_OnDeletedNote(object sender, NoteEventArgs e)
         {
-            var f = e;
+            _trackEditorContext.DeleteNote(e.Id);
+            return 0;
         }
     }
 }

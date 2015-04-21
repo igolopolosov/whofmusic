@@ -4,9 +4,10 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace WarehouseOfMusic.ViewModels
+namespace WarehouseOfMusic.UIElementContexts
 {
     using System.Collections.ObjectModel;
+    using ViewModels;
 
     public class PianoRollContext
     {

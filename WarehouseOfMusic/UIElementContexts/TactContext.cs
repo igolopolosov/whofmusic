@@ -1,4 +1,4 @@
-﻿namespace WarehouseOfMusic.ViewModels
+﻿namespace WarehouseOfMusic.UIElementContexts
 {
     using System.ComponentModel;
     using Resources;

@@ -175,7 +175,7 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Gets or sets entity set for the collection side of the relationship.
         /// </summary>
-        [Association(Storage = "_tracks", OtherKey = "ProjectId", ThisKey = "Id", DeleteRule = "Cascade")]
+        [Association(Storage = "_tracks", OtherKey = "ProjectId", ThisKey = "Id")]
         public EntitySet<ToDoTrack> Tracks
         {
             get { return this._tracks; }
@@ -189,7 +189,7 @@ namespace WarehouseOfMusic.Models
         private void AttachToDoTrack(ToDoTrack toDo)
         {
             this.NotifyPropertyChanging("ToDoTrack");
-            toDo.Project = this;
+            toDo.ProjectRef = this;
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace WarehouseOfMusic.Models
         private void DetachToDoTrack(ToDoTrack toDo)
         {
             this.NotifyPropertyChanging("ToDoTrack");
-            toDo.Project = null;
+            toDo.ProjectRef = null;
         }
 
         #region INotifyProperty event methods

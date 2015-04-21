@@ -1,8 +1,9 @@
-﻿namespace WarehouseOfMusic.ViewModels
-{
-    using System.ComponentModel;
-    using System.Windows.Media;
+﻿using System.ComponentModel;
+using System.Windows.Media;
+using WarehouseOfMusic.ViewModels;
 
+namespace WarehouseOfMusic.UIElementContexts
+{
     public class KeyContext : INotifyPropertyChanged
     {
         private Key _key;

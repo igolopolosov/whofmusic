@@ -4,13 +4,15 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Collections.ObjectModel;
+using System.Data.Linq;
 
 namespace WarehouseOfMusic.ViewModels
 {
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using Models;
+    using UIElementContexts;
 
     /// <summary>
     /// ViewModel for project editor page
@@ -78,14 +80,6 @@ namespace WarehouseOfMusic.ViewModels
         {
             this._currentTrack = this._toDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
         }
-
-        /// <summary>
-        /// Write changes in the data context to the database.
-        /// </summary>
-        public void SaveChangesToDb()
-        {
-            this._toDoDb.SubmitChanges();
-        }
         #endregion
 
         #region INotifyPropertyChanged Members
@@ -102,5 +96,31 @@ namespace WarehouseOfMusic.ViewModels
             }
         }
         #endregion
+
+        /// <summary>
+        /// Add note to current track
+        /// </summary>
+        /// <param name="note">New note</param>
+        public void AddNote(ToDoNote note)
+        {
+            note.TrackRef = _currentTrack;
+            _toDoDb.Notes.InsertOnSubmit(note);
+            _toDoDb.SubmitChanges();
+            CurrentTrack.Notes.Add(note);
+        }
+
+        /// <summary>
+        /// Delete note from current track
+        /// </summary>
+        /// <param name="id">Id of deleting note</param>
+        public void DeleteNote(int id)
+        {
+            var note = _currentTrack.Notes.First(x => x.Id == id);
+            CurrentTrack.Notes.Remove(note);
+            _toDoDb.Notes.DeleteOnSubmit(note);
+            _toDoDb.SubmitChanges();
+            //// [Hack] Restore references
+            _currentTrack.ProjectRef = _toDoDb.Projects.First(x => x.Id == _currentTrack.ProjectId);
+        }
     }
 }

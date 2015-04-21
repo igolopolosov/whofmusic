@@ -74,7 +74,7 @@ namespace WarehouseOfMusic.ViewModels
             var newTrack = new ToDoTrack
             {
                 Name = trackName,
-                Project = this._currentProject
+                ProjectRef = this._currentProject
             };
 
             this._toDoDb.Tracks.InsertOnSubmit(newTrack);

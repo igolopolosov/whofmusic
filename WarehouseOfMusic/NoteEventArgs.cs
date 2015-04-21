@@ -5,6 +5,7 @@
 
     public class NoteEventArgs : EventArgs
     {
+        public int Id;
         /// <summary>
         /// Key
         /// </summary>

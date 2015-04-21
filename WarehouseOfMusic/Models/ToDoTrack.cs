@@ -35,7 +35,7 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Entity reference, to identify the ToDoProject "storage" table
         /// </summary>
-        private EntityRef<ToDoProject> _project;
+        private EntityRef<ToDoProject> _projectRef;
 
         /// <summary>
         /// Version column aids update performance.
@@ -110,32 +110,32 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Gets or sets association, to describe the relationship between this key and that "storage" table
         /// </summary>
-        [Association(Storage = "_project", ThisKey = "ProjectId", OtherKey = "Id", IsForeignKey = true)]
-        public ToDoProject Project
+        [Association(Storage = "_projectRef", ThisKey = "ProjectId", OtherKey = "Id", IsForeignKey = true)]
+        public ToDoProject ProjectRef
         {
             get
             {
-                return this._project.Entity; 
+                return this._projectRef.Entity; 
             }
 
             set
             {
-                this.NotifyPropertyChanging("Project");
-                this._project.Entity = value;
+                this.NotifyPropertyChanging("ProjectRef");
+                this._projectRef.Entity = value;
 
                 if (value != null)
                 {
                     this.ProjectId = value.Id;
                 }
 
-                this.NotifyPropertyChanging("Project");
+                this.NotifyPropertyChanging("ProjectRef");
             }
         }
 
         /// <summary>
         /// Gets or sets entity set for the collection side of the relationship.
         /// </summary>
-        [Association(Storage = "_notes", OtherKey = "TrackId", ThisKey = "Id", DeleteRule = "Cascade")]
+        [Association(Storage = "_notes", OtherKey = "TrackId", ThisKey = "Id")]
         public EntitySet<ToDoNote> Notes
         {
             get { return this._notes; }
