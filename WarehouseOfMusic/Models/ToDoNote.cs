@@ -150,7 +150,7 @@ namespace WarehouseOfMusic.Models
         }
 
         /// <summary>
-        /// Gets or sets position of in a tact
+        /// Gets or sets position of in a tact. From 0 to 15
         /// </summary>
         [Column]
         public byte TactPosition

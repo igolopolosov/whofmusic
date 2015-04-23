@@ -102,9 +102,8 @@
     <Compile Include="ViewModels\Key.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Managers\IsoSettingsManager.cs" />
-    <Compile Include="UIElementContexts\PianoRollContext.cs" />
     <Compile Include="UIElementContexts\KeyContext.cs" />
-    <Compile Include="UIElementContexts\TactContext.cs" />
+    <Compile Include="UIElementContexts\PianoRollContext.cs" />
     <Compile Include="ViewModels\TrackEditorContext.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

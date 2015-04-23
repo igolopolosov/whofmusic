@@ -4,6 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
 using System.Data.Linq;
 
 namespace WarehouseOfMusic.ViewModels
@@ -19,14 +20,35 @@ namespace WarehouseOfMusic.ViewModels
     /// </summary>
     public class TrackEditorContext : INotifyPropertyChanged
     {
-        public ObservableCollection<TactContext> Tacts = new ObservableCollection<TactContext>
+        public ObservableCollection<PianoRollContext> Tacts;
+
+        /// <summary>
+        /// Add note to current track
+        /// </summary>
+        private ToDoNote OnAddedNote(object sender, NoteEventArgs e)
         {
-            new TactContext(1),
-            new TactContext(2),
-            new TactContext(3),
-            new TactContext(4)
-        }; 
-        
+            var note = e.Note;
+            note.TrackRef = _currentTrack;
+            _toDoDb.Notes.InsertOnSubmit(note);
+            _toDoDb.SubmitChanges();
+            CurrentTrack.Notes.Add(note);
+            return note;
+        }
+
+        /// <summary>
+        /// Add note to current track
+        /// </summary>
+        private ToDoNote OnDeletedNote(object sender, NoteEventArgs e)
+        {
+            var note = e.Note;
+            CurrentTrack.Notes.Remove(note);
+            _toDoDb.Notes.DeleteOnSubmit(note);
+            _toDoDb.SubmitChanges();
+            //// [Hack] Restore references
+            _currentTrack.ProjectRef = _toDoDb.Projects.First(x => x.Id == _currentTrack.ProjectId);
+            return null;
+        }
+
         #region DataBaseLayer
 
         /// <summary>
@@ -48,6 +70,14 @@ namespace WarehouseOfMusic.ViewModels
         public TrackEditorContext(string toDoDbConnectionString)
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
+            Tacts = new ObservableCollection<PianoRollContext>();
+            for (var i = 1; i < 5; i++)
+            {
+                var tact = new PianoRollContext(i);
+                tact.AddedNote += OnAddedNote;
+                tact.DeletedNote += OnDeletedNote;
+                Tacts.Add(tact);
+            }
         }
 
         /// <summary>
@@ -96,31 +126,5 @@ namespace WarehouseOfMusic.ViewModels
             }
         }
         #endregion
-
-        /// <summary>
-        /// Add note to current track
-        /// </summary>
-        /// <param name="note">New note</param>
-        public void AddNote(ToDoNote note)
-        {
-            note.TrackRef = _currentTrack;
-            _toDoDb.Notes.InsertOnSubmit(note);
-            _toDoDb.SubmitChanges();
-            CurrentTrack.Notes.Add(note);
-        }
-
-        /// <summary>
-        /// Delete note from current track
-        /// </summary>
-        /// <param name="id">Id of deleting note</param>
-        public void DeleteNote(int id)
-        {
-            var note = _currentTrack.Notes.First(x => x.Id == id);
-            CurrentTrack.Notes.Remove(note);
-            _toDoDb.Notes.DeleteOnSubmit(note);
-            _toDoDb.SubmitChanges();
-            //// [Hack] Restore references
-            _currentTrack.ProjectRef = _toDoDb.Projects.First(x => x.Id == _currentTrack.ProjectId);
-        }
     }
 }

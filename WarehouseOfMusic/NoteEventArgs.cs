@@ -1,18 +1,14 @@
-﻿namespace WarehouseOfMusic
+﻿using WarehouseOfMusic.Models;
+
+namespace WarehouseOfMusic
 {
     using System;
-    using ViewModels;
 
     public class NoteEventArgs : EventArgs
     {
-        public int Id;
         /// <summary>
-        /// Key
+        /// Note partially filled with parameters
         /// </summary>
-        public Key Key { get; set; }
-        /// <summary>
-        /// Position note at the tact
-        /// </summary>
-        public byte TactPosition { get; set; }
+        public ToDoNote Note;
     }
 }

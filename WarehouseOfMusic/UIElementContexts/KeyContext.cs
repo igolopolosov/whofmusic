@@ -1,13 +1,20 @@
-﻿using System.ComponentModel;
-using System.Windows.Media;
-using WarehouseOfMusic.ViewModels;
-
-namespace WarehouseOfMusic.UIElementContexts
+﻿namespace WarehouseOfMusic.UIElementContexts
 {
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Windows.Media;
+    using Models;
+    using ViewModels;
+    
     public class KeyContext : INotifyPropertyChanged
     {
         private Key _key;
 
+        private ObservableCollection<ToDoNote> _notes;
+
+        /// <summary>
+        /// Color for background of piano key
+        /// </summary>
         public Color Color
         {
             get
@@ -33,25 +40,49 @@ namespace WarehouseOfMusic.UIElementContexts
             }
         }
 
+        /// <summary>
+        /// /// <summary>
+        /// Color for foreground of piano key name
+        /// </summary>
+        /// </summary>
         public Color InversedColor
         {
             get { return Color == Colors.White ? Colors.Black : Colors.White; }
         }
-        
+
+        /// <summary>
+        /// Name of piano key
+        /// </summary>
         public string Name
         {
             get { return _key.ToString(); }
         }
 
+        /// <summary>
+        /// Notes with same key.Value
+        /// </summary>
+        public ObservableCollection<ToDoNote> Notes
+        {
+            get { return _notes; }
+            set
+            {
+                _notes = value;
+                NotifyPropertyChanged("Notes");
+            }
+        }
+
+        /// <summary>
+        /// Midi number
+        /// </summary>
         public Key Value
         {
             get { return _key; }
         }
-        
 
         public KeyContext(Key key)
         {
             _key = key;
+            _notes = new ObservableCollection<ToDoNote>();
         }
 
         #region INotifyPropertyChanged Members

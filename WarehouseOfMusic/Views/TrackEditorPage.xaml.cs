@@ -4,9 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Linq;
-using System.Windows;
-
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -15,10 +12,8 @@ namespace WarehouseOfMusic.Views
     using Microsoft.Phone.Shell;
     using Coding4Fun.Toolkit.Controls;
     using Managers;
-    using Models;
     using Resources;
     using ViewModels;
-    using UIElementContexts;
 
     public partial class TrackEditorPage : PhoneApplicationPage
     {
@@ -147,60 +142,20 @@ namespace WarehouseOfMusic.Views
 
         #region Pianoroll populating
 
-        private void PianoRollPage_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            var pianoRollPage = sender as PianoRollPage;
-            if (pianoRollPage == null) return;
-            var tactContext = PianoRoll.SelectedItem as TactContext;
-            if (tactContext == null) return;
-            var populateCollection = _trackEditorContext.CurrentTrack.Notes.Where(x => x.Tact == tactContext.Number);
-            pianoRollPage.PopulateNotes(populateCollection);
-        }
-
         private void PianoRoll_OnLoadedPivotItem(object sender, PivotItemEventArgs e)
         {
             var pianoRollPage = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
             if (pianoRollPage == null) return;
-            //var tactContext = PianoRoll.SelectedItem as TactContext;
-            //if (tactContext == null) return;
-            //pianoRollPage.PopulateNotes(_trackEditorContext.CurrentTrack.Notes.Where(x => x.Tact == tactContext.Number));
             pianoRollPage.Scroll();
         }
 
         private void PianoRoll_OnUnloadedPivotItem(object sender, PivotItemEventArgs e)
         {
             var pianoRollPage = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
-            if (pianoRollPage != null)
-            {
-                pianoRollPage.RemoveNotes();
-                pianoRollPage.SaveOffset();
-            }
-        } 
-        #endregion
-
-        #region Modification note events
-        private int PianoRollPage_OnAddedNote(object sender, NoteEventArgs e)
-        {
-            var tactContext = PianoRoll.SelectedItem as TactContext;
-            if (tactContext == null) return 0;
-            var note = new ToDoNote
-            {
-                Duration = TactContext.PianoRollContext.NoteDuration,
-                MidiNumber = (byte)e.Key,
-                Tact = tactContext.Number,
-                TactPosition = e.TactPosition
-            };
-            _trackEditorContext.AddNote(note);
-            return note.Id;
+            if (pianoRollPage == null) return;
+            pianoRollPage.SaveOffset();
         }
 
-        private int PianoRollPage_OnDeletedNote(object sender, NoteEventArgs e)
-        {
-            _trackEditorContext.DeleteNote(e.Id);
-            return 0;
-        } 
         #endregion
-
-        
     }
 }
