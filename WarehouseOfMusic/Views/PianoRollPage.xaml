@@ -28,17 +28,23 @@
                                       FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                     </Border>
 
-                    <ItemsControl Grid.Column="1" ItemsSource="{Binding Notes}">
+                    <ItemsControl Grid.Column="1" ItemsSource="{Binding Notes}" x:Name="KeyCanvas">
+                        <ItemsControl.Template>
+                            <ControlTemplate TargetType="ItemsControl" >
+                                    <ItemsPresenter />
+                            </ControlTemplate>
+                        </ItemsControl.Template>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <Canvas ZIndex="0" x:Name="KeyCanvas" Tap="KeyCanvas_OnTap"
+                                <Canvas ZIndex="0" Tap="KeyCanvas_OnTap"
                                         Background="{StaticResource PhoneChromeBrush}"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="40"
-                                           Canvas.ZIndex="1" Loaded="Note_OnLoaded" ></Rectangle>
+                                           Canvas.ZIndex="1" Loaded="Note_OnLoaded">
+                                </Rectangle>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

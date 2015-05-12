@@ -39,7 +39,7 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Position of note in a tact
         /// </summary>
-        private byte _tactposition;
+        private byte _position;
 
         /// <summary>
         /// Entity reference, to identify the ToDoTrack "storage" table
@@ -153,20 +153,20 @@ namespace WarehouseOfMusic.Models
         /// Gets or sets position of in a tact. From 0 to 15
         /// </summary>
         [Column]
-        public byte TactPosition
+        public byte Position
         {
             get
             {
-                return this._tactposition;
+                return this._position;
             }
 
             set
             {
-                if (this._tactposition != value)
+                if (this._position != value)
                 {
-                    this.NotifyPropertyChanging("TactPosition");
-                    this._tactposition = value;
-                    this.NotifyPropertyChanged("TactPosition");
+                    this.NotifyPropertyChanging("Position");
+                    this._position = value;
+                    this.NotifyPropertyChanged("Position");
                 }
             }
         }

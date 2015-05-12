@@ -1,4 +1,6 @@
-﻿namespace WarehouseOfMusic.Views
+﻿using System;
+
+namespace WarehouseOfMusic.Views
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -79,6 +81,7 @@
         #endregion
 
         #region Control for offset
+
         /// <summary>
         /// Initialize offset for this page
         /// </summary>
@@ -88,12 +91,13 @@
         {
             _pianoRollContext = this.DataContext as PianoRollContext;
             foreach (var item in
-                    from object item in PianoKeys.ItemsSource
-                    let key = item as KeyContext
-                    where key.Value == PianoRollContext.TopKey
-                    select item)
+                from object item in PianoKeys.ItemsSource
+                let key = item as KeyContext
+                where key.Value == PianoRollContext.TopKey
+                select item)
             {
                 PianoKeys.ScrollTo(item);
+                _cellWidth = (_items[item].ActualWidth * 4) / (5 * 16);
             }
         }
 
@@ -135,8 +139,7 @@
             if (key == null) return;
 
             var tapPoint = e.GetPosition(canvas);
-            _cellWidth = canvas.ActualWidth / 16;
-            var tactPostition = (tapPoint.X - (tapPoint.X % _cellWidth)) / _cellWidth;
+            var tactPostition = Math.Round((tapPoint.X - (tapPoint.X % _cellWidth)) / _cellWidth);
             _pianoRollContext.AddNote((byte) key.Value,(byte)tactPostition);
         }
 
@@ -173,15 +176,15 @@
             var toDoNote = noteRectangle.DataContext as ToDoNote;
             if (toDoNote == null) return;
 
+
             var blockWidth = toDoNote.Duration * _cellWidth;
+            var leftOffset = toDoNote.Position*_cellWidth;
             noteRectangle.Width = blockWidth;
-            Canvas.SetTop(noteRectangle, 0);
-            Canvas.SetLeft(noteRectangle, toDoNote.TactPosition * _cellWidth);
+            noteRectangle.RenderTransform = new TranslateTransform() { X = leftOffset };
             noteRectangle.Tap += noteRectangle_Tap;
             noteRectangle.DoubleTap += noteRectangle_DoubleTap;
         }
 
         #endregion
-        
     }
 }

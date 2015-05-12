@@ -70,14 +70,6 @@ namespace WarehouseOfMusic.ViewModels
         public TrackEditorContext(string toDoDbConnectionString)
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
-            Tacts = new ObservableCollection<PianoRollContext>();
-            for (var i = 1; i < 5; i++)
-            {
-                var tact = new PianoRollContext(i);
-                tact.AddedNote += OnAddedNote;
-                tact.DeletedNote += OnDeletedNote;
-                Tacts.Add(tact);
-            }
         }
 
         /// <summary>
@@ -109,7 +101,24 @@ namespace WarehouseOfMusic.ViewModels
         public void LoadTrackFromDatabase(int trackId)
         {
             this._currentTrack = this._toDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
+
+            Tacts = new ObservableCollection<PianoRollContext>();
+            for (var i = 1; i < 5; i++)
+            {
+                var tact = new PianoRollContext(i);
+                tact.AddedNote += OnAddedNote;
+                tact.DeletedNote += OnDeletedNote;
+                foreach (var key in tact.Keys)
+                {
+                    key.Notes =
+                        new ObservableCollection<ToDoNote>(
+                            _currentTrack.Notes.Where(
+                                x => x.MidiNumber == (byte) key.Value && x.Tact == tact.Number));
+                }
+                Tacts.Add(tact);
+            }
         }
+
         #endregion
 
         #region INotifyPropertyChanged Members

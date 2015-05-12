@@ -81,7 +81,7 @@ namespace WarehouseOfMusic.UIElementContexts
                 Duration = NoteDuration,
                 MidiNumber = keyValue,
                 Tact = Number,
-                TactPosition = tactPostition
+                Position = tactPostition
             };
             
             if (AddedNote == null) return;

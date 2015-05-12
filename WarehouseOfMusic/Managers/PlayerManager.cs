@@ -89,7 +89,7 @@ namespace WarehouseOfMusic.Managers
             {
                 foreach (var note in track.Notes)
                 {
-                    if (note.TactPosition == _stepControl)
+                    if (note.Position == _stepControl)
                     {
                         var args = new KeyPressedArgs
                         {
@@ -99,7 +99,7 @@ namespace WarehouseOfMusic.Managers
                         this._audioController.KeyIsPressedChanged(this, args);
                     }
 
-                    if (note.TactPosition + note.Duration == _stepControl)
+                    if (note.Position + note.Duration == _stepControl)
                     {
                         var args = new KeyPressedArgs
                         {
