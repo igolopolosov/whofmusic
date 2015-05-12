@@ -6,7 +6,6 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -18,10 +17,11 @@
         <DataTemplate x:Key="TrackListBoxTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-
                 <TextBlock Grid.Column="0" Text="{Binding Name}"
                            FontSize="{StaticResource PhoneFontSizeLarge}"
                            Tap="TrackListBoxItem_OnTap"/>
@@ -32,56 +32,28 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="SoundListBoxTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-
-                <CheckBox x:Name="SoloCheckBox" Grid.Column="0" IsChecked="{Binding Solo, Mode=TwoWay}" 
-                          Checked="SoloCheckBox_OnChecked">S</CheckBox>
-                <CheckBox x:Name="MuteCheckBox" Grid.Column="1" IsChecked="{Binding Mute, Mode=TwoWay}"
-                          Checked="MuteCheckBox_OnChecked">M</CheckBox>
-                <Slider Grid.Column="2" Value="{Binding Volume, Mode=TwoWay}"></Slider>
+                <CheckBox x:Name="SoloCheckBox" Grid.Column="2" IsChecked="{Binding Solo, Mode=TwoWay}" 
+                          Checked="SoloCheckBox_OnChecked"></CheckBox>
+                <CheckBox x:Name="MuteCheckBox" Grid.Column="3" IsChecked="{Binding Mute, Mode=TwoWay}"
+                          Checked="MuteCheckBox_OnChecked"></CheckBox>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
-    <StackPanel x:Name="LayoutRoot">
-       <phone:Panorama>
-            <phone:Panorama.Title>
-                <TextBlock Text="{Binding CurrentProject.Name}" FontSize="64" Margin="0,48,0,0"/>
-            </phone:Panorama.Title>
-            <phone:PanoramaItem>
-                <ListBox x:Name="TrackListBox"
+    <Grid x:Name="LayoutRoot" Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding CurrentProject.Name}" Style="{StaticResource PhoneTextNormalStyle}" 
+                       FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <phone:LongListSelector Grid.Row="1" x:Name="TrackListBox"
                         ItemsSource="{Binding CurrentProject.Tracks}"
                         ItemTemplate="{StaticResource TrackListBoxTemplate}">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-            </phone:PanoramaItem>
-            <phone:PanoramaItem>
-                <ListBox x:Name="SoundListBox"
-                        ItemsSource="{Binding CurrentProject.Tracks}"
-                        ItemTemplate="{StaticResource SoundListBoxTemplate}">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-            </phone:PanoramaItem>
-
-        </phone:Panorama>
-    </StackPanel>
+        </phone:LongListSelector>
+    </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">

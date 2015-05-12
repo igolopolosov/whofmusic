@@ -4,8 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using WomAudioComponent;
-
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -165,7 +163,7 @@ namespace WarehouseOfMusic.Views
         /// <param name="e">Click event</param>
         private void StopButton_OnClick(object sender, EventArgs e)
         {
-            var playPauseButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            var playPauseButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
             if (playPauseButton == null) return;
             playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
             playPauseButton.Text = AppResources.AppBarPlay;
@@ -179,7 +177,7 @@ namespace WarehouseOfMusic.Views
         /// <param name="e">One tap</param>
         private void TrackListBoxItem_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var grid = sender as Grid;
+            var grid = sender as TextBlock;
             if (grid == null) return;
             var chosenTrack = grid.DataContext as ToDoTrack;
             if (chosenTrack == null) return;
