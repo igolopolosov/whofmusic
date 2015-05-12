@@ -35,7 +35,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid x:Name="TrackInfoGrid" Grid.Row="0">
-            <TextBlock Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
+            <TextBlock Text="{Binding CurrentTrack.InitialTact}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeSmall}"/>
         </Grid>
 

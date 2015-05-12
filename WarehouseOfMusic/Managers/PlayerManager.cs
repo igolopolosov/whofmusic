@@ -10,6 +10,7 @@ namespace WarehouseOfMusic.Managers
     using System.Threading;
     using Models;
     using WomAudioComponent;
+
     /// <summary>
     /// Supports to play tracks
     /// </summary>
@@ -67,7 +68,6 @@ namespace WarehouseOfMusic.Managers
         public void Play()
         {
             _audioController.Start();
-            this._playerTimer = new Timer(Step, null, 100, 25);
         }
 
         /// <summary>
@@ -77,40 +77,6 @@ namespace WarehouseOfMusic.Managers
         {
             this._playerTimer.Dispose();
             _audioController.Stop();
-        }
-
-        /// <summary>
-        /// Call on every step of timer
-        /// </summary>
-        /// <returns>No things</returns>
-        private void Step(object state)
-        {
-            foreach (var track in _onPlayTracks)
-            {
-                foreach (var note in track.Notes)
-                {
-                    if (note.Position == _stepControl)
-                    {
-                        var args = new KeyPressedArgs
-                        {
-                            IsPressed = true,
-                            KeyNumber = note.MidiNumber
-                        };
-                        this._audioController.KeyIsPressedChanged(this, args);
-                    }
-
-                    if (note.Position + note.Duration == _stepControl)
-                    {
-                        var args = new KeyPressedArgs
-                        {
-                            IsPressed = false,
-                            KeyNumber = note.MidiNumber
-                        };
-                        this._audioController.KeyIsPressedChanged(this, args);
-                    }
-                }
-            }
-            _stepControl++;
         }
     }
 }

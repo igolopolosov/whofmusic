@@ -4,9 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Data.Linq;
-
 namespace WarehouseOfMusic.ViewModels
 {
     using System.Collections.ObjectModel;
@@ -18,8 +15,11 @@ namespace WarehouseOfMusic.ViewModels
     /// <summary>
     /// ViewModel for project editor page
     /// </summary>
-    public class TrackEditorContext : INotifyPropertyChanged
+    public class SampleEditorContext : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Represent notes of each separate tact in sample
+        /// </summary>
         public ObservableCollection<PianoRollContext> Tacts;
 
         /// <summary>
@@ -28,10 +28,10 @@ namespace WarehouseOfMusic.ViewModels
         private ToDoNote OnAddedNote(object sender, NoteEventArgs e)
         {
             var note = e.Note;
-            note.TrackRef = _currentTrack;
+            note.SampleRef = _currentSample;
             _toDoDb.Notes.InsertOnSubmit(note);
             _toDoDb.SubmitChanges();
-            CurrentTrack.Notes.Add(note);
+            CurrentSample.Notes.Add(note);
             return note;
         }
 
@@ -41,11 +41,11 @@ namespace WarehouseOfMusic.ViewModels
         private ToDoNote OnDeletedNote(object sender, NoteEventArgs e)
         {
             var note = e.Note;
-            CurrentTrack.Notes.Remove(note);
+            CurrentSample.Notes.Remove(note);
             _toDoDb.Notes.DeleteOnSubmit(note);
             _toDoDb.SubmitChanges();
             //// [Hack] Restore references
-            _currentTrack.ProjectRef = _toDoDb.Projects.First(x => x.Id == _currentTrack.ProjectId);
+            _currentSample.TrackRef = _toDoDb.Tracks.First(x => x.Id == _currentSample.TrackId);
             return null;
         }
 
@@ -59,15 +59,15 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Currently editing project
         /// </summary>
-        private ToDoTrack _currentTrack;
+        private ToDoSample _currentSample;
 
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="TrackEditorContext" /> class.
+        /// Initializes a new instance of the <see cref="SampleEditorContext" /> class.
         /// Class constructor, create the data context object.
         /// </summary>
         /// <param name="toDoDbConnectionString">Path to connect to database</param>
-        public TrackEditorContext(string toDoDbConnectionString)
+        public SampleEditorContext(string toDoDbConnectionString)
         {
             this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
         }
@@ -80,30 +80,32 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Gets or sets the current project
         /// </summary>
-        public ToDoTrack CurrentTrack
+        public ToDoSample CurrentSample
         {
             get
             {
-                return this._currentTrack;
+                return this._currentSample;
             }
 
             set
             {
-                this._currentTrack = value;
-                this.NotifyPropertyChanged("CurrentProject");
+                this._currentSample = value;
+                this.NotifyPropertyChanged("CurrentSample");
             }
         }
 
         /// <summary>
-        /// Query database and load the information for project
+        /// Query database and load the information for sample
         /// </summary>
-        /// <param name="trackId">ID of loading project</param>
-        public void LoadTrackFromDatabase(int trackId)
+        /// <param name="trackId">ID of loading track</param>
+        public void LoadSampleFromDatabase(int trackId)
         {
-            this._currentTrack = this._toDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
+            var currentTrack = this._toDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
+            if (currentTrack != null) this._currentSample = currentTrack.Samples.FirstOrDefault();
 
             Tacts = new ObservableCollection<PianoRollContext>();
-            for (var i = 1; i < 5; i++)
+            if (_currentSample == null) return;
+            for (var i = _currentSample.InitialTact; i < _currentSample.InitialTact + _currentSample.Size; i++)
             {
                 var tact = new PianoRollContext(i);
                 tact.AddedNote += OnAddedNote;
@@ -111,9 +113,8 @@ namespace WarehouseOfMusic.ViewModels
                 foreach (var key in tact.Keys)
                 {
                     key.Notes =
-                        new ObservableCollection<ToDoNote>(
-                            _currentTrack.Notes.Where(
-                                x => x.MidiNumber == (byte) key.Value && x.Tact == tact.Number));
+                        new ObservableCollection<ToDoNote>(_currentSample.Notes.Where
+                            (x => x.MidiNumber == (byte) key.Value && x.Tact == tact.Number));
                 }
                 Tacts.Add(tact);
             }

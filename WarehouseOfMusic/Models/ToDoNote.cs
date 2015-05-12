@@ -44,7 +44,7 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Entity reference, to identify the ToDoTrack "storage" table
         /// </summary>
-        private EntityRef<ToDoTrack> _trackRef;
+        private EntityRef<ToDoSample> _sampleRef;
 
         /// <summary>
         /// Version column aids update performance.
@@ -174,25 +174,25 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Gets or sets association, to describe the relationship between this key and that "storage" table
         /// </summary>
-        [Association(Storage = "_trackRef", ThisKey = "TrackId", OtherKey = "Id", IsForeignKey = true)]
-        public ToDoTrack TrackRef
+        [Association(Storage = "_sampleRef", ThisKey = "SampleId", OtherKey = "Id", IsForeignKey = true)]
+        public ToDoSample SampleRef
         {
             get
             {
-                return this._trackRef.Entity; 
+                return this._sampleRef.Entity; 
             }
 
             set
             {
-                this.NotifyPropertyChanging("TrackRef");
-                this._trackRef.Entity = value;
+                this.NotifyPropertyChanging("SampleRef");
+                this._sampleRef.Entity = value;
 
                 if (value != null)
                 {
-                    this.TrackId = value.Id;
+                    this.SampleId = value.Id;
                 }
 
-                this.NotifyPropertyChanging("TrackRef");
+                this.NotifyPropertyChanging("SampleRef");
             }
         }
 
@@ -200,7 +200,7 @@ namespace WarehouseOfMusic.Models
         /// Gets or sets internal column for the associated ToDoTrack ID value
         /// </summary>
         [Column]
-        internal int TrackId { get; set; }
+        internal int SampleId { get; set; }
 
         #region INotifyProperty Members
         

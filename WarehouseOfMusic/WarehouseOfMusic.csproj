@@ -98,13 +98,14 @@
     </Compile>
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Models\ToDoSample.cs" />
     <Compile Include="NoteEventArgs.cs" />
     <Compile Include="ViewModels\Key.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Managers\IsoSettingsManager.cs" />
     <Compile Include="UIElementContexts\KeyContext.cs" />
     <Compile Include="UIElementContexts\PianoRollContext.cs" />
-    <Compile Include="ViewModels\TrackEditorContext.cs" />
+    <Compile Include="ViewModels\SampleEditorContext.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -120,8 +121,8 @@
     <Compile Include="Views\PianoRollPage.xaml.cs">
       <DependentUpon>PianoRollPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TrackEditorPage.xaml.cs">
-      <DependentUpon>TrackEditorPage.xaml</DependentUpon>
+    <Compile Include="Views\SampleEditorPage.xaml.cs">
+      <DependentUpon>SampleEditorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectEditorPage.xaml.cs">
       <DependentUpon>ProjectEditorPage.xaml</DependentUpon>
@@ -167,7 +168,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TrackEditorPage.xaml">
+    <Page Include="Views\SampleEditorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -184,7 +184,7 @@ namespace WarehouseOfMusic.Views
 
             var chosenTrack = grid.DataContext as ToDoTrack;
             IsoSettingsManager.SetCurrentTrack(chosenTrack.Id);
-            NavigationService.Navigate(new Uri("/Views/TrackEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
+            NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
         }
     }
 }

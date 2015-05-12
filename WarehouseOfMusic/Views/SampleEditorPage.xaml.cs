@@ -20,7 +20,7 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// ViewModel for this page
         /// </summary>
-        private TrackEditorContext _trackEditorContext;
+        private SampleEditorContext _sampleEditorContext;
 
         /// <summary>
         /// Manager of track 
@@ -52,10 +52,10 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void InitialiazeDataContext()
         {
-            this._trackEditorContext = new TrackEditorContext(App.DbConnectionString);
-            this._trackEditorContext.LoadTrackFromDatabase((int) IsoSettingsManager.GetCurrentTrackId());
-            this.DataContext = this._trackEditorContext;
-            this.PianoRoll.ItemsSource = this._trackEditorContext.Tacts;
+            this._sampleEditorContext = new SampleEditorContext(App.DbConnectionString);
+            this._sampleEditorContext.LoadSampleFromDatabase((int) IsoSettingsManager.GetCurrentTrackId());
+            this.DataContext = this._sampleEditorContext;
+            this.PianoRoll.ItemsSource = this._sampleEditorContext.Tacts;
         }
 
         #endregion

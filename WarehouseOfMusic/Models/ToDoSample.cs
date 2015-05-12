@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ToDoTrack.cs">
+// <copyright file="ToDoSample.cs">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -15,42 +15,48 @@ namespace WarehouseOfMusic.Models
     /// Table of tracks are containing in a project
     /// </summary>
     [Table]
-    public class ToDoTrack : INotifyPropertyChanged, INotifyPropertyChanging
+    public class ToDoSample : INotifyPropertyChanged, INotifyPropertyChanging
     {
         /// <summary>
-        /// ID of track
+        /// ID of sample
         /// </summary>
         private int _id;
 
         /// <summary>
-        /// Name of track
+        /// Number of first tact in the sample
         /// </summary>
-        private string _name;
+        private byte _initialTact;
 
         /// <summary>
         /// Entity set for the collection side of the relationship.
         /// </summary>
-        private EntitySet<ToDoSample> _samples;
+        private EntitySet<ToDoNote> _notes;
+
+        /// <summary>
+        /// Quantity of tacts in the sample
+        /// </summary>
+        private byte _size;
 
         /// <summary>
         /// Entity reference, to identify the ToDoProject "storage" table
         /// </summary>
-        private EntityRef<ToDoProject> _projectRef;
+        private EntityRef<ToDoTrack> _trackRef;
 
         /// <summary>
         /// Version column aids update performance.
         /// </summary>
-        [Column(IsVersion = true)] private Binary _version;
+        [Column(IsVersion = true)]
+        private Binary _version;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToDoTrack" /> class.
         /// Assign handlers for the add and remove operations, respectively.
         /// </summary>
-        public ToDoTrack()
+        public ToDoSample()
         {
-            this._samples = new EntitySet<ToDoSample>(
-                new Action<ToDoSample>(this.AttachToDoSample),
-                new Action<ToDoSample>(this.DetachToDoSample));
+            this._notes = new EntitySet<ToDoNote>(
+                new Action<ToDoNote>(this.AttachToDoNote),
+                new Action<ToDoNote>(this.DetachToDoNote));
         }
 
         /// <summary>
@@ -71,7 +77,7 @@ namespace WarehouseOfMusic.Models
         {
             get
             {
-                return this._id; 
+                return this._id;
             }
 
             set
@@ -86,23 +92,45 @@ namespace WarehouseOfMusic.Models
         }
 
         /// <summary>
-        /// Gets or sets Name of track
+        /// Gets or sets number of first tact in the sample
         /// </summary>
         [Column]
-        public string Name
+        public byte InitialTact
         {
             get
             {
-                return this._name; 
+                return this._initialTact;
             }
 
             set
             {
-                if (this._name != value)
+                if (this._initialTact != value)
                 {
-                    this.NotifyPropertyChanging("Name");
-                    this._name = value;
-                    this.NotifyPropertyChanged("Name");
+                    this.NotifyPropertyChanging("InitialTact");
+                    this._initialTact = value;
+                    this.NotifyPropertyChanged("InitialTact");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets quantity of tacts in sample
+        /// </summary>
+        [Column]
+        public byte Size
+        {
+            get
+            {
+                return this._size;
+            }
+
+            set
+            {
+                if (this._size != value)
+                {
+                    this.NotifyPropertyChanging("Size");
+                    this._size = value;
+                    this.NotifyPropertyChanged("Size");
                 }
             }
         }
@@ -110,66 +138,66 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Gets or sets association, to describe the relationship between this key and that "storage" table
         /// </summary>
-        [Association(Storage = "_projectRef", ThisKey = "ProjectId", OtherKey = "Id", IsForeignKey = true)]
-        public ToDoProject ProjectRef
+        [Association(Storage = "_trackRef", ThisKey = "TrackId", OtherKey = "Id", IsForeignKey = true)]
+        public ToDoTrack TrackRef
         {
             get
             {
-                return this._projectRef.Entity; 
+                return this._trackRef.Entity;
             }
 
             set
             {
-                this.NotifyPropertyChanging("ProjectRef");
-                this._projectRef.Entity = value;
+                this.NotifyPropertyChanging("TrackRefRef");
+                this._trackRef.Entity = value;
 
                 if (value != null)
                 {
-                    this.ProjectId = value.Id;
+                    this.TrackId = value.Id;
                 }
 
-                this.NotifyPropertyChanging("ProjectRef");
+                this.NotifyPropertyChanging("TrackRefRef");
             }
         }
 
         /// <summary>
         /// Gets or sets entity set for the collection side of the relationship.
         /// </summary>
-        [Association(Storage = "_samples", OtherKey = "TrackId", ThisKey = "Id")]
-        public EntitySet<ToDoSample> Samples
+        [Association(Storage = "_notes", OtherKey = "SampleId", ThisKey = "Id")]
+        public EntitySet<ToDoNote> Notes
         {
-            get { return this._samples; }
-            set { this._samples.Assign(value); }
+            get { return this._notes; }
+            set { this._notes.Assign(value); }
         }
 
         /// <summary>
         /// Gets or sets internal column for the associated ToDoProject ID value
         /// </summary>
         [Column]
-        internal int ProjectId { get; set; }
+        internal int TrackId { get; set; }
 
         /// <summary>
         /// Called during an add operation
         /// </summary>
-        /// <param name="toDo">Sample on adding</param>
-        private void AttachToDoSample(ToDoSample toDo)
+        /// <param name="toDo">Note on adding</param>
+        private void AttachToDoNote(ToDoNote toDo)
         {
-            this.NotifyPropertyChanging("ToDoSample");
-            toDo.TrackRef = this;
+            this.NotifyPropertyChanging("ToDoNote");
+            toDo.SampleRef = this;
         }
 
         /// <summary>
         ///  Called during a remove operation
         /// </summary>
-        /// <param name="toDo">Sample on removing</param>
-        private void DetachToDoSample(ToDoSample toDo)
+        /// <param name="toDo">Note on removing</param>
+        private void DetachToDoNote(ToDoNote toDo)
         {
-            this.NotifyPropertyChanging("ToDoSample");
-            toDo.TrackRef = null;
+            this.NotifyPropertyChanging("ToDoNote");
+            toDo.SampleRef = null;
         }
 
         #region INotifyProperty Members
-        
+
         /// <summary>
         /// Used to notify that a property changed
         /// </summary>

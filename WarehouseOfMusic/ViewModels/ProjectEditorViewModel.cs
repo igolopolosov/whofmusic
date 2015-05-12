@@ -80,6 +80,17 @@ namespace WarehouseOfMusic.ViewModels
             this._toDoDb.Tracks.InsertOnSubmit(newTrack);
             this._toDoDb.SubmitChanges();
             this._currentProject.Tracks.Add(newTrack);
+
+            var sample = new ToDoSample
+            {
+                InitialTact = 1,
+                Size = 4,
+                TrackRef = newTrack
+            };
+
+            this._toDoDb.Samples.InsertOnSubmit(sample);
+            this._toDoDb.SubmitChanges();
+            this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Samples.Add(sample);
         }
 
         /// <summary>
@@ -88,9 +99,13 @@ namespace WarehouseOfMusic.ViewModels
         /// <param name="trackForDelete">Track on removing</param>
         public void DeleteTrack(ToDoTrack trackForDelete)
         {
-            foreach (var note in this._currentProject.Tracks.First(x => x.Id == trackForDelete.Id).Notes)
+            foreach (var sample in this._currentProject.Tracks.First(x => x.Id == trackForDelete.Id).Samples)
             {
-                this._toDoDb.Notes.DeleteOnSubmit(note);
+                foreach (var note in sample.Notes)
+                {
+                    this._toDoDb.Notes.DeleteOnSubmit(note);
+                }
+                this._toDoDb.Samples.DeleteOnSubmit(sample);
             }
 
             this._currentProject.Tracks.Remove(trackForDelete);

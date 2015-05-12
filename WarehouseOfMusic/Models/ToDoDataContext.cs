@@ -24,6 +24,11 @@ namespace WarehouseOfMusic.Models
         public Table<ToDoProject> Projects;
 
         /// <summary>
+        /// Specify a table for the samples.
+        /// </summary>
+        public Table<ToDoSample> Samples;
+
+        /// <summary>
         /// Specify a table for the tracks
         /// </summary>
         public Table<ToDoTrack> Tracks;
