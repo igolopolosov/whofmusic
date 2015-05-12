@@ -30,21 +30,10 @@
     </phone:PhoneApplicationPage.Resources>
     
     <Grid x:Name="LayoutGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid x:Name="TrackInfoGrid" Grid.Row="0">
-            <TextBlock Text="{Binding CurrentTrack.InitialTact}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
-                       HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeSmall}"/>
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <phone:Pivot x:Name="PianoRoll" ItemsSource="{Binding}" HeaderTemplate="{StaticResource SmallPivotTitle}" 
+        <phone:Pivot x:Name="PianoRoll" ItemsSource="{Binding}" HeaderTemplate="{StaticResource SmallPivotTitle}" 
                          Margin="0" Padding="0" ItemTemplate="{StaticResource PivotItem}" UnloadedPivotItem="PianoRoll_OnUnloadedPivotItem" 
                          LoadedPivotItem="PianoRoll_OnLoadedPivotItem">
-            </phone:Pivot>
-        </Grid>
+        </phone:Pivot>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>

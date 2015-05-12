@@ -189,4 +189,7 @@
   <data name="TactString" xml:space="preserve">
     <value>TACT</value>
   </data>
+  <data name="AppBarAddTrack" xml:space="preserve">
+    <value>add track</value>
+  </data>
 </root>

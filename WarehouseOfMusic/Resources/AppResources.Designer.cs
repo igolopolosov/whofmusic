@@ -61,6 +61,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на добавить дорожку.
+        /// </summary>
+        public static string AppBarAddTrack {
+            get {
+                return ResourceManager.GetString("AppBarAddTrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на справка.
         /// </summary>
         public static string AppBarHelp {

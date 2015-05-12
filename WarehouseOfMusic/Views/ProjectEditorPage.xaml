@@ -23,33 +23,25 @@
 
                 <TextBlock Grid.Column="0" Text="{Binding Name}"
                            FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                <Button x:Name="DeleteTrackButton" Grid.Column="1" Content="X" Click="DeleteTrackButton_OnClick"/>
+                <Button x:Name="DeleteTrackButton" Grid.Column="1" Content="X" Click="DeleteTrackButton_Click"/>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
     
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
     <Grid x:Name="LayoutRoot">
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
+        <StackPanel x:Name="TitlePanel" Margin="12">
             <TextBlock Text="{Binding CurrentProject.Name}" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
-            <Grid x:Name="ProjectControlPanel" Margin="12">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <ListBox x:Name="TrackListBox" Grid.Row="0"
+            <ListBox x:Name="TrackListBox"
                         ItemsSource="{Binding CurrentProject.Tracks}"
                         ItemTemplate="{StaticResource TrackListBoxTemplate}">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                </ListBox>
-                <Button x:Name="AddTrackButton" Content="ADD TRACK" Grid.Row="1" Click="AddTrackButton_Click"/>
-            </Grid>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
         </StackPanel>
     </Grid>
 

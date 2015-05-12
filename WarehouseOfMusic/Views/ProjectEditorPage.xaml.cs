@@ -70,7 +70,7 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         /// <param name="sender">Some object</param>
         /// <param name="e">On click</param>
-        private void AddTrackButton_Click(object sender, RoutedEventArgs e)
+        private void AddTrackButton_Click(object sender, EventArgs e)
         {
             this._viewModel.AddTrack();
         }
@@ -80,7 +80,7 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         /// <param name="sender">Some object</param>
         /// <param name="e">On click</param>
-        private void DeleteTrackButton_OnClick(object sender, RoutedEventArgs e)
+        private void DeleteTrackButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
 
@@ -110,6 +110,14 @@ namespace WarehouseOfMusic.Views
             //// Add menu item linked with help page
             var helpMenuItem = new ApplicationBarMenuItem(AppResources.AppBarHelp);
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
+
+            //// Add play button for player
+            var addButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarAddTrack,
+            };
+            addButton.Click += this.AddTrackButton_Click;
+            this.ApplicationBar.Buttons.Add(addButton);
 
             //// Add play button for player
             var playButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
