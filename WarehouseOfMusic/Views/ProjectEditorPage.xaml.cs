@@ -62,6 +62,15 @@ namespace WarehouseOfMusic.Views
             this._viewModel.LoadProjectFromDatabase((int)IsoSettingsManager.GetCurrentProjectId());
             this.DataContext = this._viewModel;
         }
+
+        /// <summary>
+        /// Called when the page is deactivated
+        /// </summary>
+        /// <param name="e">Navigation event</param>
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _viewModel.SaveChangesToDb();
+        }
         #endregion
 
         #region Track editing(add, delete)
@@ -74,24 +83,6 @@ namespace WarehouseOfMusic.Views
         {
             this._viewModel.AddTrack();
         }
-
-        /// <summary>
-        /// Deleting of chosen track
-        /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">On click</param>
-        private void DeleteTrackButton_Click(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-
-            if (button != null)
-            {
-                var trackForDelete = button.DataContext as ToDoTrack;
-                this._viewModel.DeleteTrack(trackForDelete);
-            }
-
-            this.Focus();
-        } 
         #endregion
 
         #region For application bar
@@ -154,7 +145,7 @@ namespace WarehouseOfMusic.Views
         private void PlayButton_OnClick(object sender, EventArgs e)
         {
             var button = sender as ApplicationBarIconButton;
-
+            if (button == null) return;
             if (button.Text == AppResources.AppBarPlay || button.Text == AppResources.AppBarResume)
             {
                 button.IconUri = new Uri("/Assets/AppBar/appbar.control.pause.png", UriKind.Relative);
@@ -175,6 +166,7 @@ namespace WarehouseOfMusic.Views
         private void StopButton_OnClick(object sender, EventArgs e)
         {
             var playPauseButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            if (playPauseButton == null) return;
             playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
             playPauseButton.Text = AppResources.AppBarPlay;
         }
@@ -189,10 +181,28 @@ namespace WarehouseOfMusic.Views
         {
             var grid = sender as Grid;
             if (grid == null) return;
-
             var chosenTrack = grid.DataContext as ToDoTrack;
+            if (chosenTrack == null) return;
             IsoSettingsManager.SetCurrentTrack(chosenTrack.Id);
             NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
         }
+
+        #region Track Mode
+        private void SoloCheckBox_OnChecked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = e.OriginalSource as CheckBox;
+            if (checkBox == null) return;
+            var track = checkBox.DataContext as ToDoTrack;
+            if (track != null) track.Mute = false;
+        }
+
+        private void MuteCheckBox_OnChecked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = e.OriginalSource as CheckBox;
+            if (checkBox == null) return;
+            var track = checkBox.DataContext as ToDoTrack;
+            if (track != null) track.Solo = false;
+        }
+        #endregion
     }
 }

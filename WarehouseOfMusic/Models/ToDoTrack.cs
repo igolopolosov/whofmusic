@@ -43,6 +43,21 @@ namespace WarehouseOfMusic.Models
         [Column(IsVersion = true)] private Binary _version;
 
         /// <summary>
+        /// Mode
+        /// </summary>
+        private bool _mute;
+
+        /// <summary>
+        /// Mode
+        /// </summary>
+        private bool _solo;
+        
+        /// <summary>
+        /// Volume of track
+        /// </summary>
+        private int _volume = 5;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ToDoTrack" /> class.
         /// Assign handlers for the add and remove operations, respectively.
         /// </summary>
@@ -86,6 +101,71 @@ namespace WarehouseOfMusic.Models
         }
 
         /// <summary>
+        /// Gets or sets track mode
+        /// </summary>
+        [Column]
+        public bool Mute
+        {
+            get
+            {
+                return this._mute; 
+            }
+
+            set
+            {
+                if (this._mute != value)
+                {
+                    this.NotifyPropertyChanging("Mute");
+                    this._mute = value;
+                    this.NotifyPropertyChanged("Mute");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets track mode
+        /// </summary>
+        [Column]
+        public bool Solo
+        {
+            get
+            {
+                return this._solo;
+            }
+
+            set
+            {
+                if (this._solo != value)
+                {
+                    this.NotifyPropertyChanging("Solo");
+                    this._solo = value;
+                    this.NotifyPropertyChanged("Solo");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets volume of track
+        /// </summary>
+        [Column]
+        public int Volume
+        {
+            get
+            {
+                return this._volume;
+            }
+
+            set
+            {
+                if (this._volume != value)
+                {
+                    this.NotifyPropertyChanging("Volume");
+                    this._volume = value;
+                    this.NotifyPropertyChanged("Volume");
+                }
+            }
+        }
+        /// <summary>
         /// Gets or sets Name of track
         /// </summary>
         [Column]
@@ -93,7 +173,7 @@ namespace WarehouseOfMusic.Models
         {
             get
             {
-                return this._name; 
+                return this._name;
             }
 
             set
