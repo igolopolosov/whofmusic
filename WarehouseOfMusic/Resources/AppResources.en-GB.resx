@@ -192,4 +192,7 @@
   <data name="AppBarAddTrack" xml:space="preserve">
     <value>add track</value>
   </data>
+  <data name="RenameProject" xml:space="preserve">
+    <value>RENAME PROJECT</value>
+  </data>
 </root>

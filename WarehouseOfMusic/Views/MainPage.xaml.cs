@@ -19,7 +19,7 @@ namespace WarehouseOfMusic.Views
     using Models;
     using Resources;
     using ViewModels;
-    
+
     /// <summary>
     /// Main Page
     /// </summary>
@@ -28,7 +28,7 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// ViewModel for main page
         /// </summary>
-        private MainViewModel _mainViewModel;
+        private MainViewModel _viewModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPage" /> class.
@@ -55,84 +55,68 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void InitialiazeDataContext()
         {
-            this._mainViewModel = new MainViewModel(App.DbConnectionString);
-            this._mainViewModel.LoadProFromDatabase();
-            this.DataContext = this._mainViewModel;
+            this._viewModel = new MainViewModel(App.DbConnectionString);
+            this._viewModel.LoadProFromDatabase();
+            this.DataContext = this._viewModel;
         }
         #endregion
 
         #region CreateProjectButton events
 
         /// <summary>
-        /// By press enter key creates new project or renames chosen by user project
+        /// Informs the user about error
         /// </summary>
-        private void CreateProjectTextBox_OnKeyUp(object sender, KeyEventArgs e)
+        private void ShowInputPromt(int projectId)
+        {
+            this._viewModel.OnRenameProjectId = projectId;
+            var projectName = projectId == -1 ? string.Empty
+                : this._viewModel.ProjectsList.FirstOrDefault(x => x.Id == projectId).Name;
+            var inputPromptTitle = projectId == -1 ? AppResources.CreateProject : AppResources.RenameProject;
+            var inputPrompt = new InputPromptOveride()
+            {
+                IsCancelVisible = true,
+                IsSubmitOnEnterKey = false,
+                Title = inputPromptTitle,
+                Value = projectName
+            };
+            inputPrompt.LostFocus += inputPrompt_LostFocus;
+            inputPrompt.KeyUp += InputPrompt_KeyUp;
+            inputPrompt.Completed += InputPromptOnCompleted;
+            inputPrompt.Show();
+        }
+
+        void inputPrompt_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            input.Message = input.Value == string.Empty ? AppResources.ErrorEmptyName : string.Empty;
+        }
+
+        private void InputPrompt_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
-            if (CreateProjectTextBox.Text == string.Empty)
-            {
-                ShowErrorMessage();
-                return;
-            }
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            input.Focus();
+        }
+
+        private void InputPromptOnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            var input = sender as InputPrompt;
+            if (input == null) return;
             
-            if (this._mainViewModel.OnRenameProjectId == -1)
+            if (this._viewModel.OnRenameProjectId == -1)
             {
-                var newProject = this._mainViewModel.CreateProject(CreateProjectTextBox.Text);
+                var newProject = this._viewModel.CreateProject(input.Value);
                 IsoSettingsManager.SetCurrentProject(newProject.Id);
                 NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative));
             }
             else
             {
-                this._mainViewModel.RenameProjectTo(CreateProjectTextBox.Text);
-                this._mainViewModel.OnRenameProjectId = -1;
+                this._viewModel.RenameProjectTo(input.Value);
+                this._viewModel.OnRenameProjectId = -1;
                 this.Focus();
             }
-        }
-
-        /// <summary>
-        /// Informs the user about error
-        /// </summary>
-        private void ShowErrorMessage()
-        {
-            var messagePrompt = new MessagePrompt()
-            {
-                Body = AppResources.ErrorEmptyName,
-                VerticalAlignment = VerticalAlignment.Center,
-            };
-            messagePrompt.Completed += messagePrompt_Completed;
-            messagePrompt.Show();
-        }
-
-        /// <summary>
-        /// Returns focus on CreateProjectTextBox
-        /// </summary>
-        private void messagePrompt_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
-        {
-            CreateProjectTextBox.Focus();
-        }
-
-        /// <summary>
-        /// CreateProjectTextBox got focus
-        /// </summary>s
-        private void CreateProjectTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            var thisTextBox = (TextBox) sender;
-            thisTextBox.Text = this._mainViewModel.OnRenameProjectId == -1
-                ? string.Empty
-                : this._mainViewModel.ProjectsList
-                    .FirstOrDefault(x => x.Id == this._mainViewModel.OnRenameProjectId).Name;
-            thisTextBox.Select(thisTextBox.Text.Length, 0);
-        }
-
-        /// <summary>
-        /// CreateProjectTextBox lost focus
-        /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">Lost focus of button</param>
-        private void CreateProjectTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            var thisTextBox = (TextBox)sender;
-            thisTextBox.Text = AppResources.CreateProject;
         }
         #endregion
 
@@ -161,10 +145,9 @@ namespace WarehouseOfMusic.Views
         private void RenameProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var contextMenuItem = sender as MenuItem;
-
             if (contextMenuItem == null) return;
             var chosenProject = contextMenuItem.DataContext as ToDoProject;
-            this._mainViewModel.OnRenameProjectId = chosenProject.Id;
+            if (chosenProject != null) ShowInputPromt(chosenProject.Id);
         }
 
         /// <summary>
@@ -178,17 +161,7 @@ namespace WarehouseOfMusic.Views
 
             if (contextMenuItem == null) return;
             var chosenProject = contextMenuItem.DataContext as ToDoProject;
-            this._mainViewModel.DeleteProject(chosenProject);
-        }
-
-        /// <summary>
-        /// Rightly set focus after tap on rename
-        /// </summary>
-        /// <param name="sender">Rename item</param>
-        /// <param name="e">On lost focus</param>
-        private void RenameProject_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            CreateProjectTextBox.Focus();
+            this._viewModel.DeleteProject(chosenProject);
         }
 
         /// <summary>
@@ -226,6 +199,19 @@ namespace WarehouseOfMusic.Views
             //// Add menu item linked with help page
             var helpMenuItem = new ApplicationBarMenuItem(AppResources.AppBarHelp);
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
+
+            //// Add play button for player
+            var addButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarAddTrack,
+            };
+            addButton.Click += this.AddTrackButton_Click;
+            this.ApplicationBar.Buttons.Add(addButton);
+        }
+
+        private void AddTrackButton_Click(object sender, EventArgs e)
+        {
+            ShowInputPromt(-1);
         }
 
         #endregion

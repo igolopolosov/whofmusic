@@ -223,6 +223,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ПЕРЕИМЕНОВАТЬ ПРОЕКТ.
+        /// </summary>
+        public static string RenameProject {
+            get {
+                return ResourceManager.GetString("RenameProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {

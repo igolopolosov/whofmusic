@@ -147,6 +147,14 @@ namespace WarehouseOfMusic.ViewModels
         {
             foreach (var track in projectForDelete.Tracks)
             {
+                foreach (var sample in track.Samples)
+                {
+                    foreach (var note in sample.Notes)
+                    {
+                        this._toDoDb.Notes.DeleteOnSubmit(note);
+                    }
+                    this._toDoDb.Samples.DeleteOnSubmit(sample);
+                }
                 this._toDoDb.Tracks.DeleteOnSubmit(track);
             }
 

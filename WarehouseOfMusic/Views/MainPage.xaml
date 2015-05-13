@@ -30,7 +30,7 @@
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu">
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.RenameContextMenu, 
-                     Source={StaticResource LocalizedStrings}}" Tap="RenameProject_OnTap" LostFocus="RenameProject_OnLostFocus" />
+                     Source={StaticResource LocalizedStrings}}" Tap="RenameProject_OnTap"/>
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.DeleteContextMenu, 
                      Source={StaticResource LocalizedStrings}}" Tap="DeleteProject_OnTap" LostFocus="DeleteProject_OnLostFocus"/>
                     </toolkit:ContextMenu>
@@ -40,42 +40,24 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot представляет корневую сетку, где размещается все содержимое страницы-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel содержит имя приложения-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
-            <TextBlock Text="WAREHOUSE OF MUSIC" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
-                       HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Foreground="{StaticResource PhoneAccentBrush}"/>
-        </StackPanel>
-
-        <!--ProjectControlPanel — управление проектом-->
-        <Grid x:Name="ProjectControlPanel" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="6*"/>
-            </Grid.RowDefinitions>
-
-            <!--Создание нового проекта-->
-            <TextBox x:Name="CreateProjectTextBox" Grid.Row="0" FontSize="{StaticResource PhoneFontSizeLarge}" 
-                     BorderBrush="{StaticResource PhoneBorderBrush}" Text="{Binding Path=LocalizedResources.CreateProject, 
-                     Source={StaticResource LocalizedStrings}}" TextAlignment="Center" KeyUp="CreateProjectTextBox_OnKeyUp"
-                     LostFocus="CreateProjectTextBox_LostFocus" GotFocus="CreateProjectTextBox_GotFocus"/>
-            <!--Список проектов-->
-            <ListBox 
-                        x:Name="ExistingProjextsListBox" ItemsSource="{Binding ProjectsList}" 
-                        Margin="24 12" Grid.Row="1"
-                        ItemTemplate="{StaticResource ToDoListBoxProjectsTemplate}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </Grid>
+        <TextBlock Grid.Row="0" Text="WAREHOUSE OF MUSIC" Style="{StaticResource PhoneTextNormalStyle}" 
+                   FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                   HorizontalAlignment="Center"  Foreground="{StaticResource PhoneAccentBrush}"/>
+        <ListBox x:Name="ExistingProjextsListBox" Margin="12" Grid.Row="1"
+                 ItemsSource="{Binding ProjectsList}" 
+                 ItemTemplate="{StaticResource ToDoListBoxProjectsTemplate}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
