@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using WarehouseOfMusic.Resources;
+
 namespace WarehouseOfMusic.ViewModels
 {
     using System.Collections.ObjectModel;
@@ -110,10 +112,30 @@ namespace WarehouseOfMusic.ViewModels
             {
                 Name = projectName
             };
-
             this._toDoDb.Projects.InsertOnSubmit(newProject);
             this._toDoDb.SubmitChanges();
             this._projectsList.Add(newProject);
+
+            var trackName = AppResources.TrackString + " 1";
+            var newTrack = new ToDoTrack
+            {
+                Name = trackName,
+                ProjectRef = newProject
+            };
+            this._toDoDb.Tracks.InsertOnSubmit(newTrack);
+            this._toDoDb.SubmitChanges();
+            newProject.Tracks.Add(newTrack);
+
+            var sample = new ToDoSample
+            {
+                InitialTact = 1,
+                Size = 4,
+                TrackRef = newTrack
+            };
+            this._toDoDb.Samples.InsertOnSubmit(sample);
+            this._toDoDb.SubmitChanges();
+            newTrack.Samples.Add(sample);
+
             return newProject;
         }
 

@@ -68,7 +68,6 @@ namespace WarehouseOfMusic.ViewModels
             {
                 trackNumber = this._currentProject.Tracks.Count + 1;
             }
-
             var trackName = AppResources.TrackString + " " + trackNumber;
 
             var newTrack = new ToDoTrack
@@ -76,7 +75,6 @@ namespace WarehouseOfMusic.ViewModels
                 Name = trackName,
                 ProjectRef = this._currentProject
             };
-
             this._toDoDb.Tracks.InsertOnSubmit(newTrack);
             this._toDoDb.SubmitChanges();
             this._currentProject.Tracks.Add(newTrack);
@@ -87,10 +85,9 @@ namespace WarehouseOfMusic.ViewModels
                 Size = 4,
                 TrackRef = newTrack
             };
-
             this._toDoDb.Samples.InsertOnSubmit(sample);
             this._toDoDb.SubmitChanges();
-            this._currentProject.Tracks.First(x => x.Id == newTrack.Id).Samples.Add(sample);
+            newTrack.Samples.Add(sample);
         }
 
         /// <summary>
