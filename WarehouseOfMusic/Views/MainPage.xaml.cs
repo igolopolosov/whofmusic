@@ -201,15 +201,15 @@ namespace WarehouseOfMusic.Views
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
-            var addButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.png", UriKind.Relative))
+            var createProjectButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.png", UriKind.Relative))
             {
-                Text = AppResources.AppBarAddTrack,
+                Text = AppResources.AppBarCreateProject,
             };
-            addButton.Click += this.AddTrackButton_Click;
-            this.ApplicationBar.Buttons.Add(addButton);
+            createProjectButton.Click += this.CreateProjectButton_Click;
+            this.ApplicationBar.Buttons.Add(createProjectButton);
         }
 
-        private void AddTrackButton_Click(object sender, EventArgs e)
+        private void CreateProjectButton_Click(object sender, EventArgs e)
         {
             ShowInputPromt(-1);
         }

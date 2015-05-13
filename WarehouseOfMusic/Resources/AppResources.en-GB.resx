@@ -195,4 +195,7 @@
   <data name="RenameProject" xml:space="preserve">
     <value>RENAME PROJECT</value>
   </data>
+  <data name="AppBarCreateProject" xml:space="preserve">
+    <value>create project</value>
+  </data>
 </root>

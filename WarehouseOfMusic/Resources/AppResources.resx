@@ -120,6 +120,9 @@
   <data name="AppBarAddTrack" xml:space="preserve">
     <value>добавить дорожку</value>
   </data>
+  <data name="AppBarCreateProject" xml:space="preserve">
+    <value>создать проект</value>
+  </data>
   <data name="AppBarHelp" xml:space="preserve">
     <value>справка</value>
   </data>

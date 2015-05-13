@@ -70,6 +70,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на создать проект.
+        /// </summary>
+        public static string AppBarCreateProject {
+            get {
+                return ResourceManager.GetString("AppBarCreateProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на справка.
         /// </summary>
         public static string AppBarHelp {
