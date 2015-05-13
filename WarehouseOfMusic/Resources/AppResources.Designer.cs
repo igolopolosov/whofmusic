@@ -178,7 +178,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на пожалуйста, задайте имя.
+        ///   Ищет локализованную строку, похожую на Пожалуйста, задайте имя..
         /// </summary>
         public static string ErrorEmptyName {
             get {
@@ -201,6 +201,24 @@ namespace WarehouseOfMusic.Resources {
         public static string LightThemeListBoxItem {
             get {
                 return ResourceManager.GetString("LightThemeListBoxItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить проект?.
+        /// </summary>
+        public static string MessageDeleteProject {
+            get {
+                return ResourceManager.GetString("MessageDeleteProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить дорожку?.
+        /// </summary>
+        public static string MessageDeleteTrack {
+            get {
+                return ResourceManager.GetString("MessageDeleteTrack", resourceCulture);
             }
         }
         

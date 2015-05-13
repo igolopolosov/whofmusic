@@ -81,10 +81,9 @@ namespace WarehouseOfMusic.Views
         /// Show dialog to create or rename project
         /// </summary>
         /// <param name="trackId">-1 = for create project dialog, n - rename project dialog </param>
-        private void ShowInputPromt(int trackId)
+        private void ShowRenameDialog()
         {
-            this._viewModel.OnRenameTrackId = trackId;
-            var trackName = this._viewModel.CurrentProject.Tracks.FirstOrDefault(x => x.Id == trackId).Name;
+            var trackName = _viewModel.OnRenameTrack.Name;
             var inputPrompt = new InputPromptOveride()
             {
                 IsCancelVisible = true,
@@ -98,6 +97,9 @@ namespace WarehouseOfMusic.Views
             inputPrompt.Show();
         }
 
+        /// <summary>
+        /// Show or hide 'empty name' error message
+        /// </summary>
         void inputPrompt_LostFocus(object sender, RoutedEventArgs e)
         {
             var input = sender as InputPrompt;
@@ -105,6 +107,9 @@ namespace WarehouseOfMusic.Views
             input.Message = input.Value == string.Empty ? AppResources.ErrorEmptyName : string.Empty;
         }
 
+        /// <summary>
+        /// Detect the end of input text
+        /// </summary>
         private void InputPrompt_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
@@ -117,9 +122,28 @@ namespace WarehouseOfMusic.Views
         {
             var input = sender as InputPrompt;
             if (input == null) return;
-            if (e.Result == null) return;
-            this._viewModel.RenameTrackTo(input.Value);
-            this._viewModel.OnRenameTrackId = -1;
+            if (e.PopUpResult == PopUpResult.Ok) this._viewModel.RenameTrackTo(input.Value);
+            this._viewModel.OnRenameTrack = null;
+        }
+
+        /// <summary>
+        /// Show dialog to delete track
+        /// </summary>
+        private void ShowDeleteDialog()
+        {
+            var messagePrompt = new MessagePrompt()
+            {
+                IsCancelVisible = true,
+                Message = AppResources.MessageDeleteTrack
+            };
+            messagePrompt.Completed += MessagePromptOnCompleted;
+            messagePrompt.Show();
+        }
+
+        private void MessagePromptOnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            if (e.PopUpResult == PopUpResult.Ok) this._viewModel.DeleteTrack();
+            _viewModel.OnDeleteTrack = null;
         }
         #endregion
 
@@ -256,16 +280,16 @@ namespace WarehouseOfMusic.Views
         {
             var contextMenuItem = sender as MenuItem;
             if (contextMenuItem == null) return;
-            var chosenTrack = contextMenuItem.DataContext as ToDoTrack;
-            if (chosenTrack != null) ShowInputPromt(chosenTrack.Id);
+            _viewModel.OnRenameTrack = contextMenuItem.DataContext as ToDoTrack;
+            ShowRenameDialog();
         }
 
         private void DeleteProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var contextMenuItem = sender as MenuItem;
             if (contextMenuItem == null) return;
-            var chosenTrack = contextMenuItem.DataContext as ToDoTrack;
-            this._viewModel.DeleteTrack(chosenTrack);
+            this._viewModel.OnDeleteTrack = contextMenuItem.DataContext as ToDoTrack;
+            ShowDeleteDialog();
         }
         #endregion
     }

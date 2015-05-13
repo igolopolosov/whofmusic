@@ -61,18 +61,17 @@ namespace WarehouseOfMusic.Views
         }
         #endregion
 
-        #region Create and rename dialogs
+        #region Create, rename and delete dialogs
 
         /// <summary>
         /// Show dialog to create or rename project
         /// </summary>
         /// <param name="projectId">-1 = for create project dialog, n - rename project dialog </param>
-        private void ShowInputPromt(int projectId)
+        private void ShowRenameDialog()
         {
-            this._viewModel.OnRenameProjectId = projectId;
-            var projectName = projectId == -1 ? string.Empty
-                : this._viewModel.ProjectsList.FirstOrDefault(x => x.Id == projectId).Name;
-            var inputPromptTitle = projectId == -1 ? AppResources.CreateProject : AppResources.RenameProject;
+            var projectName = _viewModel.OnRenameProject == null ? string.Empty
+                : _viewModel.OnRenameProject.Name;
+            var inputPromptTitle = _viewModel.OnRenameProject == null ? AppResources.CreateProject : AppResources.RenameProject;
             var inputPrompt = new InputPromptOveride()
             {
                 IsCancelVisible = true,
@@ -86,6 +85,9 @@ namespace WarehouseOfMusic.Views
             inputPrompt.Show();
         }
 
+        /// <summary>
+        /// Show or hide 'empty name' error message
+        /// </summary>
         void inputPrompt_LostFocus(object sender, RoutedEventArgs e)
         {
             var input = sender as InputPrompt;
@@ -93,6 +95,9 @@ namespace WarehouseOfMusic.Views
             input.Message = input.Value == string.Empty ? AppResources.ErrorEmptyName : string.Empty;
         }
 
+        /// <summary>
+        /// Detect the end of input text
+        /// </summary>
         private void InputPrompt_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
@@ -105,19 +110,42 @@ namespace WarehouseOfMusic.Views
         {
             var input = sender as InputPrompt;
             if (input == null) return;
-            if (e.Result == null) return;
-            if (this._viewModel.OnRenameProjectId == -1)
+            if (e.PopUpResult == PopUpResult.Ok)
             {
-                var newProject = this._viewModel.CreateProject(input.Value);
-                IsoSettingsManager.SetCurrentProject(newProject.Id);
-                NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative));
+                if (_viewModel.OnRenameProject == null)
+                {
+                    var newProject = this._viewModel.CreateProject(input.Value);
+                    IsoSettingsManager.SetCurrentProject(newProject.Id);
+                    NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    this._viewModel.RenameProjectTo(input.Value);
+                }
             }
-            else
-            {
-                this._viewModel.RenameProjectTo(input.Value);
-                this._viewModel.OnRenameProjectId = -1;
-            }
+            _viewModel.OnRenameProject = null;
         }
+
+        /// <summary>
+        /// Show dialog to delete project
+        /// </summary>
+        private void ShowDeleteDialog()
+        {
+            var messagePrompt = new MessagePrompt()
+            {
+                IsCancelVisible = true,
+                Message = AppResources.MessageDeleteProject
+            };
+            messagePrompt.Completed += MessagePromptOnCompleted;
+            messagePrompt.Show();
+        }
+
+        private void MessagePromptOnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            if (e.PopUpResult == PopUpResult.Ok) this._viewModel.DeleteProject();
+            _viewModel.OnDeleteProject = null;
+        }
+
         #endregion
 
         #region Manipulations with project
@@ -130,7 +158,6 @@ namespace WarehouseOfMusic.Views
         {
             var grid = sender as Grid;
             if (grid == null) return;
-
             var chosenProject = grid.DataContext as ToDoProject;
             if (chosenProject == null) return;
             IsoSettingsManager.SetCurrentProject(chosenProject.Id);
@@ -144,8 +171,8 @@ namespace WarehouseOfMusic.Views
         {
             var contextMenuItem = sender as MenuItem;
             if (contextMenuItem == null) return;
-            var chosenProject = contextMenuItem.DataContext as ToDoProject;
-            if (chosenProject != null) ShowInputPromt(chosenProject.Id);
+            _viewModel.OnRenameProject = contextMenuItem.DataContext as ToDoProject;
+            ShowRenameDialog();
         }
 
         /// <summary>
@@ -154,10 +181,9 @@ namespace WarehouseOfMusic.Views
         private void DeleteProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var contextMenuItem = sender as MenuItem;
-
             if (contextMenuItem == null) return;
-            var chosenProject = contextMenuItem.DataContext as ToDoProject;
-            this._viewModel.DeleteProject(chosenProject);
+            _viewModel.OnDeleteProject = contextMenuItem.DataContext as ToDoProject;
+            ShowDeleteDialog();
         }
         #endregion
 
@@ -197,7 +223,7 @@ namespace WarehouseOfMusic.Views
 
         private void CreateProjectButton_Click(object sender, EventArgs e)
         {
-            ShowInputPromt(-1);
+            ShowRenameDialog();
         }
 
         #endregion

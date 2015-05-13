@@ -178,7 +178,7 @@
     <value>stop</value>
   </data>
   <data name="ErrorEmptyName" xml:space="preserve">
-    <value>please, give a name</value>
+    <value>Please, give a name.</value>
   </data>
   <data name="AppBarPause" xml:space="preserve">
     <value>pause</value>
@@ -200,5 +200,11 @@
   </data>
   <data name="RenameTrack" xml:space="preserve">
     <value>RENAME TRACK</value>
+  </data>
+  <data name="MessageDeleteProject" xml:space="preserve">
+    <value>Are you sure you want to delete the project?</value>
+  </data>
+  <data name="MessageDeleteTrack" xml:space="preserve">
+    <value>Are you sure you want to delete the track?</value>
   </data>
 </root>

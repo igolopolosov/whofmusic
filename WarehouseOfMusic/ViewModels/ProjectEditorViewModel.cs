@@ -27,9 +27,14 @@ namespace WarehouseOfMusic.ViewModels
         private ToDoProject _currentProject;
 
         /// <summary>
-        /// Id of track that must be renamed. If the value is -1, there is no track to rename.
+        /// Track that must be deleted
         /// </summary>
-        private int _onRenameTrackId = -1;
+        private ToDoTrack _onDeleteTrack;
+        
+        /// <summary>
+        /// Track that must be renamed
+        /// </summary>
+        private ToDoTrack _onRenameTrack;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorViewModel" /> class.
@@ -64,19 +69,36 @@ namespace WarehouseOfMusic.ViewModels
         }
 
         /// <summary>
-        /// Gets or sets id of track on rename
+        /// Gets or sets track on delete
         /// </summary>
-        public int OnRenameTrackId
+        public ToDoTrack OnDeleteTrack
         {
             get
             {
-                return this._onRenameTrackId;
+                return this._onDeleteTrack;
             }
 
             set
             {
-                this._onRenameTrackId = value;
-                this.NotifyPropertyChanged("OnRenameTrackId");
+                this._onDeleteTrack = value;
+                this.NotifyPropertyChanged("OnDeleteTrack");
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets track on rename
+        /// </summary>
+        public ToDoTrack OnRenameTrack
+        {
+            get
+            {
+                return this._onRenameTrack;
+            }
+
+            set
+            {
+                this._onRenameTrack = value;
+                this.NotifyPropertyChanged("OnRenameTrack");
             }
         }
 
@@ -116,9 +138,9 @@ namespace WarehouseOfMusic.ViewModels
         /// Remove a track from the database and collections.
         /// </summary>
         /// <param name="trackForDelete">Track on removing</param>
-        public void DeleteTrack(ToDoTrack trackForDelete)
+        public void DeleteTrack()
         {
-            foreach (var sample in this._currentProject.Tracks.First(x => x.Id == trackForDelete.Id).Samples)
+            foreach (var sample in _onDeleteTrack.Samples)
             {
                 foreach (var note in sample.Notes)
                 {
@@ -127,8 +149,8 @@ namespace WarehouseOfMusic.ViewModels
                 this._toDoDb.Samples.DeleteOnSubmit(sample);
             }
 
-            this._currentProject.Tracks.Remove(trackForDelete);
-            this._toDoDb.Tracks.DeleteOnSubmit(trackForDelete);
+            this._currentProject.Tracks.Remove(_onDeleteTrack);
+            this._toDoDb.Tracks.DeleteOnSubmit(_onDeleteTrack);
             this._toDoDb.SubmitChanges();
         }
 
@@ -147,11 +169,7 @@ namespace WarehouseOfMusic.ViewModels
         /// <param name="newName">New name of track</param>
         public void RenameTrackTo(string newName)
         {
-            var onRenameTrack = (from prj in this.CurrentProject.Tracks
-                                   where prj.Id == this._onRenameTrackId
-                                   select prj).First();
-
-            onRenameTrack.Name = newName;
+            _onRenameTrack.Name = newName;
             this._toDoDb.SubmitChanges();
         }
 

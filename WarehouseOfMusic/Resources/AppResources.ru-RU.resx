@@ -157,13 +157,19 @@
     <value>удалить</value>
   </data>
   <data name="ErrorEmptyName" xml:space="preserve">
-    <value>пожалуйста, задайте имя</value>
+    <value>Пожалуйста, задайте имя.</value>
   </data>
   <data name="LanguageTextBlockText" xml:space="preserve">
     <value>язык</value>
   </data>
   <data name="LightThemeListBoxItem" xml:space="preserve">
     <value>Светлая</value>
+  </data>
+  <data name="MessageDeleteProject" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить проект?</value>
+  </data>
+  <data name="MessageDeleteTrack" xml:space="preserve">
+    <value>Вы уверены, что хотите удалить дорожку?</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>

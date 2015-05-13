@@ -24,9 +24,14 @@ namespace WarehouseOfMusic.ViewModels
         private readonly ToDoDataContext _toDoDb;
 
         /// <summary>
-        /// Project that must be renamed. If the value is -1, there is no project to rename.
+        /// Project that must be deleted
         /// </summary>
-        private int _onRenameProjectId = -1;
+        private ToDoProject _onDeleteProject;
+
+        /// <summary>
+        /// Project that must be renamed
+        /// </summary>
+        private ToDoProject _onRenameProject;
 
         /// <summary>
         /// A list of all projects
@@ -49,19 +54,36 @@ namespace WarehouseOfMusic.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Gets or sets id of project on rename
+        /// Gets or sets project on rename
         /// </summary>
-        public int OnRenameProjectId
+        public ToDoProject OnRenameProject
         {
             get
             {
-                return this._onRenameProjectId;
+                return this._onRenameProject;
             }
 
             set
             {
-                this._onRenameProjectId = value;
-                this.NotifyPropertyChanged("OnRenameProjectId");
+                this._onRenameProject = value;
+                this.NotifyPropertyChanged("OnRenameProject");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets project on delete
+        /// </summary>
+        public ToDoProject OnDeleteProject
+        {
+            get
+            {
+                return this._onDeleteProject;
+            }
+
+            set
+            {
+                this._onDeleteProject = value;
+                this.NotifyPropertyChanged("OnDeleteProject");
             }
         }
 
@@ -142,10 +164,9 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Remove project and data linked with him from collections and database.
         /// </summary>
-        /// <param name="projectForDelete">Project on removing</param>
-        internal void DeleteProject(ToDoProject projectForDelete)
+        internal void DeleteProject()
         {
-            foreach (var track in projectForDelete.Tracks)
+            foreach (var track in _onDeleteProject.Tracks)
             {
                 foreach (var sample in track.Samples)
                 {
@@ -158,8 +179,8 @@ namespace WarehouseOfMusic.ViewModels
                 this._toDoDb.Tracks.DeleteOnSubmit(track);
             }
 
-            this._projectsList.Remove(projectForDelete);
-            this._toDoDb.Projects.DeleteOnSubmit(projectForDelete);
+            this._projectsList.Remove(_onDeleteProject);
+            this._toDoDb.Projects.DeleteOnSubmit(_onDeleteProject);
             this._toDoDb.SubmitChanges();
         }
 
@@ -169,11 +190,7 @@ namespace WarehouseOfMusic.ViewModels
         /// <param name="newName">New name of the project</param>
         internal void RenameProjectTo(string newName)
         {
-            var onRenameProject = (from prj in this._projectsList
-                                   where prj.Id == this._onRenameProjectId
-                                   select prj).First();
-
-            onRenameProject.Name = newName;
+            _onRenameProject.Name = newName;
             this._toDoDb.SubmitChanges();
         }
 
