@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -36,6 +37,15 @@
                           Checked="SoloCheckBox_OnChecked"></CheckBox>
                 <CheckBox x:Name="MuteCheckBox" Grid.Column="3" IsChecked="{Binding Mute, Mode=TwoWay}"
                           Checked="MuteCheckBox_OnChecked"></CheckBox>
+
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu">
+                        <toolkit:MenuItem Header="{Binding Path=LocalizedResources.RenameContextMenu, 
+                     Source={StaticResource LocalizedStrings}}" Tap="RenameProject_OnTap"/>
+                        <toolkit:MenuItem Header="{Binding Path=LocalizedResources.DeleteContextMenu, 
+                     Source={StaticResource LocalizedStrings}}" Tap="DeleteProject_OnTap"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>

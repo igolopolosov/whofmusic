@@ -4,14 +4,18 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+
 namespace WarehouseOfMusic.Views
 {
     using System;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
+    using Coding4Fun.Toolkit.Controls;
     using Managers;
     using Models;
     using Resources;
@@ -70,16 +74,52 @@ namespace WarehouseOfMusic.Views
             _viewModel.SaveChangesToDb();
         }
         #endregion
+        
+        #region Rename dialog
 
-        #region Track editing(add, delete)
         /// <summary>
-        /// Adding new track
+        /// Show dialog to create or rename project
         /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">On click</param>
-        private void AddTrackButton_Click(object sender, EventArgs e)
+        /// <param name="trackId">-1 = for create project dialog, n - rename project dialog </param>
+        private void ShowInputPromt(int trackId)
         {
-            this._viewModel.AddTrack();
+            this._viewModel.OnRenameTrackId = trackId;
+            var trackName = this._viewModel.CurrentProject.Tracks.FirstOrDefault(x => x.Id == trackId).Name;
+            var inputPrompt = new InputPromptOveride()
+            {
+                IsCancelVisible = true,
+                IsSubmitOnEnterKey = false,
+                Title = AppResources.RenameTrack,
+                Value = trackName
+            };
+            inputPrompt.LostFocus += inputPrompt_LostFocus;
+            inputPrompt.KeyUp += InputPrompt_KeyUp;
+            inputPrompt.Completed += InputPromptOnCompleted;
+            inputPrompt.Show();
+        }
+
+        void inputPrompt_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            input.Message = input.Value == string.Empty ? AppResources.ErrorEmptyName : string.Empty;
+        }
+
+        private void InputPrompt_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            input.Focus();
+        }
+
+        private void InputPromptOnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            if (e.Result == null) return;
+            this._viewModel.RenameTrackTo(input.Value);
+            this._viewModel.OnRenameTrackId = -1;
         }
         #endregion
 
@@ -170,21 +210,6 @@ namespace WarehouseOfMusic.Views
         }
         #endregion
 
-        /// <summary>
-        /// Chose project for editing.
-        /// </summary>
-        /// <param name="sender">Project item displayed like a list box item</param>
-        /// <param name="e">One tap</param>
-        private void TrackListBoxItem_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            var grid = sender as TextBlock;
-            if (grid == null) return;
-            var chosenTrack = grid.DataContext as ToDoTrack;
-            if (chosenTrack == null) return;
-            IsoSettingsManager.SetCurrentTrack(chosenTrack.Id);
-            NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
-        }
-
         #region Track Mode
         private void SoloCheckBox_OnChecked(object sender, RoutedEventArgs e)
         {
@@ -200,6 +225,47 @@ namespace WarehouseOfMusic.Views
             if (checkBox == null) return;
             var track = checkBox.DataContext as ToDoTrack;
             if (track != null) track.Solo = false;
+        }
+        #endregion
+
+        #region Manipulations with track
+        /// <summary>
+        /// Adding new track
+        /// </summary>
+        /// <param name="sender">Some object</param>
+        /// <param name="e">On click</param>
+        private void AddTrackButton_Click(object sender, EventArgs e)
+        {
+            this._viewModel.AddTrack();
+        }
+
+        /// <summary>
+        /// Chose project for editing
+        /// </summary>
+        private void TrackListBoxItem_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var grid = sender as TextBlock;
+            if (grid == null) return;
+            var chosenTrack = grid.DataContext as ToDoTrack;
+            if (chosenTrack == null) return;
+            IsoSettingsManager.SetCurrentTrack(chosenTrack.Id);
+            NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
+        }
+
+        private void RenameProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var contextMenuItem = sender as MenuItem;
+            if (contextMenuItem == null) return;
+            var chosenTrack = contextMenuItem.DataContext as ToDoTrack;
+            if (chosenTrack != null) ShowInputPromt(chosenTrack.Id);
+        }
+
+        private void DeleteProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var contextMenuItem = sender as MenuItem;
+            if (contextMenuItem == null) return;
+            var chosenTrack = contextMenuItem.DataContext as ToDoTrack;
+            this._viewModel.DeleteTrack(chosenTrack);
         }
         #endregion
     }

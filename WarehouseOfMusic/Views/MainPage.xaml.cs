@@ -61,11 +61,12 @@ namespace WarehouseOfMusic.Views
         }
         #endregion
 
-        #region CreateProjectButton events
+        #region Create and rename dialogs
 
         /// <summary>
-        /// Informs the user about error
+        /// Show dialog to create or rename project
         /// </summary>
+        /// <param name="projectId">-1 = for create project dialog, n - rename project dialog </param>
         private void ShowInputPromt(int projectId)
         {
             this._viewModel.OnRenameProjectId = projectId;
@@ -104,7 +105,7 @@ namespace WarehouseOfMusic.Views
         {
             var input = sender as InputPrompt;
             if (input == null) return;
-            
+            if (e.Result == null) return;
             if (this._viewModel.OnRenameProjectId == -1)
             {
                 var newProject = this._viewModel.CreateProject(input.Value);
@@ -115,12 +116,11 @@ namespace WarehouseOfMusic.Views
             {
                 this._viewModel.RenameProjectTo(input.Value);
                 this._viewModel.OnRenameProjectId = -1;
-                this.Focus();
             }
         }
         #endregion
 
-        #region Manipulation with projects from list
+        #region Manipulations with project
         /// <summary>
         /// Chose project for editing.
         /// </summary>
@@ -138,10 +138,8 @@ namespace WarehouseOfMusic.Views
         }
 
         /// <summary>
-        /// Rename project
+        /// Shows rename project dialog
         /// </summary>
-        /// <param name="sender">Project item displayed like a list box item</param>
-        /// <param name="e">On tap</param>
         private void RenameProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var contextMenuItem = sender as MenuItem;
@@ -151,10 +149,8 @@ namespace WarehouseOfMusic.Views
         }
 
         /// <summary>
-        /// Delete project
+        /// Shows delete project dialog
         /// </summary>
-        /// <param name="sender">Project item displayed like a list box item</param>
-        /// <param name="e">On tap</param>
         private void DeleteProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var contextMenuItem = sender as MenuItem;
@@ -162,16 +158,6 @@ namespace WarehouseOfMusic.Views
             if (contextMenuItem == null) return;
             var chosenProject = contextMenuItem.DataContext as ToDoProject;
             this._viewModel.DeleteProject(chosenProject);
-        }
-
-        /// <summary>
-        /// Rightly set focus after tap on delete
-        /// </summary>
-        /// <param name="sender">Delete item</param>
-        /// <param name="e">On lost focus</param>
-        private void DeleteProject_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            this.Focus();
         }
         #endregion
 

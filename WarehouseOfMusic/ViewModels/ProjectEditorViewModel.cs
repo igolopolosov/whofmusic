@@ -27,6 +27,11 @@ namespace WarehouseOfMusic.ViewModels
         private ToDoProject _currentProject;
 
         /// <summary>
+        /// Id of track that must be renamed. If the value is -1, there is no track to rename.
+        /// </summary>
+        private int _onRenameTrackId = -1;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorViewModel" /> class.
         /// Class constructor, create the data context object.
         /// </summary>
@@ -55,6 +60,23 @@ namespace WarehouseOfMusic.ViewModels
             {
                 this._currentProject = value;
                 this.NotifyPropertyChanged("CurrentProject");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets id of track on rename
+        /// </summary>
+        public int OnRenameTrackId
+        {
+            get
+            {
+                return this._onRenameTrackId;
+            }
+
+            set
+            {
+                this._onRenameTrackId = value;
+                this.NotifyPropertyChanged("OnRenameTrackId");
             }
         }
 
@@ -120,6 +142,20 @@ namespace WarehouseOfMusic.ViewModels
         }
 
         /// <summary>
+        /// Rename track
+        /// </summary>
+        /// <param name="newName">New name of track</param>
+        public void RenameTrackTo(string newName)
+        {
+            var onRenameTrack = (from prj in this.CurrentProject.Tracks
+                                   where prj.Id == this._onRenameTrackId
+                                   select prj).First();
+
+            onRenameTrack.Name = newName;
+            this._toDoDb.SubmitChanges();
+        }
+
+        /// <summary>
         /// Write changes in the data context to the database.
         /// </summary>
         public void SaveChangesToDb()
@@ -141,5 +177,7 @@ namespace WarehouseOfMusic.ViewModels
             }
         }
         #endregion
+
+        
     }
 }

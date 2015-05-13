@@ -32,7 +32,7 @@
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.RenameContextMenu, 
                      Source={StaticResource LocalizedStrings}}" Tap="RenameProject_OnTap"/>
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.DeleteContextMenu, 
-                     Source={StaticResource LocalizedStrings}}" Tap="DeleteProject_OnTap" LostFocus="DeleteProject_OnLostFocus"/>
+                     Source={StaticResource LocalizedStrings}}" Tap="DeleteProject_OnTap"/>
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
             </Grid>

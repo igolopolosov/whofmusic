@@ -178,7 +178,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на пожалуйста, задайте имя проекта.
+        ///   Ищет локализованную строку, похожую на пожалуйста, задайте имя.
         /// </summary>
         public static string ErrorEmptyName {
             get {
@@ -237,6 +237,15 @@ namespace WarehouseOfMusic.Resources {
         public static string RenameProject {
             get {
                 return ResourceManager.GetString("RenameProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ПЕРЕИМЕНОВАТЬ ДОРОЖКУ.
+        /// </summary>
+        public static string RenameTrack {
+            get {
+                return ResourceManager.GetString("RenameTrack", resourceCulture);
             }
         }
         
