@@ -62,6 +62,17 @@ namespace WarehouseOfMusic.ViewModels
         /// </summary>
         public void AddSample()
         {
+            var lastSample = _currentTrack.Samples.LastOrDefault();
+            if (lastSample == null) return;
+            var sample = new ToDoSample
+            {
+                InitialTact = lastSample.InitialTact + lastSample.Size,
+                Size = 4,
+                TrackRef = _currentTrack
+            };
+            this._toDoDb.Samples.InsertOnSubmit(sample);
+            this._toDoDb.SubmitChanges();
+            _currentTrack.Samples.Add(sample);
         }
 
         /// <summary>

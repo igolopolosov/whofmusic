@@ -25,7 +25,7 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Number of first tact in the sample
         /// </summary>
-        private byte _initialTact;
+        private int _initialTact;
 
         /// <summary>
         /// Entity set for the collection side of the relationship.
@@ -95,7 +95,7 @@ namespace WarehouseOfMusic.Models
         /// Gets or sets number of first tact in the sample
         /// </summary>
         [Column]
-        public byte InitialTact
+        public int InitialTact
         {
             get
             {
@@ -132,6 +132,18 @@ namespace WarehouseOfMusic.Models
                     this._size = value;
                     this.NotifyPropertyChanged("Size");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Show title of sample
+        /// </summary>
+        public string Title
+        {
+            get
+            {
+                if (_size > 1) return _initialTact + " - " + (_initialTact + _size - 1);
+                return string.Empty + _initialTact;
             }
         }
 

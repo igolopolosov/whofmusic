@@ -207,4 +207,7 @@
   <data name="MessageDeleteTrack" xml:space="preserve">
     <value>Are you sure you want to delete the track?</value>
   </data>
+  <data name="AppBarAddSample" xml:space="preserve">
+    <value>add sample</value>
+  </data>
 </root>

@@ -16,11 +16,17 @@
 
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="SampleListSelectorTemplate">
-            <TextBlock Text="{Binding InitialTact}"
-                       FontSize="{StaticResource PhoneFontSizeLarge}"/>
+            <Grid Background="{StaticResource PhoneChromeBrush}"
+                  Margin="0,0,12,12">
+                <Image Source="../Assets/AppBar/appbar.control.play.png"
+                       VerticalAlignment="Top" HorizontalAlignment="Right"
+                       Margin="0,6,6,0" Width="40" Height="40"></Image>
+                <TextBlock Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMedium}"
+                           VerticalAlignment="Bottom" Margin="12,0,0,6"/>
+            </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
-    
+
     <Grid x:Name="LayoutRoot" Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -29,10 +35,10 @@
         <TextBlock Grid.Row="0" Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" 
                    FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                    HorizontalAlignment="Center"  Foreground="{StaticResource PhoneAccentBrush}"/>
-        <phone:LongListSelector Grid.Row="1" x:Name="SampleListSelector"
+        <phone:LongListSelector Grid.Row="1" x:Name="SampleListSelector" Margin="0, 12, 0, 0"
                         ItemsSource="{Binding CurrentTrack.Samples}"
                         ItemTemplate="{StaticResource SampleListSelectorTemplate}"
-                        LayoutMode="Grid" GridCellSize="100, 100">
+                        LayoutMode="Grid" GridCellSize="100, 100" Loaded="SampleListSelector_OnLoaded">
         </phone:LongListSelector>
     </Grid>
 

@@ -79,6 +79,14 @@ namespace WarehouseOfMusic.Views
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
+            var addButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarAddSample,
+            };
+            addButton.Click += this.AddSampleButton_Click;
+            this.ApplicationBar.Buttons.Add(addButton);
+
+            //// Add play button for player
             var playButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
             {
                 Text = AppResources.AppBarPlay,
@@ -93,6 +101,14 @@ namespace WarehouseOfMusic.Views
             };
             stopButton.Click += this.StopButton_OnClick;
             this.ApplicationBar.Buttons.Add(stopButton);
+        }
+
+        /// <summary>
+        /// Add new sample
+        /// </summary>
+        private void AddSampleButton_Click(object sender, EventArgs e)
+        {
+            this._viewModel.AddSample();
         }
 
         /// <summary>
@@ -133,11 +149,20 @@ namespace WarehouseOfMusic.Views
         /// <param name="e">Click event</param>
         private void StopButton_OnClick(object sender, EventArgs e)
         {
-            var playPauseButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            var playPauseButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
             if (playPauseButton == null) return;
             playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
             playPauseButton.Text = AppResources.AppBarPlay;
         }
         #endregion
+
+        private void SampleListSelector_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var list = sender as LongListSelector;
+            if (list == null) return;
+            var cellSize = list.ActualWidth/4 - 4;
+            list.GridCellSize = new Size(cellSize, cellSize);
+
+        }
     }
 }
