@@ -273,7 +273,7 @@ namespace WarehouseOfMusic.Views
             var chosenTrack = grid.DataContext as ToDoTrack;
             if (chosenTrack == null) return;
             IsoSettingsManager.SetCurrentTrack(chosenTrack.Id);
-            NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
+            NavigationService.Navigate(new Uri("/Views/TrackEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
         }
 
         private void RenameProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)

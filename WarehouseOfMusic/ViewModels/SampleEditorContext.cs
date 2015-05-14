@@ -97,12 +97,10 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Query database and load the information for sample
         /// </summary>
-        /// <param name="trackId">ID of loading track</param>
-        public void LoadSampleFromDatabase(int trackId)
+        /// <param name="trackId">ID of loading sample</param>
+        public void LoadSampleFromDatabase(int sampleId)
         {
-            var currentTrack = this._toDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
-            if (currentTrack != null) this._currentSample = currentTrack.Samples.FirstOrDefault();
-
+            this._currentSample = this._toDoDb.Samples.FirstOrDefault(x => x.Id == sampleId);
             Tacts = new ObservableCollection<PianoRollContext>();
             if (_currentSample == null) return;
             for (var i = _currentSample.InitialTact; i < _currentSample.InitialTact + _currentSample.Size; i++)

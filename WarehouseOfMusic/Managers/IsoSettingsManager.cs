@@ -17,6 +17,14 @@ namespace WarehouseOfMusic.Managers
             settings.Save();
         }
 
+        public static void SetCurrentSample(int sampleId)
+        {
+            var settings = IsolatedStorageSettings.ApplicationSettings;
+            if (settings.Contains("currentSampleId")) settings["currentTrackId"] = sampleId;
+            else settings.Add("currentSampleId", sampleId);
+            settings.Save();
+        }
+
         public static void SetCurrentTrack(int trackId)
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;
@@ -25,16 +33,22 @@ namespace WarehouseOfMusic.Managers
             settings.Save();
         }
 
-        public static object GetCurrentTrackId()
-        {
-            var settings = IsolatedStorageSettings.ApplicationSettings;
-            return settings.Contains("currentTrackId") ? settings["currentTrackId"] : null;
-        }
-
         public static object GetCurrentProjectId()
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;
             return settings.Contains("currentProjectId") ? settings["currentProjectId"] : null;
+        }
+
+        public static object GetCurrentSampleId()
+        {
+            var settings = IsolatedStorageSettings.ApplicationSettings;
+            return settings.Contains("currentSampleId") ? settings["currentSampleId"] : null;
+        }
+
+        public static object GetCurrentTrackId()
+        {
+            var settings = IsolatedStorageSettings.ApplicationSettings;
+            return settings.Contains("currentTrackId") ? settings["currentTrackId"] : null;
         }
     }
 }

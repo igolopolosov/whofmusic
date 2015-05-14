@@ -1,43 +1,37 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="TrackEditorPage.xaml.cs">
-//     Copyright (c) Igor Golopolosov. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using WarehouseOfMusic.Managers;
+using WarehouseOfMusic.Resources;
+using WarehouseOfMusic.ViewModels;
 
 namespace WarehouseOfMusic.Views
 {
-    using System;
-    using System.Windows.Navigation;
-    using Microsoft.Phone.Controls;
-    using Microsoft.Phone.Shell;
-    using Coding4Fun.Toolkit.Controls;
-    using Managers;
-    using Resources;
-    using ViewModels;
-
-    public partial class SampleEditorPage : PhoneApplicationPage
+    public partial class TrackEditorPage : PhoneApplicationPage
     {
         /// <summary>
         /// ViewModel for this page
         /// </summary>
-        private SampleEditorContext _viewModel;
+        private TrackEditorContext _viewModel;
 
         /// <summary>
         /// Manager of track 
         /// </summary>
         private PlayerManager _playerManager;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectEditorPage" /> class.
-        /// </summary>
-        public SampleEditorPage()
+        
+        public TrackEditorPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             this.BuildLocalizedAppBar();
         }
 
         #region Navigation control
-
         /// <summary>
         /// Called when the page is activated
         /// </summary>
@@ -52,16 +46,22 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void InitialiazeDataContext()
         {
-            this._viewModel = new SampleEditorContext(App.DbConnectionString);
-            this._viewModel.LoadSampleFromDatabase((int) IsoSettingsManager.GetCurrentSampleId());
+            this._viewModel = new TrackEditorContext(App.DbConnectionString);
+            this._viewModel.LoadTrackFromDatabase((int)IsoSettingsManager.GetCurrentTrackId());
             this.DataContext = this._viewModel;
-            this.PianoRoll.ItemsSource = this._viewModel.Tacts;
         }
 
+        /// <summary>
+        /// Called when the page is deactivated
+        /// </summary>
+        /// <param name="e">Navigation event</param>
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _viewModel.SaveChangesToDb();
+        }
         #endregion
 
         #region For application bar
-
         /// <summary>
         /// Build Localized application bar
         /// </summary>
@@ -79,20 +79,18 @@ namespace WarehouseOfMusic.Views
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
-            var playPauseButton =
-                new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
-                {
-                    Text = AppResources.AppBarPlay,
-                };
-            playPauseButton.Click += this.PlayPauseButton_OnClick;
-            this.ApplicationBar.Buttons.Add(playPauseButton);
+            var playButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarPlay,
+            };
+            playButton.Click += this.PlayButton_OnClick;
+            this.ApplicationBar.Buttons.Add(playButton);
 
             //// Add stop button for player
-            var stopButton =
-                new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.stop.png", UriKind.Relative))
-                {
-                    Text = AppResources.AppBarStop,
-                };
+            var stopButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.stop.png", UriKind.Relative))
+            {
+                Text = AppResources.AppBarStop,
+            };
             stopButton.Click += this.StopButton_OnClick;
             this.ApplicationBar.Buttons.Add(stopButton);
         }
@@ -110,10 +108,12 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// Play track
         /// </summary>
-        private void PlayPauseButton_OnClick(object sender, EventArgs e)
+        /// <param name="sender">Page with projects</param>
+        /// <param name="e">Click event</param>
+        private void PlayButton_OnClick(object sender, EventArgs e)
         {
             var button = sender as ApplicationBarIconButton;
-
+            if (button == null) return;
             if (button.Text == AppResources.AppBarPlay || button.Text == AppResources.AppBarResume)
             {
                 button.IconUri = new Uri("/Assets/AppBar/appbar.control.pause.png", UriKind.Relative);
@@ -134,28 +134,10 @@ namespace WarehouseOfMusic.Views
         private void StopButton_OnClick(object sender, EventArgs e)
         {
             var playPauseButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            if (playPauseButton == null) return;
             playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
             playPauseButton.Text = AppResources.AppBarPlay;
         }
-
-        #endregion
-
-        #region Pianoroll populating
-
-        private void PianoRoll_OnLoadedPivotItem(object sender, PivotItemEventArgs e)
-        {
-            var pianoRollPage = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
-            if (pianoRollPage == null) return;
-            pianoRollPage.Scroll();
-        }
-
-        private void PianoRoll_OnUnloadedPivotItem(object sender, PivotItemEventArgs e)
-        {
-            var pianoRollPage = e.Item.GetFirstLogicalChildByType<PianoRollPage>(true);
-            if (pianoRollPage == null) return;
-            pianoRollPage.SaveOffset();
-        }
-
         #endregion
     }
 }
