@@ -4,6 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System;
 using WarehouseOfMusic.Resources;
 
 namespace WarehouseOfMusic.ViewModels
@@ -132,7 +133,10 @@ namespace WarehouseOfMusic.ViewModels
         {
             var newProject = new ToDoProject()
             {
-                Name = projectName
+                Name = projectName,
+                CreationTime = DateTime.Now,
+                LastModificationTime = DateTime.Now,
+                Tempo = 120
             };
             this._toDoDb.Projects.InsertOnSubmit(newProject);
             this._toDoDb.SubmitChanges();

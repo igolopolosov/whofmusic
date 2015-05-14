@@ -97,6 +97,7 @@
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Converters\ColorToBrushConverter.cs" />
+    <Compile Include="Converters\TimePeriodsConverter.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="InputPromtOverride.cs" />
     <Compile Include="Models\ToDoSample.cs" />

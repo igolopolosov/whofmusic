@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using Microsoft.Phone.SecureElement;
+
 namespace WarehouseOfMusic.Models
 {
     using System.ComponentModel;
@@ -102,6 +104,30 @@ namespace WarehouseOfMusic.Models
                     this._duration = value;
                     this.NotifyPropertyChanged("Duration");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Caclculate tact in which note stops sound
+        /// </summary>
+        public int EndTact
+        {
+            get
+            {
+                if (_position + _duration > 15) return this._tact + 1;
+                return this._tact;
+            }
+        }
+
+        /// <summary>
+        /// Caclculate position in which note stops sound
+        /// </summary>
+        public int EndPosition
+        {
+            get
+            {
+                if (_position + _duration > 15) return _position + _duration - 16;
+                else return _position + _duration;
             }
         }
 

@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using WarehouseOfMusic.Managers;
+
 namespace WarehouseOfMusic
 {
     using System;
@@ -77,6 +79,9 @@ namespace WarehouseOfMusic
                     db.CreateDatabase();
                 }
             }
+
+            // Initialize common audiocontroller for app
+            PlayerManager.InitializeAudioController();
         }
 
         /// <summary>

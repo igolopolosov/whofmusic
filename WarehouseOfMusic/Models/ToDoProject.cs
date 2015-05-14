@@ -63,8 +63,6 @@ namespace WarehouseOfMusic.Models
             this._tracks = new EntitySet<ToDoTrack>(
                 new Action<ToDoTrack>(this.AttachToDoTrack),
                 new Action<ToDoTrack>(this.DetachToDoTrack));
-            this._creationTime = this._lastModificationTime = DateTime.Now;
-            this._tempo = 100;
         }
 
         /// <summary>

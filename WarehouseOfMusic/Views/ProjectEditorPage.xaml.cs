@@ -63,6 +63,7 @@ namespace WarehouseOfMusic.Views
             this._viewModel = new ProjectEditorViewModel(App.DbConnectionString);
             this._viewModel.LoadProjectFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentProjectId"));
             this.DataContext = this._viewModel;
+            _playerManager = new PlayerManager();
         }
 
         /// <summary>
@@ -212,6 +213,7 @@ namespace WarehouseOfMusic.Views
             {
                 button.IconUri = new Uri("/Assets/AppBar/appbar.control.pause.png", UriKind.Relative);
                 button.Text = AppResources.AppBarPause;
+                _playerManager.Play(_viewModel.CurrentProject.Tracks.FirstOrDefault());
             }
             else
             {
@@ -231,7 +233,9 @@ namespace WarehouseOfMusic.Views
             if (playPauseButton == null) return;
             playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
             playPauseButton.Text = AppResources.AppBarPlay;
+            _playerManager.Stop();
         }
+
         #endregion
 
         #region Track Mode
