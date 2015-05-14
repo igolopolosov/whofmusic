@@ -53,7 +53,7 @@ namespace WarehouseOfMusic.Views
         private void InitialiazeDataContext()
         {
             this._viewModel = new SampleEditorContext(App.DbConnectionString);
-            this._viewModel.LoadSampleFromDatabase((int) IsoSettingsManager.GetCurrentSampleId());
+            this._viewModel.LoadSampleFromDatabase((int) IsoSettingsManager.LoadRecord("CurrentSampleId"));
             this.DataContext = this._viewModel;
             this.PianoRoll.ItemsSource = this._viewModel.Tacts;
         }

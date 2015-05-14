@@ -115,7 +115,7 @@ namespace WarehouseOfMusic.Views
                 if (_viewModel.OnRenameProject == null)
                 {
                     var newProject = this._viewModel.CreateProject(input.Value);
-                    IsoSettingsManager.SetCurrentProject(newProject.Id);
+                    IsoSettingsManager.SaveRecord("CurrentProjectId", newProject.Id);
                     NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative));
                 }
                 else
@@ -160,7 +160,7 @@ namespace WarehouseOfMusic.Views
             if (grid == null) return;
             var chosenProject = grid.DataContext as ToDoProject;
             if (chosenProject == null) return;
-            IsoSettingsManager.SetCurrentProject(chosenProject.Id);
+            IsoSettingsManager.SaveRecord("CurrentProjectId", chosenProject.Id);
             NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative), chosenProject.Id);
         }
 

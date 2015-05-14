@@ -61,7 +61,7 @@ namespace WarehouseOfMusic.Views
         private void InitialiazeDataContext()
         {
             this._viewModel = new ProjectEditorViewModel(App.DbConnectionString);
-            this._viewModel.LoadProjectFromDatabase((int)IsoSettingsManager.GetCurrentProjectId());
+            this._viewModel.LoadProjectFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentProjectId"));
             this.DataContext = this._viewModel;
         }
 
@@ -272,7 +272,7 @@ namespace WarehouseOfMusic.Views
             if (grid == null) return;
             var chosenTrack = grid.DataContext as ToDoTrack;
             if (chosenTrack == null) return;
-            IsoSettingsManager.SetCurrentTrack(chosenTrack.Id);
+            IsoSettingsManager.SaveRecord("CurrentTrackId", chosenTrack.Id);
             NavigationService.Navigate(new Uri("/Views/TrackEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
         }
 

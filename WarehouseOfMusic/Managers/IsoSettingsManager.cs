@@ -9,46 +9,24 @@ namespace WarehouseOfMusic.Managers
 
     public static class IsoSettingsManager
     {
-        public static void SetCurrentProject(int projectId)
+        /// <summary>
+        /// Saves record to application settings
+        /// </summary>
+        public static void SaveRecord(string key, int value)
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;
-            if (settings.Contains("currentProjectId")) settings["currentProjectId"] = projectId;
-            else settings.Add("currentProjectId", projectId);
+            if (settings.Contains(key)) settings[key] = value;
+            else settings.Add(key, value);
             settings.Save();
         }
 
-        public static void SetCurrentSample(int sampleId)
+        /// <summary>
+        /// Load record from application settings
+        /// </summary>
+        public static object LoadRecord(string key)
         {
             var settings = IsolatedStorageSettings.ApplicationSettings;
-            if (settings.Contains("currentSampleId")) settings["currentTrackId"] = sampleId;
-            else settings.Add("currentSampleId", sampleId);
-            settings.Save();
-        }
-
-        public static void SetCurrentTrack(int trackId)
-        {
-            var settings = IsolatedStorageSettings.ApplicationSettings;
-            if (settings.Contains("currentTrackId")) settings["currentTrackId"] = trackId;
-            else settings.Add("currentTrackId", trackId);
-            settings.Save();
-        }
-
-        public static object GetCurrentProjectId()
-        {
-            var settings = IsolatedStorageSettings.ApplicationSettings;
-            return settings.Contains("currentProjectId") ? settings["currentProjectId"] : null;
-        }
-
-        public static object GetCurrentSampleId()
-        {
-            var settings = IsolatedStorageSettings.ApplicationSettings;
-            return settings.Contains("currentSampleId") ? settings["currentSampleId"] : null;
-        }
-
-        public static object GetCurrentTrackId()
-        {
-            var settings = IsolatedStorageSettings.ApplicationSettings;
-            return settings.Contains("currentTrackId") ? settings["currentTrackId"] : null;
+            return settings.Contains(key) ? settings[key] : null;
         }
     }
 }
