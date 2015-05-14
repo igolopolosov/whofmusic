@@ -8,8 +8,10 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WarehouseOfMusic.Managers;
+using WarehouseOfMusic.Models;
 using WarehouseOfMusic.Resources;
 using WarehouseOfMusic.ViewModels;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace WarehouseOfMusic.Views
 {
@@ -156,13 +158,30 @@ namespace WarehouseOfMusic.Views
         }
         #endregion
 
+        #region Manipulation around sample list
         private void SampleListSelector_OnLoaded(object sender, RoutedEventArgs e)
         {
             var list = sender as LongListSelector;
             if (list == null) return;
-            var cellSize = list.ActualWidth/4 - 4;
+            var cellSize = list.ActualWidth / 4 - 4;
             list.GridCellSize = new Size(cellSize, cellSize);
 
         }
+
+        /// <summary>
+        /// Chose sample for editing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SampleTitle_OnTap(object sender, GestureEventArgs e)
+        {
+            var title = sender as TextBlock;
+            if (title == null) return;
+            var chosenSample = title.DataContext as ToDoSample;
+            if (chosenSample == null) return;
+            IsoSettingsManager.SaveRecord("CurrentSampleId", chosenSample.Id);
+            NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative), chosenSample.Id);
+        } 
+        #endregion
     }
 }
