@@ -270,15 +270,15 @@ void Patch::Load(String^ container)
 
 		IPropertySet^ appSettings = appContainer->Values;
 
-		this->Oscillator1Waveform = LoadValue(appSettings, "Oscillator1Waveform", (int)WaveformType::Triangle);
+		this->Oscillator1Waveform = LoadValue(appSettings, "Oscillator1Waveform", (int)WaveformType::Square);
 		this->Oscillator2Waveform = LoadValue(appSettings, "Oscillator2Waveform", (int)WaveformType::Triangle);
 
 		this->Oscillator1Transpose = LoadValue(appSettings, "Oscillator1Transpose", 0);
 		this->Oscillator2Transpose = LoadValue(appSettings, "Oscillator2Transpose", 0);
 		this->Oscillator2FineTune = LoadValue(appSettings, "Oscillator2FineTune", 0.0);
 
-		this->Oscillator1Volume = LoadValue(appSettings, "Oscillator1Volume", 75.0);        // out of 100
-		this->Oscillator2Volume = LoadValue(appSettings, "Oscillator2Volume", 25.0);        // out of 100
+		this->Oscillator1Volume = LoadValue(appSettings, "Oscillator1Volume", 100.0);        // out of 100
+		this->Oscillator2Volume = LoadValue(appSettings, "Oscillator2Volume", 0);        // out of 100
 
 		this->FilterOn = LoadValue(appSettings, "FilterOn", false);
 		this->FilterCutoffFrequency = LoadValue(appSettings, "FilterCutoffFrequency", 1.0); // 1 octave
@@ -290,10 +290,10 @@ void Patch::Load(String^ container)
 		this->FilterSustain = LoadValue(appSettings, "FilterSustain", 50.0);                // half max
 		this->FilterRelease = LoadValue(appSettings, "FilterRelease", 3.0);                 // 1 sec
 
-		this->LoudnessAttack = LoadValue(appSettings, "LoudnessAttack", 2.0);               // 10**2 msec
-		this->LoudnessDecay = LoadValue(appSettings, "LoudnessDecay", 2.0);                 // 100 msec
+		this->LoudnessAttack = LoadValue(appSettings, "LoudnessAttack", 0.0);               // 10**2 msec
+		this->LoudnessDecay = LoadValue(appSettings, "LoudnessDecay", 0.0);                 // 100 msec
 		this->LoudnessSustain = LoadValue(appSettings, "LoudnessSustain", 50.0);            // half max
-		this->LoudnessRelease = LoadValue(appSettings, "LoudnessRelease", 3.0);             // 1 sec
+		this->LoudnessRelease = LoadValue(appSettings, "LoudnessRelease", 0.0);             // 1 sec
 	
 }
 

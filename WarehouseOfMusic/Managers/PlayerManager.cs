@@ -25,7 +25,7 @@ namespace WarehouseOfMusic.Managers
         /// <summary>
         /// Audio API 
         /// </summary>
-        private static List<AudioController> AudioControllers;
+        private static AudioController _audioController;
 
         /// <summary>
         /// Controls position in tact
@@ -67,10 +67,8 @@ namespace WarehouseOfMusic.Managers
         
         public static void InitializeAudioController()
         {
-            AudioControllers = new List<AudioController>();
-            var controller = new AudioController();
-            controller.CreatePatch();
-            AudioControllers.Add(controller);
+            _audioController = new AudioController();
+            _audioController.CreatePatch();
         }
 
         #endregion
@@ -81,12 +79,7 @@ namespace WarehouseOfMusic.Managers
         public void Play(ToDoTrack onPlayTrack)
         {
             _onPlayTracks = new List<ToDoTrack> { onPlayTrack };
-            
-            foreach (var controller in AudioControllers)
-            {
-                controller.Start();
-                controller.SetVolumeLevel(100);
-            }
+            _audioController.Start();
             CreateNoteList();
             var tempo = _onPlayTracks.First().ProjectRef.Tempo;
             _playerTimer = new Timer(StepCallback, null, 0, TimePeriodsConverter.GetStepPeriod(tempo));
@@ -94,6 +87,9 @@ namespace WarehouseOfMusic.Managers
             _tact = 1;
         }
 
+        /// <summary>
+        /// Creates list of notes from track
+        /// </summary>
         private void CreateNoteList()
         {
             _onPlayNotes = new Queue<ToDoNote>();
@@ -108,12 +104,26 @@ namespace WarehouseOfMusic.Managers
             }
         }
 
+        /// <summary>
+        /// One step of timer
+        /// </summary>
         private void StepCallback(object state)
         {
             if (_playedNotes.Count == 0 && _onPlayNotes.Count == 0)
             {
                 _playerTimer.Dispose();
                 return;
+            }
+
+            foreach (var note in _playedNotes.Where(note => note.EndTact == _tact && note.EndPosition == _position).ToList())
+            {
+                var keyArgs = new KeyPressedArgs()
+                {
+                    IsPressed = false,
+                    KeyNumber = note.MidiNumber
+                };
+                _audioController.KeyIsPressedChanged(this, keyArgs);
+                _playedNotes.Remove(note);
             }
             
             bool oneMoreTime;
@@ -126,30 +136,19 @@ namespace WarehouseOfMusic.Managers
                 {
                     _playedNotes.Add(_onPlayNotes.Peek());
                     _oneTimePlayNotes.Enqueue(_onPlayNotes.Dequeue());
-                    foreach (var note in _oneTimePlayNotes)
-                    {
-                        var keyArgs = new KeyPressedArgs()
-                        {
-                            IsPressed = true,
-                            KeyNumber = note.MidiNumber
-                        };
-                        AudioControllers.First().KeyIsPressedChanged(this, keyArgs);
-                    }
                     oneMoreTime = true;
                 }
             }   while (oneMoreTime);
 
-            var list = _playedNotes.Where(note => note.EndTact == _tact && note.EndPosition == _position).ToArray();
-            foreach (var note in list)
+            foreach (var keyArgs in _oneTimePlayNotes.Select(note => new KeyPressedArgs()
             {
-                var keyArgs = new KeyPressedArgs()
-                {
-                    IsPressed = false,
-                    KeyNumber = note.MidiNumber
-                };
-                AudioControllers.First().KeyIsPressedChanged(this, keyArgs);
-                _playedNotes.Remove(note);
+                IsPressed = true,
+                KeyNumber = note.MidiNumber
+            }))
+            {
+                _audioController.KeyIsPressedChanged(this, keyArgs);
             }
+
             _position++;
             if (_position != 16) return;
             _position = 0;
@@ -162,10 +161,7 @@ namespace WarehouseOfMusic.Managers
         public void Stop()
         {
             this._playerTimer.Dispose();
-            foreach (var controller in AudioControllers)
-            {
-                //controller.Stop();
-            }
+            _audioController.Stop();
         }
     }
 }

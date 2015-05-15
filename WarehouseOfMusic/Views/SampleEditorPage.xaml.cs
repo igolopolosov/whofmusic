@@ -56,6 +56,7 @@ namespace WarehouseOfMusic.Views
             this._viewModel.LoadSampleFromDatabase((int) IsoSettingsManager.LoadRecord("CurrentSampleId"));
             this.DataContext = this._viewModel;
             this.PianoRoll.ItemsSource = this._viewModel.Tacts;
+            _playerManager = new PlayerManager();
         }
 
         #endregion
@@ -118,6 +119,7 @@ namespace WarehouseOfMusic.Views
             {
                 button.IconUri = new Uri("/Assets/AppBar/appbar.control.pause.png", UriKind.Relative);
                 button.Text = AppResources.AppBarPause;
+                _playerManager.Play(_viewModel.CurrentSample.TrackRef);
             }
             else
             {
@@ -136,6 +138,7 @@ namespace WarehouseOfMusic.Views
             var playPauseButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
             playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
             playPauseButton.Text = AppResources.AppBarPlay;
+            _playerManager.Stop();
         }
 
         #endregion
