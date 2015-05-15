@@ -63,7 +63,7 @@ namespace WarehouseOfMusic.Views
             this._viewModel = new ProjectEditorViewModel(App.DbConnectionString);
             this._viewModel.LoadProjectFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentProjectId"));
             this.DataContext = this._viewModel;
-            _playerManager = new PlayerManager();
+            _playerManager = new PlayerManager(_viewModel.CurrentProject.Tempo);
         }
 
         /// <summary>

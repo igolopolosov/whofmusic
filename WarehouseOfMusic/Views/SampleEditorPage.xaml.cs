@@ -59,7 +59,7 @@ namespace WarehouseOfMusic.Views
             this._viewModel.LoadSampleFromDatabase((int) IsoSettingsManager.LoadRecord("CurrentSampleId"));
             this.DataContext = this._viewModel;
             this.PianoRoll.ItemsSource = this._viewModel.Tacts;
-            _playerManager = new PlayerManager();
+            _playerManager = new PlayerManager(_viewModel.CurrentSample.TrackRef.ProjectRef.Tempo);
             _playerManager.StateChangeEvent+=_playerManager_StateChangeEvent;
         }
 

@@ -48,7 +48,7 @@
             this._viewModel = new TrackEditorContext(App.DbConnectionString);
             this._viewModel.LoadTrackFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentTrackId"));
             this.DataContext = this._viewModel;
-            _playerManager = new PlayerManager();
+            _playerManager = new PlayerManager(_viewModel.CurrentTrack.ProjectRef.Tempo);
         }
 
         /// <summary>
