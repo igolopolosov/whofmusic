@@ -203,7 +203,7 @@ namespace WarehouseOfMusic.Managers
         public void Pause()
         {
             this._playerTimer.Stop();
-            foreach (var note in _playedNotes)
+            foreach (var note in _playedNotes.ToList())
             {
                 var keyArgs = new KeyPressedArgs()
                 {
@@ -213,7 +213,6 @@ namespace WarehouseOfMusic.Managers
                 _audioController.KeyIsPressedChanged(this, keyArgs);
                 _playedNotes.Remove(note);
             }
-
             State = PlayerState.Paused;
         }
 
@@ -222,7 +221,7 @@ namespace WarehouseOfMusic.Managers
         /// </summary>
         public void Resume()
         {
-            this._playerTimer.Stop();
+            this._playerTimer.Start();
             State = PlayerState.Playing;
         } 
 
@@ -232,6 +231,16 @@ namespace WarehouseOfMusic.Managers
         public void Stop()
         {
             this._playerTimer.Stop();
+            foreach (var note in _playedNotes.ToList())
+            {
+                var keyArgs = new KeyPressedArgs()
+                {
+                    IsPressed = false,
+                    KeyNumber = note.MidiNumber
+                };
+                _audioController.KeyIsPressedChanged(this, keyArgs);
+                _playedNotes.Remove(note);
+            }
             State = PlayerState.Stopped;
         } 
         #endregion
