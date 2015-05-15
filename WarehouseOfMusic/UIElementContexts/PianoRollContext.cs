@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using WarehouseOfMusic.Enums;
+using WarehouseOfMusic.EventArgs;
 using WarehouseOfMusic.Models;
-using WarehouseOfMusic.ViewModels;
 
 namespace WarehouseOfMusic.UIElementContexts
 {

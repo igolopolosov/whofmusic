@@ -98,11 +98,13 @@
     </Compile>
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\TimePeriodsConverter.cs" />
+    <Compile Include="Enums\PlayerState.cs" />
+    <Compile Include="EventArgs\PlayerEventArgs.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="InputPromtOverride.cs" />
     <Compile Include="Models\ToDoSample.cs" />
-    <Compile Include="NoteEventArgs.cs" />
-    <Compile Include="ViewModels\Key.cs" />
+    <Compile Include="EventArgs\NoteEventArgs.cs" />
+    <Compile Include="Enums\Key.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Managers\IsoSettingsManager.cs" />
     <Compile Include="UIElementContexts\KeyContext.cs" />

@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using WarehouseOfMusic.Managers;
-using WarehouseOfMusic.Models;
-using WarehouseOfMusic.Resources;
-using WarehouseOfMusic.ViewModels;
-using GestureEventArgs = System.Windows.Input.GestureEventArgs;
-
-namespace WarehouseOfMusic.Views
+﻿namespace WarehouseOfMusic.Views
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Navigation;
+    using Microsoft.Phone.Controls;
+    using Microsoft.Phone.Shell;
+    using Managers;
+    using Models;
+    using Resources;
+    using ViewModels;
+    using GestureEventArgs = System.Windows.Input.GestureEventArgs;
+
     public partial class TrackEditorPage : PhoneApplicationPage
     {
         /// <summary>
@@ -176,15 +173,25 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SampleTitle_OnTap(object sender, GestureEventArgs e)
+        private void Sample_OnTap(object sender, GestureEventArgs e)
         {
-            var title = sender as TextBlock;
-            if (title == null) return;
-            var chosenSample = title.DataContext as ToDoSample;
+            var grid = sender as Grid;
+            if (grid == null) return;
+            var chosenSample = grid.DataContext as ToDoSample;
             if (chosenSample == null) return;
             IsoSettingsManager.SaveRecord("CurrentSampleId", chosenSample.Id);
             NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative), chosenSample.Id);
-        } 
+        }
+
+        private void SamplePlayButton_OnTap(object sender, GestureEventArgs e)
+        {
+            var image = sender as Image;
+            if (image == null) return;
+            e.Handled = true;
+            var chosenSample = image.DataContext as ToDoSample;
+            if (chosenSample == null) return;
+            _playerManager.Play(_viewModel.CurrentTrack, chosenSample.InitialTact);
+        }
         #endregion
     }
 }

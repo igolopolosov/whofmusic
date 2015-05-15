@@ -33,10 +33,11 @@ namespace WomAudioComponent
 	public:
 		AudioController();
 		void CreatePatch();
+		void ReleaseVoices();
 		Patch^ GetPatch();
 		bool IsOverloadPeaks();
 		void SetVolumeLevel(int volumeLevel);
-		void Start();
+		void Start();		
 		void Stop();
 		void KeyIsPressedChanged(Platform::Object^ sender, KeyPressedArgs^ args);
 	};

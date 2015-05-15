@@ -1,4 +1,6 @@
-﻿namespace WarehouseOfMusic.UIElementContexts
+﻿using WarehouseOfMusic.Enums;
+
+namespace WarehouseOfMusic.UIElementContexts
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;

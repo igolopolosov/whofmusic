@@ -1,10 +1,8 @@
 ﻿using WarehouseOfMusic.Models;
 
-namespace WarehouseOfMusic
+namespace WarehouseOfMusic.EventArgs
 {
-    using System;
-
-    public class NoteEventArgs : EventArgs
+    public class NoteEventArgs : System.EventArgs
     {
         /// <summary>
         /// Note partially filled with parameters

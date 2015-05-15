@@ -201,6 +201,43 @@ void AudioController::Start()
 	pXAudio2->StartEngine();
 }
 
+void AudioController::ReleaseVoices()
+{
+	return;
+	for (std::pair<int, SynthVoice *> pair : playingSynthVoices)
+	{
+		if (pair.second != nullptr)
+		{
+			// Signal a release
+			pair.second->Release();
+
+			// At this point, the key has been released but the voice is not
+			//  yet completed because the release segment of the envelope
+			//  is still in progress.
+
+			// For that reason, put the voice at the beginning of the 
+			//  collection rather than the end to avoid it being reused
+			//  immediately.
+			availableSynthVoices.insert(availableSynthVoices.begin(), pair.second);
+
+			// Remove it from playingSynthVoices collection
+			playingSynthVoices.erase(pair.first);
+		}
+	}
+
+	for (SynthVoice * voice : availableSynthVoices)
+	{
+		delete voice;
+	}
+	// Create a sufficient number of oscillators
+	for (int i = 0; i < NUM_OSCILLATORS; i++)
+	{
+		SynthVoice * pSynthVoice = new SynthVoice(pXAudio2.Get(), pMasteringVoice);
+		allSynthVoices.push_back(pSynthVoice);
+		availableSynthVoices.push_back(pSynthVoice);
+	}
+}
+
 void AudioController::Stop()
 {
 	pXAudio2->StopEngine();

@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using WarehouseOfMusic.EventArgs;
+
 namespace WarehouseOfMusic.ViewModels
 {
     using System.Collections.ObjectModel;

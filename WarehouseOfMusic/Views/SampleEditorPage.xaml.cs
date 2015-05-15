@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using WarehouseOfMusic.Enums;
+
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -14,6 +16,7 @@ namespace WarehouseOfMusic.Views
     using Managers;
     using Resources;
     using ViewModels;
+    using EventArgs;
 
     public partial class SampleEditorPage : PhoneApplicationPage
     {
@@ -57,6 +60,7 @@ namespace WarehouseOfMusic.Views
             this.DataContext = this._viewModel;
             this.PianoRoll.ItemsSource = this._viewModel.Tacts;
             _playerManager = new PlayerManager();
+            _playerManager.StateChangeEvent+=_playerManager_StateChangeEvent;
         }
 
         #endregion
@@ -113,18 +117,14 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void PlayPauseButton_OnClick(object sender, EventArgs e)
         {
-            var button = sender as ApplicationBarIconButton;
-
-            if (button.Text == AppResources.AppBarPlay || button.Text == AppResources.AppBarResume)
+            switch (_playerManager.State)
             {
-                button.IconUri = new Uri("/Assets/AppBar/appbar.control.pause.png", UriKind.Relative);
-                button.Text = AppResources.AppBarPause;
-                _playerManager.Play(_viewModel.CurrentSample.TrackRef);
-            }
-            else
-            {
-                button.IconUri = new Uri("/Assets/AppBar/appbar.control.resume.png", UriKind.Relative);
-                button.Text = AppResources.AppBarResume;
+                case PlayerState.Stopped: _playerManager.Play(_viewModel.CurrentSample.TrackRef);
+                    break;    
+                case PlayerState.Playing: _playerManager.Pause();
+                    break;
+                case PlayerState.Paused: _playerManager.Resume();
+                    break;
             }
         }
 
@@ -135,10 +135,40 @@ namespace WarehouseOfMusic.Views
         /// <param name="e">Click event</param>
         private void StopButton_OnClick(object sender, EventArgs e)
         {
-            var playPauseButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
-            playPauseButton.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
-            playPauseButton.Text = AppResources.AppBarPlay;
             _playerManager.Stop();
+        }
+
+        /// <summary>
+        /// Dispatcher used to avoid threading exeptions
+        /// </summary>
+        private void _playerManager_StateChangeEvent(object sender, PlayerEventArgs e)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                var button = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+                if (button == null) return;
+                switch (e.State)
+                {
+                    case PlayerState.Stopped:
+                    {
+                        button.IconUri = new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative);
+                        button.Text = AppResources.AppBarPlay;
+                    }
+                        break;
+                    case PlayerState.Playing:
+                    {
+                        button.IconUri = new Uri("/Assets/AppBar/appbar.control.pause.png", UriKind.Relative);
+                        button.Text = AppResources.AppBarPause;
+                    }
+                        break;
+                    case PlayerState.Paused:
+                    {
+                        button.IconUri = new Uri("/Assets/AppBar/appbar.control.resume.png", UriKind.Relative);
+                        button.Text = AppResources.AppBarResume;
+                    }
+                        break;
+                }
+            });
         }
 
         #endregion
@@ -160,5 +190,7 @@ namespace WarehouseOfMusic.Views
         }
 
         #endregion
+
+
     }
 }
