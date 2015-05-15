@@ -6,7 +6,6 @@
 
 using System;
 using System.Linq;
-using System.Threading;
 using System.Windows.Threading;
 using WarehouseOfMusic.Converters;
 using WarehouseOfMusic.Enums;
@@ -114,6 +113,23 @@ namespace WarehouseOfMusic.Managers
         /// <summary>
         /// Start playing samples
         /// </summary>
+        public void Play(ToDoProject onPlayProject)
+        {
+            _audioController.Start();
+            _onPlayTracks = new List<TrackManager>();
+            foreach (var track in onPlayProject.Tracks)
+            {
+                _onPlayTracks.Add(new TrackManager(track));
+            }
+            _position = 0;
+            _tact = 1;
+            _playerTimer.Start();
+            State = PlayerState.Playing;
+        }
+
+        /// <summary>
+        /// Start playing samples
+        /// </summary>
         public void Play(ToDoTrack onPlayTrack)
         {
             _audioController.Start();
@@ -143,7 +159,7 @@ namespace WarehouseOfMusic.Managers
         public void Pause()
         {
             this._playerTimer.Stop();
-            ////
+            CleansePlaybleStream();
             State = PlayerState.Paused;
         }
 
@@ -162,9 +178,29 @@ namespace WarehouseOfMusic.Managers
         public void Stop()
         {
             this._playerTimer.Stop();
-            ////
+            CleansePlaybleStream();
             State = PlayerState.Stopped;
-        } 
+        }
+
+        /// <summary>
+        /// Raise events which stops playble notes
+        /// </summary>
+        private void CleansePlaybleStream()
+        {
+            foreach (var track in _onPlayTracks)
+            {
+                foreach (var note in track.PlayedNotes.ToList())
+                {
+                    var keyArgs = new KeyPressedArgs()
+                    {
+                        IsPressed = false,
+                        KeyNumber = note.MidiNumber
+                    };
+                    _audioController.KeyIsPressedChanged(this, keyArgs);
+                    track.PlayedNotes.Remove(note);
+                }
+            }
+        }
         #endregion
         
         void _playerTimer_Tick(object sender, System.EventArgs e)
