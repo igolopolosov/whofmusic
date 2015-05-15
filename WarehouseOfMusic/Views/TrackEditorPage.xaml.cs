@@ -1,4 +1,5 @@
 ﻿using WarehouseOfMusic.Enums;
+using WarehouseOfMusic.EventArgs;
 
 namespace WarehouseOfMusic.Views
 {
@@ -51,7 +52,13 @@ namespace WarehouseOfMusic.Views
             this._viewModel.LoadTrackFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentTrackId"));
             this.DataContext = this._viewModel;
             _playerManager = new PlayerManager(_viewModel.CurrentTrack.ProjectRef.Tempo);
-            _playerManager.StateChangeEvent += _playerManager_StateChangeEvent;
+            _playerManager.StateChangedEvent += _playerManager_StateChangeEvent;
+            _playerManager.TactChangedEvent += PlayerManagerOnTactChangedEvent;
+        }
+
+        private void PlayerManagerOnTactChangedEvent(object sender, PlayerEventArgs e)
+        {
+            this._viewModel.ChangeSamplesState(e.PlaybleTact);
         }
 
         /// <summary>

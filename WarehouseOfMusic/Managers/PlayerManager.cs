@@ -73,9 +73,28 @@ namespace WarehouseOfMusic.Managers
             private set
             {
                 _state = value;
-                if (StateChangeEvent != null)
+                if (StateChangedEvent != null)
                 {
-                    StateChangeEvent(this, new PlayerEventArgs { State = _state });
+                    StateChangedEvent(this, new PlayerEventArgs { State = _state });
+                }
+            }
+        }
+
+        /// <summary>
+        /// Controls tact number. Then value is zero - no one tact is plaiyng.
+        /// </summary>
+        public int Tact
+        {
+            get
+            {
+                return _tact;
+            }
+            private set
+            {
+                _tact = value;
+                if (TactChangedEvent != null)
+                {
+                    TactChangedEvent(this, new PlayerEventArgs { PlaybleTact = _tact});
                 }
             }
         }
@@ -85,7 +104,12 @@ namespace WarehouseOfMusic.Managers
         /// <summary>
         /// Happend, when player stops or starts play sound
         /// </summary>
-        public event PlayerChangedHandler StateChangeEvent;
+        public event PlayerChangedHandler StateChangedEvent;
+
+        /// <summary>
+        /// Happend, when player stops or starts play sound
+        /// </summary>
+        public event PlayerChangedHandler TactChangedEvent;
         #endregion
 
         #region Constructors
@@ -119,10 +143,10 @@ namespace WarehouseOfMusic.Managers
             _onPlayTracks = new List<TrackManager>();
             foreach (var track in onPlayProject.Tracks)
             {
-                _onPlayTracks.Add(new TrackManager(track));
+                _onPlayTracks.Add(new TrackManager(track, 0));
             }
             _position = 0;
-            _tact = 1;
+            Tact = 1;
             _playerTimer.Start();
             State = PlayerState.Playing;
         }
@@ -133,9 +157,9 @@ namespace WarehouseOfMusic.Managers
         public void Play(ToDoTrack onPlayTrack)
         {
             _audioController.Start();
-            _onPlayTracks = new List<TrackManager> {new TrackManager(onPlayTrack)};
+            _onPlayTracks = new List<TrackManager> {new TrackManager(onPlayTrack, 0)};
             _position = 0;
-            _tact = 1;
+            Tact = 1;
             _playerTimer.Start();
             State = PlayerState.Playing;
         }
@@ -146,9 +170,9 @@ namespace WarehouseOfMusic.Managers
         public void Play(ToDoTrack onPlayTrack, int initialTact)
         {
             _audioController.Start();
-            _onPlayTracks = new List<TrackManager> {new TrackManager(onPlayTrack)};
+            _onPlayTracks = new List<TrackManager> {new TrackManager(onPlayTrack, initialTact)};
             _position = 0;
-            _tact = initialTact;
+            Tact = initialTact;
             _playerTimer.Start();
             State = PlayerState.Playing;
         }
@@ -179,6 +203,7 @@ namespace WarehouseOfMusic.Managers
         {
             this._playerTimer.Stop();
             CleansePlaybleStream();
+            Tact = 0;
             State = PlayerState.Stopped;
         }
 
@@ -208,6 +233,7 @@ namespace WarehouseOfMusic.Managers
             if (_onPlayTracks.All(x=>x.IsTrackEnd))
             {
                 _playerTimer.Stop();
+                Tact = 0;
                 State = PlayerState.Stopped;
                 return;
             }
@@ -255,7 +281,7 @@ namespace WarehouseOfMusic.Managers
             _position++;
             if (_position != 16) return;
             _position = 0;
-            _tact++;
+            Tact++;
         }
    }
 }

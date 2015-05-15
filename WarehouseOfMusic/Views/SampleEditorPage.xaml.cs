@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 
 using WarehouseOfMusic.Enums;
+using WarehouseOfMusic.UIElementContexts;
 
 namespace WarehouseOfMusic.Views
 {
@@ -60,9 +61,8 @@ namespace WarehouseOfMusic.Views
             this.DataContext = this._viewModel;
             this.PianoRoll.ItemsSource = this._viewModel.Tacts;
             _playerManager = new PlayerManager(_viewModel.CurrentSample.TrackRef.ProjectRef.Tempo);
-            _playerManager.StateChangeEvent+=_playerManager_StateChangeEvent;
+            _playerManager.StateChangedEvent +=_playerManager_StateChangeEvent;
         }
-
         #endregion
 
         #region For application bar
@@ -117,9 +117,11 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void PlayPauseButton_OnClick(object sender, EventArgs e)
         {
+            var tact = this.PianoRoll.SelectedItem as PianoRollContext;
+            if (tact == null) return;
             switch (_playerManager.State)
             {
-                case PlayerState.Stopped: _playerManager.Play(_viewModel.CurrentSample.TrackRef);
+                case PlayerState.Stopped: _playerManager.Play(_viewModel.CurrentSample.TrackRef, tact.TactNumber);
                     break;    
                 case PlayerState.Playing: _playerManager.Pause();
                     break;

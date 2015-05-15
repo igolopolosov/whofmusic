@@ -114,7 +114,7 @@ namespace WarehouseOfMusic.ViewModels
                 {
                     key.Notes =
                         new ObservableCollection<ToDoNote>(_currentSample.Notes.Where
-                            (x => x.MidiNumber == (byte) key.Value && x.Tact == tact.Number));
+                            (x => x.MidiNumber == (byte) key.Value && x.Tact == tact.TactNumber));
                 }
                 Tacts.Add(tact);
             }

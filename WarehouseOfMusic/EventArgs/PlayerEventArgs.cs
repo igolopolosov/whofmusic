@@ -4,5 +4,6 @@
     public class PlayerEventArgs : System.EventArgs
     {
         public PlayerState State;
+        public int PlaybleTact;
     }
 }

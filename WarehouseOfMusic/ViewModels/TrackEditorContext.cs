@@ -58,6 +58,17 @@ namespace WarehouseOfMusic.ViewModels
         }
 
         /// <summary>
+        /// Switch IsPlaying parameter for samples
+        /// </summary>
+        public void ChangeSamplesState(int playbleTactNumber)
+        {
+            foreach (var sample in _currentTrack.Samples)
+            {
+                sample.IsPlaying = sample.InitialTact <= playbleTactNumber && playbleTactNumber < (sample.InitialTact + sample.Size);
+            }
+        }
+
+        /// <summary>
         /// Add new Sample to the database and collections.
         /// </summary>
         public void AddSample()

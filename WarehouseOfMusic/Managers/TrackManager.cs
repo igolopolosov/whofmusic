@@ -29,13 +29,13 @@
             }
         }
 
-        public TrackManager(ToDoTrack onPlayTrack)
+       public TrackManager(ToDoTrack onPlayTrack, int initialTact)
         {
             OnPlayNotes = new Queue<ToDoNote>();
             PlayedNotes = new List<ToDoNote>();
             foreach (var note in
                     onPlayTrack.Samples.OrderBy(x => x.InitialTact)
-                        .Select(sample => sample.Notes.OrderBy(x => x.Tact).ThenBy(x => x.Position))
+                        .Select(sample => sample.Notes.Where(x => x.Tact >= initialTact).OrderBy(x => x.Tact).ThenBy(x => x.Position))
                         .SelectMany(notes => notes))
             {
                 OnPlayNotes.Enqueue(note);

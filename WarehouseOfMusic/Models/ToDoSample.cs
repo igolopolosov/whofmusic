@@ -4,6 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Windows;
+using System.Windows.Media;
+
 namespace WarehouseOfMusic.Models
 {
     using System;
@@ -17,6 +20,36 @@ namespace WarehouseOfMusic.Models
     [Table]
     public class ToDoSample : INotifyPropertyChanged, INotifyPropertyChanging
     {
+        #region SampleColor
+        private bool _isPlaying;
+        public bool IsPlaying
+        {
+            get { return _isPlaying; }
+            set
+            {
+                if (this._isPlaying != value)
+                {
+                    this.NotifyPropertyChanging("StateBrush");
+                    this._isPlaying = value;
+                    this.NotifyPropertyChanged("StateBrush");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Use to color sample rectangle
+        /// </summary>
+        public Brush StateBrush
+        {
+            get
+            {
+                return _isPlaying
+                    ? (SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"]
+                    : (SolidColorBrush)Application.Current.Resources["PhoneChromeBrush"];
+            }
+        } 
+        #endregion
+
         /// <summary>
         /// ID of sample
         /// </summary>

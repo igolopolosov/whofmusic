@@ -16,7 +16,7 @@
 
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="SampleListSelectorTemplate">
-            <Grid Background="{StaticResource PhoneChromeBrush}"
+            <Grid Background ="{Binding StateBrush}"
                   Margin="0,0,12,12"
                   toolkit:TiltEffect.IsTiltEnabled="True"
                   Tap="Sample_OnTap">

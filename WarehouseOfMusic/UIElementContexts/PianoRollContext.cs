@@ -17,7 +17,7 @@ namespace WarehouseOfMusic.UIElementContexts
         /// <summary>
         /// Number of tact
         /// </summary>
-        private readonly int _number;
+        private readonly int _tactNumber;
 
         /// <summary>
         /// Collection of all availiable keys
@@ -27,17 +27,17 @@ namespace WarehouseOfMusic.UIElementContexts
         /// <summary>
         /// Name of tact
         /// </summary>
-        public string Name
+        public string TactName
         {
-            get { return _number + " " + AppResources.TactString; }
+            get { return _tactNumber + " " + AppResources.TactString; }
         }
 
         /// <summary>
         /// Number of tact
         /// </summary>
-        public int Number
+        public int TactNumber
         {
-            get { return _number; }
+            get { return _tactNumber; }
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace WarehouseOfMusic.UIElementContexts
         /// <param name="number">Number of tact</param>
         public PianoRollContext(int number)
         {
-            _number = number;
+            _tactNumber = number;
             _keys = new ObservableCollection<KeyContext>();
             var key = Key.B7;
             _keys.Add(new KeyContext(key));
@@ -81,7 +81,7 @@ namespace WarehouseOfMusic.UIElementContexts
             {
                 Duration = NoteDuration,
                 MidiNumber = keyValue,
-                Tact = Number,
+                Tact = TactNumber,
                 Position = tactPostition
             };
             

@@ -17,7 +17,7 @@
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="SmallPivotTitle">
             <ContentPresenter Margin="0">
-                <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeSmall}"/>
+                <TextBlock Text="{Binding TactName}" FontSize="{StaticResource PhoneFontSizeSmall}"/>
             </ContentPresenter>
         </DataTemplate>
 

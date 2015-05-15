@@ -67,7 +67,7 @@ namespace WarehouseOfMusic.Views
             this._viewModel.LoadProjectFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentProjectId"));
             this.DataContext = this._viewModel;
             _playerManager = new PlayerManager(_viewModel.CurrentProject.Tempo);
-            _playerManager.StateChangeEvent += _playerManager_StateChangeEvent;
+            _playerManager.StateChangedEvent += _playerManager_StateChangeEvent;
         }
 
         /// <summary>
