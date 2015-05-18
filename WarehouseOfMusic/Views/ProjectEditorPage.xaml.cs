@@ -91,7 +91,6 @@ namespace WarehouseOfMusic.Views
             var trackName = _viewModel.OnRenameTrack.Name;
             var inputPrompt = new InputPromptOveride()
             {
-                IsCancelVisible = true,
                 IsSubmitOnEnterKey = false,
                 Title = AppResources.RenameTrack,
                 Value = trackName
@@ -138,7 +137,6 @@ namespace WarehouseOfMusic.Views
         {
             var messagePrompt = new MessagePrompt()
             {
-                IsCancelVisible = true,
                 Message = AppResources.MessageDeleteTrack
             };
             messagePrompt.Completed += MessagePromptOnCompleted;

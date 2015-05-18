@@ -94,6 +94,28 @@ namespace WarehouseOfMusic.ViewModels
         }
 
         /// <summary>
+        /// Find and return next track in list
+        /// </summary>
+        public ToDoTrack NextTrack()
+        {
+            var currentProject = _currentTrack.ProjectRef;
+            var currentTrackIndex = currentProject.Tracks.IndexOf(_currentTrack);
+            currentTrackIndex++;
+            return currentTrackIndex == currentProject.Tracks.Count ? currentProject.Tracks[0] : currentProject.Tracks[currentTrackIndex];
+        }
+
+        /// <summary>
+        /// Find and return previous track in list
+        /// </summary>
+        public ToDoTrack PreviousTrack()
+        {
+            var currentProject = _currentTrack.ProjectRef;
+            var currentTrackIndex = currentProject.Tracks.IndexOf(_currentTrack);
+            currentTrackIndex--;
+            return currentTrackIndex == -1 ? currentProject.Tracks[currentProject.Tracks.Count - 1] : currentProject.Tracks[currentTrackIndex];
+        }
+
+        /// <summary>
         /// Query database and load the information for project
         /// </summary>
         /// <param name="projectId">ID of loading project</param>
@@ -124,7 +146,5 @@ namespace WarehouseOfMusic.ViewModels
             }
         }
         #endregion
-
-        
     }
 }

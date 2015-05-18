@@ -228,5 +228,27 @@ namespace WarehouseOfMusic.Views
             _playerManager.Play(_viewModel.CurrentTrack, chosenSample.InitialTact);
         }
         #endregion
+
+        #region Navigation buttons
+        private void ToLeftButton_OnTap(object sender, GestureEventArgs e)
+        {
+            var previousTrack = _viewModel.PreviousTrack();
+            IsoSettingsManager.SaveRecord("CurrentTrackId", previousTrack.Id);
+            this.InitialiazeDataContext();
+        }
+
+        private void ToRightButton_OnTap(object sender, GestureEventArgs e)
+        {
+            var nextTrack = _viewModel.NextTrack();
+            IsoSettingsManager.SaveRecord("CurrentTrackId", nextTrack.Id);
+            this.InitialiazeDataContext();
+        }
+
+        private void TitleGrid_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            ToLeftButton.Width = TitleGrid.ActualHeight;
+            ToRightButton.Width = TitleGrid.ActualHeight;
+        } 
+        #endregion
     }
 }

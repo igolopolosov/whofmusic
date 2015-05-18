@@ -59,7 +59,7 @@
         <TextBlock Grid.Row="0" Text="{Binding CurrentProject.Name}" Style="{StaticResource PhoneTextNormalStyle}" 
                    FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                    HorizontalAlignment="Center"  Foreground="{StaticResource PhoneAccentBrush}"/>
-        <phone:LongListSelector Grid.Row="1" x:Name="TrackListBox" Margin="12"
+        <phone:LongListSelector Grid.Row="1" x:Name="TrackListBox" Margin="0, 12, 0, 0"
                         ItemsSource="{Binding CurrentProject.Tracks}"
                         ItemTemplate="{StaticResource TrackListBoxTemplate}">
         </phone:LongListSelector>

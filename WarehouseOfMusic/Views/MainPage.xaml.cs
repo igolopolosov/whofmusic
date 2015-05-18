@@ -74,7 +74,6 @@ namespace WarehouseOfMusic.Views
             var inputPromptTitle = _viewModel.OnRenameProject == null ? AppResources.CreateProject : AppResources.RenameProject;
             var inputPrompt = new InputPromptOveride()
             {
-                IsCancelVisible = true,
                 IsSubmitOnEnterKey = false,
                 Title = inputPromptTitle,
                 Value = projectName
@@ -133,7 +132,6 @@ namespace WarehouseOfMusic.Views
         {
             var messagePrompt = new MessagePrompt()
             {
-                IsCancelVisible = true,
                 Message = AppResources.MessageDeleteProject
             };
             messagePrompt.Completed += MessagePromptOnCompleted;
