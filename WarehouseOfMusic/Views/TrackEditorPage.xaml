@@ -40,23 +40,23 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="ToLeftButton" Grid.Column="0"
+            <Button x:Name="ToLeftButton" Grid.Column="0" BorderThickness="0"
                   toolkit:TiltEffect.IsTiltEnabled="True"
                   Tap="ToLeftButton_OnTap" >
-            	<Grid.Background>
+                <Button.Background>
             		<ImageBrush ImageSource="/Assets/AppBar/appbar.arrow.left.png"/>
-            	</Grid.Background>
-            </Grid>
+            	</Button.Background>
+            </Button>
             <TextBlock Grid.Column="1"  Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" 
                    FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                    HorizontalAlignment="Center"  Foreground="{StaticResource PhoneAccentBrush}"/>
-            <Grid x:Name="ToRightButton" Grid.Column="2" 
+            <Button x:Name="ToRightButton" Grid.Column="2" BorderThickness="0"
                   toolkit:TiltEffect.IsTiltEnabled="True" 
                   Tap="ToRightButton_OnTap">
-            	<Grid.Background>
+                <Button.Background>
             		<ImageBrush Stretch="Fill" ImageSource="/Assets/AppBar/appbar.arrow.right.png"/>
-            	</Grid.Background>
-            </Grid>
+            	</Button.Background>
+            </Button>
         </Grid>
 
         <phone:LongListSelector Grid.Row="1" x:Name="SampleListSelector" Margin="0, 12, 0, 0"
