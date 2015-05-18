@@ -214,6 +214,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Введите значение от 30 до 240..
+        /// </summary>
+        public static string MessageChangeTempo {
+            get {
+                return ResourceManager.GetString("MessageChangeTempo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить проект?.
         /// </summary>
         public static string MessageDeleteProject {
@@ -228,6 +237,15 @@ namespace WarehouseOfMusic.Resources {
         public static string MessageDeleteTrack {
             get {
                 return ResourceManager.GetString("MessageDeleteTrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Не подходит!.
+        /// </summary>
+        public static string MessageIncorrectValue {
+            get {
+                return ResourceManager.GetString("MessageIncorrectValue", resourceCulture);
             }
         }
         
@@ -327,6 +345,15 @@ namespace WarehouseOfMusic.Resources {
         public static string ThemeTextBlockText {
             get {
                 return ResourceManager.GetString("ThemeTextBlockText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ИЗМЕНИТЬ ТЕМП.
+        /// </summary>
+        public static string TitleChangeTempo {
+            get {
+                return ResourceManager.GetString("TitleChangeTempo", resourceCulture);
             }
         }
         

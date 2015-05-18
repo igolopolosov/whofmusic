@@ -80,31 +80,31 @@ namespace WarehouseOfMusic.Views
         }
         #endregion
         
-        #region Rename dialog
+        #region Rename and delete track dialogs
 
         /// <summary>
         /// Show dialog to create or rename project
         /// </summary>
         /// <param name="trackId">-1 = for create project dialog, n - rename project dialog </param>
-        private void ShowRenameDialog()
+        private void ShowRenameTrackDialog()
         {
             var trackName = _viewModel.OnRenameTrack.Name;
-            var inputPrompt = new InputPromptOveride()
+            var renameTrackDialog = new InputPromptOveride()
             {
                 IsSubmitOnEnterKey = false,
                 Title = AppResources.RenameTrack,
                 Value = trackName
             };
-            inputPrompt.LostFocus += inputPrompt_LostFocus;
-            inputPrompt.KeyUp += InputPrompt_KeyUp;
-            inputPrompt.Completed += InputPromptOnCompleted;
-            inputPrompt.Show();
+            renameTrackDialog.LostFocus += RenameTrackDialog_OnLostFocus;
+            renameTrackDialog.KeyUp += RenameTrackDialog_OnKeyUp;
+            renameTrackDialog.Completed += RenameTrackDialog_OnCompleted;
+            renameTrackDialog.Show();
         }
 
         /// <summary>
         /// Show or hide 'empty name' error message
         /// </summary>
-        void inputPrompt_LostFocus(object sender, RoutedEventArgs e)
+        void RenameTrackDialog_OnLostFocus(object sender, RoutedEventArgs e)
         {
             var input = sender as InputPrompt;
             if (input == null) return;
@@ -114,7 +114,7 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// Detect the end of input text
         /// </summary>
-        private void InputPrompt_KeyUp(object sender, KeyEventArgs e)
+        private void RenameTrackDialog_OnKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
             var input = sender as InputPrompt;
@@ -122,7 +122,7 @@ namespace WarehouseOfMusic.Views
             input.Focus();
         }
 
-        private void InputPromptOnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        private void RenameTrackDialog_OnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
         {
             var input = sender as InputPrompt;
             if (input == null) return;
@@ -133,17 +133,17 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// Show dialog to delete track
         /// </summary>
-        private void ShowDeleteDialog()
+        private void ShowDeleteTrackDialog()
         {
-            var messagePrompt = new MessagePrompt()
+            var deleteTrackDialog = new MessagePrompt()
             {
                 Message = AppResources.MessageDeleteTrack
             };
-            messagePrompt.Completed += MessagePromptOnCompleted;
-            messagePrompt.Show();
+            deleteTrackDialog.Completed += DeleteTrackDialog_OnCompleted;
+            deleteTrackDialog.Show();
         }
 
-        private void MessagePromptOnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        private void DeleteTrackDialog_OnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
         {
             if (e.PopUpResult == PopUpResult.Ok) this._viewModel.DeleteTrack();
             _viewModel.OnDeleteTrack = null;
@@ -312,7 +312,7 @@ namespace WarehouseOfMusic.Views
             var contextMenuItem = sender as MenuItem;
             if (contextMenuItem == null) return;
             _viewModel.OnRenameTrack = contextMenuItem.DataContext as ToDoTrack;
-            ShowRenameDialog();
+            ShowRenameTrackDialog();
         }
 
         private void DeleteProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -320,7 +320,77 @@ namespace WarehouseOfMusic.Views
             var contextMenuItem = sender as MenuItem;
             if (contextMenuItem == null) return;
             this._viewModel.OnDeleteTrack = contextMenuItem.DataContext as ToDoTrack;
-            ShowDeleteDialog();
+            ShowDeleteTrackDialog();
+        }
+        #endregion
+
+        #region Tempo change
+        private void TempoGrid_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var tempoChangeDialog = new InputPromptOveride()
+            {
+                IsSubmitOnEnterKey = false,
+                Title = AppResources.TitleChangeTempo,
+                Message = AppResources.MessageChangeTempo,
+                Value = string.Empty + _viewModel.CurrentProject.Tempo
+            };
+            tempoChangeDialog.LostFocus += TempoChangeDialog_OnLostFocus;
+            tempoChangeDialog.KeyUp += TempoChangeDialog_OnKeyUp;
+            tempoChangeDialog.Completed += TempoChangeDialog_OnCompleted;
+            tempoChangeDialog.Show();
+        }
+
+        /// <summary>
+        /// Show or hide 'empty name' error message
+        /// </summary>
+        void TempoChangeDialog_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            try
+            {
+                var newValue = Convert.ToInt32(input.Value);
+                if (30 <= newValue && newValue <= 240) input.Message = AppResources.MessageChangeTempo;
+                else input.Message = AppResources.MessageIncorrectValue + " " + AppResources.MessageChangeTempo;
+            }
+            catch (Exception)
+            {
+                input.Message = AppResources.MessageIncorrectValue + " " + AppResources.MessageChangeTempo;
+            }
+        }
+
+        /// <summary>
+        /// Detect the end of input text
+        /// </summary>
+        private void TempoChangeDialog_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            input.Focus();
+        }
+
+        private void TempoChangeDialog_OnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            if (e.PopUpResult == PopUpResult.Ok)
+            {
+                try
+                {
+                    var newValue = Convert.ToInt32(input.Value);
+                    if (30 <= newValue && newValue <= 240)
+                    {
+                        _viewModel.CurrentProject.Tempo = newValue;
+                        _viewModel.SaveChangesToDb();
+                        _playerManager = new PlayerManager(newValue);
+                    }
+                }
+                catch (Exception)
+                {
+                    input.Message = AppResources.MessageIncorrectValue + " " + AppResources.MessageChangeTempo;
+                }
+            }
         }
         #endregion
     }

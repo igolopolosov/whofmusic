@@ -65,7 +65,7 @@
                 <ColumnDefinition Width="68"></ColumnDefinition>
                 <ColumnDefinition Width="20"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="TempoGrid">
+            <Grid x:Name="TempoGrid" Tap="TempoGrid_OnTap">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />

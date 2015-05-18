@@ -213,4 +213,13 @@
   <data name="TextBlockTextTempo" xml:space="preserve">
     <value>tempo</value>
   </data>
+  <data name="MessageChangeTempo" xml:space="preserve">
+    <value>Enter value from 30 to 240.</value>
+  </data>
+  <data name="TitleChangeTempo" xml:space="preserve">
+    <value>CHANGE TEMPO</value>
+  </data>
+  <data name="MessageIncorrectValue" xml:space="preserve">
+    <value>Unsuitable!</value>
+  </data>
 </root>

@@ -71,23 +71,23 @@ namespace WarehouseOfMusic.Views
         {
             var projectName = _viewModel.OnRenameProject == null ? string.Empty
                 : _viewModel.OnRenameProject.Name;
-            var inputPromptTitle = _viewModel.OnRenameProject == null ? AppResources.CreateProject : AppResources.RenameProject;
-            var inputPrompt = new InputPromptOveride()
+            var dialogTitle = _viewModel.OnRenameProject == null ? AppResources.CreateProject : AppResources.RenameProject;
+            var renameProjectDialog = new InputPromptOveride()
             {
                 IsSubmitOnEnterKey = false,
-                Title = inputPromptTitle,
+                Title = dialogTitle,
                 Value = projectName
             };
-            inputPrompt.LostFocus += inputPrompt_LostFocus;
-            inputPrompt.KeyUp += InputPrompt_KeyUp;
-            inputPrompt.Completed += InputPromptOnCompleted;
-            inputPrompt.Show();
+            renameProjectDialog.LostFocus += RenameProjectDialog_OnLostFocus;
+            renameProjectDialog.KeyUp += RenameProjectDialog_OnKeyUp;
+            renameProjectDialog.Completed += RenameProjectDialog_OnCompleted;
+            renameProjectDialog.Show();
         }
 
         /// <summary>
         /// Show or hide 'empty name' error message
         /// </summary>
-        void inputPrompt_LostFocus(object sender, RoutedEventArgs e)
+        void RenameProjectDialog_OnLostFocus(object sender, RoutedEventArgs e)
         {
             var input = sender as InputPrompt;
             if (input == null) return;
@@ -97,7 +97,7 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// Detect the end of input text
         /// </summary>
-        private void InputPrompt_KeyUp(object sender, KeyEventArgs e)
+        private void RenameProjectDialog_OnKeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
             var input = sender as InputPrompt;
@@ -105,7 +105,7 @@ namespace WarehouseOfMusic.Views
             input.Focus();
         }
 
-        private void InputPromptOnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        private void RenameProjectDialog_OnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
         {
             var input = sender as InputPrompt;
             if (input == null) return;
@@ -130,15 +130,15 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void ShowDeleteDialog()
         {
-            var messagePrompt = new MessagePrompt()
+            var deleteProjectDialog = new MessagePrompt()
             {
                 Message = AppResources.MessageDeleteProject
             };
-            messagePrompt.Completed += MessagePromptOnCompleted;
-            messagePrompt.Show();
+            deleteProjectDialog.Completed += DeleteProjectDialog_OnCompleted;
+            deleteProjectDialog.Show();
         }
 
-        private void MessagePromptOnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        private void DeleteProjectDialog_OnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
         {
             if (e.PopUpResult == PopUpResult.Ok) this._viewModel.DeleteProject();
             _viewModel.OnDeleteProject = null;

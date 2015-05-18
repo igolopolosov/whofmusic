@@ -168,11 +168,17 @@
   <data name="LightThemeListBoxItem" xml:space="preserve">
     <value>Светлая</value>
   </data>
+  <data name="MessageChangeTempo" xml:space="preserve">
+    <value>Введите значение от 30 до 240.</value>
+  </data>
   <data name="MessageDeleteProject" xml:space="preserve">
     <value>Вы уверены, что хотите удалить проект?</value>
   </data>
   <data name="MessageDeleteTrack" xml:space="preserve">
     <value>Вы уверены, что хотите удалить дорожку?</value>
+  </data>
+  <data name="MessageIncorrectValue" xml:space="preserve">
+    <value>Не подходит!</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -206,6 +212,9 @@
   </data>
   <data name="ThemeTextBlockText" xml:space="preserve">
     <value>тема</value>
+  </data>
+  <data name="TitleChangeTempo" xml:space="preserve">
+    <value>ИЗМЕНИТЬ ТЕМП</value>
   </data>
   <data name="TrackString" xml:space="preserve">
     <value>Дорожка</value>
