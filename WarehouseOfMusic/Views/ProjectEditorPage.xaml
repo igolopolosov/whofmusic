@@ -23,7 +23,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Name}"
+                <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center"
                            FontSize="{StaticResource PhoneFontSizeLarge}"
                            Tap="TrackListBoxItem_OnTap"/>
                 <ComboBox Grid.Column="1" ItemsSource="{Binding Instruments}">
@@ -51,15 +51,41 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
-    <Grid x:Name="LayoutRoot" Margin="12">
+    <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding CurrentProject.Name}" Style="{StaticResource PhoneTextNormalStyle}" 
+
+        <Grid x:Name="TitleGrid" Grid.Row="0" Background="{StaticResource PhoneChromeBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="68"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="68"></ColumnDefinition>
+                <ColumnDefinition Width="68"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="TempoGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Center"
+                           Text="{Binding Path=LocalizedResources.TextBlockTextTempo, Source={StaticResource LocalizedStrings}}"></TextBlock>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center"
+                           Text="{Binding CurrentProject.Tempo}"></TextBlock>
+            </Grid>
+            <TextBlock Grid.Column="1" Text="{Binding CurrentProject.Name}" Style="{StaticResource PhoneTextNormalStyle}" 
                    FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                    HorizontalAlignment="Center"  Foreground="{StaticResource PhoneAccentBrush}"/>
-        <phone:LongListSelector Grid.Row="1" x:Name="TrackListBox" Margin="0, 12, 0, 0"
+            <TextBlock Grid.Column="2" Text="s" Style="{StaticResource PhoneTextNormalStyle}" 
+                   FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                   HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="3" Text="m" Style="{StaticResource PhoneTextNormalStyle}" 
+                   FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
+                   HorizontalAlignment="Center"></TextBlock>
+        </Grid>
+        <phone:LongListSelector Grid.Row="1" x:Name="TrackListBox" Margin="12"
                         ItemsSource="{Binding CurrentProject.Tracks}"
                         ItemTemplate="{StaticResource TrackListBoxTemplate}">
         </phone:LongListSelector>

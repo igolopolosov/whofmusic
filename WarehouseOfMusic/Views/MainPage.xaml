@@ -40,15 +40,17 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot представляет корневую сетку, где размещается все содержимое страницы-->
-    <Grid x:Name="LayoutRoot" Margin="12">
+    <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0" Text="WAREHOUSE OF MUSIC" Style="{StaticResource PhoneTextNormalStyle}" 
+        <Grid x:Name="TitleGrid" Grid.Row="0" Background="{StaticResource PhoneChromeBrush}">
+            <TextBlock Text="WAREHOUSE OF MUSIC" Style="{StaticResource PhoneTextNormalStyle}" 
                    FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                    HorizontalAlignment="Center"  Foreground="{StaticResource PhoneAccentBrush}"/>
+        </Grid>
+
         <ListBox x:Name="ExistingProjextsListBox" Margin="12" Grid.Row="1"
                  ItemsSource="{Binding ProjectsList}" 
                  ItemTemplate="{StaticResource ToDoListBoxProjectsTemplate}">

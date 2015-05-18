@@ -21,14 +21,14 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel содержит название страницы-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
+        <Grid x:Name="TitleGrid" Grid.Row="0" Background="{StaticResource PhoneChromeBrush}">
             <TextBlock Text="{Binding Path=LocalizedResources.Settings, Source={StaticResource LocalizedStrings}}" 
                        Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Thin"
                        HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
-        </StackPanel>
+        </Grid>
 
         <!--ApplicationSettingsGrid — управление настройками проекта-->
-        <Grid x:Name="ApplicationSettingsGrid" Grid.Row="1" Margin="12,0">
+        <Grid x:Name="ApplicationSettingsGrid" Grid.Row="1" Margin="12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="20*"/>

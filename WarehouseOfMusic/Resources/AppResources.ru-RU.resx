@@ -201,6 +201,9 @@
   <data name="TactString" xml:space="preserve">
     <value>ТАКТ</value>
   </data>
+  <data name="TextBlockTextTempo" xml:space="preserve">
+    <value>темп</value>
+  </data>
   <data name="ThemeTextBlockText" xml:space="preserve">
     <value>тема</value>
   </data>

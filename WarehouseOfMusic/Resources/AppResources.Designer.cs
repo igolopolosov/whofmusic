@@ -313,6 +313,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на темп.
+        /// </summary>
+        public static string TextBlockTextTempo {
+            get {
+                return ResourceManager.GetString("TextBlockTextTempo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на тема.
         /// </summary>
         public static string ThemeTextBlockText {

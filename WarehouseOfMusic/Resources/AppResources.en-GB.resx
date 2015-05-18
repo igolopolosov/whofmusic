@@ -210,4 +210,7 @@
   <data name="AppBarAddSample" xml:space="preserve">
     <value>add sample</value>
   </data>
+  <data name="TextBlockTextTempo" xml:space="preserve">
+    <value>tempo</value>
+  </data>
 </root>
