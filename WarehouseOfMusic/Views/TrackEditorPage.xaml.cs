@@ -54,15 +54,16 @@ namespace WarehouseOfMusic.Views
             this.DataContext = this._viewModel;
             this._viewModel.CurrentTrack.Samples.CollectionChanged +=Samples_CollectionChanged;
             _playerManager = new PlayerManager(_viewModel.CurrentTrack.ProjectRef.Tempo);
-            _playerManager.StateChangedEvent += _playerManager_StateChangeEvent;
-            _playerManager.TactChangedEvent += PlayerManagerOnTactChangedEvent;
+            _playerManager.StateChangedEvent += PlayerManager_OnStateChangeEvent;
+            _playerManager.TactChangedEvent += PlayerManager_OnTactChangedEvent;
         }
 
         private void Samples_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+
         }
 
-        private void PlayerManagerOnTactChangedEvent(object sender, PlayerEventArgs e)
+        private void PlayerManager_OnTactChangedEvent(object sender, PlayerEventArgs e)
         {
             this._viewModel.ChangeSamplesState(e.PlaybleTact);
         }
@@ -168,7 +169,7 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// Dispatcher used to avoid threading exeptions
         /// </summary>
-        private void _playerManager_StateChangeEvent(object sender, WarehouseOfMusic.EventArgs.PlayerEventArgs e)
+        private void PlayerManager_OnStateChangeEvent(object sender, WarehouseOfMusic.EventArgs.PlayerEventArgs e)
         {
             Dispatcher.BeginInvoke(() =>
             {

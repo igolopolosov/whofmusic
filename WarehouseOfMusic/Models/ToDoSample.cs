@@ -45,7 +45,7 @@ namespace WarehouseOfMusic.Models
             {
                 return _isPlaying
                     ? (SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"]
-                    : (SolidColorBrush)Application.Current.Resources["PhoneChromeBrush"];
+                    : (SolidColorBrush)Application.Current.Resources["PhoneBackgroundBrush"];
             }
         } 
         #endregion

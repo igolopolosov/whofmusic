@@ -16,7 +16,7 @@
 
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="TrackListBoxTemplate">
-            <Grid>
+            <Grid toolkit:TiltEffect.IsTiltEnabled="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="Auto" />
@@ -24,6 +24,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center"
+                           Foreground="{StaticResource PhoneForegroundBrush}"
                            FontSize="{StaticResource PhoneFontSizeLarge}"
                            Tap="TrackListBoxItem_OnTap"/>
                 <ComboBox Grid.Column="1" ItemsSource="{Binding Instruments}">

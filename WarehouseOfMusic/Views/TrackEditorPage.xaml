@@ -17,15 +17,20 @@
 
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="SampleListSelectorTemplate">
-            <Grid Background ="{Binding StateBrush}"
-                  Margin="0,0,12,12"
-                  toolkit:TiltEffect.IsTiltEnabled="True"
-                  Tap="Sample_OnTap">
-                <TextBlock x:Name="SampleTitle" Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMedium}"
-                           Margin="12,0,0,6"/>
-                <Image x:Name="SamplePlayButton" Source="../Assets/AppBar/appbar.control.play.png"
+            <Grid Background ="{Binding StateBrush}" Margin="6"
+                  toolkit:TiltEffect.IsTiltEnabled="True" Tap="Sample_OnTap">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="SampleTitle" Grid.Column="0"
+                           Margin="6" VerticalAlignment="Center" Text="{Binding Title}" 
+                           Foreground="{StaticResource PhoneForegroundBrush}"
+                           FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                <Image x:Name="SamplePlayButton" Grid.Column="1"
+                       Source="../Assets/AppBar/appbar.control.play.png"
                        HorizontalAlignment="Right" Margin="0,6,6,0" Width="40" Height="40" 
-                       Tap="SamplePlayButton_OnTap"></Image>
+                       Tap="SamplePlayButton_OnTap"/>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>

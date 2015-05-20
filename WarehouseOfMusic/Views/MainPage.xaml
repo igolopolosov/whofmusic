@@ -17,14 +17,17 @@
     <phone:PhoneApplicationPage.Resources>
         <!--Вид отдельного элемента списка проектов-->
         <DataTemplate x:Key="ToDoListBoxProjectsTemplate">
-            <Grid x:Name="ProjectItemGrid" VerticalAlignment="Stretch" Tap="ProjectItemGrid_OnTap">
+            <Grid x:Name="ProjectItemGrid" VerticalAlignment="Stretch" 
+                  Tap="ProjectItemGrid_OnTap" toolkit:TiltEffect.IsTiltEnabled="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding Name}" 
+                           Foreground="{StaticResource PhoneForegroundBrush}"
                            FontSize="{StaticResource PhoneFontSizeLarge}"/>
                 <TextBlock Grid.Row="1" Text="{Binding CreationTime}" FontWeight="Thin" 
+                           Foreground="{StaticResource PhoneForegroundBrush}"
                            FontSize="{StaticResource PhoneFontSizeMedium}"/>
 
                 <toolkit:ContextMenuService.ContextMenu>
