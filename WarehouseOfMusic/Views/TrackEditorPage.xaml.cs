@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Specialized;
+using System.Linq;
+using System.Windows.Input;
 using WarehouseOfMusic.Enums;
 using WarehouseOfMusic.EventArgs;
 
@@ -60,7 +62,30 @@ namespace WarehouseOfMusic.Views
 
         private void Samples_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                var movedSample = e.OldItems[0] as ToDoSample;
+                if (movedSample == null) return;
+                foreach (var sample in _viewModel.CurrentTrack.Samples.Where(x => x.InitialTact > movedSample.InitialTact))
+                {
+                    sample.InitialTact = sample.InitialTact - movedSample.Size;
+                }
+            }
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                var movedSample = e.NewItems[0] as ToDoSample;
+                var newInitialtact = e.NewStartingIndex == 0
+                    ? 1
+                    : _viewModel.CurrentTrack.Samples[e.NewStartingIndex - 1].InitialTact + _viewModel.CurrentTrack.Samples[e.NewStartingIndex - 1].Size;
+                if (movedSample == null) return;
+                foreach (var sample in _viewModel.CurrentTrack.Samples.Where(x => x.InitialTact >= newInitialtact))
+                {
+                    sample.InitialTact = sample.InitialTact + movedSample.Size;
+                }
+                movedSample.InitialTact = newInitialtact;
+                _viewModel.RestoreReferences(movedSample);
+                _viewModel.SaveChangesToDb();
+            }
         }
 
         private void PlayerManager_OnTactChangedEvent(object sender, PlayerEventArgs e)
@@ -201,13 +226,6 @@ namespace WarehouseOfMusic.Views
         #endregion
 
         #region Manipulation around sample list
-        private void SampleListSelector_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            var list = sender as LongListSelector;
-            if (list == null) return;
-            var cellSize = list.ActualWidth / 4 - 4;
-            list.GridCellSize = new Size(cellSize, cellSize);
-        }
 
         /// <summary>
         /// Chose sample for editing

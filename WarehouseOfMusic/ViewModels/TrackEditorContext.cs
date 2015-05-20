@@ -146,5 +146,13 @@ namespace WarehouseOfMusic.ViewModels
             }
         }
         #endregion
+
+        /// <summary>
+        /// Fix bugs with null value of reference
+        /// </summary>
+        public void RestoreReferences(ToDoSample movedSample)
+        {
+            movedSample.TrackRef = _currentTrack;
+        }
     }
 }

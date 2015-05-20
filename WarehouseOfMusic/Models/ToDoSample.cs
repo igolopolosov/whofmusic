@@ -139,9 +139,15 @@ namespace WarehouseOfMusic.Models
             {
                 if (this._initialTact != value)
                 {
+                    foreach (var note in Notes)
+                    {
+                        note.Tact = note.Tact + (value - _initialTact);
+                    }
                     this.NotifyPropertyChanging("InitialTact");
+                    this.NotifyPropertyChanging("Title");
                     this._initialTact = value;
                     this.NotifyPropertyChanged("InitialTact");
+                    this.NotifyPropertyChanged("Title");
                 }
             }
         }

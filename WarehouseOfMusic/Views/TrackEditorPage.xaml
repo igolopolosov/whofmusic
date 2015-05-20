@@ -68,7 +68,7 @@
         <rlb:ReorderListBox Grid.Row="1"  x:Name="SampleListSelector" Margin="12"
                         ItemsSource="{Binding CurrentTrack.Samples}"
                         ItemTemplate="{StaticResource SampleListSelectorTemplate}"
-                        Loaded="SampleListSelector_OnLoaded" IsReorderEnabled="True">
+                        IsReorderEnabled="True">
         </rlb:ReorderListBox>
     </Grid>
 
