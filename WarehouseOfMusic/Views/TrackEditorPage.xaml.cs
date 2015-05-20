@@ -1,4 +1,5 @@
-﻿using WarehouseOfMusic.Enums;
+﻿using System.Windows.Input;
+using WarehouseOfMusic.Enums;
 using WarehouseOfMusic.EventArgs;
 
 namespace WarehouseOfMusic.Views
@@ -51,9 +52,14 @@ namespace WarehouseOfMusic.Views
             this._viewModel = new TrackEditorContext(App.DbConnectionString);
             this._viewModel.LoadTrackFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentTrackId"));
             this.DataContext = this._viewModel;
+            this._viewModel.CurrentTrack.Samples.CollectionChanged +=Samples_CollectionChanged;
             _playerManager = new PlayerManager(_viewModel.CurrentTrack.ProjectRef.Tempo);
             _playerManager.StateChangedEvent += _playerManager_StateChangeEvent;
             _playerManager.TactChangedEvent += PlayerManagerOnTactChangedEvent;
+        }
+
+        private void Samples_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
         }
 
         private void PlayerManagerOnTactChangedEvent(object sender, PlayerEventArgs e)
@@ -200,7 +206,6 @@ namespace WarehouseOfMusic.Views
             if (list == null) return;
             var cellSize = list.ActualWidth / 4 - 4;
             list.GridCellSize = new Size(cellSize, cellSize);
-
         }
 
         /// <summary>

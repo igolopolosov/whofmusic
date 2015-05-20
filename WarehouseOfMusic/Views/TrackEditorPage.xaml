@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:rlb="clr-namespace:ReorderListBox;assembly=ReorderListBox"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -20,11 +21,11 @@
                   Margin="0,0,12,12"
                   toolkit:TiltEffect.IsTiltEnabled="True"
                   Tap="Sample_OnTap">
-                <Image x:Name="SamplePlayButton" Source="../Assets/AppBar/appbar.control.play.png"
-                       VerticalAlignment="Top" HorizontalAlignment="Right" toolkit:TiltEffect.IsTiltEnabled="True"
-                       Margin="0,6,6,0" Width="40" Height="40" Tap="SamplePlayButton_OnTap"></Image>
                 <TextBlock x:Name="SampleTitle" Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMedium}"
-                           VerticalAlignment="Bottom" Margin="12,0,0,6"/>
+                           Margin="12,0,0,6"/>
+                <Image x:Name="SamplePlayButton" Source="../Assets/AppBar/appbar.control.play.png"
+                       HorizontalAlignment="Right" Margin="0,6,6,0" Width="40" Height="40" 
+                       Tap="SamplePlayButton_OnTap"></Image>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -59,12 +60,11 @@
             	</Button.Background>
             </Button>
         </Grid>
-
-        <phone:LongListSelector Grid.Row="1" x:Name="SampleListSelector" Margin="12"
+        <rlb:ReorderListBox Grid.Row="1"  x:Name="SampleListSelector" Margin="12"
                         ItemsSource="{Binding CurrentTrack.Samples}"
                         ItemTemplate="{StaticResource SampleListSelectorTemplate}"
-                        LayoutMode="Grid" GridCellSize="100, 100" Loaded="SampleListSelector_OnLoaded">
-        </phone:LongListSelector>
+                        Loaded="SampleListSelector_OnLoaded" IsReorderEnabled="True">
+        </rlb:ReorderListBox>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
