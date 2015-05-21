@@ -228,4 +228,7 @@
   <data name="RenameSample" xml:space="preserve">
     <value>RENAME SAMPLE</value>
   </data>
+  <data name="MessageChoseSampleSize" xml:space="preserve">
+    <value>Select the number of tacts in the added sample!</value>
+  </data>
 </root>

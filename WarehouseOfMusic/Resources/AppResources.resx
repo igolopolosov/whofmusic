@@ -171,6 +171,9 @@
   <data name="MessageChangeTempo" xml:space="preserve">
     <value>Введите значение от 30 до 240.</value>
   </data>
+  <data name="MessageChoseSampleSize" xml:space="preserve">
+    <value>Выберите количество тактов в добавляемом блоке!</value>
+  </data>
   <data name="MessageDeleteProject" xml:space="preserve">
     <value>Вы уверены, что хотите удалить проект?</value>
   </data>

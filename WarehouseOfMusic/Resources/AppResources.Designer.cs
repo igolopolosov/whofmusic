@@ -223,6 +223,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Выберите количество тактов в добавляемом блоке!.
+        /// </summary>
+        public static string MessageChoseSampleSize {
+            get {
+                return ResourceManager.GetString("MessageChoseSampleSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить проект?.
         /// </summary>
         public static string MessageDeleteProject {

@@ -220,7 +220,22 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void AddSampleButton_Click(object sender, EventArgs e)
         {
-            this._viewModel.AddSample(4);
+            var tactSizePickDialog = new MessagePrompt()
+            {
+                Title = AppResources.MessageChoseSampleSize,
+                Body = new TactSizePicker()
+            };
+            tactSizePickDialog.Completed += tactSizePickDialog_Completed;
+            tactSizePickDialog.Show();
+        }
+
+        private void tactSizePickDialog_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            if (e.PopUpResult != PopUpResult.Ok) return;
+            var dialog = sender as MessagePrompt;
+            if (dialog == null) return;
+            var tactPicker = dialog.Body as TactSizePicker;
+            if (tactPicker != null) this._viewModel.AddSample(tactPicker.TactSize);
         }
 
         /// <summary>

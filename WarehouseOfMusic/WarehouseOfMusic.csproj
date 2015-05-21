@@ -124,6 +124,9 @@
     <Compile Include="Models\ToDoNote.cs" />
     <Compile Include="Models\ToDoTrack.cs" />
     <Compile Include="Managers\PlayerManager.cs" />
+    <Compile Include="Views\TactSizePicker.xaml.cs">
+      <DependentUpon>TactSizePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TrackEditorPage.xaml.cs">
       <DependentUpon>TrackEditorPage.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ApplicationSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TactSizePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
