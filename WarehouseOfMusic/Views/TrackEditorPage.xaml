@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:rlb="clr-namespace:ReorderListBox;assembly=ReorderListBox"
+    xmlns:cf="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -60,23 +61,17 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="ToLeftButton" Grid.Column="0" BorderThickness="0"
+            <cf:RoundButton x:Name="ToLeftButton" Grid.Column="0" Margin="0,6,0,0"
                   toolkit:TiltEffect.IsTiltEnabled="True"
-                  Tap="ToLeftButton_OnTap" >
-                <Button.Background>
-            		<ImageBrush ImageSource="/Assets/AppBar/appbar.arrow.left.png"/>
-            	</Button.Background>
-            </Button>
+                  Tap="ToLeftButton_OnTap" Stretch="UniformToFill"
+                  ImageSource="/Assets/AppBar/appbar.arrow.left.min.png"></cf:RoundButton>
             <TextBlock Grid.Column="1"  Text="{Binding CurrentTrack.Name}" Style="{StaticResource PhoneTextNormalStyle}" 
                    FontWeight="Thin" FontSize="{StaticResource PhoneFontSizeExtraLarge}"
                    HorizontalAlignment="Center"  Foreground="{StaticResource PhoneAccentBrush}"/>
-            <Button x:Name="ToRightButton" Grid.Column="2" BorderThickness="0"
-                  toolkit:TiltEffect.IsTiltEnabled="True" 
-                  Tap="ToRightButton_OnTap">
-                <Button.Background>
-            		<ImageBrush Stretch="Fill" ImageSource="/Assets/AppBar/appbar.arrow.right.png"/>
-            	</Button.Background>
-            </Button>
+            <cf:RoundButton x:Name="ToRightButton" Grid.Column="2" Margin="0,6,0,0"
+                  toolkit:TiltEffect.IsTiltEnabled="True"
+                  Tap="ToRightButton_OnTap" Stretch="UniformToFill"
+                  ImageSource="/Assets/AppBar/appbar.arrow.right.min.png"></cf:RoundButton>
         </Grid>
         <rlb:ReorderListBox Grid.Row="1"  x:Name="SampleListSelector" Margin="12"
                         ItemsSource="{Binding CurrentTrack.Samples}"
