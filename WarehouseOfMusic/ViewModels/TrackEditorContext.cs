@@ -188,10 +188,10 @@ namespace WarehouseOfMusic.ViewModels
         /// <param name="trackId">ID of loading project</param>
         public void LoadTrackFromDatabase(int trackId)
         {
+            var options = new DataLoadOptions();
+            options.AssociateWith<ToDoTrack>(x => x.Samples.OrderBy(y => y.InitialTact));
+            this._toDoDb.LoadOptions = options;
             this._currentTrack = this._toDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
-            if (_currentTrack == null) return;
-            var list = _currentTrack.Samples.OrderBy(x => x.InitialTact);
-            _currentTrack.Samples.Assign(list);
         }
 
         /// <summary>
