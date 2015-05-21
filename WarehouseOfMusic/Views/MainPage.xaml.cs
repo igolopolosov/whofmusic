@@ -187,24 +187,11 @@ namespace WarehouseOfMusic.Views
 
         #region For application bar
         /// <summary>
-        /// Click on SettingsButton
-        /// </summary>
-        private void SettingsMenuItem_OnClick(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Views/ApplicationSettingsPage.xaml", UriKind.Relative));
-        }
-
-        /// <summary>
         /// Build Localized application bar
         /// </summary>
         private void BuildLocalizedAppBar()
         {
             this.ApplicationBar = new ApplicationBar();
-
-            //// Add menu item linked with settings page
-            var settingsMenuItem = new ApplicationBarMenuItem(AppResources.AppBarSettings);
-            settingsMenuItem.Click += this.SettingsMenuItem_OnClick;
-            this.ApplicationBar.MenuItems.Add(settingsMenuItem);
 
             //// Add menu item linked with help page
             var helpMenuItem = new ApplicationBarMenuItem(AppResources.AppBarHelp);
