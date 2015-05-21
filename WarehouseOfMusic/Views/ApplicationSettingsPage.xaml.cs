@@ -107,9 +107,6 @@ namespace WarehouseOfMusic.Views
                 case 1:
                     ThemeManager.ToLightTheme();
                     break;
-                case 2:
-                    ThemeManager.ToLightTheme();
-                    break;
             }
         } 
         #endregion

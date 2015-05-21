@@ -160,15 +160,6 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Удобная.
-        /// </summary>
-        public static string CustomThemeListBoxItem {
-            get {
-                return ResourceManager.GetString("CustomThemeListBoxItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Темная.
         /// </summary>
         public static string DarkThemeListBoxItem {

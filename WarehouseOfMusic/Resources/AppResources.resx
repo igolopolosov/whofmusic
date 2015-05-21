@@ -150,9 +150,6 @@
   <data name="CreateProject" xml:space="preserve">
     <value>СОЗДАТЬ ПРОЕКТ</value>
   </data>
-  <data name="CustomThemeListBoxItem" xml:space="preserve">
-    <value>Удобная</value>
-  </data>
   <data name="DarkThemeListBoxItem" xml:space="preserve">
     <value>Темная</value>
   </data>

@@ -123,9 +123,6 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>en-GB</value>
   </data>
-  <data name="CustomThemeListBoxItem" xml:space="preserve">
-    <value>Smart</value>
-  </data>
   <data name="DarkThemeListBoxItem" xml:space="preserve">
     <value>Dark</value>
   </data>

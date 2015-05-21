@@ -30,13 +30,13 @@
         <!--ApplicationSettingsGrid — управление настройками проекта-->
         <Grid x:Name="ApplicationSettingsGrid" Grid.Row="1" Margin="12">
             <Grid.RowDefinitions>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             
             <!--Изменение громкости звука в приложении-->
@@ -68,8 +68,6 @@
                 <ListBoxItem Content="{Binding Path=LocalizedResources.DarkThemeListBoxItem, 
                     Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center"/>
                 <ListBoxItem Content="{Binding Path=LocalizedResources.LightThemeListBoxItem, 
-                    Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center"/>
-                <ListBoxItem Content="{Binding Path=LocalizedResources.CustomThemeListBoxItem, 
                     Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center"/>
             </ListBox>
             
