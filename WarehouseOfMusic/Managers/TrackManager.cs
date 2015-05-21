@@ -21,6 +21,9 @@
         /// </summary>
         public List<ToDoNote> PlayedNotes;
 
+        /// <summary>
+        /// True if all notes of track is played
+        /// </summary>
         public bool IsTrackEnd
         {
             get
@@ -29,7 +32,10 @@
             }
         }
 
-       public TrackManager(ToDoTrack onPlayTrack, int initialTact)
+        /// <summary>
+        /// Control for playing notes of track
+        /// </summary>
+        public TrackManager(ToDoTrack onPlayTrack, int initialTact)
         {
             OnPlayNotes = new Queue<ToDoNote>();
             PlayedNotes = new List<ToDoNote>();

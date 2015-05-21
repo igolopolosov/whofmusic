@@ -141,9 +141,21 @@ namespace WarehouseOfMusic.Managers
         {
             _audioController.Start();
             _onPlayTracks = new List<TrackManager>();
-            foreach (var track in onPlayProject.Tracks)
+            // Add tracks from the solo mode, 
+            // or if there are none, then add all the tracks without mute mode
+            if (onPlayProject.Tracks.Any(x => x.Solo))
             {
-                _onPlayTracks.Add(new TrackManager(track, 0));
+                foreach (var track in onPlayProject.Tracks.Where(x => x.Solo))
+                {
+                    _onPlayTracks.Add(new TrackManager(track, 0));
+                }
+            }
+            else
+            {
+                foreach (var track in onPlayProject.Tracks.Where(x => !x.Mute))
+                {
+                    _onPlayTracks.Add(new TrackManager(track, 0));
+                }
             }
             _position = 0;
             Tact = 1;
