@@ -61,6 +61,11 @@ namespace WarehouseOfMusic.Models
         private int _initialTact;
 
         /// <summary>
+        /// Name of the sample
+        /// </summary>
+        private string _name;
+
+        /// <summary>
         /// Entity set for the collection side of the relationship.
         /// </summary>
         private EntitySet<ToDoNote> _notes;
@@ -153,6 +158,30 @@ namespace WarehouseOfMusic.Models
         }
 
         /// <summary>
+        /// Gets or sets name of the sample
+        /// </summary>
+        [Column]
+        public string Name
+        {
+            get
+            {
+                return this._name;
+            }
+
+            set
+            {
+                if (this._name != value)
+                {
+                    this.NotifyPropertyChanging("Name");
+                    this.NotifyPropertyChanging("Title");
+                    this._name = value;
+                    this.NotifyPropertyChanged("Name");
+                    this.NotifyPropertyChanged("Title");
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets quantity of tacts in sample
         /// </summary>
         [Column]
@@ -181,8 +210,8 @@ namespace WarehouseOfMusic.Models
         {
             get
             {
-                if (_size > 1) return _initialTact + " - " + (_initialTact + _size - 1);
-                return string.Empty + _initialTact;
+                if (_size > 1) return _initialTact + " - " + (_initialTact + _size - 1) + " " + _name;
+                return _initialTact + " " + _name;
             }
         }
 

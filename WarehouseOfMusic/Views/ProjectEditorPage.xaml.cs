@@ -307,7 +307,7 @@ namespace WarehouseOfMusic.Views
             NavigationService.Navigate(new Uri("/Views/TrackEditorPage.xaml", UriKind.Relative), chosenTrack.Id);
         }
 
-        private void RenameProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void RenameTrack_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var contextMenuItem = sender as MenuItem;
             if (contextMenuItem == null) return;
@@ -315,7 +315,7 @@ namespace WarehouseOfMusic.Views
             ShowRenameTrackDialog();
         }
 
-        private void DeleteProject_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void DeleteTrack_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var contextMenuItem = sender as MenuItem;
             if (contextMenuItem == null) return;

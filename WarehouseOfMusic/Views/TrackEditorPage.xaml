@@ -31,6 +31,14 @@
                        Source="../Assets/AppBar/appbar.control.play.png"
                        HorizontalAlignment="Right" Margin="0,6,6,0" Width="40" Height="40" 
                        Tap="SamplePlayButton_OnTap"/>
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu">
+                        <toolkit:MenuItem Header="{Binding Path=LocalizedResources.RenameContextMenu, 
+                     Source={StaticResource LocalizedStrings}}" Tap="RenameSample_OnTap"/>
+                        <toolkit:MenuItem Header="{Binding Path=LocalizedResources.DeleteContextMenu, 
+                     Source={StaticResource LocalizedStrings}}" Tap="DeleteSample_OnTap"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>

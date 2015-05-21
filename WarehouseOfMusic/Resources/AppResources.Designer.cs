@@ -232,6 +232,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить блок?.
+        /// </summary>
+        public static string MessageDeleteSample {
+            get {
+                return ResourceManager.GetString("MessageDeleteSample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить дорожку?.
         /// </summary>
         public static string MessageDeleteTrack {
@@ -282,6 +291,15 @@ namespace WarehouseOfMusic.Resources {
         public static string RenameProject {
             get {
                 return ResourceManager.GetString("RenameProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ПЕРЕИМЕНОВАТЬ БЛОК.
+        /// </summary>
+        public static string RenameSample {
+            get {
+                return ResourceManager.GetString("RenameSample", resourceCulture);
             }
         }
         

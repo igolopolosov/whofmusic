@@ -156,7 +156,8 @@ namespace WarehouseOfMusic.ViewModels
             {
                 InitialTact = 1,
                 Size = 4,
-                TrackRef = newTrack
+                TrackRef = newTrack,
+                Name = newTrack.Name + newTrack.Samples.Count
             };
             this._toDoDb.Samples.InsertOnSubmit(sample);
             this._toDoDb.SubmitChanges();

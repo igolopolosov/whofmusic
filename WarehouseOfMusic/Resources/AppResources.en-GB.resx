@@ -222,4 +222,10 @@
   <data name="MessageIncorrectValue" xml:space="preserve">
     <value>Unsuitable!</value>
   </data>
+  <data name="MessageDeleteSample" xml:space="preserve">
+    <value>Are you sure you want to delete the sample?</value>
+  </data>
+  <data name="RenameSample" xml:space="preserve">
+    <value>RENAME SAMPLE</value>
+  </data>
 </root>

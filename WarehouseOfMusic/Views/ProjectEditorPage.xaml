@@ -42,9 +42,9 @@
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu">
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.RenameContextMenu, 
-                     Source={StaticResource LocalizedStrings}}" Tap="RenameProject_OnTap"/>
+                     Source={StaticResource LocalizedStrings}}" Tap="RenameTrack_OnTap"/>
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.DeleteContextMenu, 
-                     Source={StaticResource LocalizedStrings}}" Tap="DeleteProject_OnTap"/>
+                     Source={StaticResource LocalizedStrings}}" Tap="DeleteTrack_OnTap"/>
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
             </Grid>

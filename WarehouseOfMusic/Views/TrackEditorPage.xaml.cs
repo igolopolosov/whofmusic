@@ -1,6 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
+using Coding4Fun.Toolkit.Controls;
 using WarehouseOfMusic.Enums;
 using WarehouseOfMusic.EventArgs;
 
@@ -103,6 +104,75 @@ namespace WarehouseOfMusic.Views
         }
         #endregion
 
+        #region Rename and delete sample dialogs
+
+        /// <summary>
+        /// Show dialog to create or rename project
+        /// </summary>
+        private void ShowRenameSampleDialog()
+        {
+            var sampleName = _viewModel.OnRenameSample.Name;
+            var renameSampleDialog = new InputPromptOveride()
+            {
+                IsSubmitOnEnterKey = false,
+                Title = AppResources.RenameSample,
+                Value = sampleName
+            };
+            renameSampleDialog.LostFocus += RenameSampleDialog_OnLostFocus;
+            renameSampleDialog.KeyUp += RenameSampleDialog_OnKeyUp;
+            renameSampleDialog.Completed += RenameSampleDialog_OnCompleted;
+            renameSampleDialog.Show();
+        }
+
+        /// <summary>
+        /// Show or hide 'empty name' error message
+        /// </summary>
+        void RenameSampleDialog_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            input.Message = input.Value == string.Empty ? AppResources.ErrorEmptyName : string.Empty;
+        }
+
+        /// <summary>
+        /// Detect the end of input text
+        /// </summary>
+        private void RenameSampleDialog_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            input.Focus();
+        }
+
+        private void RenameSampleDialog_OnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            var input = sender as InputPrompt;
+            if (input == null) return;
+            if (e.PopUpResult == PopUpResult.Ok) this._viewModel.RenameSampleTo(input.Value);
+            this._viewModel.OnRenameSample = null;
+        }
+
+        /// <summary>
+        /// Show dialog to delete sample
+        /// </summary>
+        private void ShowDeleteSampleDialog()
+        {
+            var deleteSampleDialog = new MessagePrompt()
+            {
+                Message = AppResources.MessageDeleteSample
+            };
+            deleteSampleDialog.Completed += DeleteSampleDialog_OnCompleted;
+            deleteSampleDialog.Show();
+        }
+
+        private void DeleteSampleDialog_OnCompleted(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            if (e.PopUpResult == PopUpResult.Ok) this._viewModel.DeleteSample();
+            _viewModel.OnDeleteSample = null;
+        }
+        #endregion
+
         #region For application bar
         /// <summary>
         /// Build Localized application bar
@@ -150,7 +220,7 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void AddSampleButton_Click(object sender, EventArgs e)
         {
-            this._viewModel.AddSample();
+            this._viewModel.AddSample(4);
         }
 
         /// <summary>
@@ -250,6 +320,22 @@ namespace WarehouseOfMusic.Views
             var chosenSample = image.DataContext as ToDoSample;
             if (chosenSample == null) return;
             _playerManager.Play(_viewModel.CurrentTrack, chosenSample.InitialTact);
+        }
+
+        private void RenameSample_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var contextMenuItem = sender as MenuItem;
+            if (contextMenuItem == null) return;
+            _viewModel.OnRenameSample = contextMenuItem.DataContext as ToDoSample;
+            ShowRenameSampleDialog();
+        }
+
+        private void DeleteSample_OnTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var contextMenuItem = sender as MenuItem;
+            if (contextMenuItem == null) return;
+            this._viewModel.OnDeleteSample = contextMenuItem.DataContext as ToDoSample;
+            ShowDeleteSampleDialog();
         }
         #endregion
 

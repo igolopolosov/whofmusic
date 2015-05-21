@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Data.Linq;
+
 namespace WarehouseOfMusic.ViewModels
 {
     using System.ComponentModel;
@@ -24,6 +26,16 @@ namespace WarehouseOfMusic.ViewModels
         /// Currently editing project
         /// </summary>
         private ToDoTrack _currentTrack;
+
+        /// <summary>
+        /// Sample that must be deleted
+        /// </summary>
+        private ToDoSample _onDeleteSample;
+
+        /// <summary>
+        /// Sample that must be renamed
+        /// </summary>
+        private ToDoSample _onRenameSample;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorViewModel" /> class.
@@ -58,6 +70,40 @@ namespace WarehouseOfMusic.ViewModels
         }
 
         /// <summary>
+        /// Gets or sets track on delete
+        /// </summary>
+        public ToDoSample OnDeleteSample
+        {
+            get
+            {
+                return this._onDeleteSample;
+            }
+
+            set
+            {
+                this._onDeleteSample = value;
+                this.NotifyPropertyChanged("OnDeleteSample");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets track on rename
+        /// </summary>
+        public ToDoSample OnRenameSample
+        {
+            get
+            {
+                return this._onRenameSample;
+            }
+
+            set
+            {
+                this._onRenameSample = value;
+                this.NotifyPropertyChanged("OnRenameSample");
+            }
+        }
+
+        /// <summary>
         /// Switch IsPlaying parameter for samples
         /// </summary>
         public void ChangeSamplesState(int playbleTactNumber)
@@ -71,15 +117,16 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Add new Sample to the database and collections.
         /// </summary>
-        public void AddSample()
+        public void AddSample(byte size)
         {
             var lastSample = _currentTrack.Samples.LastOrDefault();
-            if (lastSample == null) return;
+            var initialTact = lastSample == null ? 1 : lastSample.InitialTact + lastSample.Size;
             var sample = new ToDoSample
             {
-                InitialTact = lastSample.InitialTact + lastSample.Size,
-                Size = 4,
-                TrackRef = _currentTrack
+                InitialTact = initialTact,
+                Size = size,
+                TrackRef = _currentTrack,
+                Name = _currentTrack.Name + _currentTrack.Samples.Count
             };
             this._toDoDb.Samples.InsertOnSubmit(sample);
             this._toDoDb.SubmitChanges();
@@ -91,6 +138,16 @@ namespace WarehouseOfMusic.ViewModels
         /// </summary>
         public void DeleteSample()
         {
+            var project = _currentTrack.ProjectRef;
+            foreach (var note in _onDeleteSample.Notes)
+            {
+                this._toDoDb.Notes.DeleteOnSubmit(note);
+            }
+
+            this._currentTrack.Samples.Remove(_onDeleteSample);
+            this._toDoDb.Samples.DeleteOnSubmit(_onDeleteSample);
+            this._toDoDb.SubmitChanges();
+            this._currentTrack.ProjectRef = project;
         }
 
         /// <summary>
@@ -113,6 +170,16 @@ namespace WarehouseOfMusic.ViewModels
             var currentTrackIndex = currentProject.Tracks.IndexOf(_currentTrack);
             currentTrackIndex--;
             return currentTrackIndex == -1 ? currentProject.Tracks[currentProject.Tracks.Count - 1] : currentProject.Tracks[currentTrackIndex];
+        }
+
+        /// <summary>
+        /// Rename Sample
+        /// </summary>
+        /// <param name="newName">New name of Sample</param>
+        public void RenameSampleTo(string newName)
+        {
+            _onRenameSample.Name = newName;
+            this._toDoDb.SubmitChanges();
         }
 
         /// <summary>
