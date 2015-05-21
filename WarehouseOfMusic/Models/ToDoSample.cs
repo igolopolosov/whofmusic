@@ -210,8 +210,8 @@ namespace WarehouseOfMusic.Models
         {
             get
             {
-                if (_size > 1) return _initialTact + " - " + (_initialTact + _size - 1) + " " + _name;
-                return _initialTact + " " + _name;
+                if (_size > 1) return _initialTact + " - " + (_initialTact + _size - 1);
+                return string.Empty + _initialTact;
             }
         }
 

@@ -20,14 +20,19 @@
             <Grid Background ="{Binding StateBrush}" Margin="6"
                   toolkit:TiltEffect.IsTiltEnabled="True" Tap="Sample_OnTap">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="SampleTitle" Grid.Column="0"
                            Margin="6" VerticalAlignment="Center" Text="{Binding Title}" 
                            Foreground="{StaticResource PhoneForegroundBrush}"
                            FontSize="{StaticResource PhoneFontSizeMedium}"/>
-                <Image x:Name="SamplePlayButton" Grid.Column="1"
+                <TextBlock x:Name="SampleName" Grid.Column="1"
+                           Margin="6" VerticalAlignment="Center" Text="{Binding Name}" 
+                           Foreground="{StaticResource PhoneForegroundBrush}"
+                           FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                <Image x:Name="SamplePlayButton" Grid.Column="2"
                        Source="../Assets/AppBar/appbar.control.play.png"
                        HorizontalAlignment="Right" Margin="0,6,6,0" Width="40" Height="40" 
                        Tap="SamplePlayButton_OnTap"/>
