@@ -212,11 +212,8 @@
     <Content Include="Assets\AppBar\appbar.control.pause.png" />
     <Content Include="Assets\AppBar\appbar.control.resume.png" />
     <Content Include="Assets\AppBar\appbar.control.stop.png" />
-    <Content Include="Assets\AppBar\appbar.base.png" />
-    <Content Include="Assets\AppBar\appbar.base.select.png" />
     <Content Include="Assets\AppBar\appbar.control.play.png" />
     <Content Include="Assets\AppBar\appbar.question.png" />
-    <Content Include="Assets\AppBar\appbar.settings.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
