@@ -185,12 +185,15 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Query database and load the information for project
         /// </summary>
-        /// <param name="projectId">ID of loading project</param>
+        /// <param name="trackId">ID of loading project</param>
         public void LoadTrackFromDatabase(int trackId)
         {
             this._currentTrack = this._toDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
+            if (_currentTrack == null) return;
+            var list = _currentTrack.Samples.OrderBy(x => x.InitialTact);
+            _currentTrack.Samples.Assign(list);
         }
-        
+
         /// <summary>
         /// Write changes in the data context to the database.
         /// </summary>
