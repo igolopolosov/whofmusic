@@ -97,6 +97,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на длительность ноты.
+        /// </summary>
+        public static string AppBarNoteDuration {
+            get {
+                return ResourceManager.GetString("AppBarNoteDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на пауза.
         /// </summary>
         public static string AppBarPause {
@@ -219,6 +228,15 @@ namespace WarehouseOfMusic.Resources {
         public static string MessageChangeTempo {
             get {
                 return ResourceManager.GetString("MessageChangeTempo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выберите длительность ноты!.
+        /// </summary>
+        public static string MessageChoseNoteSize {
+            get {
+                return ResourceManager.GetString("MessageChoseNoteSize", resourceCulture);
             }
         }
         

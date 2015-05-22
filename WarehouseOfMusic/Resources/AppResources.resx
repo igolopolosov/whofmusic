@@ -129,6 +129,9 @@
   <data name="AppBarHelp" xml:space="preserve">
     <value>справка</value>
   </data>
+  <data name="AppBarNoteDuration" xml:space="preserve">
+    <value>длительность ноты</value>
+  </data>
   <data name="AppBarPause" xml:space="preserve">
     <value>пауза</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="MessageChangeTempo" xml:space="preserve">
     <value>Введите значение от 30 до 240.</value>
+  </data>
+  <data name="MessageChoseNoteSize" xml:space="preserve">
+    <value>Выберите длительность ноты!</value>
   </data>
   <data name="MessageChoseSampleSize" xml:space="preserve">
     <value>Выберите количество тактов в добавляемом блоке!</value>

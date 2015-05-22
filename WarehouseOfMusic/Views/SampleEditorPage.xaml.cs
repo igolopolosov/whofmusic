@@ -79,10 +79,19 @@ namespace WarehouseOfMusic.Views
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
+            var noteDurationButton =
+                new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.music.select.png", UriKind.Relative))
+                {
+                    Text = AppResources.AppBarNoteDuration
+                };
+            noteDurationButton.Click += NoteDurationButton_OnClick;
+            this.ApplicationBar.Buttons.Add(noteDurationButton);
+            
+            //// Add play button for player
             var playPauseButton =
                 new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
                 {
-                    Text = AppResources.AppBarPlay,
+                    Text = AppResources.AppBarPlay
                 };
             playPauseButton.Click += this.PlayPauseButton_OnClick;
             this.ApplicationBar.Buttons.Add(playPauseButton);
@@ -91,12 +100,35 @@ namespace WarehouseOfMusic.Views
             var stopButton =
                 new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.stop.png", UriKind.Relative))
                 {
-                    Text = AppResources.AppBarStop,
+                    Text = AppResources.AppBarStop
                 };
             stopButton.Click += this.StopButton_OnClick;
             this.ApplicationBar.Buttons.Add(stopButton);
         }
-        
+
+        /// <summary>
+        /// Show dialog for chose duration of note
+        /// </summary>
+        private void NoteDurationButton_OnClick(object sender, EventArgs eventArgs)
+        {
+            var noteDurationPickDialog = new MessagePrompt()
+            {
+                Title = AppResources.MessageChoseNoteSize,
+                Body = new NoteSizePicker()
+            };
+            noteDurationPickDialog.Completed += NoteDurationPickDialog_Completed;
+            noteDurationPickDialog.Show();
+        }
+
+        private void NoteDurationPickDialog_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
+        {
+            if (e.PopUpResult != PopUpResult.Ok) return;
+            var dialog = sender as MessagePrompt;
+            if (dialog == null) return;
+            var durationPicker = dialog.Body as NoteSizePicker;
+            if (durationPicker != null) PianoRollContext.NoteDuration = durationPicker.Duration;
+        }
+
         /// <summary>
         /// Play track
         /// </summary>
@@ -132,7 +164,7 @@ namespace WarehouseOfMusic.Views
         {
             Dispatcher.BeginInvoke(() =>
             {
-                var button = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+                var button = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
                 if (button == null) return;
                 switch (e.State)
                 {

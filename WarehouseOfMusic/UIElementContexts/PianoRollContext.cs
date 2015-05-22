@@ -48,7 +48,7 @@ namespace WarehouseOfMusic.UIElementContexts
         /// <summary>
         /// Current value of note duration
         /// </summary>
-        public static byte NoteDuration = 2;
+        public static byte NoteDuration = 4;
 
         /// <summary>
         /// Collection of all availiable keys

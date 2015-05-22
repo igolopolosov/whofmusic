@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="WarehouseOfMusic.Views.NoteSizePicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="240">
+    
+    <StackPanel x:Name="LayoutRoot" Orientation="Vertical">
+        <TextBlock x:Name="SliderValueBlock" Text="8" HorizontalAlignment="Center"
+                   FontSize="{StaticResource PhoneFontSizeLarge}"
+                   Loaded="SliderValueBlock_OnLoaded"></TextBlock>
+        <Slider x:Name="NoteSizeSlider" Minimum="1" Maximum="16" SmallChange="1"
+                ValueChanged="NoteSizeSlider_OnValueChanged"
+                Loaded="NoteSizeSlider_OnLoaded"></Slider>
+    </StackPanel>
+</UserControl>

@@ -231,4 +231,10 @@
   <data name="DuplicateContextMenu" xml:space="preserve">
     <value>duplicate</value>
   </data>
+  <data name="MessageChoseNoteSize" xml:space="preserve">
+    <value>Select the duration of the note!</value>
+  </data>
+  <data name="AppBarNoteDuration" xml:space="preserve">
+    <value>duration of note</value>
+  </data>
 </root>
