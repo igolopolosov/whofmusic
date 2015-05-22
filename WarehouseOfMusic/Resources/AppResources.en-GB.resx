@@ -228,4 +228,7 @@
   <data name="MessageChoseSampleSize" xml:space="preserve">
     <value>Select the number of tacts in the added sample!</value>
   </data>
+  <data name="DuplicateContextMenu" xml:space="preserve">
+    <value>duplicate</value>
+  </data>
 </root>

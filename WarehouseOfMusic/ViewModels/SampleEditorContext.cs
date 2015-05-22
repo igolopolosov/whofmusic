@@ -46,7 +46,7 @@ namespace WarehouseOfMusic.ViewModels
             CurrentSample.Notes.Remove(note);
             _toDoDb.Notes.DeleteOnSubmit(note);
             _toDoDb.SubmitChanges();
-            //// [Hack] Restore references
+            //// Restore references
             _currentSample.TrackRef = _toDoDb.Tracks.First(x => x.Id == _currentSample.TrackId);
             return null;
         }

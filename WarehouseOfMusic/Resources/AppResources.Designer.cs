@@ -178,6 +178,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на дублировать.
+        /// </summary>
+        public static string DuplicateContextMenu {
+            get {
+                return ResourceManager.GetString("DuplicateContextMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Пожалуйста, задайте имя..
         /// </summary>
         public static string ErrorEmptyName {

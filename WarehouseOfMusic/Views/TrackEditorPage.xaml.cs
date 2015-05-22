@@ -337,6 +337,14 @@ namespace WarehouseOfMusic.Views
             this._viewModel.OnDeleteSample = contextMenuItem.DataContext as ToDoSample;
             ShowDeleteSampleDialog();
         }
+
+        private void DuplicateSample_OnTap(object sender, GestureEventArgs e)
+        {
+            var contextMenuItem = sender as MenuItem;
+            if (contextMenuItem == null) return;
+            var sample = contextMenuItem.DataContext as ToDoSample;
+            this._viewModel.Duplicate(sample);
+        }
         #endregion
 
         #region Navigation buttons

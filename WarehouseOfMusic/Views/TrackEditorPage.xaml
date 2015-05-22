@@ -39,6 +39,8 @@
                        Tap="SamplePlayButton_OnTap"/>
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu IsZoomEnabled="True" x:Name="ContextMenu">
+                        <toolkit:MenuItem Header="{Binding Path=LocalizedResources.DuplicateContextMenu, 
+                     Source={StaticResource LocalizedStrings}}" Tap="DuplicateSample_OnTap"/>
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.RenameContextMenu, 
                      Source={StaticResource LocalizedStrings}}" Tap="RenameSample_OnTap"/>
                         <toolkit:MenuItem Header="{Binding Path=LocalizedResources.DeleteContextMenu, 

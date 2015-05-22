@@ -150,6 +150,36 @@ namespace WarehouseOfMusic.ViewModels
             this._currentTrack.ProjectRef = project;
         }
 
+        public void Duplicate(ToDoSample sample)
+        {
+            var index = _currentTrack.Samples.IndexOf(sample) + 1;
+            var duplicateSample = new ToDoSample()
+            {
+                InitialTact = sample.InitialTact,
+                Size = sample.Size,
+                TrackRef = _currentTrack,
+                Name = sample.Name + "(" + _currentTrack.Samples.Count + ")"
+            };
+            this._toDoDb.Samples.InsertOnSubmit(duplicateSample);
+            this._toDoDb.SubmitChanges();
+            _currentTrack.Samples.Insert(index, duplicateSample);
+
+            foreach (var note in sample.Notes)
+            {
+                var duplicateNote = new ToDoNote()
+                {
+                    Duration = note.Duration,
+                    MidiNumber = note.MidiNumber,
+                    Position = note.Position,
+                    Tact = (duplicateSample.InitialTact - sample.InitialTact) + note.Tact,
+                    SampleRef = duplicateSample
+                };
+                _toDoDb.Notes.InsertOnSubmit(duplicateNote);
+                _toDoDb.SubmitChanges();
+                duplicateSample.Notes.Add(duplicateNote);
+            }
+        }
+
         /// <summary>
         /// Find and return next track in list
         /// </summary>
@@ -180,6 +210,14 @@ namespace WarehouseOfMusic.ViewModels
         {
             _onRenameSample.Name = newName;
             this._toDoDb.SubmitChanges();
+        }
+
+        /// <summary>
+        /// Fix bugs with null value of reference
+        /// </summary>
+        public void RestoreReferences(ToDoSample movedSample)
+        {
+            movedSample.TrackRef = _currentTrack;
         }
 
         /// <summary>
@@ -216,13 +254,5 @@ namespace WarehouseOfMusic.ViewModels
             }
         }
         #endregion
-
-        /// <summary>
-        /// Fix bugs with null value of reference
-        /// </summary>
-        public void RestoreReferences(ToDoSample movedSample)
-        {
-            movedSample.TrackRef = _currentTrack;
-        }
     }
 }

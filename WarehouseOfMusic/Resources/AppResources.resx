@@ -156,6 +156,9 @@
   <data name="DeleteContextMenu" xml:space="preserve">
     <value>удалить</value>
   </data>
+  <data name="DuplicateContextMenu" xml:space="preserve">
+    <value>дублировать</value>
+  </data>
   <data name="ErrorEmptyName" xml:space="preserve">
     <value>Пожалуйста, задайте имя.</value>
   </data>
