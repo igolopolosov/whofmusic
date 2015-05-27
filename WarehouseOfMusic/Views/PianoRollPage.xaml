@@ -36,8 +36,11 @@
                         </ItemsControl.Template>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <Canvas ZIndex="0" Tap="KeyCanvas_OnTap"
-                                        Background="{StaticResource PhoneChromeBrush}"/>
+                                <Canvas ZIndex="0" Tap="KeyCanvas_OnTap">
+                                    <Canvas.Background>
+                                        <ImageBrush Stretch="Fill" ImageSource="/Assets/PianoRollGrid.png"/>
+                                    </Canvas.Background>
+                                </Canvas>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
