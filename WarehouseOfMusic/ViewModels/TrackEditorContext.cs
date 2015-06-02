@@ -4,10 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Data.Linq;
-
 namespace WarehouseOfMusic.ViewModels
 {
+    using System.Data.Linq;
     using System.Linq;
     using Models;
 
@@ -31,15 +30,6 @@ namespace WarehouseOfMusic.ViewModels
         /// </summary>
         private ToDoSample _onRenameSample;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectEditorContext" /> class.
-        /// Class constructor, create the data context object.
-        /// </summary>
-        /// <param name="toDoDbConnectionString">Path to connect to database</param>
-        public TrackEditorContext(string toDoDbConnectionString) : base(toDoDbConnectionString)
-        {
-        }
-        
         /// <summary>
         /// Gets or sets the current project
         /// </summary>
@@ -92,6 +82,48 @@ namespace WarehouseOfMusic.ViewModels
         }
 
         /// <summary>
+        /// Next track in list
+        /// </summary>
+        public ToDoTrack NextTrack
+        {
+            get
+            {
+                var currentProject = _currentTrack.ProjectRef;
+                var currentTrackIndex = currentProject.Tracks.IndexOf(_currentTrack);
+                currentTrackIndex++;
+                return currentTrackIndex == currentProject.Tracks.Count
+                    ? currentProject.Tracks[0]
+                    : currentProject.Tracks[currentTrackIndex];
+            }
+        }
+
+        /// <summary>
+        /// Previous track in list
+        /// </summary>
+        public ToDoTrack PreviousTrack
+        {
+            get
+            {
+                var currentProject = _currentTrack.ProjectRef;
+                var currentTrackIndex = currentProject.Tracks.IndexOf(_currentTrack);
+                currentTrackIndex--;
+                return currentTrackIndex == -1
+                    ? currentProject.Tracks[currentProject.Tracks.Count - 1]
+                    : currentProject.Tracks[currentTrackIndex];
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectEditorContext" /> class.
+        /// Class constructor, create the data context object.
+        /// </summary>
+        /// <param name="toDoDbConnectionString">Path to connect to database</param>
+        public TrackEditorContext(string toDoDbConnectionString)
+            : base(toDoDbConnectionString)
+        {
+        }
+
+        /// <summary>
         /// Switch IsPlaying parameter for samples
         /// </summary>
         public void ChangeSamplesState(int playbleTactNumber)
@@ -139,6 +171,10 @@ namespace WarehouseOfMusic.ViewModels
             this._currentTrack.ProjectRef = project;
         }
 
+        /// <summary>
+        /// Add to list of track sample track as chosen
+        /// </summary>
+        /// <param name="sample"></param>
         public void Duplicate(ToDoSample sample)
         {
             var index = _currentTrack.Samples.IndexOf(sample) + 1;
@@ -168,29 +204,7 @@ namespace WarehouseOfMusic.ViewModels
                 duplicateSample.Notes.Add(duplicateNote);
             }
         }
-
-        /// <summary>
-        /// Find and return next track in list
-        /// </summary>
-        public ToDoTrack NextTrack()
-        {
-            var currentProject = _currentTrack.ProjectRef;
-            var currentTrackIndex = currentProject.Tracks.IndexOf(_currentTrack);
-            currentTrackIndex++;
-            return currentTrackIndex == currentProject.Tracks.Count ? currentProject.Tracks[0] : currentProject.Tracks[currentTrackIndex];
-        }
-
-        /// <summary>
-        /// Find and return previous track in list
-        /// </summary>
-        public ToDoTrack PreviousTrack()
-        {
-            var currentProject = _currentTrack.ProjectRef;
-            var currentTrackIndex = currentProject.Tracks.IndexOf(_currentTrack);
-            currentTrackIndex--;
-            return currentTrackIndex == -1 ? currentProject.Tracks[currentProject.Tracks.Count - 1] : currentProject.Tracks[currentTrackIndex];
-        }
-
+        
         /// <summary>
         /// Rename Sample
         /// </summary>

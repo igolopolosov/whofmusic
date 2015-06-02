@@ -7,7 +7,6 @@
 namespace WarehouseOfMusic.ViewModels
 {
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Linq;
     using EventArgs;
     using Models;
@@ -22,35 +21,6 @@ namespace WarehouseOfMusic.ViewModels
         /// Represent notes of each separate tact in sample
         /// </summary>
         public ObservableCollection<PianoRollContext> Tacts;
-
-        /// <summary>
-        /// Add note to current track
-        /// </summary>
-        private ToDoNote OnAddedNote(object sender, NoteEventArgs e)
-        {
-            var note = e.Note;
-            note.SampleRef = _currentSample;
-            ToDoDb.Notes.InsertOnSubmit(note);
-            ToDoDb.SubmitChanges();
-            CurrentSample.Notes.Add(note);
-            return note;
-        }
-
-        /// <summary>
-        /// Add note to current track
-        /// </summary>
-        private ToDoNote OnDeletedNote(object sender, NoteEventArgs e)
-        {
-            var note = e.Note;
-            CurrentSample.Notes.Remove(note);
-            ToDoDb.Notes.DeleteOnSubmit(note);
-            ToDoDb.SubmitChanges();
-            //// Restore references
-            _currentSample.TrackRef = ToDoDb.Tracks.First(x => x.Id == _currentSample.TrackId);
-            return null;
-        }
-
-        #region DataBaseLayer
 
         /// <summary>
         /// Currently editing project
@@ -87,7 +57,7 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Query database and load the information for sample
         /// </summary>
-        /// <param name="trackId">ID of loading sample</param>
+        /// <param name="sampleId">ID of loading sample</param>
         public override void LoadData(int sampleId)
         {
             this._currentSample = this.ToDoDb.Samples.FirstOrDefault(x => x.Id == sampleId);
@@ -108,6 +78,31 @@ namespace WarehouseOfMusic.ViewModels
             }
         }
 
-        #endregion
+        /// <summary>
+        /// Add note to current track
+        /// </summary>
+        private ToDoNote OnAddedNote(object sender, NoteEventArgs e)
+        {
+            var note = e.Note;
+            note.SampleRef = _currentSample;
+            ToDoDb.Notes.InsertOnSubmit(note);
+            ToDoDb.SubmitChanges();
+            CurrentSample.Notes.Add(note);
+            return note;
+        }
+
+        /// <summary>
+        /// Add note to current track
+        /// </summary>
+        private ToDoNote OnDeletedNote(object sender, NoteEventArgs e)
+        {
+            var note = e.Note;
+            CurrentSample.Notes.Remove(note);
+            ToDoDb.Notes.DeleteOnSubmit(note);
+            ToDoDb.SubmitChanges();
+            //// Restore references
+            _currentSample.TrackRef = ToDoDb.Tracks.First(x => x.Id == _currentSample.TrackId);
+            return null;
+        }
     }
 }

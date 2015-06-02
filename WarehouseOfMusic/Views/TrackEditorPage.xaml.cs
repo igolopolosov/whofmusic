@@ -1,18 +1,17 @@
-﻿using System.Collections.Specialized;
-using System.Linq;
-using System.Windows.Input;
-using Coding4Fun.Toolkit.Controls;
-using WarehouseOfMusic.Enums;
-using WarehouseOfMusic.EventArgs;
-
-namespace WarehouseOfMusic.Views
+﻿namespace WarehouseOfMusic.Views
 {
     using System;
+    using System.Collections.Specialized;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Navigation;
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
+    using Coding4Fun.Toolkit.Controls;
+    using Enums;
+    using EventArgs;
     using Managers;
     using Models;
     using Resources;
@@ -350,15 +349,13 @@ namespace WarehouseOfMusic.Views
         #region Navigation buttons
         private void ToLeftButton_OnTap(object sender, GestureEventArgs e)
         {
-            var previousTrack = _viewModel.PreviousTrack();
-            IsoSettingsManager.SaveRecord("CurrentTrackId", previousTrack.Id);
+            IsoSettingsManager.SaveRecord("CurrentTrackId", _viewModel.PreviousTrack.Id);
             this.InitialiazeDataContext();
         }
 
         private void ToRightButton_OnTap(object sender, GestureEventArgs e)
         {
-            var nextTrack = _viewModel.NextTrack();
-            IsoSettingsManager.SaveRecord("CurrentTrackId", nextTrack.Id);
+            IsoSettingsManager.SaveRecord("CurrentTrackId", _viewModel.NextTrack.Id);
             this.InitialiazeDataContext();
         }
 

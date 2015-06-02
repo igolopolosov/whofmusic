@@ -125,7 +125,6 @@ namespace WarehouseOfMusic.ViewModels
         /// <summary>
         /// Remove a track from the database and collections.
         /// </summary>
-        /// <param name="trackForDelete">Track on removing</param>
         public void DeleteTrack()
         {
             foreach (var sample in _onDeleteTrack.Samples)
