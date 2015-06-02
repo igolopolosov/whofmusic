@@ -121,12 +121,13 @@ namespace WarehouseOfMusic.ViewModels
         {
             var lastSample = _currentTrack.Samples.LastOrDefault();
             var initialTact = lastSample == null ? 1 : lastSample.InitialTact + lastSample.Size;
+            var nameAddition = lastSample == null ? 0 : lastSample.Id;
             var sample = new ToDoSample
             {
                 InitialTact = initialTact,
                 Size = size,
                 TrackRef = _currentTrack,
-                Name = _currentTrack.Name + _currentTrack.Samples.Count
+                Name = _currentTrack.Name + "_" + nameAddition
             };
             this._toDoDb.Samples.InsertOnSubmit(sample);
             this._toDoDb.SubmitChanges();
