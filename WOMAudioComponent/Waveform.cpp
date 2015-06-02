@@ -54,18 +54,6 @@ PointCollection^ Waveform::Points::get()
         pts->Append(Point(2 * PER, BASE));
         break;
 
-    case WaveformType::Pulse:
-        pts->Append(Point(ZERO, BASE));
-        pts->Append(Point(ZERO, TOP));
-        pts->Append(Point(PER / 4, TOP));
-        pts->Append(Point(PER / 4, BASE));
-        pts->Append(Point(PER, BASE));
-        pts->Append(Point(PER, BOT));
-        pts->Append(Point(5 * PER / 4, BOT));
-        pts->Append(Point(5 * PER / 4, BASE));
-        pts->Append(Point(2 * PER, BASE));
-        break;
-
     }
     return pts;
 }

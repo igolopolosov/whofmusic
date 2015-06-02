@@ -112,10 +112,6 @@ void Oscillator::FillAndSubmit(int startIndex, int count)
             waveformBuffer[i] = angle < 0.5f ? 1.0f : -1.0f;
             break;
 
-        case WomAudioComponent::WaveformType::Pulse:
-            waveformBuffer[i] = angle < 0.25f ? 1.0f : (angle < 0.5f ? 0 : (angle < 0.75 ? -1 : 0));
-            break;
-
         default:
             waveformBuffer[i] = 0;
             break;

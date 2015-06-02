@@ -27,7 +27,7 @@
                            Foreground="{StaticResource PhoneForegroundBrush}"
                            FontSize="{StaticResource PhoneFontSizeLarge}"
                            Tap="TrackListBoxItem_OnTap"/>
-                <ComboBox Grid.Column="1" ItemsSource="{Binding Instruments}">
+                <ComboBox x:Name="InstrumentList" Grid.Column="1" Loaded="InstrumentList_OnLoaded">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}"/>

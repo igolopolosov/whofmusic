@@ -4,14 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-
-using WarehouseOfMusic.Enums;
-using WarehouseOfMusic.EventArgs;
-
 namespace WarehouseOfMusic.Views
 {
     using System;
-    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
@@ -19,6 +14,8 @@ namespace WarehouseOfMusic.Views
     using Microsoft.Phone.Controls;
     using Microsoft.Phone.Shell;
     using Coding4Fun.Toolkit.Controls;
+    using Enums;
+    using EventArgs;
     using Managers;
     using Models;
     using Resources;
@@ -377,6 +374,18 @@ namespace WarehouseOfMusic.Views
                 }
             }
         }
+        #endregion
+
+        #region Choose instrument
+        private void InstrumentList_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var list = sender as ComboBox;
+            if (list == null) return;
+            var track = list.DataContext as ToDoTrack;
+            if (track == null) return;
+            list.ItemsSource = ProjectEditorContext.Instruments;
+            list.SelectedItem = track.Instrument;
+        } 
         #endregion
     }
 }

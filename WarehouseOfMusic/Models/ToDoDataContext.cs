@@ -7,6 +7,7 @@
 namespace WarehouseOfMusic.Models
 {
     using System.Data.Linq;
+    using WomAudioComponent;
 
     /// <summary>
     /// Image of database
@@ -34,6 +35,11 @@ namespace WarehouseOfMusic.Models
         public Table<ToDoTrack> Tracks;
 
         /// <summary>
+        /// Specify a table for the tracks
+        /// </summary>
+        public Table<ToDoInstrument> Instruments;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ToDoDataContext" /> class.
         /// Pass the connection string to the base class.
         /// </summary>
@@ -41,6 +47,23 @@ namespace WarehouseOfMusic.Models
         public ToDoDataContext(string connectionString)
             : base(connectionString)
         {
+        }
+
+        /// <summary>
+        /// Add simple instruments to DB
+        /// </summary>
+        public void Populate()
+        {
+            for (var i = 0; i < 4; i++)
+            {
+                var instrument = new ToDoInstrument()
+                {
+                    Name = "" + (WaveformType)i,
+                    Waveform = (WaveformType)i
+                };
+                this.Instruments.InsertOnSubmit(instrument);
+            }
+            this.SubmitChanges();
         }
     }
 }

@@ -7,7 +7,6 @@ namespace WomAudioComponent
         Sine,
         Triangle,
         Sawtooth,
-        Square,
-        Pulse
+        Square
     };
 }

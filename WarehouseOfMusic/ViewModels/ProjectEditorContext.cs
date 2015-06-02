@@ -6,6 +6,7 @@
 
 namespace WarehouseOfMusic.ViewModels
 {
+    using System.Collections.ObjectModel;
     using System.Linq;
     using Models;
     using Resources;
@@ -21,6 +22,11 @@ namespace WarehouseOfMusic.ViewModels
         private ToDoProject _currentProject;
 
         /// <summary>
+        /// List of available instruments
+        /// </summary>
+        private static ObservableCollection<ToDoInstrument> _instruments;
+
+        /// <summary>
         /// Track that must be deleted
         /// </summary>
         private ToDoTrack _onDeleteTrack;
@@ -29,6 +35,7 @@ namespace WarehouseOfMusic.ViewModels
         /// Track that must be renamed
         /// </summary>
         private ToDoTrack _onRenameTrack;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectEditorContext" /> class.
@@ -39,7 +46,7 @@ namespace WarehouseOfMusic.ViewModels
         {
         }
 
-       /// <summary>
+        /// <summary>
         /// Gets or sets the current project
         /// </summary>
         public ToDoProject CurrentProject
@@ -53,6 +60,17 @@ namespace WarehouseOfMusic.ViewModels
             {
                 this._currentProject = value;
                 this.NotifyPropertyChanged("CurrentProject");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the current project
+        /// </summary>
+        public static ObservableCollection<ToDoInstrument> Instruments 
+        {
+            get
+            {
+                return _instruments;
             }
         }
 
@@ -105,7 +123,8 @@ namespace WarehouseOfMusic.ViewModels
             var newTrack = new ToDoTrack
             {
                 Name = trackName,
-                ProjectRef = this._currentProject
+                ProjectRef = this._currentProject,
+                Instrument = this.ToDoDb.Instruments.First()
             };
             this.ToDoDb.Tracks.InsertOnSubmit(newTrack);
             this.ToDoDb.SubmitChanges();
@@ -148,6 +167,7 @@ namespace WarehouseOfMusic.ViewModels
         public override void LoadData(int projectId)
         {
             this._currentProject = this.ToDoDb.Projects.FirstOrDefault(x => x.Id == projectId);
+            _instruments = new ObservableCollection<ToDoInstrument>(this.ToDoDb.Instruments);
         }
 
         /// <summary>

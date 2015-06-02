@@ -102,6 +102,7 @@
     <Compile Include="EventArgs\PlayerEventArgs.cs" />
     <Compile Include="InputPromtOverride.cs" />
     <Compile Include="Managers\TrackManager.cs" />
+    <Compile Include="Models\ToDoInstrument.cs" />
     <Compile Include="Models\ToDoSample.cs" />
     <Compile Include="EventArgs\NoteEventArgs.cs" />
     <Compile Include="Enums\Key.cs" />

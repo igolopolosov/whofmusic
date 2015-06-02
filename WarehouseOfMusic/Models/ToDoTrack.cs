@@ -33,6 +33,11 @@ namespace WarehouseOfMusic.Models
         private EntitySet<ToDoSample> _samples;
 
         /// <summary>
+        /// Entity set for the collection side of the relationship.
+        /// </summary>
+        private EntityRef<ToDoInstrument> _instrument;
+
+        /// <summary>
         /// Entity reference, to identify the ToDoProject "storage" table
         /// </summary>
         private EntityRef<ToDoProject> _projectRef;
@@ -215,6 +220,29 @@ namespace WarehouseOfMusic.Models
         /// <summary>
         /// Gets or sets entity set for the collection side of the relationship.
         /// </summary>
+        [Association(Storage = "_instrument", OtherKey = "Id", ThisKey = "InstrumentId", IsForeignKey = true)]
+        public ToDoInstrument Instrument
+        {
+            get
+            {
+                return this._instrument.Entity;
+            }
+
+            set
+            {
+                this.NotifyPropertyChanging("Instrument");
+                this._instrument.Entity = value;
+                if (value != null)
+                {
+                    this.InstrumentId = value.Id;
+                }
+                this.NotifyPropertyChanging("Instrument");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets entity set for the collection side of the relationship.
+        /// </summary>
         [Association(Storage = "_samples", OtherKey = "TrackId", ThisKey = "Id")]
         public EntitySet<ToDoSample> Samples
         {
@@ -227,6 +255,12 @@ namespace WarehouseOfMusic.Models
         /// </summary>
         [Column]
         internal int ProjectId { get; set; }
+
+        /// <summary>
+        /// Gets or sets internal column for the associated ToDoInstrument ID value
+        /// </summary>
+        [Column]
+        internal int InstrumentId { get; set; }
 
         /// <summary>
         /// Called during an add operation

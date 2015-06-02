@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 
 using WarehouseOfMusic.Managers;
+using WomAudioComponent;
 
 namespace WarehouseOfMusic
 {
@@ -77,6 +78,7 @@ namespace WarehouseOfMusic
                 {
                     // Create the local database.
                     db.CreateDatabase();
+                    db.Populate();
                 }
             }
 
