@@ -1,12 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using WarehouseOfMusic.Enums;
-using WarehouseOfMusic.EventArgs;
-using WarehouseOfMusic.Models;
-
-namespace WarehouseOfMusic.UIElementContexts
+﻿namespace WarehouseOfMusic.UIElementContexts
 {
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Linq;
+    using Enums;
+    using EventArgs;
+    using Models;
     using Resources;
 
     /// <summary>
@@ -75,6 +74,11 @@ namespace WarehouseOfMusic.UIElementContexts
             }
         }
 
+        /// <summary>
+        /// Add new note to the tact
+        /// </summary>
+        /// <param name="keyValue">Midi number of note</param>
+        /// <param name="tactPostition">Position in the tact</param>
         public void AddNote(byte keyValue, byte tactPostition)
         {
             var note = new ToDoNote
@@ -91,6 +95,10 @@ namespace WarehouseOfMusic.UIElementContexts
             keyContext.Notes.Add(compeletedNote);
         }
 
+        /// <summary>
+        /// Delete note from the tact
+        /// </summary>
+        /// <param name="toDoNote"></param>
         public void DeleteNote(ToDoNote toDoNote)
         {
             var keyContext = _keys.First(x => x.Value == (Key)toDoNote.MidiNumber);

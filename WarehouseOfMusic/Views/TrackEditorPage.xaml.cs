@@ -308,7 +308,7 @@
             var chosenSample = grid.DataContext as ToDoSample;
             if (chosenSample == null) return;
             IsoSettingsManager.SaveRecord("CurrentSampleId", chosenSample.Id);
-            NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative), chosenSample.Id);
+            NavigationService.Navigate(new Uri("/Views/SampleEditorPage.xaml", UriKind.Relative));
         }
 
         private void SamplePlayButton_OnTap(object sender, GestureEventArgs e)

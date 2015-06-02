@@ -1,12 +1,10 @@
-﻿using WarehouseOfMusic.Enums;
-
-namespace WarehouseOfMusic.UIElementContexts
+﻿namespace WarehouseOfMusic.UIElementContexts
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Windows.Media;
+    using Enums;
     using Models;
-    using ViewModels;
     
     public class KeyContext : INotifyPropertyChanged
     {

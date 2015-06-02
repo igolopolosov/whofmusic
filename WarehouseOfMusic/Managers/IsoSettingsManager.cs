@@ -3,6 +3,7 @@
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace WarehouseOfMusic.Managers
 {
     using System.IO.IsolatedStorage;

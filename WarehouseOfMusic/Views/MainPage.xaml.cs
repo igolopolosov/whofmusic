@@ -159,7 +159,7 @@ namespace WarehouseOfMusic.Views
             var chosenProject = grid.DataContext as ToDoProject;
             if (chosenProject == null) return;
             IsoSettingsManager.SaveRecord("CurrentProjectId", chosenProject.Id);
-            NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative), chosenProject.Id);
+            NavigationService.Navigate(new Uri("/Views/ProjectEditorPage.xaml", UriKind.Relative));
         }
 
         /// <summary>

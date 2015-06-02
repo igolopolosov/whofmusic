@@ -4,16 +4,15 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Linq;
-using System.Windows.Threading;
-using WarehouseOfMusic.Converters;
-using WarehouseOfMusic.Enums;
-using WarehouseOfMusic.EventArgs;
-
 namespace WarehouseOfMusic.Managers
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Threading;
+    using Converters;
+    using Enums;
+    using EventArgs;
     using Models;
     using WomAudioComponent;
 

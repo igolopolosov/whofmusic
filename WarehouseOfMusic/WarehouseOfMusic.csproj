@@ -100,7 +100,6 @@
     <Compile Include="Converters\TimePeriodsConverter.cs" />
     <Compile Include="Enums\PlayerState.cs" />
     <Compile Include="EventArgs\PlayerEventArgs.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="InputPromtOverride.cs" />
     <Compile Include="Managers\TrackManager.cs" />
     <Compile Include="Models\ToDoSample.cs" />
@@ -156,9 +155,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.ru-RU.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Managers\ThemeManager.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="ViewModels\MainPageContext.cs" />
     <Compile Include="ViewModels\ProjectEditorContext.cs" />
