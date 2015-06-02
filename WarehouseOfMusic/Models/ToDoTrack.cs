@@ -7,6 +7,7 @@
 namespace WarehouseOfMusic.Models
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Data.Linq;
     using System.Data.Linq.Mapping;
@@ -36,6 +37,11 @@ namespace WarehouseOfMusic.Models
         /// Entity set for the collection side of the relationship.
         /// </summary>
         private EntityRef<ToDoInstrument> _instrument;
+
+        /// <summary>
+        /// List of available instruments
+        /// </summary>
+        private ObservableCollection<ToDoInstrument> _instruments;
 
         /// <summary>
         /// Entity reference, to identify the ToDoProject "storage" table
@@ -103,6 +109,19 @@ namespace WarehouseOfMusic.Models
                     this.NotifyPropertyChanged("Id");
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the list of instruments
+        /// </summary>
+        public ObservableCollection<ToDoInstrument> Instruments
+        {
+            get
+            {
+                return _instruments;
+            }
+
+            set { _instruments = value; }
         }
 
         /// <summary>

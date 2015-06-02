@@ -42,8 +42,10 @@
                                     FullModeHeader="{Binding Path=LocalizedResources.SelectInstrument, 
                      Source={StaticResource LocalizedStrings}}"
                                     ItemTemplate="{StaticResource DropdownTemplate}"
+                                    ItemsSource="{Binding Instruments}"
                                     FullModeItemTemplate="{StaticResource DropdownFullTemplate}"
-                                    Loaded="InstrumentList_OnLoaded">
+                                    Loaded="InstrumentList_OnLoaded" SelectionChanged="InstrumentList_OnSelectionChanged"
+                                    >
                 </toolkit:ListPicker>
                 <CheckBox x:Name="SoloCheckBox" Grid.Column="2" IsChecked="{Binding Solo, Mode=TwoWay}" 
                           Checked="SoloCheckBox_OnChecked"></CheckBox>

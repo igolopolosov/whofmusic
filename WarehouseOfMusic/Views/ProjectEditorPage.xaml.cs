@@ -5,6 +5,8 @@
 //-----------------------------------------------------------------------
 
 using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.Phone.Controls.Primitives;
+using WomAudioComponent;
 
 namespace WarehouseOfMusic.Views
 {
@@ -379,20 +381,26 @@ namespace WarehouseOfMusic.Views
         #endregion
 
         #region Choose instrument
+
+        /// <summary>
+        /// Handle multiply calls of selection changed
+        /// </summary>
+        private bool _handled;
+
         private void InstrumentList_OnLoaded(object sender, RoutedEventArgs e)
         {
             var list = sender as ListPicker;
             if (list == null) return;
             var track = list.DataContext as ToDoTrack;
             if (track == null) return;
-            var instrument = track.Instrument;
-            list.ItemsSource = ProjectEditorContext.Instruments;
-            list.SelectedItem = instrument;
-            list.SelectionChanged += InstrumentList_OnSelectionChanged;
-        } 
-        
+            list.SelectedItem = track.Instrument;
+            _handled = false;
+        }
+
         private void InstrumentList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (_handled) return;
+            if (e.RemovedItems == null || e.RemovedItems.Count <= 0) return;
             var list = sender as ListPicker;
             if (list == null) return;
             var track = list.DataContext as ToDoTrack;
@@ -400,6 +408,7 @@ namespace WarehouseOfMusic.Views
             var instrument = list.SelectedItem as ToDoInstrument;
             if (instrument == null) return;
             _viewModel.SelectInstrument(track, instrument);
+            _handled = true;
         }
         #endregion
     }
