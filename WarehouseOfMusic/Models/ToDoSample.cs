@@ -4,15 +4,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Windows;
-using System.Windows.Media;
-
 namespace WarehouseOfMusic.Models
 {
     using System;
     using System.ComponentModel;
     using System.Data.Linq;
     using System.Data.Linq.Mapping;
+    using System.Windows;
+    using System.Windows.Media;
 
     /// <summary>
     /// Table of tracks are containing in a project

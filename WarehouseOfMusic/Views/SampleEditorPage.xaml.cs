@@ -57,7 +57,7 @@ namespace WarehouseOfMusic.Views
         private void InitialiazeDataContext()
         {
             this._viewModel = new SampleEditorContext(App.DbConnectionString);
-            this._viewModel.LoadSampleFromDatabase((int) IsoSettingsManager.LoadRecord("CurrentSampleId"));
+            this._viewModel.LoadData((int) IsoSettingsManager.LoadRecord("CurrentSampleId"));
             this.DataContext = this._viewModel;
             this.PianoRoll.ItemsSource = this._viewModel.Tacts;
             _playerManager = new PlayerManager(_viewModel.CurrentSample.TrackRef.ProjectRef.Tempo);

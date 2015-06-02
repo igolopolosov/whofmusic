@@ -53,7 +53,7 @@ namespace WarehouseOfMusic.Views
         private void InitialiazeDataContext()
         {
             this._viewModel = new TrackEditorContext(App.DbConnectionString);
-            this._viewModel.LoadTrackFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentTrackId"));
+            this._viewModel.LoadData((int)IsoSettingsManager.LoadRecord("CurrentTrackId"));
             this.DataContext = this._viewModel;
             this._viewModel.CurrentTrack.Samples.CollectionChanged +=Samples_CollectionChanged;
             _playerManager = new PlayerManager(_viewModel.CurrentTrack.ProjectRef.Tempo);

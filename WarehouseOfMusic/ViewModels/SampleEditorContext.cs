@@ -4,20 +4,19 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using WarehouseOfMusic.EventArgs;
-
 namespace WarehouseOfMusic.ViewModels
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using EventArgs;
     using Models;
     using UIElementContexts;
 
     /// <summary>
     /// ViewModel for project editor page
     /// </summary>
-    public class SampleEditorContext : INotifyPropertyChanged
+    public class SampleEditorContext : Context
     {
         /// <summary>
         /// Represent notes of each separate tact in sample
@@ -31,8 +30,8 @@ namespace WarehouseOfMusic.ViewModels
         {
             var note = e.Note;
             note.SampleRef = _currentSample;
-            _toDoDb.Notes.InsertOnSubmit(note);
-            _toDoDb.SubmitChanges();
+            ToDoDb.Notes.InsertOnSubmit(note);
+            ToDoDb.SubmitChanges();
             CurrentSample.Notes.Add(note);
             return note;
         }
@@ -44,20 +43,15 @@ namespace WarehouseOfMusic.ViewModels
         {
             var note = e.Note;
             CurrentSample.Notes.Remove(note);
-            _toDoDb.Notes.DeleteOnSubmit(note);
-            _toDoDb.SubmitChanges();
+            ToDoDb.Notes.DeleteOnSubmit(note);
+            ToDoDb.SubmitChanges();
             //// Restore references
-            _currentSample.TrackRef = _toDoDb.Tracks.First(x => x.Id == _currentSample.TrackId);
+            _currentSample.TrackRef = ToDoDb.Tracks.First(x => x.Id == _currentSample.TrackId);
             return null;
         }
 
         #region DataBaseLayer
 
-        /// <summary>
-        /// LINQ to SQL data context for the local database.
-        /// </summary>
-        private readonly ToDoDataContext _toDoDb;
-        
         /// <summary>
         /// Currently editing project
         /// </summary>
@@ -69,16 +63,10 @@ namespace WarehouseOfMusic.ViewModels
         /// Class constructor, create the data context object.
         /// </summary>
         /// <param name="toDoDbConnectionString">Path to connect to database</param>
-        public SampleEditorContext(string toDoDbConnectionString)
+        public SampleEditorContext(string toDoDbConnectionString) : base(toDoDbConnectionString)
         {
-            this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
         }
-
-        /// <summary>
-        /// Event of property changed
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        
         /// <summary>
         /// Gets or sets the current project
         /// </summary>
@@ -100,9 +88,9 @@ namespace WarehouseOfMusic.ViewModels
         /// Query database and load the information for sample
         /// </summary>
         /// <param name="trackId">ID of loading sample</param>
-        public void LoadSampleFromDatabase(int sampleId)
+        public override void LoadData(int sampleId)
         {
-            this._currentSample = this._toDoDb.Samples.FirstOrDefault(x => x.Id == sampleId);
+            this._currentSample = this.ToDoDb.Samples.FirstOrDefault(x => x.Id == sampleId);
             Tacts = new ObservableCollection<PianoRollContext>();
             if (_currentSample == null) return;
             for (var i = _currentSample.InitialTact; i < _currentSample.InitialTact + _currentSample.Size; i++)
@@ -120,21 +108,6 @@ namespace WarehouseOfMusic.ViewModels
             }
         }
 
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        /// <summary>
-        /// Used to notify the app that a property has changed.
-        /// </summary>
-        /// <param name="propertyName">Property on changed</param>
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
         #endregion
     }
 }

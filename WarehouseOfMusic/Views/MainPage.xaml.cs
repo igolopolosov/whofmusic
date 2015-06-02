@@ -28,7 +28,7 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// ViewModel for main page
         /// </summary>
-        private MainViewModel _viewModel;
+        private MainPageContext _viewModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPage" /> class.
@@ -55,8 +55,8 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void InitialiazeDataContext()
         {
-            this._viewModel = new MainViewModel(App.DbConnectionString);
-            this._viewModel.LoadProFromDatabase();
+            this._viewModel = new MainPageContext(App.DbConnectionString);
+            this._viewModel.LoadData(0);
             this.DataContext = this._viewModel;
         }
         #endregion

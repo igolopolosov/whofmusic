@@ -1,29 +1,22 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="MainViewModel.cs">
+// <copyright file="MainPageContext.cs">
 //     Copyright (c) Igor Golopolosov. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System;
-using WarehouseOfMusic.Resources;
-
 namespace WarehouseOfMusic.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Linq;
     using Models;
+    using Resources;
 
     /// <summary>
     /// Class to realize access to database and represent information to application pages.
     /// </summary>
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainPageContext : Context
     {
-        /// <summary>
-        /// LINQ to SQL data context for the local database.
-        /// </summary>
-        private readonly ToDoDataContext _toDoDb;
-
         /// <summary>
         /// Project that must be deleted
         /// </summary>
@@ -38,21 +31,6 @@ namespace WarehouseOfMusic.ViewModels
         /// A list of all projects
         /// </summary>
         private ObservableCollection<ToDoProject> _projectsList;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MainViewModel" /> class.
-        /// Class constructor, create the data context object.
-        /// </summary>
-        /// <param name="toDoDbConnectionString">Path to connect to database</param>
-        public MainViewModel(string toDoDbConnectionString)
-        {
-            this._toDoDb = new ToDoDataContext(toDoDbConnectionString);
-        }
-
-        /// <summary>
-        /// Event of property changed
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets or sets project on rename
@@ -106,22 +84,24 @@ namespace WarehouseOfMusic.ViewModels
         }
 
         /// <summary>
-        /// Query database and load the list of projects
+        /// Initializes a new instance of the <see cref="MainPageContext" /> class.
+        /// Class constructor, create the data context object.
         /// </summary>
-        public void LoadProFromDatabase()
+        /// <param name="connectionString">Path to connect to database</param>
+        public MainPageContext(string connectionString)
+            : base(connectionString)
         {
-            //// Load a list of all projects. 
-            this._projectsList = this._toDoDb.Projects.Any()
-                ? new ObservableCollection<ToDoProject>(this._toDoDb.Projects)
-                : new ObservableCollection<ToDoProject>();
         }
 
         /// <summary>
-        /// Write changes in the data context to the database.
+        /// Query database and load the list of projects
         /// </summary>
-        public void SaveChangesToDb()
+        public override void LoadData(int id)
         {
-            this._toDoDb.SubmitChanges();
+            //// Load a list of all projects. 
+            this._projectsList = this.ToDoDb.Projects.Any()
+                ? new ObservableCollection<ToDoProject>(this.ToDoDb.Projects)
+                : new ObservableCollection<ToDoProject>();
         }
 
         /// <summary>
@@ -129,7 +109,7 @@ namespace WarehouseOfMusic.ViewModels
         /// </summary>
         /// <param name="projectName">Name of project</param>
         /// <returns>New project</returns>
-        internal ToDoProject CreateProject(string projectName)
+        public ToDoProject CreateProject(string projectName)
         {
             var newProject = new ToDoProject()
             {
@@ -138,8 +118,8 @@ namespace WarehouseOfMusic.ViewModels
                 LastModificationTime = DateTime.Now,
                 Tempo = 120
             };
-            this._toDoDb.Projects.InsertOnSubmit(newProject);
-            this._toDoDb.SubmitChanges();
+            this.ToDoDb.Projects.InsertOnSubmit(newProject);
+            this.ToDoDb.SubmitChanges();
             this._projectsList.Add(newProject);
 
             var trackName = AppResources.TrackString + " 1";
@@ -148,8 +128,8 @@ namespace WarehouseOfMusic.ViewModels
                 Name = trackName,
                 ProjectRef = newProject
             };
-            this._toDoDb.Tracks.InsertOnSubmit(newTrack);
-            this._toDoDb.SubmitChanges();
+            this.ToDoDb.Tracks.InsertOnSubmit(newTrack);
+            this.ToDoDb.SubmitChanges();
             newProject.Tracks.Add(newTrack);
 
             var sample = new ToDoSample
@@ -159,8 +139,8 @@ namespace WarehouseOfMusic.ViewModels
                 TrackRef = newTrack,
                 Name = newTrack.Name + newTrack.Samples.Count
             };
-            this._toDoDb.Samples.InsertOnSubmit(sample);
-            this._toDoDb.SubmitChanges();
+            this.ToDoDb.Samples.InsertOnSubmit(sample);
+            this.ToDoDb.SubmitChanges();
             newTrack.Samples.Add(sample);
 
             return newProject;
@@ -177,16 +157,16 @@ namespace WarehouseOfMusic.ViewModels
                 {
                     foreach (var note in sample.Notes)
                     {
-                        this._toDoDb.Notes.DeleteOnSubmit(note);
+                        this.ToDoDb.Notes.DeleteOnSubmit(note);
                     }
-                    this._toDoDb.Samples.DeleteOnSubmit(sample);
+                    this.ToDoDb.Samples.DeleteOnSubmit(sample);
                 }
-                this._toDoDb.Tracks.DeleteOnSubmit(track);
+                this.ToDoDb.Tracks.DeleteOnSubmit(track);
             }
 
             this._projectsList.Remove(_onDeleteProject);
-            this._toDoDb.Projects.DeleteOnSubmit(_onDeleteProject);
-            this._toDoDb.SubmitChanges();
+            this.ToDoDb.Projects.DeleteOnSubmit(_onDeleteProject);
+            this.ToDoDb.SubmitChanges();
         }
 
         /// <summary>
@@ -196,22 +176,7 @@ namespace WarehouseOfMusic.ViewModels
         internal void RenameProjectTo(string newName)
         {
             _onRenameProject.Name = newName;
-            this._toDoDb.SubmitChanges();
+            this.ToDoDb.SubmitChanges();
         }
-
-        #region INotifyPropertyChanged Members
-
-        /// <summary>
-        /// Used to notify the app that a property has changed.
-        /// </summary>
-        /// <param name="propertyName">Property on changed</param>
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
     }
 }

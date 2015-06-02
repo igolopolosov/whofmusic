@@ -110,6 +110,7 @@
     <Compile Include="Managers\IsoSettingsManager.cs" />
     <Compile Include="UIElementContexts\KeyContext.cs" />
     <Compile Include="UIElementContexts\PianoRollContext.cs" />
+    <Compile Include="ViewModels\Context.cs" />
     <Compile Include="ViewModels\TrackEditorContext.cs" />
     <Compile Include="ViewModels\SampleEditorContext.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
@@ -159,8 +160,8 @@
     <Compile Include="Managers\ThemeManager.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ProjectEditorViewModel.cs" />
+    <Compile Include="ViewModels\MainPageContext.cs" />
+    <Compile Include="ViewModels\ProjectEditorContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

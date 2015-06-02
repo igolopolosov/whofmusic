@@ -4,8 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using Microsoft.Phone.SecureElement;
-
 namespace WarehouseOfMusic.Models
 {
     using System.ComponentModel;

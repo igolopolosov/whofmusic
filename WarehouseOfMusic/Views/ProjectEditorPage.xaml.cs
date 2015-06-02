@@ -32,7 +32,7 @@ namespace WarehouseOfMusic.Views
         /// <summary>
         /// ViewModel for this page
         /// </summary>
-        private ProjectEditorViewModel _viewModel;
+        private ProjectEditorContext _viewModel;
 
         /// <summary>
         /// Manager of track 
@@ -63,8 +63,8 @@ namespace WarehouseOfMusic.Views
         /// </summary>
         private void InitialiazeDataContext()
         {
-            this._viewModel = new ProjectEditorViewModel(App.DbConnectionString);
-            this._viewModel.LoadProjectFromDatabase((int)IsoSettingsManager.LoadRecord("CurrentProjectId"));
+            this._viewModel = new ProjectEditorContext(App.DbConnectionString);
+            this._viewModel.LoadData((int)IsoSettingsManager.LoadRecord("CurrentProjectId"));
             this.DataContext = this._viewModel;
             _playerManager = new PlayerManager(_viewModel.CurrentProject.Tempo);
             _playerManager.StateChangedEvent += _playerManager_StateChangeEvent;
