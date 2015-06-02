@@ -313,6 +313,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на ВЫБРАТЬ ИНСТРУМЕНТ.
+        /// </summary>
+        public static string SelectInstrument {
+            get {
+                return ResourceManager.GetString("SelectInstrument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ТАКТ.
         /// </summary>
         public static string TactString {

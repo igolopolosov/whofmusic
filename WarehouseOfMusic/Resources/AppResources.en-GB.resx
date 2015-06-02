@@ -213,4 +213,7 @@
   <data name="AppBarNoteDuration" xml:space="preserve">
     <value>duration of note</value>
   </data>
+  <data name="SelectInstrument" xml:space="preserve">
+    <value>SELECT INSTRUMENT</value>
+  </data>
 </root>

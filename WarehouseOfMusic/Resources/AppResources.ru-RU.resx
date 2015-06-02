@@ -201,6 +201,9 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>ru-RU</value>
   </data>
+  <data name="SelectInstrument" xml:space="preserve">
+    <value>ВЫБРАТЬ ИНСТРУМЕНТ</value>
+  </data>
   <data name="TactString" xml:space="preserve">
     <value>ТАКТ</value>
   </data>

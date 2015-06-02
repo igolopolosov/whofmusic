@@ -15,11 +15,21 @@
     shell:SystemTray.IsVisible="True">
 
     <phone:PhoneApplicationPage.Resources>
+        <DataTemplate x:Name="DropdownTemplate">
+            <StackPanel>
+                <TextBlock Text="{Binding Name}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Name="DropdownFullTemplate">
+            <StackPanel Margin="6">
+                <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeMedium}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate x:Key="TrackListBoxTemplate">
             <Grid toolkit:TiltEffect.IsTiltEnabled="True">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
@@ -27,13 +37,14 @@
                            Foreground="{StaticResource PhoneForegroundBrush}"
                            FontSize="{StaticResource PhoneFontSizeLarge}"
                            Tap="TrackListBoxItem_OnTap"/>
-                <ComboBox x:Name="InstrumentList" Grid.Column="1" Loaded="InstrumentList_OnLoaded">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                <toolkit:ListPicker x:Name="InstrumentList" Grid.Column="1"
+                                    ExpansionMode="FullScreenOnly"
+                                    FullModeHeader="{Binding Path=LocalizedResources.SelectInstrument, 
+                     Source={StaticResource LocalizedStrings}}"
+                                    ItemTemplate="{StaticResource DropdownTemplate}"
+                                    FullModeItemTemplate="{StaticResource DropdownFullTemplate}"
+                                    Loaded="InstrumentList_OnLoaded">
+                </toolkit:ListPicker>
                 <CheckBox x:Name="SoloCheckBox" Grid.Column="2" IsChecked="{Binding Solo, Mode=TwoWay}" 
                           Checked="SoloCheckBox_OnChecked"></CheckBox>
                 <CheckBox x:Name="MuteCheckBox" Grid.Column="3" IsChecked="{Binding Mute, Mode=TwoWay}"

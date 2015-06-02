@@ -179,5 +179,11 @@ namespace WarehouseOfMusic.ViewModels
             _onRenameTrack.Name = newName;
             this.ToDoDb.SubmitChanges();
         }
+
+        public void SelectInstrument(ToDoTrack track, ToDoInstrument instrument)
+        {
+            _currentProject.Tracks.First(x => track.Id == x.Id).Instrument = instrument;
+            SaveChangesToDb();
+        }
     }
 }

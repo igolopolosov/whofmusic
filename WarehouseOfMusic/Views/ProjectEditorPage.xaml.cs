@@ -4,6 +4,8 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using System.Runtime.InteropServices.WindowsRuntime;
+
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -379,13 +381,26 @@ namespace WarehouseOfMusic.Views
         #region Choose instrument
         private void InstrumentList_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var list = sender as ComboBox;
+            var list = sender as ListPicker;
             if (list == null) return;
             var track = list.DataContext as ToDoTrack;
             if (track == null) return;
+            var instrument = track.Instrument;
             list.ItemsSource = ProjectEditorContext.Instruments;
-            list.SelectedItem = track.Instrument;
+            list.SelectedItem = instrument;
+            list.SelectionChanged += InstrumentList_OnSelectionChanged;
         } 
+        
+        private void InstrumentList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var list = sender as ListPicker;
+            if (list == null) return;
+            var track = list.DataContext as ToDoTrack;
+            if (track == null) return;
+            var instrument = list.SelectedItem as ToDoInstrument;
+            if (instrument == null) return;
+            _viewModel.SelectInstrument(track, instrument);
+        }
         #endregion
     }
 }
