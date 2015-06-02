@@ -134,8 +134,18 @@ void AudioController::KeyIsPressedChanged(Object^ sender, KeyPressedArgs^ args)
 			dynamic.oscillator2Transpose = patch->Oscillator2Transpose;
 			dynamic.oscillator2FineTune = float(pow(2.0, patch->Oscillator2FineTune / 12));
 
-			dynamic.oscillator1Amplitude = float(patch->Oscillator1Volume / 100);
+			
+			switch (args->Instrument)
+			{
+			case WaveformType::Sine: dynamic.oscillator1Amplitude = 24.0;
+			case WaveformType::Triangle: dynamic.oscillator1Amplitude = 24.0;
+			case WaveformType::Sawtooth: dynamic.oscillator1Amplitude = 1.0;
+			case WaveformType::Square: dynamic.oscillator1Amplitude = 1.0;
+			default:
+				break;
+			}
 			dynamic.oscillator2Amplitude = float(patch->Oscillator2Volume / 100);
+
 			pSynthVoice->SetParameters(&dynamic);
 
 			// Set up a TriggeredSynthVoiceParameters structure
