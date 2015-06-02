@@ -123,29 +123,8 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>en-GB</value>
   </data>
-  <data name="DarkThemeListBoxItem" xml:space="preserve">
-    <value>Dark</value>
-  </data>
-  <data name="LanguageTextBlockText" xml:space="preserve">
-    <value>language</value>
-  </data>
-  <data name="LightThemeListBoxItem" xml:space="preserve">
-    <value>Light</value>
-  </data>
-  <data name="ThemeTextBlockText" xml:space="preserve">
-    <value>theme</value>
-  </data>
-  <data name="VolumeTextBlockText" xml:space="preserve">
-    <value>volume</value>
-  </data>
   <data name="CreateProject" xml:space="preserve">
     <value>CREATE PROJECT</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>SETTINGS</value>
-  </data>
-  <data name="ApplySettingsButtonContent" xml:space="preserve">
-    <value>APPLY</value>
   </data>
   <data name="ProjectString" xml:space="preserve">
     <value>Project</value>
@@ -158,9 +137,6 @@
   </data>
   <data name="AppBarHelp" xml:space="preserve">
     <value>help</value>
-  </data>
-  <data name="AppBarSettings" xml:space="preserve">
-    <value>settings</value>
   </data>
   <data name="DeleteContextMenu" xml:space="preserve">
     <value>delete</value>
@@ -226,13 +202,13 @@
     <value>RENAME SAMPLE</value>
   </data>
   <data name="MessageChoseSampleSize" xml:space="preserve">
-    <value>Select the number of tacts in the added sample!</value>
+    <value>Select the number of tacts in the added sample.</value>
   </data>
   <data name="DuplicateContextMenu" xml:space="preserve">
     <value>duplicate</value>
   </data>
   <data name="MessageChoseNoteSize" xml:space="preserve">
-    <value>Select the duration of the note!</value>
+    <value>Select the duration of the note.</value>
   </data>
   <data name="AppBarNoteDuration" xml:space="preserve">
     <value>duration of note</value>

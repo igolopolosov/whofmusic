@@ -141,20 +141,11 @@
   <data name="AppBarResume" xml:space="preserve">
     <value>продолжить</value>
   </data>
-  <data name="AppBarSettings" xml:space="preserve">
-    <value>настройки</value>
-  </data>
   <data name="AppBarStop" xml:space="preserve">
-    <value>стоп</value>
-  </data>
-  <data name="ApplySettingsButtonContent" xml:space="preserve">
-    <value>ПРИМЕНИТЬ</value>
+    <value>остановить</value>
   </data>
   <data name="CreateProject" xml:space="preserve">
     <value>СОЗДАТЬ ПРОЕКТ</value>
-  </data>
-  <data name="DarkThemeListBoxItem" xml:space="preserve">
-    <value>Темная</value>
   </data>
   <data name="DeleteContextMenu" xml:space="preserve">
     <value>удалить</value>
@@ -165,20 +156,14 @@
   <data name="ErrorEmptyName" xml:space="preserve">
     <value>Пожалуйста, задайте имя.</value>
   </data>
-  <data name="LanguageTextBlockText" xml:space="preserve">
-    <value>язык</value>
-  </data>
-  <data name="LightThemeListBoxItem" xml:space="preserve">
-    <value>Светлая</value>
-  </data>
   <data name="MessageChangeTempo" xml:space="preserve">
     <value>Введите значение от 30 до 240.</value>
   </data>
   <data name="MessageChoseNoteSize" xml:space="preserve">
-    <value>Выберите длительность ноты!</value>
+    <value>Выберите длительность ноты.</value>
   </data>
   <data name="MessageChoseSampleSize" xml:space="preserve">
-    <value>Выберите количество тактов в добавляемом блоке!</value>
+    <value>Выберите количество тактов в добавляемом блоке.</value>
   </data>
   <data name="MessageDeleteProject" xml:space="preserve">
     <value>Вы уверены, что хотите удалить проект?</value>
@@ -216,25 +201,16 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>ru-RU</value>
   </data>
-  <data name="Settings" xml:space="preserve">
-    <value>НАСТРОЙКИ</value>
-  </data>
   <data name="TactString" xml:space="preserve">
     <value>ТАКТ</value>
   </data>
   <data name="TextBlockTextTempo" xml:space="preserve">
     <value>темп</value>
   </data>
-  <data name="ThemeTextBlockText" xml:space="preserve">
-    <value>тема</value>
-  </data>
   <data name="TitleChangeTempo" xml:space="preserve">
     <value>ИЗМЕНИТЬ ТЕМП</value>
   </data>
   <data name="TrackString" xml:space="preserve">
     <value>Дорожка</value>
-  </data>
-  <data name="VolumeTextBlockText" xml:space="preserve">
-    <value>громкость</value>
   </data>
 </root>

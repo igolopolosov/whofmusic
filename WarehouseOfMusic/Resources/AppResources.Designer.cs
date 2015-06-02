@@ -133,29 +133,11 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на настройки.
-        /// </summary>
-        public static string AppBarSettings {
-            get {
-                return ResourceManager.GetString("AppBarSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на стоп.
+        ///   Ищет локализованную строку, похожую на остановить.
         /// </summary>
         public static string AppBarStop {
             get {
                 return ResourceManager.GetString("AppBarStop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на ПРИМЕНИТЬ.
-        /// </summary>
-        public static string ApplySettingsButtonContent {
-            get {
-                return ResourceManager.GetString("ApplySettingsButtonContent", resourceCulture);
             }
         }
         
@@ -165,15 +147,6 @@ namespace WarehouseOfMusic.Resources {
         public static string CreateProject {
             get {
                 return ResourceManager.GetString("CreateProject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Темная.
-        /// </summary>
-        public static string DarkThemeListBoxItem {
-            get {
-                return ResourceManager.GetString("DarkThemeListBoxItem", resourceCulture);
             }
         }
         
@@ -205,24 +178,6 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на язык.
-        /// </summary>
-        public static string LanguageTextBlockText {
-            get {
-                return ResourceManager.GetString("LanguageTextBlockText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Светлая.
-        /// </summary>
-        public static string LightThemeListBoxItem {
-            get {
-                return ResourceManager.GetString("LightThemeListBoxItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Введите значение от 30 до 240..
         /// </summary>
         public static string MessageChangeTempo {
@@ -232,7 +187,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выберите длительность ноты!.
+        ///   Ищет локализованную строку, похожую на Выберите длительность ноты..
         /// </summary>
         public static string MessageChoseNoteSize {
             get {
@@ -241,7 +196,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выберите количество тактов в добавляемом блоке!.
+        ///   Ищет локализованную строку, похожую на Выберите количество тактов в добавляемом блоке..
         /// </summary>
         public static string MessageChoseSampleSize {
             get {
@@ -358,15 +313,6 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на НАСТРОЙКИ.
-        /// </summary>
-        public static string Settings {
-            get {
-                return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на ТАКТ.
         /// </summary>
         public static string TactString {
@@ -385,15 +331,6 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на тема.
-        /// </summary>
-        public static string ThemeTextBlockText {
-            get {
-                return ResourceManager.GetString("ThemeTextBlockText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на ИЗМЕНИТЬ ТЕМП.
         /// </summary>
         public static string TitleChangeTempo {
@@ -408,15 +345,6 @@ namespace WarehouseOfMusic.Resources {
         public static string TrackString {
             get {
                 return ResourceManager.GetString("TrackString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на громкость.
-        /// </summary>
-        public static string VolumeTextBlockText {
-            get {
-                return ResourceManager.GetString("VolumeTextBlockText", resourceCulture);
             }
         }
     }
