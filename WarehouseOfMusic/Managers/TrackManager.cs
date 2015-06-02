@@ -1,4 +1,6 @@
-﻿namespace WarehouseOfMusic.Managers
+﻿using WomAudioComponent;
+
+namespace WarehouseOfMusic.Managers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -22,6 +24,11 @@
         public List<ToDoNote> PlayedNotes;
 
         /// <summary>
+        /// Instrument for play
+        /// </summary>
+        public WaveformType Instrument;
+
+        /// <summary>
         /// True if all notes of track is played
         /// </summary>
         public bool IsTrackEnd
@@ -37,6 +44,7 @@
         /// </summary>
         public TrackManager(ToDoTrack onPlayTrack, int initialTact)
         {
+            Instrument = onPlayTrack.Instrument.Waveform;
             OnPlayNotes = new Queue<ToDoNote>();
             PlayedNotes = new List<ToDoNote>();
             foreach (var note in

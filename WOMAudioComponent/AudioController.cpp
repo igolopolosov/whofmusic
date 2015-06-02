@@ -126,6 +126,18 @@ void AudioController::KeyIsPressedChanged(Object^ sender, KeyPressedArgs^ args)
 			SynthVoice * pSynthVoice = availableSynthVoices.back();
 			availableSynthVoices.pop_back();
 
+			DynamicSynthVoiceParameters dynamic;
+			dynamic.oscillator1Waveform = (WaveformType)args->Instrument;
+			dynamic.oscillator2Waveform = (WaveformType)args->Instrument;
+
+			dynamic.oscillator1Transpose = patch->Oscillator1Transpose;
+			dynamic.oscillator2Transpose = patch->Oscillator2Transpose;
+			dynamic.oscillator2FineTune = float(pow(2.0, patch->Oscillator2FineTune / 12));
+
+			dynamic.oscillator1Amplitude = float(patch->Oscillator1Volume / 100);
+			dynamic.oscillator2Amplitude = float(patch->Oscillator2Volume / 100);
+			pSynthVoice->SetParameters(&dynamic);
+
 			// Set up a TriggeredSynthVoiceParameters structure
 			TriggeredSynthVoiceParameters params;
 			params.triggerFrequency = float(440 * pow(2, (keyNum % 1000 - 69) / 12.0));

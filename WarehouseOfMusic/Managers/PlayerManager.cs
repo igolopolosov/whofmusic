@@ -256,7 +256,8 @@ namespace WarehouseOfMusic.Managers
                     var keyArgs = new KeyPressedArgs()
                     {
                         IsPressed = false,
-                        KeyNumber = note.MidiNumber
+                        KeyNumber = note.MidiNumber,
+                        Instrument = track.Instrument
                     };
                     _audioController.KeyIsPressedChanged(this, keyArgs);
                     track.PlayedNotes.Remove(note);
@@ -282,7 +283,8 @@ namespace WarehouseOfMusic.Managers
                 foreach (var keyArgs in track.OneTimePlayNotes.Select(note => new KeyPressedArgs()
                 {
                     IsPressed = true,
-                    KeyNumber = note.MidiNumber
+                    KeyNumber = note.MidiNumber,
+                    Instrument = track.Instrument
                 }))
                 {
                     _audioController.KeyIsPressedChanged(this, keyArgs);

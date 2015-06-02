@@ -6,5 +6,6 @@ namespace WomAudioComponent
 	{
 		property int KeyNumber;
 		property bool IsPressed;
+		property WaveformType Instrument;
 	};
 }
