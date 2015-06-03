@@ -178,6 +178,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на главная.
+        /// </summary>
+        public static string MainString {
+            get {
+                return ResourceManager.GetString("MainString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Введите значение от 30 до 240..
         /// </summary>
         public static string MessageChangeTempo {
@@ -250,7 +259,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Проект.
+        ///   Ищет локализованную строку, похожую на проект.
         /// </summary>
         public static string ProjectString {
             get {
@@ -313,6 +322,15 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на блок.
+        /// </summary>
+        public static string SampleString {
+            get {
+                return ResourceManager.GetString("SampleString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ВЫБРАТЬ ИНСТРУМЕНТ.
         /// </summary>
         public static string SelectInstrument {
@@ -349,7 +367,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Дорожка.
+        ///   Ищет локализованную строку, похожую на дорожка.
         /// </summary>
         public static string TrackString {
             get {

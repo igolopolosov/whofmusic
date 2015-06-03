@@ -4,10 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Runtime.InteropServices.WindowsRuntime;
-using Microsoft.Phone.Controls.Primitives;
-using WomAudioComponent;
-
 namespace WarehouseOfMusic.Views
 {
     using System;
@@ -161,6 +157,7 @@ namespace WarehouseOfMusic.Views
 
             //// Add menu item linked with help page
             var helpMenuItem = new ApplicationBarMenuItem(AppResources.AppBarHelp);
+            helpMenuItem.Click += (sender, args) => NavigationService.Navigate(new Uri("/Views/HelpPage.xaml", UriKind.Relative));
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
@@ -168,7 +165,7 @@ namespace WarehouseOfMusic.Views
             {
                 Text = AppResources.AppBarAddTrack,
             };
-            addButton.Click += this.AddTrackButton_Click;
+            addButton.Click += (sender, args) => this._viewModel.AddTrack();
             this.ApplicationBar.Buttons.Add(addButton);
 
             //// Add play button for player
@@ -176,7 +173,18 @@ namespace WarehouseOfMusic.Views
             {
                 Text = AppResources.AppBarPlay,
             };
-            playButton.Click += this.PlayButton_OnClick;
+            playButton.Click += (sender, args) =>
+            {
+                switch (_playerManager.State)
+                {
+                    case PlayerState.Stopped: _playerManager.Play(_viewModel.CurrentProject);
+                        break;
+                    case PlayerState.Playing: _playerManager.Pause();
+                        break;
+                    case PlayerState.Paused: _playerManager.Resume();
+                        break;
+                }
+            };
             this.ApplicationBar.Buttons.Add(playButton);
 
             //// Add stop button for player
@@ -184,36 +192,8 @@ namespace WarehouseOfMusic.Views
             {
                 Text = AppResources.AppBarStop,
             };
-            stopButton.Click += this.StopButton_OnClick;
+            stopButton.Click += (sender, args) => _playerManager.Stop();
             this.ApplicationBar.Buttons.Add(stopButton);
-        }
-
-        /// <summary>
-        /// Play track
-        /// </summary>
-        /// <param name="sender">Page with projects</param>
-        /// <param name="e">Click event</param>
-        private void PlayButton_OnClick(object sender, EventArgs e)
-        {
-            switch (_playerManager.State)
-            {
-                case PlayerState.Stopped: _playerManager.Play(_viewModel.CurrentProject);
-                    break;
-                case PlayerState.Playing: _playerManager.Pause();
-                    break;
-                case PlayerState.Paused: _playerManager.Resume();
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Stop track
-        /// </summary>
-        /// <param name="sender">Page with projects</param>
-        /// <param name="e">Click event</param>
-        private void StopButton_OnClick(object sender, EventArgs e)
-        {
-            _playerManager.Stop();
         }
 
         /// <summary>
@@ -270,15 +250,6 @@ namespace WarehouseOfMusic.Views
         #endregion
 
         #region Manipulations with track
-        /// <summary>
-        /// Adding new track
-        /// </summary>
-        /// <param name="sender">Some object</param>
-        /// <param name="e">On click</param>
-        private void AddTrackButton_Click(object sender, EventArgs e)
-        {
-            this._viewModel.AddTrack();
-        }
 
         /// <summary>
         /// Chose project for editing

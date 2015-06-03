@@ -156,6 +156,9 @@
   <data name="ErrorEmptyName" xml:space="preserve">
     <value>Пожалуйста, задайте имя.</value>
   </data>
+  <data name="MainString" xml:space="preserve">
+    <value>главная</value>
+  </data>
   <data name="MessageChangeTempo" xml:space="preserve">
     <value>Введите значение от 30 до 240.</value>
   </data>
@@ -181,7 +184,7 @@
     <value>OK</value>
   </data>
   <data name="ProjectString" xml:space="preserve">
-    <value>Проект</value>
+    <value>проект</value>
   </data>
   <data name="RenameContextMenu" xml:space="preserve">
     <value>переименовать</value>
@@ -201,6 +204,9 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>ru-RU</value>
   </data>
+  <data name="SampleString" xml:space="preserve">
+    <value>блок</value>
+  </data>
   <data name="SelectInstrument" xml:space="preserve">
     <value>ВЫБРАТЬ ИНСТРУМЕНТ</value>
   </data>
@@ -214,6 +220,6 @@
     <value>ИЗМЕНИТЬ ТЕМП</value>
   </data>
   <data name="TrackString" xml:space="preserve">
-    <value>Дорожка</value>
+    <value>дорожка</value>
   </data>
 </root>

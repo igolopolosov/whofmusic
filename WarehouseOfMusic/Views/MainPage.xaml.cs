@@ -195,6 +195,7 @@ namespace WarehouseOfMusic.Views
 
             //// Add menu item linked with help page
             var helpMenuItem = new ApplicationBarMenuItem(AppResources.AppBarHelp);
+            helpMenuItem.Click += (sender, args) => NavigationService.Navigate(new Uri("/Views/HelpPage.xaml", UriKind.Relative));
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
@@ -202,15 +203,9 @@ namespace WarehouseOfMusic.Views
             {
                 Text = AppResources.AppBarCreateProject,
             };
-            createProjectButton.Click += this.CreateProjectButton_Click;
+            createProjectButton.Click += (sender, args) => ShowRenameDialog(); ;
             this.ApplicationBar.Buttons.Add(createProjectButton);
         }
-
-        private void CreateProjectButton_Click(object sender, EventArgs e)
-        {
-            ShowRenameDialog();
-        }
-
         #endregion
     }
 }

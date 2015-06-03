@@ -173,15 +173,17 @@
         #endregion
 
         #region For application bar
+
         /// <summary>
         /// Build Localized application bar
         /// </summary>
         private void BuildLocalizedAppBar()
         {
             this.ApplicationBar = new ApplicationBar();
-            
+
             //// Add menu item linked with help page
             var helpMenuItem = new ApplicationBarMenuItem(AppResources.AppBarHelp);
+            helpMenuItem.Click += (sender, args) => NavigationService.Navigate(new Uri("/Views/HelpPage.xaml", UriKind.Relative));
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
@@ -193,19 +195,35 @@
             this.ApplicationBar.Buttons.Add(addButton);
 
             //// Add play button for player
-            var playButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
+            var playButton =
+                new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
+                {
+                    Text = AppResources.AppBarPlay,
+                };
+            playButton.Click += (sender, args) =>
             {
-                Text = AppResources.AppBarPlay,
+                switch (_playerManager.State)
+                {
+                    case PlayerState.Stopped:
+                        _playerManager.Play(_viewModel.CurrentTrack);
+                        break;
+                    case PlayerState.Playing:
+                        _playerManager.Pause();
+                        break;
+                    case PlayerState.Paused:
+                        _playerManager.Resume();
+                        break;
+                }
             };
-            playButton.Click += this.PlayButton_OnClick;
             this.ApplicationBar.Buttons.Add(playButton);
 
             //// Add stop button for player
-            var stopButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.stop.png", UriKind.Relative))
-            {
-                Text = AppResources.AppBarStop,
-            };
-            stopButton.Click += this.StopButton_OnClick;
+            var stopButton =
+                new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.stop.png", UriKind.Relative))
+                {
+                    Text = AppResources.AppBarStop,
+                };
+            stopButton.Click += (sender, args) => _playerManager.Stop();
             this.ApplicationBar.Buttons.Add(stopButton);
         }
 
@@ -230,34 +248,6 @@
             if (dialog == null) return;
             var tactPicker = dialog.Body as TactSizePicker;
             if (tactPicker != null) this._viewModel.AddSample(tactPicker.TactSize);
-        }
-
-        /// <summary>
-        /// Play track
-        /// </summary>
-        /// <param name="sender">Page with projects</param>
-        /// <param name="e">Click event</param>
-        private void PlayButton_OnClick(object sender, EventArgs e)
-        {
-            switch (_playerManager.State)
-            {
-                case PlayerState.Stopped: _playerManager.Play(_viewModel.CurrentTrack);
-                    break;
-                case PlayerState.Playing: _playerManager.Pause();
-                    break;
-                case PlayerState.Paused: _playerManager.Resume();
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Stop track
-        /// </summary>
-        /// <param name="sender">Page with projects</param>
-        /// <param name="e">Click event</param>
-        private void StopButton_OnClick(object sender, EventArgs e)
-        {
-            _playerManager.Stop();
         }
 
         /// <summary>

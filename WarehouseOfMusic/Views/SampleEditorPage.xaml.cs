@@ -76,6 +76,8 @@ namespace WarehouseOfMusic.Views
 
             //// Add menu item linked with help page
             var helpMenuItem = new ApplicationBarMenuItem(AppResources.AppBarHelp);
+            helpMenuItem.Click +=
+                (sender, args) => NavigationService.Navigate(new Uri("/Views/HelpPage.xaml", UriKind.Relative));
             this.ApplicationBar.MenuItems.Add(helpMenuItem);
 
             //// Add play button for player
@@ -86,14 +88,30 @@ namespace WarehouseOfMusic.Views
                 };
             noteDurationButton.Click += NoteDurationButton_OnClick;
             this.ApplicationBar.Buttons.Add(noteDurationButton);
-            
+
             //// Add play button for player
             var playPauseButton =
                 new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.control.play.png", UriKind.Relative))
                 {
                     Text = AppResources.AppBarPlay
                 };
-            playPauseButton.Click += this.PlayPauseButton_OnClick;
+            playPauseButton.Click += (sender, args) =>
+            {
+                var tact = this.PianoRoll.SelectedItem as PianoRollContext;
+                if (tact == null) return;
+                switch (_playerManager.State)
+                {
+                    case PlayerState.Stopped:
+                        _playerManager.Play(_viewModel.CurrentSample.TrackRef, tact.TactNumber);
+                        break;
+                    case PlayerState.Playing:
+                        _playerManager.Pause();
+                        break;
+                    case PlayerState.Paused:
+                        _playerManager.Resume();
+                        break;
+                }
+            };
             this.ApplicationBar.Buttons.Add(playPauseButton);
 
             //// Add stop button for player
@@ -102,7 +120,8 @@ namespace WarehouseOfMusic.Views
                 {
                     Text = AppResources.AppBarStop
                 };
-            stopButton.Click += this.StopButton_OnClick;
+            stopButton.Click += (sender, args) => _playerManager.Stop();
+            ;
             this.ApplicationBar.Buttons.Add(stopButton);
         }
 
@@ -127,34 +146,6 @@ namespace WarehouseOfMusic.Views
             if (dialog == null) return;
             var durationPicker = dialog.Body as NoteSizePicker;
             if (durationPicker != null) PianoRollContext.NoteDuration = durationPicker.Duration;
-        }
-
-        /// <summary>
-        /// Play track
-        /// </summary>
-        private void PlayPauseButton_OnClick(object sender, EventArgs e)
-        {
-            var tact = this.PianoRoll.SelectedItem as PianoRollContext;
-            if (tact == null) return;
-            switch (_playerManager.State)
-            {
-                case PlayerState.Stopped: _playerManager.Play(_viewModel.CurrentSample.TrackRef, tact.TactNumber);
-                    break;    
-                case PlayerState.Playing: _playerManager.Pause();
-                    break;
-                case PlayerState.Paused: _playerManager.Resume();
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Stop track
-        /// </summary>
-        /// <param name="sender">Page with projects</param>
-        /// <param name="e">Click event</param>
-        private void StopButton_OnClick(object sender, EventArgs e)
-        {
-            _playerManager.Stop();
         }
 
         /// <summary>
