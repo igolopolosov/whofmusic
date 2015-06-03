@@ -295,6 +295,33 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменение длительности ноты..
+        /// </summary>
+        public static string HelpSample1 {
+            get {
+                return ResourceManager.GetString("HelpSample1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавление ноты - нажатие на сетку..
+        /// </summary>
+        public static string HelpSample2 {
+            get {
+                return ResourceManager.GetString("HelpSample2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удаление ноты -двойное нажатие на удаляемую ноту..
+        /// </summary>
+        public static string HelpSample3 {
+            get {
+                return ResourceManager.GetString("HelpSample3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Добавление нового блока в конец дорожки..
         /// </summary>
         public static string HelpTrack1 {

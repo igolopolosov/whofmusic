@@ -189,7 +189,28 @@
             <!--блок-->
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.SampleString, 
                      Source={StaticResource LocalizedStrings}}">
-                <Grid/>
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.music.select.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="1" Text="{Binding Path=LocalizedResources.HelpSample1, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        </Grid>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpSample2, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpSample3, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </phone:PanoramaItem>
         </phone:Panorama>
     </Grid>

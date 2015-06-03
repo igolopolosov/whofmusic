@@ -195,6 +195,15 @@
   <data name="HelpProject9" xml:space="preserve">
     <value>Переход к редактированию дорожки - нажмите на дорожку из списка.</value>
   </data>
+  <data name="HelpSample1" xml:space="preserve">
+    <value>Изменение длительности ноты.</value>
+  </data>
+  <data name="HelpSample2" xml:space="preserve">
+    <value>Добавление ноты - нажатие на сетку.</value>
+  </data>
+  <data name="HelpSample3" xml:space="preserve">
+    <value>Удаление ноты -двойное нажатие на удаляемую ноту.</value>
+  </data>
   <data name="HelpTrack1" xml:space="preserve">
     <value>Добавление нового блока в конец дорожки.</value>
   </data>

@@ -261,6 +261,15 @@
   <data name="HelpProject9" xml:space="preserve">
     <value>Transition to editing the track - tap on the track from the list.</value>
   </data>
+  <data name="HelpSample1" xml:space="preserve">
+    <value>Change duration of the note.</value>
+  </data>
+  <data name="HelpSample2" xml:space="preserve">
+    <value>Adding notes - tap on the grid.</value>
+  </data>
+  <data name="HelpSample3" xml:space="preserve">
+    <value>Deleting notes - double-tap on the note.</value>
+  </data>
   <data name="HelpTrack1" xml:space="preserve">
     <value>Adding a new sample at the end of the track.</value>
   </data>
