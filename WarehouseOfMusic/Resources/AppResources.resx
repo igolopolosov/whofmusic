@@ -156,6 +156,18 @@
   <data name="ErrorEmptyName" xml:space="preserve">
     <value>Пожалуйста, задайте имя.</value>
   </data>
+  <data name="HelpMain1" xml:space="preserve">
+    <value>На данной странице вы можете создать новый проект, перейти к редактированию проекта, переименовать или удалить существующий проект из списка.</value>
+  </data>
+  <data name="HelpMain2" xml:space="preserve">
+    <value>Создание нового проекта - нажмите данную кнопку на панели приложения.</value>
+  </data>
+  <data name="HelpMain3" xml:space="preserve">
+    <value>Переход к редактированию проекта - нажмите на проект из списка.</value>
+  </data>
+  <data name="HelpMain4" xml:space="preserve">
+    <value>Переименование или удаление проекта - удерживайте нажатие на проекте из списка.</value>
+  </data>
   <data name="MainString" xml:space="preserve">
     <value>главная</value>
   </data>

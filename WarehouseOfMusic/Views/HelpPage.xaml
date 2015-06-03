@@ -21,21 +21,41 @@
             <!--главная-->
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.MainString, 
                      Source={StaticResource LocalizedStrings}}">
-                <Grid/>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Path=LocalizedResources.HelpMain1, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                    <Grid Margin="0 6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Grid.Column="1"  Width="60" Height="60" StrokeThickness="5" 
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="../../Assets/AppBar/appbar.add.png"></ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse><TextBlock  Grid.Column="0" Text="{Binding Path=LocalizedResources.HelpMain2, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                    </Grid>
+                    <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpMain3, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpMain4, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                </StackPanel>
             </phone:PanoramaItem>
-            
+
             <!--проект-->
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.ProjectString, 
                      Source={StaticResource LocalizedStrings}}">
                 <Grid/>
             </phone:PanoramaItem>
-            
+
             <!--дорожка-->
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.TrackString, 
                      Source={StaticResource LocalizedStrings}}">
                 <Grid/>
             </phone:PanoramaItem>
-            
+
             <!--блок-->
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.SampleString, 
                      Source={StaticResource LocalizedStrings}}">

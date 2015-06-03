@@ -178,6 +178,42 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на На данной странице вы можете создать новый проект, перейти к редактированию проекта, переименовать или удалить существующий проект из списка..
+        /// </summary>
+        public static string HelpMain1 {
+            get {
+                return ResourceManager.GetString("HelpMain1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Создание нового проекта - нажмите данную кнопку на панели приложения..
+        /// </summary>
+        public static string HelpMain2 {
+            get {
+                return ResourceManager.GetString("HelpMain2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переход к редактированию проекта - нажмите на проект из списка..
+        /// </summary>
+        public static string HelpMain3 {
+            get {
+                return ResourceManager.GetString("HelpMain3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переименование или удаление проекта - удерживайте нажатие на проекте из списка..
+        /// </summary>
+        public static string HelpMain4 {
+            get {
+                return ResourceManager.GetString("HelpMain4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на главная.
         /// </summary>
         public static string MainString {
