@@ -156,6 +156,18 @@
   <data name="ErrorEmptyName" xml:space="preserve">
     <value>Пожалуйста, задайте имя.</value>
   </data>
+  <data name="HelpMain1" xml:space="preserve">
+    <value>На данной странице вы можете создать новую музыкальную композицию, перейти к редактированию композиции, переименовать или удалить существующую музыкальную композицию из списка.</value>
+  </data>
+  <data name="HelpMain2" xml:space="preserve">
+    <value>Создание новой музыкальной композиции - нажмите данную кнопку на панели приложения.</value>
+  </data>
+  <data name="HelpMain3" xml:space="preserve">
+    <value>Переход к редактированию композиции - нажмите на композициию из списка.</value>
+  </data>
+  <data name="HelpMain4" xml:space="preserve">
+    <value>Переименование или удаление композиции - удерживайте нажатие на композиции из списка.</value>
+  </data>
   <data name="MainString" xml:space="preserve">
     <value>главная</value>
   </data>
@@ -184,7 +196,7 @@
     <value>OK</value>
   </data>
   <data name="ProjectString" xml:space="preserve">
-    <value>Проект</value>
+    <value>композиция</value>
   </data>
   <data name="RenameContextMenu" xml:space="preserve">
     <value>переименовать</value>

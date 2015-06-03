@@ -127,7 +127,7 @@
     <value>CREATE PROJECT</value>
   </data>
   <data name="ProjectString" xml:space="preserve">
-    <value>project</value>
+    <value>composition</value>
   </data>
   <data name="TrackString" xml:space="preserve">
     <value>track</value>
@@ -221,5 +221,17 @@
   </data>
   <data name="SampleString" xml:space="preserve">
     <value>sample</value>
+  </data>
+  <data name="HelpMain1" xml:space="preserve">
+    <value>On this page you can create a new music composition, go to the editing of the composition, rename or delete an existing music composition from the list.</value>
+  </data>
+  <data name="HelpMain2" xml:space="preserve">
+    <value>Creating a new music composition - press this button in the application bar.</value>
+  </data>
+  <data name="HelpMain3" xml:space="preserve">
+    <value>Go to the editing of the composition - tap on the composition from the list.</value>
+  </data>
+  <data name="HelpMain4" xml:space="preserve">
+    <value>Renaming or deleting a composition - hold on the composition of the list.</value>
   </data>
 </root>
