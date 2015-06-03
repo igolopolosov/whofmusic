@@ -156,17 +156,44 @@
   <data name="ErrorEmptyName" xml:space="preserve">
     <value>Пожалуйста, задайте имя.</value>
   </data>
-  <data name="HelpMain1" xml:space="preserve">
-    <value>На данной странице вы можете создать новую музыкальную композицию, перейти к редактированию композиции, переименовать или удалить существующую музыкальную композицию из списка.</value>
-  </data>
   <data name="HelpMain2" xml:space="preserve">
-    <value>Создание новой музыкальной композиции - нажмите данную кнопку на панели приложения.</value>
+    <value>Создание новой музыкальной композиции.</value>
   </data>
   <data name="HelpMain3" xml:space="preserve">
     <value>Переход к редактированию композиции - нажмите на композициию из списка.</value>
   </data>
   <data name="HelpMain4" xml:space="preserve">
     <value>Переименование или удаление композиции - удерживайте нажатие на композиции из списка.</value>
+  </data>
+  <data name="HelpProject1" xml:space="preserve">
+    <value>Добавление новой дорожки к музыкальной композиции.</value>
+  </data>
+  <data name="HelpProject10" xml:space="preserve">
+    <value>Переименование или удаление дорожки - удерживайте нажатие на дорожке из списка.</value>
+  </data>
+  <data name="HelpProject2" xml:space="preserve">
+    <value>Воспроизведение с начала музыкальной композиции с учётом настроек режимов воспроизведения дорожек.</value>
+  </data>
+  <data name="HelpProject3" xml:space="preserve">
+    <value>Остановка воспроизведения композиции на текущем моменте.</value>
+  </data>
+  <data name="HelpProject4" xml:space="preserve">
+    <value>Продолжение воспроизведения композиции с момента остановки.</value>
+  </data>
+  <data name="HelpProject5" xml:space="preserve">
+    <value>Прекращение воспроизведения композиции.</value>
+  </data>
+  <data name="HelpProject6" xml:space="preserve">
+    <value>Изменение темпа - нажмите на блок с названием "темп".</value>
+  </data>
+  <data name="HelpProject7" xml:space="preserve">
+    <value>Выбор инструмента - нажмите кнопку следующую за названием дорожки, на которой отображается название текущего выбранного инструмента.</value>
+  </data>
+  <data name="HelpProject8" xml:space="preserve">
+    <value>Изменение режима воспроизведения - в правой части экрана для нужной дорожки выберите режим. s - сольный. m - без звука.</value>
+  </data>
+  <data name="HelpProject9" xml:space="preserve">
+    <value>Переход к редактированию дорожки - нажмите на дорожку из списка.</value>
   </data>
   <data name="MainString" xml:space="preserve">
     <value>главная</value>

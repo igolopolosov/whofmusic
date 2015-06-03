@@ -222,16 +222,43 @@
   <data name="SampleString" xml:space="preserve">
     <value>sample</value>
   </data>
-  <data name="HelpMain1" xml:space="preserve">
-    <value>On this page you can create a new music composition, go to the editing of the composition, rename or delete an existing music composition from the list.</value>
-  </data>
   <data name="HelpMain2" xml:space="preserve">
-    <value>Creating a new music composition - press this button in the application bar.</value>
+    <value>Creating a new musical composition.</value>
   </data>
   <data name="HelpMain3" xml:space="preserve">
-    <value>Go to the editing of the composition - tap on the composition from the list.</value>
+    <value>Transition to editing the composition - tap on the composition from the list.</value>
   </data>
   <data name="HelpMain4" xml:space="preserve">
-    <value>Renaming or deleting a composition - hold on the composition of the list.</value>
+    <value>Renaming or deleting the composition - hold on the composition of the list.</value>
+  </data>
+  <data name="HelpProject1" xml:space="preserve">
+    <value>Adding a new track to the musical composition.</value>
+  </data>
+  <data name="HelpProject10" xml:space="preserve">
+    <value>Rename or delete the track - hold on the track from the list.</value>
+  </data>
+  <data name="HelpProject2" xml:space="preserve">
+    <value>Playing from the beginning of a musical composition with the account settings play tracks.</value>
+  </data>
+  <data name="HelpProject3" xml:space="preserve">
+    <value>Pause playback of a composition at the moment.</value>
+  </data>
+  <data name="HelpProject4" xml:space="preserve">
+    <value>Resume playback after stopping.</value>
+  </data>
+  <data name="HelpProject5" xml:space="preserve">
+    <value>Stop playing composition.</value>
+  </data>
+  <data name="HelpProject6" xml:space="preserve">
+    <value>Changing the tempo - tap on the block called "temp."</value>
+  </data>
+  <data name="HelpProject7" xml:space="preserve">
+    <value>Instrument selection - tap the button following the title track, which displays the name of the currently selected instrument.</value>
+  </data>
+  <data name="HelpProject8" xml:space="preserve">
+    <value>Change the play mode - the right of the screen to select the desired track. s - solo. m - mute.</value>
+  </data>
+  <data name="HelpProject9" xml:space="preserve">
+    <value>Transition to editing the track - tap on the track from the list.</value>
   </data>
 </root>

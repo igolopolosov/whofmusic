@@ -178,16 +178,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на На данной странице вы можете создать новую музыкальную композицию, перейти к редактированию композиции, переименовать или удалить существующую музыкальную композицию из списка..
-        /// </summary>
-        public static string HelpMain1 {
-            get {
-                return ResourceManager.GetString("HelpMain1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Создание новой музыкальной композиции - нажмите данную кнопку на панели приложения..
+        ///   Ищет локализованную строку, похожую на Создание новой музыкальной композиции..
         /// </summary>
         public static string HelpMain2 {
             get {
@@ -210,6 +201,96 @@ namespace WarehouseOfMusic.Resources {
         public static string HelpMain4 {
             get {
                 return ResourceManager.GetString("HelpMain4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавление новой дорожки к музыкальной композиции..
+        /// </summary>
+        public static string HelpProject1 {
+            get {
+                return ResourceManager.GetString("HelpProject1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переименование или удаление дорожки - удерживайте нажатие на дорожке из списка..
+        /// </summary>
+        public static string HelpProject10 {
+            get {
+                return ResourceManager.GetString("HelpProject10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Воспроизведение с начала музыкальной композиции с учётом настроек режимов воспроизведения дорожек..
+        /// </summary>
+        public static string HelpProject2 {
+            get {
+                return ResourceManager.GetString("HelpProject2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Остановка воспроизведения композиции на текущем моменте..
+        /// </summary>
+        public static string HelpProject3 {
+            get {
+                return ResourceManager.GetString("HelpProject3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Продолжение воспроизведения композиции с момента остановки..
+        /// </summary>
+        public static string HelpProject4 {
+            get {
+                return ResourceManager.GetString("HelpProject4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Прекращение воспроизведения композиции..
+        /// </summary>
+        public static string HelpProject5 {
+            get {
+                return ResourceManager.GetString("HelpProject5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменение темпа - нажмите на блок с названием &quot;темп&quot;..
+        /// </summary>
+        public static string HelpProject6 {
+            get {
+                return ResourceManager.GetString("HelpProject6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Выбор инструмента - нажмите кнопку следующую за названием дорожки, на которой отображается название текущего выбранного инструмента..
+        /// </summary>
+        public static string HelpProject7 {
+            get {
+                return ResourceManager.GetString("HelpProject7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменение режима воспроизведения - в правой части экрана для нужной дорожки выберите режим. s - сольный. m - без звука..
+        /// </summary>
+        public static string HelpProject8 {
+            get {
+                return ResourceManager.GetString("HelpProject8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переход к редактированию дорожки - нажмите на дорожку из списка..
+        /// </summary>
+        public static string HelpProject9 {
+            get {
+                return ResourceManager.GetString("HelpProject9", resourceCulture);
             }
         }
         

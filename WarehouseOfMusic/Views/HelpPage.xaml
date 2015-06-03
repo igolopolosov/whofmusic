@@ -21,33 +21,117 @@
             <!--главная-->
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.MainString, 
                      Source={StaticResource LocalizedStrings}}">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Path=LocalizedResources.HelpMain1, 
-                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
-                    <Grid Margin="0 6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Grid.Column="1"  Width="60" Height="60" StrokeThickness="5" 
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
                                  Stroke="{StaticResource PhoneBorderBrush}">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="../../Assets/AppBar/appbar.add.png"></ImageBrush>
-                            </Ellipse.Fill>
-                        </Ellipse><TextBlock  Grid.Column="0" Text="{Binding Path=LocalizedResources.HelpMain2, 
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.add.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="1" Text="{Binding Path=LocalizedResources.HelpMain2, 
                      Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
-                    </Grid>
-                    <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpMain3, 
+                        </Grid>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpMain3, 
                      Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
-                    <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpMain4, 
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpMain4, 
                      Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
-                </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </phone:PanoramaItem>
 
             <!--проект-->
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.ProjectString, 
                      Source={StaticResource LocalizedStrings}}">
-                <Grid/>
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.add.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="1" Text="{Binding Path=LocalizedResources.HelpProject1, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        </Grid>
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.control.play.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="1" Text="{Binding Path=LocalizedResources.HelpProject2, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        </Grid>
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.control.pause.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="1" Text="{Binding Path=LocalizedResources.HelpProject3, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        </Grid>
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.control.resume.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="1" Text="{Binding Path=LocalizedResources.HelpProject4, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        </Grid>
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.control.stop.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="1" Text="{Binding Path=LocalizedResources.HelpProject5, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        </Grid>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpProject6, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpProject7, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpProject8, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpProject9, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpProject10, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </phone:PanoramaItem>
 
             <!--дорожка-->
