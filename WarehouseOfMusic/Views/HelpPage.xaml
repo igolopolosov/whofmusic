@@ -15,7 +15,7 @@
 
     <!--LayoutRoot содержит корневую сетку, где размещается все содержимое страницы-->
     <Grid x:Name="LayoutRoot">
-        <phone:Panorama Title="{Binding Path=LocalizedResources.AppBarHelp, 
+        <phone:Panorama x:Name="HelpPanorama" Title="{Binding Path=LocalizedResources.AppBarHelp, 
                      Source={StaticResource LocalizedStrings}}">
 
             <!--главная-->
