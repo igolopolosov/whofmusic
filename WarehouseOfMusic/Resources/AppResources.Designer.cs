@@ -295,6 +295,60 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавление нового блока в конец дорожки..
+        /// </summary>
+        public static string HelpTrack1 {
+            get {
+                return ResourceManager.GetString("HelpTrack1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переключение между дорожками..
+        /// </summary>
+        public static string HelpTrack2 {
+            get {
+                return ResourceManager.GetString("HelpTrack2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Перемещение блока - удерживайте нажатие на стрелках около нужного блока..
+        /// </summary>
+        public static string HelpTrack3 {
+            get {
+                return ResourceManager.GetString("HelpTrack3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Воспроизведение дорожки с определенного блока - нажмите треугольник на нужном блоке..
+        /// </summary>
+        public static string HelpTrack4 {
+            get {
+                return ResourceManager.GetString("HelpTrack4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дублирование, переименование и удаление блока - удерживайте нажатие на дорожке из списка..
+        /// </summary>
+        public static string HelpTrack5 {
+            get {
+                return ResourceManager.GetString("HelpTrack5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Переход к редактированию блока - нажмите на блок из списка..
+        /// </summary>
+        public static string HelpTrack6 {
+            get {
+                return ResourceManager.GetString("HelpTrack6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на главная.
         /// </summary>
         public static string MainString {

@@ -195,6 +195,24 @@
   <data name="HelpProject9" xml:space="preserve">
     <value>Переход к редактированию дорожки - нажмите на дорожку из списка.</value>
   </data>
+  <data name="HelpTrack1" xml:space="preserve">
+    <value>Добавление нового блока в конец дорожки.</value>
+  </data>
+  <data name="HelpTrack2" xml:space="preserve">
+    <value>Переключение между дорожками.</value>
+  </data>
+  <data name="HelpTrack3" xml:space="preserve">
+    <value>Перемещение блока - удерживайте нажатие на стрелках около нужного блока.</value>
+  </data>
+  <data name="HelpTrack4" xml:space="preserve">
+    <value>Воспроизведение дорожки с определенного блока - нажмите треугольник на нужном блоке.</value>
+  </data>
+  <data name="HelpTrack5" xml:space="preserve">
+    <value>Дублирование, переименование и удаление блока - удерживайте нажатие на дорожке из списка.</value>
+  </data>
+  <data name="HelpTrack6" xml:space="preserve">
+    <value>Переход к редактированию блока - нажмите на блок из списка.</value>
+  </data>
   <data name="MainString" xml:space="preserve">
     <value>главная</value>
   </data>

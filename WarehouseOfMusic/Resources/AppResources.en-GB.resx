@@ -261,4 +261,22 @@
   <data name="HelpProject9" xml:space="preserve">
     <value>Transition to editing the track - tap on the track from the list.</value>
   </data>
+  <data name="HelpTrack1" xml:space="preserve">
+    <value>Adding a new sample at the end of the track.</value>
+  </data>
+  <data name="HelpTrack2" xml:space="preserve">
+    <value>Switching between tracks.</value>
+  </data>
+  <data name="HelpTrack3" xml:space="preserve">
+    <value>Moving sample - hold on the arrow beside the desired block.</value>
+  </data>
+  <data name="HelpTrack4" xml:space="preserve">
+    <value>Playing track from a particular sample - tap on the triangle on the right sample.</value>
+  </data>
+  <data name="HelpTrack5" xml:space="preserve">
+    <value>Duplicating, renaming, and deleting sample- hold on the sample from the list.</value>
+  </data>
+  <data name="HelpTrack6" xml:space="preserve">
+    <value>Transition to editing the sample - tap on the sample from the list.</value>
+  </data>
 </root>

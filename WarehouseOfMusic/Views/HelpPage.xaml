@@ -28,7 +28,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
                                  Stroke="{StaticResource PhoneBorderBrush}">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="../../Assets/AppBar/appbar.add.png"></ImageBrush>
@@ -55,7 +55,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
                                  Stroke="{StaticResource PhoneBorderBrush}">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="../../Assets/AppBar/appbar.add.png"></ImageBrush>
@@ -69,7 +69,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
                                  Stroke="{StaticResource PhoneBorderBrush}">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="../../Assets/AppBar/appbar.control.play.png"></ImageBrush>
@@ -83,7 +83,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
                                  Stroke="{StaticResource PhoneBorderBrush}">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="../../Assets/AppBar/appbar.control.pause.png"></ImageBrush>
@@ -97,7 +97,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
                                  Stroke="{StaticResource PhoneBorderBrush}">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="../../Assets/AppBar/appbar.control.resume.png"></ImageBrush>
@@ -111,7 +111,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 6 0"
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
                                  Stroke="{StaticResource PhoneBorderBrush}">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="../../Assets/AppBar/appbar.control.stop.png"></ImageBrush>
@@ -137,7 +137,53 @@
             <!--дорожка-->
             <phone:PanoramaItem Header="{Binding Path=LocalizedResources.TrackString, 
                      Source={StaticResource LocalizedStrings}}">
-                <Grid/>
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.add.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="1" Text="{Binding Path=LocalizedResources.HelpTrack1, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        </Grid>
+                        <Grid Margin="0 6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.arrow.left.min.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Grid.Column="1"  Width="60" Height="60" StrokeThickness="5" Margin="0 0 12 0"
+                                 Stroke="{StaticResource PhoneBorderBrush}">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../../Assets/AppBar/appbar.arrow.right.min.png"></ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  Grid.Column="2" Text="{Binding Path=LocalizedResources.HelpTrack2, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        </Grid>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpTrack3, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpTrack4, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpTrack5, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Margin="0 6" Text="{Binding Path=LocalizedResources.HelpTrack6, 
+                     Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap"></TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </phone:PanoramaItem>
 
             <!--блок-->
