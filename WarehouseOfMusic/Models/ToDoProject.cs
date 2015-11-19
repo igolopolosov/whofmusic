@@ -23,11 +23,6 @@ namespace WarehouseOfMusic.Models
         private DateTime _creationTime;
 
         /// <summary>
-        /// Time of last modification of the project
-        /// </summary>
-        private DateTime _lastModificationTime;
-
-        /// <summary>
         /// ID of the project
         /// </summary>
         private int _id;
@@ -111,25 +106,6 @@ namespace WarehouseOfMusic.Models
                 this._id = value;
                 this.NotifyPropertyChanged("Id");
             }
-        }
-
-        /// <summary>
-        /// Gets or sets Time of last modification of the project
-        /// </summary>
-        [Column]
-        public DateTime LastModificationTime
-        {
-            get
-            {
-                return this._lastModificationTime;
-            }
-
-            set
-            {
-                this.NotifyPropertyChanging("LastModificationTime");
-                this._lastModificationTime = value;
-                this.NotifyPropertyChanged("LastModificationTime");
-            } 
         }
         
         /// <summary>

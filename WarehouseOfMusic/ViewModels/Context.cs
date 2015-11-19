@@ -3,21 +3,23 @@
     using System.ComponentModel;
     using Models;
 
+    /// <summary>
+    /// Template of class from ViewModel layer.
+    /// </summary>
     public abstract class Context : INotifyPropertyChanged
     {
         /// <summary>
         /// LINQ to SQL data context for the local database.
         /// </summary>
-        protected readonly ToDoDataContext ToDoDb;
+        protected readonly ToDoDataContext DataBaseContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Context" /> class.
-        /// Class constructor, create the data context object.
         /// </summary>
-        /// <param name="toDoDbConnectionString">Path to connect to database</param>
+        /// <param name="toDoDbConnectionString">Path of connection to the database.</param>
         protected Context(string toDoDbConnectionString)
         {
-            this.ToDoDb = new ToDoDataContext(toDoDbConnectionString);
+            this.DataBaseContext = new ToDoDataContext(toDoDbConnectionString);
         }
 
         /// <summary>
@@ -25,7 +27,7 @@
         /// </summary>
         public void SaveChangesToDb()
         {
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.SubmitChanges();
         }
         
         /// <summary>

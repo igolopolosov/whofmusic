@@ -107,12 +107,12 @@ namespace WarehouseOfMusic.ViewModels
             {
                 Name = trackName,
                 ProjectRef = this._currentProject,
-                Instrument = this.ToDoDb.Instruments.First()
+                Instrument = this.DataBaseContext.Instruments.First()
             };
-            this.ToDoDb.Tracks.InsertOnSubmit(newTrack);
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.Tracks.InsertOnSubmit(newTrack);
+            this.DataBaseContext.SubmitChanges();
             this._currentProject.Tracks.Add(newTrack);
-            newTrack.Instruments = new ObservableCollection<ToDoInstrument>(this.ToDoDb.Instruments);
+            newTrack.Instruments = new ObservableCollection<ToDoInstrument>(this.DataBaseContext.Instruments);
 
             var sample = new ToDoSample
             {
@@ -121,8 +121,8 @@ namespace WarehouseOfMusic.ViewModels
                 TrackRef = newTrack,
                 Name = newTrack.Name + "_" + newTrack.Samples.Count
             };
-            this.ToDoDb.Samples.InsertOnSubmit(sample);
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.Samples.InsertOnSubmit(sample);
+            this.DataBaseContext.SubmitChanges();
             newTrack.Samples.Add(sample);
         }
 
@@ -135,14 +135,14 @@ namespace WarehouseOfMusic.ViewModels
             {
                 foreach (var note in sample.Notes)
                 {
-                    this.ToDoDb.Notes.DeleteOnSubmit(note);
+                    this.DataBaseContext.Notes.DeleteOnSubmit(note);
                 }
-                this.ToDoDb.Samples.DeleteOnSubmit(sample);
+                this.DataBaseContext.Samples.DeleteOnSubmit(sample);
             }
 
             this._currentProject.Tracks.Remove(_onDeleteTrack);
-            this.ToDoDb.Tracks.DeleteOnSubmit(_onDeleteTrack);
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.Tracks.DeleteOnSubmit(_onDeleteTrack);
+            this.DataBaseContext.SubmitChanges();
         }
 
         /// <summary>
@@ -151,10 +151,10 @@ namespace WarehouseOfMusic.ViewModels
         /// <param name="projectId">ID of loading project</param>
         public override void LoadData(int projectId)
         {
-            this._currentProject = this.ToDoDb.Projects.FirstOrDefault(x => x.Id == projectId);
+            this._currentProject = this.DataBaseContext.Projects.FirstOrDefault(x => x.Id == projectId);
             foreach (var track in _currentProject.Tracks)
             {
-                track.Instruments = new ObservableCollection<ToDoInstrument>(this.ToDoDb.Instruments);
+                track.Instruments = new ObservableCollection<ToDoInstrument>(this.DataBaseContext.Instruments);
             }
             
         }
@@ -166,7 +166,7 @@ namespace WarehouseOfMusic.ViewModels
         public void RenameTrackTo(string newName)
         {
             _onRenameTrack.Name = newName;
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.SubmitChanges();
         }
 
         public void SelectInstrument(ToDoTrack track, ToDoInstrument instrument)

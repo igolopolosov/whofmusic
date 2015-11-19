@@ -149,8 +149,8 @@ namespace WarehouseOfMusic.ViewModels
                 TrackRef = _currentTrack,
                 Name = _currentTrack.Name + "_" + nameAddition
             };
-            this.ToDoDb.Samples.InsertOnSubmit(sample);
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.Samples.InsertOnSubmit(sample);
+            this.DataBaseContext.SubmitChanges();
             _currentTrack.Samples.Add(sample);
         }
 
@@ -162,12 +162,12 @@ namespace WarehouseOfMusic.ViewModels
             var project = _currentTrack.ProjectRef;
             foreach (var note in _onDeleteSample.Notes)
             {
-                this.ToDoDb.Notes.DeleteOnSubmit(note);
+                this.DataBaseContext.Notes.DeleteOnSubmit(note);
             }
 
             this._currentTrack.Samples.Remove(_onDeleteSample);
-            this.ToDoDb.Samples.DeleteOnSubmit(_onDeleteSample);
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.Samples.DeleteOnSubmit(_onDeleteSample);
+            this.DataBaseContext.SubmitChanges();
             this._currentTrack.ProjectRef = project;
         }
 
@@ -185,8 +185,8 @@ namespace WarehouseOfMusic.ViewModels
                 TrackRef = _currentTrack,
                 Name = sample.Name + "(" + _currentTrack.Samples.Count + ")"
             };
-            this.ToDoDb.Samples.InsertOnSubmit(duplicateSample);
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.Samples.InsertOnSubmit(duplicateSample);
+            this.DataBaseContext.SubmitChanges();
             _currentTrack.Samples.Insert(index, duplicateSample);
 
             foreach (var note in sample.Notes)
@@ -199,8 +199,8 @@ namespace WarehouseOfMusic.ViewModels
                     Tact = (duplicateSample.InitialTact - sample.InitialTact) + note.Tact,
                     SampleRef = duplicateSample
                 };
-                ToDoDb.Notes.InsertOnSubmit(duplicateNote);
-                ToDoDb.SubmitChanges();
+                DataBaseContext.Notes.InsertOnSubmit(duplicateNote);
+                DataBaseContext.SubmitChanges();
                 duplicateSample.Notes.Add(duplicateNote);
             }
         }
@@ -212,7 +212,7 @@ namespace WarehouseOfMusic.ViewModels
         public void RenameSampleTo(string newName)
         {
             _onRenameSample.Name = newName;
-            this.ToDoDb.SubmitChanges();
+            this.DataBaseContext.SubmitChanges();
         }
 
         /// <summary>
@@ -231,8 +231,8 @@ namespace WarehouseOfMusic.ViewModels
         {
             var options = new DataLoadOptions();
             options.AssociateWith<ToDoTrack>(x => x.Samples.OrderBy(y => y.InitialTact));
-            this.ToDoDb.LoadOptions = options;
-            this._currentTrack = this.ToDoDb.Tracks.FirstOrDefault(x => x.Id == trackId);
+            this.DataBaseContext.LoadOptions = options;
+            this._currentTrack = this.DataBaseContext.Tracks.FirstOrDefault(x => x.Id == trackId);
         }
     }
 }

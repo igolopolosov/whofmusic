@@ -412,7 +412,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить проект?.
+        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить проект.
         /// </summary>
         public static string MessageDeleteProject {
             get {
@@ -421,7 +421,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить блок?.
+        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить блок.
         /// </summary>
         public static string MessageDeleteSample {
             get {
@@ -430,7 +430,7 @@ namespace WarehouseOfMusic.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить дорожку?.
+        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите удалить дорожку.
         /// </summary>
         public static string MessageDeleteTrack {
             get {

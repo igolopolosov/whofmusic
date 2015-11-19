@@ -62,11 +62,6 @@ namespace WarehouseOfMusic.Models
         /// Mode
         /// </summary>
         private bool _solo;
-        
-        /// <summary>
-        /// Volume of track
-        /// </summary>
-        private int _volume = 5;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ToDoTrack" /> class.
@@ -168,27 +163,6 @@ namespace WarehouseOfMusic.Models
             }
         }
 
-        /// <summary>
-        /// Gets or sets volume of track
-        /// </summary>
-        [Column]
-        public int Volume
-        {
-            get
-            {
-                return this._volume;
-            }
-
-            set
-            {
-                if (this._volume != value)
-                {
-                    this.NotifyPropertyChanging("Volume");
-                    this._volume = value;
-                    this.NotifyPropertyChanged("Volume");
-                }
-            }
-        }
         /// <summary>
         /// Gets or sets Name of track
         /// </summary>

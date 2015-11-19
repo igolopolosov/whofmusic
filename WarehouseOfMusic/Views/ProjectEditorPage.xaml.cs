@@ -134,7 +134,7 @@ namespace WarehouseOfMusic.Views
         {
             var deleteTrackDialog = new MessagePrompt()
             {
-                Message = AppResources.MessageDeleteTrack
+                Message = AppResources.MessageDeleteTrack + " " + _viewModel.OnDeleteTrack.Name + "?"
             };
             deleteTrackDialog.Completed += DeleteTrackDialog_OnCompleted;
             deleteTrackDialog.Show();

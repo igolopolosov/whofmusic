@@ -60,7 +60,7 @@ namespace WarehouseOfMusic.ViewModels
         /// <param name="sampleId">ID of loading sample</param>
         public override void LoadData(int sampleId)
         {
-            this._currentSample = this.ToDoDb.Samples.FirstOrDefault(x => x.Id == sampleId);
+            this._currentSample = this.DataBaseContext.Samples.FirstOrDefault(x => x.Id == sampleId);
             Tacts = new ObservableCollection<PianoRollContext>();
             if (_currentSample == null) return;
             for (var i = _currentSample.InitialTact; i < _currentSample.InitialTact + _currentSample.Size; i++)
@@ -85,8 +85,8 @@ namespace WarehouseOfMusic.ViewModels
         {
             var note = e.Note;
             note.SampleRef = _currentSample;
-            ToDoDb.Notes.InsertOnSubmit(note);
-            ToDoDb.SubmitChanges();
+            DataBaseContext.Notes.InsertOnSubmit(note);
+            DataBaseContext.SubmitChanges();
             CurrentSample.Notes.Add(note);
             return note;
         }
@@ -98,10 +98,10 @@ namespace WarehouseOfMusic.ViewModels
         {
             var note = e.Note;
             CurrentSample.Notes.Remove(note);
-            ToDoDb.Notes.DeleteOnSubmit(note);
-            ToDoDb.SubmitChanges();
+            DataBaseContext.Notes.DeleteOnSubmit(note);
+            DataBaseContext.SubmitChanges();
             //// Restore references
-            _currentSample.TrackRef = ToDoDb.Tracks.First(x => x.Id == _currentSample.TrackId);
+            _currentSample.TrackRef = DataBaseContext.Tracks.First(x => x.Id == _currentSample.TrackId);
             return null;
         }
     }

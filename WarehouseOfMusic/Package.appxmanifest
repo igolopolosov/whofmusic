@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="12f97bca-12bc-4571-b24a-c9438a2683c7" Publisher="CN=Igor Golopolosov" Version="1.0.0.0" />
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" 
+         xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
+  <Identity Name="40635hotkey.WarehouseofMusic" Publisher="CN=1742FCA8-DF20-40AE-9688-1AE09A5B836D" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="8d0f7152-e53d-46d9-8b71-8d5478edac88" PhonePublisherId="c260c37d-66fd-44ea-8c30-516a142193c3" />
   <Properties>
-    <DisplayName>WarehouseOfMusic</DisplayName>
-    <PublisherDisplayName>Igor Golopolosov</PublisherDisplayName>
+    <DisplayName>Warehouse of Music</DisplayName>
+    <PublisherDisplayName>hotkey</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>

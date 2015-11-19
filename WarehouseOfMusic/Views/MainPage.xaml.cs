@@ -132,7 +132,7 @@ namespace WarehouseOfMusic.Views
         {
             var deleteProjectDialog = new MessagePrompt()
             {
-                Message = AppResources.MessageDeleteProject
+                Message = AppResources.MessageDeleteProject + " " + _viewModel.OnDeleteProject.Name + "?"
             };
             deleteProjectDialog.Completed += DeleteProjectDialog_OnCompleted;
             deleteProjectDialog.Show();

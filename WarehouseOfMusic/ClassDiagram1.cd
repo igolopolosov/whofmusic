@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WarehouseOfMusic.App" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>A0AgCCAIAAAAhAAAAAEAAAAAAAAAEQAAAAAAAIIACAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.InputPromptOveride" Collapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputPromtOverride.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.LocalizedStrings" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>LocalizedStrings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Converters.ColorToBrushConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\ColorToBrushConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WarehouseOfMusic.Converters.TimePeriodsConverter" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAASAAAAAAAAAAAAA=</HashCode>
+      <FileName>Converters\TimePeriodsConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.EventArgs.NoteEventArgs" Collapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>EventArgs\NoteEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.EventArgs.PlayerEventArgs" Collapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAIA=</HashCode>
+      <FileName>EventArgs\PlayerEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Managers.IsoSettingsManager">
+    <Position X="15.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\IsoSettingsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Managers.PlayerManager">
+    <Position X="17.5" Y="5.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="WarehouseOfMusic.Managers.PlayerManager.PlayerChangedHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Managers\PlayerManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAEAAAAAACAkAAEAAAAACsAAEhAwIAAA=</HashCode>
+      <FileName>Managers\PlayerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Managers.TrackManager">
+    <Position X="15.75" Y="6.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAACAAAAACAAAAAAAIAgAAAAAAAA=</HashCode>
+      <FileName>Managers\TrackManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Models.ToDoDataContext" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAgAAAAAEAAABAAAAAAAAAAAAAAAAAgAAAAAAAAAQA=</HashCode>
+      <FileName>Models\ToDoDataContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Models.ToDoInstrument" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACMAAAABAAIIAAAABAAAQBgAAAAAAAAAABAAAAAQA=</HashCode>
+      <FileName>Models\ToDoInstrument.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WarehouseOfMusic.Models.ToDoNote" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQABECIIAgABBAAABBgAAAAAACAAgEwAAAAQA=</HashCode>
+      <FileName>Models\ToDoNote.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WarehouseOfMusic.Models.ToDoProject" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAMAAIIAABIBAAAQBkAAAAAAAEAAAgAAAEQA=</HashCode>
+      <FileName>Models\ToDoProject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WarehouseOfMusic.Models.ToDoSample" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEyMAAAAAAAoMAAAABAAAQBhARMAAACAgAAgAIAAQA=</HashCode>
+      <FileName>Models\ToDoSample.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WarehouseOfMusic.Models.ToDoTrack" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAACAAAAIJgICCRCAAQJjAAAAABgABAQAAAAAQA=</HashCode>
+      <FileName>Models\ToDoTrack.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WarehouseOfMusic.Resources.AppResources" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCQkEFAAAAgCCEApyJABFCAIAQAACADAOSCJAIADqKA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.UIElementContexts.KeyContext" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAwBAAAAAAAAIAAAACAAAQAgAAAAAAAAAAggAAAAAA=</HashCode>
+      <FileName>UIElementContexts\KeyContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WarehouseOfMusic.UIElementContexts.PianoRollContext" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="WarehouseOfMusic.UIElementContexts.PianoRollContext.NoteChangedHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UIElementContexts\PianoRollContext.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAASACAAAAAAAIAACAAAAAAEgAAAAAAgAAgAAAQICAA=</HashCode>
+      <FileName>UIElementContexts\PianoRollContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WarehouseOfMusic.ViewModels.Context">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAQAIAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Context.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WarehouseOfMusic.ViewModels.MainPageContext">
+    <Position X="5" Y="6" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAEAAAACAgBBAAAEAAAAAAACEAAACAA=</HashCode>
+      <FileName>ViewModels\MainPageContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.ViewModels.ProjectEditorContext">
+    <Position X="7.25" Y="6" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAAAACAAQCAAAAAAAAAAAAAABBAgAAAAQAIBAAAg=</HashCode>
+      <FileName>ViewModels\ProjectEditorContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.ViewModels.SampleEditorContext">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="WarehouseOfMusic.ViewModels.Context" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="2.891" />
+        <Point X="4.5" Y="5.625" />
+        <Point X="1.312" Y="5.625" />
+        <Point X="1.312" Y="6" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAQAAAAAAAAAACAAAAABAAAAAAAAAAhAAA=</HashCode>
+      <FileName>ViewModels\SampleEditorContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.ViewModels.TrackEditorContext">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAQCAAAAAACJAAJAAAAIKAQEAAAAgAAEAA=</HashCode>
+      <FileName>ViewModels\TrackEditorContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Views.HelpPage" Collapsed="true">
+    <Position X="12.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\HelpPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Views.MainPage" Collapsed="true">
+    <Position X="14.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAACAAAAAAQABAUAAAAAAQAABAAAAhAAFAAAQAAAAA=</HashCode>
+      <FileName>Views\MainPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Views.NoteSizePicker" Collapsed="true">
+    <Position X="10.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABACAACAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Views\NoteSizePicker.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Views.PianoRollPage" Collapsed="true">
+    <Position X="10.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAABQAAAAAABAAAgCABAAAAAAAAAgASAAACc=</HashCode>
+      <FileName>Views\PianoRollPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Views.ProjectEditorPage" Collapsed="true">
+    <Position X="14.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABQAFgAAAQBBQQAAAAABQAEMAAQgQAEAAAAABAjAA=</HashCode>
+      <FileName>Views\ProjectEditorPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Views.SampleEditorPage" Collapsed="true">
+    <Position X="10.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAQABAQAAUAABQAAAAEAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Views\SampleEditorPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Views.TactSizePicker" Collapsed="true">
+    <Position X="12.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Views\TactSizePicker.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarehouseOfMusic.Views.TrackEditorPage" Collapsed="true">
+    <Position X="12.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAYAEUADAQAAGIAFwAgIAAAEUAIAAAAAIAAgA=</HashCode>
+      <FileName>Views\TrackEditorPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WomAudioComponent.AudioController">
+    <Position X="20.25" Y="10" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="WomAudioComponent.KeyPressedArgs">
+    <Position X="18.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="WarehouseOfMusic.Enums.Key" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMA3AAAAAAAAAAAAuAQAgP0+AAAAAN8AAAAAgP8PAAA=</HashCode>
+      <FileName>Enums\Key.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WarehouseOfMusic.Enums.PlayerState" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\PlayerState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

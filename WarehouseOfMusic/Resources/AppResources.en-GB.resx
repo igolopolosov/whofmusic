@@ -175,10 +175,10 @@
     <value>RENAME TRACK</value>
   </data>
   <data name="MessageDeleteProject" xml:space="preserve">
-    <value>Are you sure you want to delete the project?</value>
+    <value>Are you sure you want to delete the project</value>
   </data>
   <data name="MessageDeleteTrack" xml:space="preserve">
-    <value>Are you sure you want to delete the track?</value>
+    <value>Are you sure you want to delete the track</value>
   </data>
   <data name="AppBarAddSample" xml:space="preserve">
     <value>add sample</value>
@@ -196,7 +196,7 @@
     <value>Unsuitable!</value>
   </data>
   <data name="MessageDeleteSample" xml:space="preserve">
-    <value>Are you sure you want to delete the sample?</value>
+    <value>Are you sure you want to delete the sample</value>
   </data>
   <data name="RenameSample" xml:space="preserve">
     <value>RENAME SAMPLE</value>

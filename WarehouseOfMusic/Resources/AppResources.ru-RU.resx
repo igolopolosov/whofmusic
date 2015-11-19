@@ -235,13 +235,13 @@
     <value>Выберите количество тактов в добавляемом блоке.</value>
   </data>
   <data name="MessageDeleteProject" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить проект?</value>
+    <value>Вы уверены, что хотите удалить проект</value>
   </data>
   <data name="MessageDeleteSample" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить блок?</value>
+    <value>Вы уверены, что хотите удалить блок</value>
   </data>
   <data name="MessageDeleteTrack" xml:space="preserve">
-    <value>Вы уверены, что хотите удалить дорожку?</value>
+    <value>Вы уверены, что хотите удалить дорожку</value>
   </data>
   <data name="MessageIncorrectValue" xml:space="preserve">
     <value>Не подходит!</value>

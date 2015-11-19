@@ -159,7 +159,7 @@
         {
             var deleteSampleDialog = new MessagePrompt()
             {
-                Message = AppResources.MessageDeleteSample
+                Message = AppResources.MessageDeleteSample + " " + _viewModel.OnDeleteSample.Name + "?"
             };
             deleteSampleDialog.Completed += DeleteSampleDialog_OnCompleted;
             deleteSampleDialog.Show();
