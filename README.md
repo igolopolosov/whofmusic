@@ -17,7 +17,7 @@ There is a small library 📚 which currently generates `angle wave ^^^` sound. 
 Find sound generating library under [WOMAudioComponent](https://github.com/usehotkey/whofmusic/tree/master/WOMAudioComponent) folder.
 
 ## Powered by
-- 🔯 `C#`
+- 🔮 `C#`
 - ➕ `C++`
 - 📦 `Nuget`
 - ☎️ `Windows Phone 8.1`
